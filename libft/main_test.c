@@ -6,26 +6,48 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 23:30:00 by tidminta          #+#    #+#             */
-/*   Updated: 2019/12/02 23:43:28 by tidminta         ###   ########.fr       */
+/*   Updated: 2019/12/03 18:55:33 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <string.h>
 #include <unistd.h>
 #include <stdio.h>
-#include "libft.h"
+#include <stdlib.h>
 
-int main(void)
+//#include "libft.h"
+
+int		ft_strlen(char *s)
 {
-	char	src[] = "lorem ipsum dolor sit amet";
-	char	*dest;
-	char	src2[] = "lorem ipsum dolor sit amet";
-	char	*dest2;
+	int i;
 
-	dest = src + 1;
-	dest2 = src2 + 1;
-	printf("%s\n", dest);
-	if (dest != ft_memmove(dest, src, 8))
-		write(1, "dest's adress was not returned\n", 31);
-	write(1, dest, 22);
-	printf("\n%s\n", memmove(dest2, src2,8));
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+
+void	ft_print_result(int n)
+{
+	char c;
+
+	if (n >= 10)
+		ft_print_result(n / 10);
+	c = n % 10 + '0';
+	write(1, &c, 1);
+}
+
+int			main(void)
+{
+	char	*dest;
+
+	if (!(dest = (char *)malloc(sizeof(*dest) * 15)))
+		return (0);
+	memset(dest, 0, 15);
+	memset(dest, 'r', 6);
+	printf("\ndest : %s\n", dest);
+	ft_print_result(ft_strlcpy(dest, "", 15));
+	write(1, "\n", 1);
+	write(1, dest, 15);
+	return (0);
 }

@@ -1,43 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   main_test.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/26 19:49:56 by tidminta          #+#    #+#             */
-/*   Updated: 2019/12/03 18:43:12 by tidminta         ###   ########.fr       */
+/*   Created: 2019/12/02 23:30:00 by tidminta          #+#    #+#             */
+/*   Updated: 2019/12/03 18:41:14 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <string.h>
+#include <unistd.h>
+#include <stdio.h>
 #include "libft.h"
 
-size_t		ft_strlcat(char *dst, const char *src, size_t dstsize)
+void	ft_print_result(int n)
 {
-	size_t	i;
-	size_t	j;
-	size_t	len;
+	char c;
 
-	i = 0;
-	j = 0;
-	len = 0;
-	if (dstsize > 0)
-	{
-	while (dst[i])
-		i++;
-	while (src[len])
-		++len;
-	if (dstsize <= i)
-		len = len + dstsize;
-	else
-		len = len + i;
-	while (src[j] && (i + 1) < dstsize)
-	{
-		dst[i] = src[j];
-		i++;
-		j++;
-	}
-	dst[i] = '\0';
-	}
-	return (len);
+	if (n >= 10)
+		ft_print_result(n / 10);
+	c = n % 10 + '0';
+	write(1, &c, 1);
+}
+
+int			main(void)
+{
+	char	*dest;
+
+	if (!(dest = (char *)malloc(sizeof(*dest) * 15)))
+		return (0);
+	memset(dest, 0, 15);
+	memset(dest, 'r', 6);
+	ft_print_result(ft_strlcpy(dest, "", 15));
+	write(1, "\n", 1);
+	write(1, dest, 15);
+	return (0);
 }

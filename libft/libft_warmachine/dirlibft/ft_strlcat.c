@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 19:49:56 by tidminta          #+#    #+#             */
-/*   Updated: 2019/12/02 22:05:47 by tidminta         ###   ########.fr       */
+/*   Updated: 2019/12/03 18:43:12 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ size_t		ft_strlcat(char *dst, const char *src, size_t dstsize)
 	i = 0;
 	j = 0;
 	len = 0;
+	if (dstsize > 0)
+	{
 	while (dst[i])
 		i++;
 	while (src[len])
@@ -36,5 +38,6 @@ size_t		ft_strlcat(char *dst, const char *src, size_t dstsize)
 		j++;
 	}
 	dst[i] = '\0';
+	}
 	return (len);
 }

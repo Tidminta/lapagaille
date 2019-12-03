@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 12:48:08 by tidminta          #+#    #+#             */
-/*   Updated: 2019/12/02 23:28:24 by tidminta         ###   ########.fr       */
+/*   Updated: 2019/12/03 17:53:39 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,8 @@ int	main(int ac, char **av)
 	// /* ******************************************************************** */
 	(void)ac;
 	(void)av;
-	// printf("fct : %s\n", memmove(av[1], av[2], ft_strlen(av[2])));
-	// printf("ft_ : %s\n", ft_memmove(av[3], av[4], ft_strlen(av[4])));
-	if (dest != ft_memmove(dest, src, 8))
-		write(1, "dest's adress was not returned\n", 31);
-	write(1, dest, 22);
+	printf("fct : %s\n", memmove(av[1], av[2], ft_strlen(av[2])));
+	printf("ft_ : %s\n", ft_memmove(av[3], av[4], ft_strlen(av[4])));
 	// /* ******************************************************************** */
 	// (void)av;
 	// (void)ac;
