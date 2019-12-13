@@ -6,19 +6,23 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 18:40:29 by tidminta          #+#    #+#             */
-/*   Updated: 2019/12/03 18:46:28 by tidminta         ###   ########.fr       */
+/*   Updated: 2019/12/04 17:22:56 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t	i;
-	size_t	len;
 
 	i = 0;
-	len = ft_strlen(src);
+	if ((!src || src[0] == 0))
+	{
+		*dst = 0;
+		return (0);
+	}
 	if (dstsize > 0 && src[0])
 	{
 		while (src[i] && i < (dstsize - 1))
@@ -32,5 +36,5 @@ size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize)
 		dst[i] = '\0';
 		i++;
 	}
-	return (len);
+	return (ft_strlen(src));
 }

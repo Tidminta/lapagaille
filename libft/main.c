@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 12:48:08 by tidminta          #+#    #+#             */
-/*   Updated: 2019/12/03 17:53:39 by tidminta         ###   ########.fr       */
+/*   Updated: 2019/12/13 20:11:22 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,10 @@ int	main(int ac, char **av)
   	// printf("\nft_mmcpy : %s\n", ft_memccpy(str2, string2, 32, 5));
   	// printf("\nav[2] : %s\n", str2);  
 	// /* ******************************************************************** */
-	(void)ac;
-	(void)av;
-	printf("fct : %s\n", memmove(av[1], av[2], ft_strlen(av[2])));
-	printf("ft_ : %s\n", ft_memmove(av[3], av[4], ft_strlen(av[4])));
+	// (void)ac;
+	// (void)av;
+	// printf("fct : %s\n", memmove(av[1], av[2], ft_strlen(av[2])));
+	// printf("ft_ : %s\n", ft_memmove(av[3], av[4], ft_strlen(av[4])));
 	// /* ******************************************************************** */
 	// (void)av;
 	// (void)ac;
@@ -120,13 +120,24 @@ int	main(int ac, char **av)
 	//  printf("str : %s\n", strrchr("", 32));
 	//  printf("\nft_ : %s\n", ft_strrchr("", 32));
 	/* ******************************************************************** */
-	// (void)ac;
-	// printf("%i\n", strncmp(av[1], av[2], 5));
-	// printf("\nft_ : %i\n", ft_strncmp(av[1], av[2], 5));
+	(void)ac;
+	(void)av;
+	// printf("fct : %i\n", strncmp("abcdefgh", "abcdwxyz", 0));
+	// printf("ft_ : %i\n", ft_strncmp("", "abcdwxyz", 0));
+	printf("\nfct : %i\n", strncmp("test\200", "test\0", 6));
+	printf("ft_ : %i\n", ft_strncmp("test\200", "test\0", 6));
 	/* ******************************************************************** */
+	// char	*dest;
+
 	// (void)ac;
-	// printf("%lu\nav[1] : %s\nav[2] : %s\n", strlcpy(av[1], av[2], 17), av[1], av[2]);
-	// printf("ft_ : %zi\nav[3] : %s\nav[4] : %s\n", ft_strlcpy(av[3], av[4], 17), av[3], av[4]);
+	// (void)av;
+	// if (!(dest = (char *)malloc(sizeof(*dest) * 15)))
+	// 	return (0);
+	// memset(dest, 0, 15);
+	// memset(dest, 'r', 6);
+	// printf("%s\n",dest);
+	// printf("%zu\n", ft_strlcpy(dest, "", 15));
+	// printf("%s\n",dest);
 	/* ******************************************************************** */
 	// (void)ac;
 	// printf("ft_ : %s\n", ft_memchr(av[1], 32, 0));

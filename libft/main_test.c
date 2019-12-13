@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 23:30:00 by tidminta          #+#    #+#             */
-/*   Updated: 2019/12/03 18:55:33 by tidminta         ###   ########.fr       */
+/*   Updated: 2019/12/04 19:00:49 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//#include "libft.h"
-
-int		ft_strlen(char *s)
-{
-	int i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
+#include "libft.h"
 
 void	ft_print_result(int n)
 {
@@ -37,7 +27,7 @@ void	ft_print_result(int n)
 	write(1, &c, 1);
 }
 
-int			main(void)
+int		main(void)
 {
 	char	*dest;
 
@@ -45,9 +35,13 @@ int			main(void)
 		return (0);
 	memset(dest, 0, 15);
 	memset(dest, 'r', 6);
-	printf("\ndest : %s\n", dest);
-	ft_print_result(ft_strlcpy(dest, "", 15));
-	write(1, "\n", 1);
-	write(1, dest, 15);
+	// printf("avant %s\n", dest);
+	// memset(dest, 'r', 15);
+	// printf("apres %s\n", dest);
+	// ft_print_result(strlcat(dest, "lorem ipsum dolor sit amet", 5));
+	// write(1, "\n", 1);
+	// write(1, dest, 15);
+	strlcat(dest, "lorem ipsum dolor sit amet", 5);
+	printf("%s\n", dest);
 	return (0);
 }

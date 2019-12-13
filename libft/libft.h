@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:01:24 by tidminta          #+#    #+#             */
-/*   Updated: 2019/12/02 22:06:23 by tidminta         ###   ########.fr       */
+/*   Updated: 2019/12/04 19:27:34 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <string.h>
 # include <stdlib.h>
+#include <stdio.h>//
 
 void		*ft_memset(void *b, int c, size_t len);
 
