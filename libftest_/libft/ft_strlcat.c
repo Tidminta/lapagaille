@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 19:49:56 by tidminta          #+#    #+#             */
-/*   Updated: 2019/12/14 21:33:13 by tidminta         ###   ########.fr       */
+/*   Updated: 2019/12/18 18:15:40 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ size_t		ft_strlcat(char *dst, const char *src, size_t dstsize)
 		len = len + dstsize;
 	else
 		len = len + i;
-	while (src[j] && (i + 1) <= dstsize)
+	while (src[j] && (i + 1) < dstsize)
 	{
 		dst[i] = src[j];
 		i++;

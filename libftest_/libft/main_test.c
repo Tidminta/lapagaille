@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 23:30:00 by tidminta          #+#    #+#             */
-/*   Updated: 2019/12/14 21:02:57 by tidminta         ###   ########.fr       */
+/*   Updated: 2019/12/18 17:45:08 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,10 @@ int		main(void)
 	memset(dest, 0, 15);
 	memset(dest, 'r', 6);
 	ft_print_result(ft_strlcat(dest, "lorem ipsum dolor sit amet", 15));
-	printf("\nfct result\n");
-	ft_print_result(strlcat(dest, "lorem ipsum dolor sit amet", 15));
 	write(1, "\n", 1);
+	// printf("\nfct result\n");
+	// ft_print_result(strlcat(dest, "lorem ipsum dolor sit amet", 15));
+	// write(1, "\n", 1);
 	write(1, dest, 15);
 	return (0);
 }

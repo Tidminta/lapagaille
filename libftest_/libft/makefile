@@ -6,7 +6,7 @@
 #    By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/13 00:09:25 by tidminta          #+#    #+#              #
-#    Updated: 2019/12/18 16:15:44 by tidminta         ###   ########.fr        #
+#    Updated: 2019/12/18 22:48:10 by tidminta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,16 @@ SRC		=	ft_atoi.c \
 			ft_strlcpy.c \
 			ft_memchr.c \
 			ft_memcmp.c \
-			ft_strlcat.c
+			ft_strlcat.c \
+			ft_strnstr.c \
+			ft_calloc.c \
+			ft_strdup.c \
+			ft_substr.c \
+			ft_putchar_fd.c \
+			ft_putstr_fd.c \
+			ft_putendl_fd.c \
+			ft_putnbr_fd.c
+
 OBJ		=	$(subst .c,.o,$(SRC))
 CFLAGS	=	-Wall -Werror -Wextra
 

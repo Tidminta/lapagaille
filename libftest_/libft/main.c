@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 12:48:08 by tidminta          #+#    #+#             */
-/*   Updated: 2019/12/13 20:11:22 by tidminta         ###   ########.fr       */
+/*   Updated: 2019/12/18 23:10:56 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 
 int	main(int ac, char **av)
 {
+	(void)av;
+	(void)ac;
 	// /* ******************************************************************** */
 	// printf("len = %zu\n", ft_strlen("Tidiane"));
 	// /* ******************************************************************** */
@@ -120,12 +122,12 @@ int	main(int ac, char **av)
 	//  printf("str : %s\n", strrchr("", 32));
 	//  printf("\nft_ : %s\n", ft_strrchr("", 32));
 	/* ******************************************************************** */
-	(void)ac;
-	(void)av;
+	//(void)ac;
+	// (void)av;
 	// printf("fct : %i\n", strncmp("abcdefgh", "abcdwxyz", 0));
 	// printf("ft_ : %i\n", ft_strncmp("", "abcdwxyz", 0));
-	printf("\nfct : %i\n", strncmp("test\200", "test\0", 6));
-	printf("ft_ : %i\n", ft_strncmp("test\200", "test\0", 6));
+	// printf("\nfct : %i\n", strncmp("test\200", "test\0", 6));
+	// printf("ft_ : %i\n", ft_strncmp("test\200", "test\0", 6));
 	/* ******************************************************************** */
 	// char	*dest;
 
@@ -147,6 +149,17 @@ int	main(int ac, char **av)
 	// printf("ft_ : %i\n", ft_memcmp(av[1], av[2], ft_strlen(av[1])));
 	// printf("fct : %i\n", memcmp(av[1], av[2], ft_strlen(av[1])));
 	/* ******************************************************************** */
-
+	// printf("ft_ : %s\n", ft_strnstr("lorem ipsum dolor sit amet", "dolor", 15));
+	// printf("fct : %s\n", strnstr("lorem ipsum dolor sit amet", "dolor", 15));
+	/* ******************************************************************** */
+	// printf("%s\n", ft_strdup(av[1]));
+	// printf("%s\n", strdup(av[1]));
+	/* ******************************************************************** */
+	// printf("%s\n", ft_substr(av[1], 6,ft_strlen(av[1])));
+	/* ******************************************************************** */
+	// printf("%s\n", ft_strjoin(av[1], av[2]));
+	/* ******************************************************************** */
+	ft_putnbr_fd(0, 1);
+	/* ******************************************************************** */
 	return (0);
 }

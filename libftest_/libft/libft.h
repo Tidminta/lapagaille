@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:01:24 by tidminta          #+#    #+#             */
-/*   Updated: 2019/12/14 22:11:46 by tidminta         ###   ########.fr       */
+/*   Updated: 2019/12/18 22:48:33 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,21 @@ void		*ft_memmove(void *dst, const void *src, size_t len);
 
 size_t		ft_strlcat(char *dst, const char *src, size_t dstsize);
 
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
+char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
 
+void		*ft_calloc(size_t count, size_t size);
+
+char		*ft_strdup(const char *s1);
+
+char		*ft_substr(char const *s, unsigned int start, size_t len);
+
+//char		*ft_strjoin(char const *s1, char const *s2);
+
+void		ft_putchar_fd(char c, int fd);
+
+void		ft_putstr_fd(char *s, int fd);
+
+void		ft_putendl_fd(char *s, int fd);
+
+void		ft_putnbr_fd(int n, int fd);
 #endif
