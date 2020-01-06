@@ -13,21 +13,6 @@
 #include "libft.h"
 #include <stdlib.h>
 
-int     is_present(char *str, char c)
-{
-    int i;
-
-    i = 0;
-    while (str[i])
-    {
-        if (str[i] == c)
-            return (1);
-        i++;
-    }
-    return (0);
-}
-
-
 char        *ft_strjoin(char const *s1, char const *s2)
 {    char    *alloc;
     int len;

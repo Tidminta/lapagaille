@@ -41,7 +41,8 @@ SRC		=	ft_atoi.c \
 			ft_putstr_fd.c \
 			ft_putendl_fd.c \
 			ft_putnbr_fd.c \
-			ft_strjoin.c
+			ft_strjoin.c \
+			ft_split.c
 
 OBJ		=	$(subst .c,.o,$(SRC))
 CFLAGS	=	-Wall -Werror -Wextra

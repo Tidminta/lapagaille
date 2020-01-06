@@ -27,19 +27,37 @@ void	ft_print_result(int n)
 	write(1, &c, 1);
 }
 
+unsigned int            ft_is_present(char const *s, unsigned int *index, char c)
+{
+    if (s[*index] == c)
+        return (1);
+    else
+        return (0);
+}
+
+size_t          ft_fill(char const *s, unsigned int *index, char c)
+{
+    printf("FT_FILL");
+    size_t len;
+    len = 0;
+    while (ft_is_present(s, *index, c) == 0)
+    {
+        len++;
+        index++;
+    }
+    printf("len = %zu\n", len);
+    return (len);
+}
+
 int		main(void)
 {
-	char	*dest;
+	unsigned int i;
+	char c;
 
-	if (!(dest = (char *)malloc(sizeof(*dest) * 15)))
-		return (0);
-	memset(dest, 0, 15);
-	memset(dest, 'r', 6);
-	ft_print_result(ft_strlcat(dest, "lorem ipsum dolor sit amet", 15));
-	write(1, "\n", 1);
-	// printf("\nfct result\n");
-	// ft_print_result(strlcat(dest, "lorem ipsum dolor sit amet", 15));
-	// write(1, "\n", 1);
-	write(1, dest, 15);
+	i = 0;
+	if (ft_is_present("Paris est magique", &i, c) == 0)
+	{
+		ft_fill("Paris est magique", &i, c);
+	}
 	return (0);
 }
