@@ -6,7 +6,7 @@
 #    By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/13 00:09:25 by tidminta          #+#    #+#              #
-#    Updated: 2019/12/18 22:48:10 by tidminta         ###   ########.fr        #
+#    Updated: 2020/01/09 20:00:26 by tidminta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,8 @@ SRC		=	ft_atoi.c \
 			ft_putstr_fd.c \
 			ft_putendl_fd.c \
 			ft_putnbr_fd.c \
-			ft_strjoin.c 
+			ft_strjoin.c \
+			ft_strtrim.c
 
 OBJ		=	$(subst .c,.o,$(SRC))
 CFLAGS	=	-Wall -Werror -Wextra
