@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tolower.c                                       :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/14 15:55:17 by tidminta          #+#    #+#             */
-/*   Updated: 2019/11/14 16:02:42 by tidminta         ###   ########.fr       */
+/*   Created: 2019/11/13 22:30:27 by tidminta          #+#    #+#             */
+/*   Updated: 2020/01/14 17:49:11 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_tolower(int c)
-{
-	unsigned char new_c;
+#include "libft.h"
 
-	new_c = (unsigned char)c;
-	if (new_c >= 'A' && new_c <= 'Z')
-		new_c = new_c + 32;
-	c = (int)new_c;
-	return (c);
+int		ft_isalnum(int c)
+{
+	if (c < 0)
+		return (0);
+	return (ft_isalpha(c) || ft_isdigit(c));
 }

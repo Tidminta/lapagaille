@@ -1,40 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/26 19:49:56 by tidminta          #+#    #+#             */
-/*   Updated: 2019/12/18 18:15:40 by tidminta         ###   ########.fr       */
+/*   Created: 2019/11/05 17:32:37 by tidminta          #+#    #+#             */
+/*   Updated: 2020/01/15 01:21:23 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t		ft_strlcat(char *dst, const char *src, size_t dstsize)
+int		ft_atoi(const char *str)
 {
-	size_t	i;
-	size_t	j;
-	size_t	len;
+	int i;
+	int signe;
+	int nb;
 
 	i = 0;
-	j = 0;
-	len = 0;
-	while (dst[i])
+	nb = 0;
+	signe = 1;
+	while (str[i] == '\t' || str[i] == '\n' || str[i] == '\r' || str[i] == '\v'
+		|| str[i] == '\f' || str[i] == ' ')
 		i++;
-	while (src[len])
-		len++;
-	if (dstsize <= i)
-		len = len + dstsize;
-	else
-		len = len + i;
-	while (src[j] && (i + 1) < dstsize)
+	if (str[i] == '+' || str[i] == '-')
 	{
-		dst[i] = src[j];
+		signe = (str[i] == '-') ? signe *= -1 : signe;
 		i++;
-		j++;
 	}
-	dst[i] = '\0';
-	return (len);
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		nb = (nb * 10) + str[i] - 48;
+		i++;
+	}
+	return (nb * signe);
 }

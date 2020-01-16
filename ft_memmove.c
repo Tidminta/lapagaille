@@ -1,22 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/14 13:19:49 by tidminta          #+#    #+#             */
-/*   Updated: 2019/11/14 15:47:08 by tidminta         ###   ########.fr       */
+/*   Created: 2019/11/07 19:37:34 by tidminta          #+#    #+#             */
+/*   Updated: 2020/01/15 00:26:40 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_toupper(int c)
-{
-	unsigned char new_c;
+#include "libft.h"
 
-	new_c = (unsigned char)c;
-	if (new_c >= 'a' && new_c <= 'z')
-		new_c = new_c - 32;
-	c = (int)new_c;
-	return (c);
+void		*ft_memmove(void *dst, const void *src, size_t len)
+{
+	unsigned char	*new_dst;
+	unsigned char	*new_src;
+
+	if (src == dst)
+		return (dst);
+	new_dst = (unsigned char *)dst;
+	new_src = (unsigned char *)src;
+	if (src < dst)
+	{
+		while (len--)
+			new_dst[len] = new_src[len];
+	}
+	else
+	{
+		while (len--)
+			*new_dst++ = *new_src++;
+	}
+	return (dst);
 }

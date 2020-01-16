@@ -6,14 +6,14 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 22:16:34 by tidminta          #+#    #+#             */
-/*   Updated: 2020/01/14 02:06:35 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/01/15 01:45:15 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-int		ft_present(const char *charset, char c)
+static int		ft_present(const char *charset, char c)
 {
 	int i;
 
@@ -27,7 +27,7 @@ int		ft_present(const char *charset, char c)
 	return (0);
 }
 
-char	*ft_strtrim(char const *s1, char const *set)
+char			*ft_strtrim(char const *s1, char const *set)
 {
 	size_t	i;
 	size_t	start;

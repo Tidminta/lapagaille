@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/07 19:37:34 by tidminta          #+#    #+#             */
-/*   Updated: 2020/01/14 02:56:18 by tidminta         ###   ########.fr       */
+/*   Created: 2019/12/18 19:47:08 by tidminta          #+#    #+#             */
+/*   Updated: 2020/01/14 22:15:00 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-void		*ft_memmove(void *dst, const void *src, size_t len)
+char	*ft_strdup(const char *s1)
 {
-	unsigned char	*new_dst;
-	unsigned char	*new_src;
+	char	*alloc;
+	size_t	len;
 
-	new_dst = (unsigned char *)dst;
-	new_src = (unsigned char *)src;
-	if (src < dst)
+	len = ft_strlen(s1) + 1;
+	if (s1[0] == 0)
 	{
-		while (len--)
-			new_dst[len] = new_src[len];
+		if (!(alloc = ft_calloc(1, sizeof(char))))
+			return (NULL);
+		return (alloc);
 	}
-	else
-	{
-		while (len--)
-			*new_dst++ = *new_src++;
-	}
-	return (dst);
+	if (!(alloc = ft_calloc(len, sizeof(char))))
+		return (NULL);
+	ft_strlcpy(alloc, s1, len);
+	return (alloc);
 }

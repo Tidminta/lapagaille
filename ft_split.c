@@ -6,13 +6,13 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 22:30:24 by tidminta          #+#    #+#             */
-/*   Updated: 2020/01/14 01:56:07 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/01/15 02:52:27 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-unsigned int	ft_is_present(char const *s, unsigned int *index, char c)
+static unsigned int	ft_is_present(char const *s, unsigned int *index, char c)
 {
 	if (s[*index] && s[*index] == c)
 		return (1);
@@ -20,7 +20,7 @@ unsigned int	ft_is_present(char const *s, unsigned int *index, char c)
 		return (0);
 }
 
-unsigned int	ft_words(char const *s, char c)
+static unsigned int	ft_words(char const *s, char c)
 {
 	unsigned int i;
 	unsigned int words;
@@ -42,7 +42,7 @@ unsigned int	ft_words(char const *s, char c)
 	return (words);
 }
 
-size_t			ft_sub2(char const *s, unsigned int *i, char c)
+static size_t		ft_sub2(char const *s, unsigned int *i, char c)
 {
 	size_t	len;
 
@@ -59,7 +59,8 @@ size_t			ft_sub2(char const *s, unsigned int *i, char c)
 	return (len);
 }
 
-char			*ft_sub3(char const *s, unsigned int start, size_t len, char c)
+static char			*ft_sub3(char const *s, unsigned int start, size_t len,
+	char c)
 {
 	char	*alloc;
 	size_t	i;
@@ -79,23 +80,28 @@ char			*ft_sub3(char const *s, unsigned int start, size_t len, char c)
 	return (alloc);
 }
 
-char			**ft_split(char const *s, char c)
+char				**ft_split(char const *s, char c)
 {
 	char			**tab;
 	unsigned int	words;
 	unsigned int	i;
 	unsigned int	j;
 
+	if (!s || !c)
+		return (NULL);
 	words = ft_words(s, c);
 	i = 0;
 	j = 0;
-	if (!s || !(tab = (char **)malloc(sizeof(char *) * (words + 1))))
-	{
+	if (!(tab = (char **)malloc(sizeof(char *) * (words + 1))))
 		return (NULL);
-	}
 	while (j < words)
 	{
-		tab[j] = ft_sub3(s, i, ft_sub2(s, &i, c), c);
+		if (!(tab[j] = ft_sub3(s, i, ft_sub2(s, &i, c), c)))
+		{
+			while (j--)
+				free(tab[j]);
+			return (0);
+		}
 		j++;
 	}
 	tab[words] = 0;

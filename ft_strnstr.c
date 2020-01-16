@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 21:55:49 by tidminta          #+#    #+#             */
-/*   Updated: 2019/12/18 19:26:03 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/01/14 20:25:31 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	i = -1;
 	j = 0;
 	tmp = (char *)haystack;
-	if (needle[0] == '\0')
+	if (needle[0] == '\0' || haystack == needle)
 		return (tmp);
 	while ((haystack[++i] && needle[j]) && (i < len))
 	{

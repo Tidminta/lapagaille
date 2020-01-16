@@ -1,22 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/13 22:14:19 by tidminta          #+#    #+#             */
-/*   Updated: 2019/11/13 22:29:04 by tidminta         ###   ########.fr       */
+/*   Created: 2020/01/13 18:17:52 by tidminta          #+#    #+#             */
+/*   Updated: 2020/01/15 01:16:24 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isdigit(int c)
-{
-	unsigned char new_c;
+#include "libft.h"
 
-	new_c = (unsigned char)c;
-	if (new_c >= '0' && new_c <= '9')
-		return (1);
-	else
-		return (0);
+char		*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+{
+	char			*alloc;
+	size_t			len;
+	unsigned int	i;
+
+	alloc = NULL;
+	if (!s || !(*f))
+		return (NULL);
+	len = ft_strlen(s) + 1;
+	i = 0;
+	if (!(alloc = ft_calloc(len, sizeof(char))))
+		return (NULL);
+	while (s[i])
+	{
+		alloc[i] = (*f)(i, s[i]);
+		i++;
+	}
+	return (alloc);
 }

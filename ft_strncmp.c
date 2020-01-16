@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/18 19:47:08 by tidminta          #+#    #+#             */
-/*   Updated: 2020/01/14 02:01:22 by tidminta         ###   ########.fr       */
+/*   Created: 2019/11/26 18:01:33 by tidminta          #+#    #+#             */
+/*   Updated: 2020/01/15 01:44:17 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-char	*ft_strdup(const char *s1)
+int		ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	char *alloc;
+	size_t	i;
 
-	if (!s1 || s1[0] == 0)
+	i = 0;
+	if (n <= 0)
+		return (0);
+	while ((s1[i] == s2[i]) && (i < n - 1) && (s1[i] && s2[i]))
 	{
-		if (!(alloc = ft_calloc(1, sizeof(s1))))
-			return (NULL);
-		return (alloc);
+		i++;
 	}
-	if (!(alloc = ft_calloc(ft_strlen(s1), sizeof(s1))))
-		return (NULL);
-	ft_strlcpy(alloc, s1, (ft_strlen(s1) + 1));
-	return (alloc);
+	if (s1[i] != s2[i])
+	{
+		return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	}
+	return (0);
 }

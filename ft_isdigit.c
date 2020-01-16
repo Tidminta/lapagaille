@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/13 22:41:28 by tidminta          #+#    #+#             */
-/*   Updated: 2019/12/02 21:59:17 by tidminta         ###   ########.fr       */
+/*   Created: 2019/11/13 22:14:19 by tidminta          #+#    #+#             */
+/*   Updated: 2020/01/14 17:48:05 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isascii(int c)
+int		ft_isdigit(int c)
 {
-	unsigned char new_c;
-
-	new_c = (unsigned char)c;
-	if (new_c >= 0 && new_c <= 127)
+	if (c < 0)
+		return (0);
+	if (c >= '0' && c <= '9')
 		return (1);
 	else
 		return (0);

@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/13 18:17:52 by tidminta          #+#    #+#             */
-/*   Updated: 2020/01/14 01:58:07 by tidminta         ###   ########.fr       */
+/*   Created: 2019/11/26 18:40:29 by tidminta          #+#    #+#             */
+/*   Updated: 2020/01/15 01:43:51 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	char			*alloc;
-	size_t			len;
-	unsigned int	i;
+	size_t	i;
 
-	len = ft_strlen(s) + 1;
 	i = 0;
-	if ((!s) || !(alloc = ft_calloc(len, sizeof(char))))
-		return (NULL);
-	while (s[i])
+	if (dstsize >= 0 && src && dst)
 	{
-		alloc[i] = (*f)(i, s[i]);
-		i++;
+		while (src[i] && dstsize > 1)
+		{
+			dst[i] = src[i];
+			i++;
+			dstsize--;
+		}
+		if (dstsize > 0)
+		{
+			dst[i] = '\0';
+		}
+		return (ft_strlen(src));
 	}
-	return (alloc);
+	return (0);
 }

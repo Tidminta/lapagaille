@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/26 16:44:04 by tidminta          #+#    #+#             */
-/*   Updated: 2019/12/02 22:55:37 by tidminta         ###   ########.fr       */
+/*   Created: 2019/11/14 15:55:17 by tidminta          #+#    #+#             */
+/*   Updated: 2020/01/14 18:04:54 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdio.h>
-
-char	*ft_strrchr(const char *s, int c)
+int		ft_tolower(int c)
 {
-	int		i;
-	char	match;
-
-	i = 0;
-	while (s[i])
-		i++;
-	match = (char)c;
-	while (i > 0 && (s[i] != match))
-	{
-		i--;
-	}
-	if (s[i] == match)
-		return ((char*)s + i);
-	return (NULL);
+	if (c <= 'A' && c >= 'Z')
+		return (0);
+	if (c >= 'A' && c <= 'Z')
+		c += 32;
+	return (c);
 }

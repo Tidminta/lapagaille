@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/18 19:31:05 by tidminta          #+#    #+#             */
-/*   Updated: 2019/12/18 20:21:53 by tidminta         ###   ########.fr       */
+/*   Created: 2019/12/18 20:25:42 by tidminta          #+#    #+#             */
+/*   Updated: 2020/01/15 00:38:57 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-void	*ft_calloc(size_t count, size_t size)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	void	*alloc;
+	char	*alloc;
+	size_t	i;
 
-	count = (count <= 0) ? 1 : count;
-	if (!(alloc = malloc(sizeof(size) * count)))
+	if (!s)
 		return (NULL);
-	ft_bzero(alloc, count);
+	if (start > ft_strlen(s))
+		return (ft_calloc(1, sizeof(char)));
+	i = -1;
+	alloc = NULL;
+	if (!(alloc = (char *)malloc(sizeof(char) * (len + 1))))
+		return (NULL);
+	ft_bzero(alloc, (len + 1));
+	while ((++i < len) && (s[start]))
+	{
+		alloc[i] = s[start];
+		start++;
+	}
 	return (alloc);
 }
