@@ -1,40 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   free_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/23 20:15:32 by tidminta          #+#    #+#             */
-/*   Updated: 2020/02/06 03:18:52 by tidminta         ###   ########.fr       */
+/*   Created: 2020/02/04 17:37:57 by tidminta          #+#    #+#             */
+/*   Updated: 2020/02/06 03:12:06 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+// #include "get_next_line.h"
+// #include <libc.h>
+#include <stdlib.h>
+#include <stdio.h>
 
-void	ft_putstr(char *str)
+int		ft_strlen(char *str)
 {
 	int i;
 
 	i = 0;
 	while (str[i])
 		i++;
-	write(1, str, i);
-	write(1, "\n", 1);
-}
-
-char		*ft_strchr(const char *s, int c)//si besoin enlever "const"
-{
-	int		i;
-	char	match;
-
-	i = 0;
-	match = (char)c;
-	while (*s && (*s != match))
-		s++;
-	if (*s == match)
-		return ((char *)s);
-	return (NULL);
+	return (i);
 }
 
 char		*ft_strdup(char *s1)
@@ -57,7 +45,7 @@ char		*ft_strdup(char *s1)
 	while (++i < len)
 		alloc[i] = '\0';
 	i = -1;
-	while (++i < (len - 1) && s1[i] != '\n')
+	while (++i < (len - 1))
 		alloc[i] = s1[i];
 	return (alloc);
 }
@@ -73,8 +61,9 @@ char		*ft_strjoin(char *s1, char *s2)
 	i = -1;
 	j = -1;
 	if (!s1 || !s2)
-		return (ft_strdup(""));
+		return (NULL);
 	len = ft_strlen(s1) + ft_strlen(s2) + 1;
+	printf("len = %i\n", len);
 	if (!(alloc = malloc(sizeof(char) * len)))
 		return (NULL);
 	while (++i < len)
@@ -84,16 +73,17 @@ char		*ft_strjoin(char *s1, char *s2)
 		alloc[i] = s1[i];
 	while (i < (len - 1))
 		alloc[i++] = s2[++j];
-	// free(s1);
 	return (alloc);
 }
 
-int		ft_strlen(char *str)
+int		main(void)
 {
-	int i;
+	char	*str;
+	char	*tmp;
 
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+	tmp = "paris est magique";
+	str = ft_strdup(tmp + 5);
+	printf("str = %s\n", str);
+	free(str);
+	return (0);
 }
