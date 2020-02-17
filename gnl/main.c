@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 21:12:52 by tidminta          #+#    #+#             */
-/*   Updated: 2020/02/08 19:49:13 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/02/14 15:13:28 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,32 @@ int		main(int ac, char **av)
 {
 	char	*string;
 	int		fd;
-	int		i;
+	int		ret;
 
 	(void)ac;
-	i = 0;
+	ret = 0;
 	fd = open(av[1], O_RDONLY);
-	printf("fd = %d\n", fd);
 	string = NULL;
+	// printf("fd = %i\nBUFF_SIZE = %i\n", fd, BUFFER_SIZE);
 	if (fd == -1)
 	{
 		ft_putstr("OPEN FAILED\n");
 		return (0);
 	}
-	while (get_next_line(fd, &string) > 0)
+	// printf("[avant boucle main]\n");
+	while ((ret = get_next_line(42, &string)) > 0)
 	{
-		printf("[main]\n");
-		ft_putstr(string);
-		printf("**********\n");
+		// printf("\n[main]\n");
+		printf("%s\n", string);
 		free(string);
 		string = NULL;
+		// printf("ret = %i\n", ret);
 	}
+	// printf("[hors boucle]\n");
+	printf("%s\n", string);
+	free(string);
+	string = NULL;
+	// printf("dernier return = %i\n", ret);
 	// system("leaks a.out");
 	return (0);
 }
