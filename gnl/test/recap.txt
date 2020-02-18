@@ -1,0 +1,18 @@
++segfault quand fichier vide
++mauvais return quand random fd
+
++test realise avec gnl tester
+****************************
++mauvais return fix
+-fix "KO with file ending with a '\ n'" -->  gnl_lover et gnl_tester
+-segfault sur 2eme test --> unit test
+****************************
++compilation avec le bon define(BUFFER SIZE) a fix et tester
+??penser a refaire gnl avec buff statique
+****************************
+fix test_file7 avec BUFFER_SIZE = 2 (derniere ligne/caractere en double)
+en fonction de la taille de BUFFER_SIZE GNL reagit +/- bien
+depuis modification de ft_where_is GNL leaks
+segfault quand BUFF_SIZE >= 1 milliard
+fix perte d'info entre le 1er read(test de rd) et le 2eme(boucle strjoin) --> les (*line) sont tronquees
+****************************
