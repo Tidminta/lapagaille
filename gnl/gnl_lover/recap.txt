@@ -1,2 +1,0 @@
-semble fonctionner avec n'importe quel BUFFER_SIZE sauf 1 milliards --> segfault
-tester et fix avec les testeurs, fixer les leaks

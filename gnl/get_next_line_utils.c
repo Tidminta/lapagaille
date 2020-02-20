@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 20:15:32 by tidminta          #+#    #+#             */
-/*   Updated: 2020/02/13 19:36:06 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/02/20 14:19:10 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,16 @@ char	*ft_where_is_nl(char *s)
 	alloc = NULL;
 	if (!s)
 		return (NULL);
-	while ((s[i] && s[i] != '\n'))
+	while ((s[i]) && s[i] != '\n')
 		i++;
-	if (s[i] == '\n')
+	if (s[i] && s[i] == '\n')
 	{
 		if (!(alloc = (char *)malloc(sizeof(char) * (ft_strlen(s) - i))))
 			return (NULL);
 		alloc = ft_substr(s, i + 1, ft_strlen(s) - i);
 		return (alloc);
 	}
+	free(s);
+	s = NULL;
 	return (NULL);
 }
