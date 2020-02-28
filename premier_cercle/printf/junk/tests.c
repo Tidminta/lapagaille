@@ -3,43 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   tests.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tidminta <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 18:13:08 by tidminta          #+#    #+#             */
-/*   Updated: 2020/02/27 18:14:37 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/02/28 14:56:31 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_sumnum(int nb, ...)
-{
-	va_list list_ptr;
-	int		sum;
-	int		i;
+#include "../lib/libft.h"
+#include <stdio.h>
 
-	sum = 0;
-	i = 0;
-	va_start(list_ptr, nb);
-	while (i < nb)
-	{
-		sum += va_arg(list_ptr, int);
-		i++;
-	}
-	va_end(list_ptr);
-	return (sum);
-}
+int			ft_get_width(const char *s, int *index);
+char		ft_check_conv_spe(char car);
+int			ft_get_width(const char *s, int *index);
 
 int		main(void)
 {
-	int		somme;
-	char	alpha;
-	const char *str;
-	char		*str2;
+	int		i;
+	int		str_width;
 
-	str2 = str;
-	somme = ft_sumnum(5, 2, 3, 4, 5, 6);
-	alpha = 'a';
-	printf("somme = %d\n", somme);
-	printf("char = %.3c", alpha);
+	i = 0;
+	str_width = ft_get_width("paris %15522.15c est magique", &i);
+	printf("width = [%d]\ni = [%d]\n", str_width, i);
 	return (0);
 }
 
+// int		ft_sumnum(int nb, ...)
+// {
+// 	va_list list_ptr;
+// 	int		sum;
+// 	int		i;
+
+// 	sum = 0;
+// 	i = 0;
+// 	va_start(list_ptr, nb);
+// 	while (i < nb)
+// 	{
+// 		sum += va_arg(list_ptr, int);
+// 		i++;
+// 	}
+// 	va_end(list_ptr);
+// 	return (sum);
+// }

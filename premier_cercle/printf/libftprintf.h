@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:44:41 by tidminta          #+#    #+#             */
-/*   Updated: 2020/02/27 20:27:46 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/02/28 15:07:51 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ int				ft_printf(const char *str, ...);
 int				ft_sumnum(int nb, ...);
 
 int				ft_get_width(const char *s, int *index);
+
+char			ft_check_conv_spe(char car);
+
+size_t			ft_strncopy(char **dst, const char *src, int start, size_t dstsize);
 
 int				ft_get_precis(const char *s);
 
