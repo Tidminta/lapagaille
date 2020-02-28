@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:44:41 by tidminta          #+#    #+#             */
-/*   Updated: 2020/02/28 15:07:51 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/02/28 23:43:56 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@
 typedef struct	s_infos
 {
 	const char	*string;
-	char		*flag;
+	int			flag_d;
+	int			flag_m;
 	int			width;
 	int			precis;
 	char		conv_spe;
@@ -36,9 +37,7 @@ int				ft_get_width(const char *s, int *index);
 
 char			ft_check_conv_spe(char car);
 
-size_t			ft_strncopy(char **dst, const char *src, int start, size_t dstsize);
-
-int				ft_get_precis(const char *s);
+int				ft_get_precis(const char *s, int *index);
 
 void			*ft_memset(void *b, int c, size_t len);
 

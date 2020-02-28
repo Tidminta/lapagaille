@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 16:00:08 by tidminta          #+#    #+#             */
-/*   Updated: 2020/02/28 15:26:56 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/02/28 23:53:08 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,49 +20,62 @@ char		ft_check_conv_spe(char car)
 	return (0);
 }
 
-size_t		ft_strncopy(char **dst, const char *src, int start, size_t dstsize)
+int			ft_get_flag(const char *s, t_infos *struct_ptr)
 {
-	size_t	j;
+	int i;
 
-	j = 0;
-	if (!src || !dst)
-		return (0);
-	if (dstsize == 0)
-		return (start);
-	while (src[start] && j < dstsize - 1)
+	i = 0;
+	while (s[i] && s[i] != '%')
 	{
-		*dst[j] = src[start];
-		printf("[ft_strncopy][%i] = [%c]\n", start, src[start]);
-		j++;
-		start++;
+		if (s[i] == )
 	}
-	*dst[j] = '\0';
-	return (1);
 }
 
-int			ft_get_width(const char *s, int *index)//"paris %15522.15c est magique"
+int			ft_get_width(const char *s, int *index)
 {
+	unsigned int	j;
 	int				width;
-	char			tab[30];
-	char			*tmp;
-	int	j;
+	char			*alloc;
 	size_t			len;
 
 	width = 0;
 	len = 0;
-	tmp = tab;
 	while (s[*index] && s[*index] != '%')
 		*index += 1;
 	if (s[*index] == '%')
 	{
 		j = *index + 1;
-		printf("[ft_get_width]*index = %i\n", *index);
 		while (s[++(*index)] && ft_isdigit(s[*index])
 			&& (s[*index != '.'] || !(ft_check_conv_spe(s[*index]))))
 			len++;
-		ft_strncopy(&tmp, s, &j, len);
-		width = ft_atoi(tab);
+		if (!(alloc = ft_substr(s, j, len)))
+			return (-1);
+		width = ft_atoi(alloc);
 		return (width);
 	}
 	return (0);
+}
+
+int				ft_get_precis(const char *s, int *index)
+{
+	unsigned int	j;
+	int				precis;
+	char			*alloc;
+	size_t			len;
+
+	precis = 0;
+	j = *index + 1;
+	len = 0;
+	alloc = NULL;
+	while (s[++(*index)] && ft_isdigit(s[*index])
+		&& !(ft_check_conv_spe(s[*index])))
+		len++;
+	if (len)
+	{
+		if (!(alloc = ft_substr(s, j, len)))
+			return (-1);
+	}
+	precis = ft_atoi(alloc);
+	free(alloc);
+	return (precis);
 }
