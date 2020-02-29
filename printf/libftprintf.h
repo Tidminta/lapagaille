@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:44:41 by tidminta          #+#    #+#             */
-/*   Updated: 2020/02/28 23:43:56 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/02/29 22:24:08 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,31 @@
 # include <stdarg.h>
 # include <stdio.h>
 
-typedef struct	s_infos
+/* check bits fields pour les flags */
+
+typedef struct	s_infos_
 {
-	const char	*string;
-	int			flag_d;
-	int			flag_m;
+	char		conv_spe;
+	int			flag_zero;
+	int			flag_moins;
 	int			width;
 	int			precis;
-	char		conv_spe;
-}				t_infos;
+	int			conv_len;
+}				t_infos_;
 
 int				ft_printf(const char *str, ...);
 
-int				ft_sumnum(int nb, ...);
+/*int				ft_sumnum(int nb, ...);*/
 
-int				ft_get_width(const char *s, int *index);
+t_infos_		*ft_init_struct(void);
+
+void			ft_get_flag(char *s, int *index, t_infos_ *struct_ptr_);
+
+int				ft_get_width(char *s, int *index);
 
 char			ft_check_conv_spe(char car);
 
-int				ft_get_precis(const char *s, int *index);
+int				ft_get_precis(char *s, int *index);
 
 void			*ft_memset(void *b, int c, size_t len);
 

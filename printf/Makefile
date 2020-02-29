@@ -6,7 +6,7 @@
 #    By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/13 00:09:25 by tidminta          #+#    #+#              #
-#    Updated: 2020/02/28 12:33:42 by tidminta         ###   ########.fr        #
+#    Updated: 2020/02/29 21:23:37 by tidminta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,9 @@ OBJ =	./lib/ft_memset.c\
 		./lib/ft_strmapi.c\
 		./lib/ft_toupper.c\
 		./lib/ft_tolower.c\
-		./lib/ft_check_format.c
+		./lib/ft_check_format.c\
+		./lib/ft_check_format2.c
+
 
 
 OBJ_OBJS	=	$(OBJ:.c=.o)
