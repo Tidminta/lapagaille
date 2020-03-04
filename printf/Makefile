@@ -6,7 +6,7 @@
 #    By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/13 00:09:25 by tidminta          #+#    #+#              #
-#    Updated: 2020/02/29 21:23:37 by tidminta         ###   ########.fr        #
+#    Updated: 2020/03/04 18:26:14 by tidminta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,10 +39,12 @@ OBJ =	./lib/ft_memset.c\
 		./lib/ft_strtrim.c\
 		./lib/ft_split.c\
 		./lib/ft_itoa.c\
+		./lib/ft_putchar.c\
 		./lib/ft_putchar_fd.c\
 		./lib/ft_putstr_fd.c\
 		./lib/ft_putendl_fd.c\
 		./lib/ft_putnbr_fd.c\
+		./lib/ft_putnbr.c\
 		./lib/ft_strchr.c\
 		./lib/ft_strrchr.c\
 		./lib/ft_isascii.c\
@@ -50,14 +52,17 @@ OBJ =	./lib/ft_memset.c\
 		./lib/ft_strmapi.c\
 		./lib/ft_toupper.c\
 		./lib/ft_tolower.c\
-		./lib/ft_check_format.c\
-		./lib/ft_check_format2.c
+		./lib/ft_format.c\
+		./lib/ft_format2.c\
+		./lib/ft_printf.c\
+		./lib/ft_convert.c\
+		./lib/ft_printing.c
 
 
 
 OBJ_OBJS	=	$(OBJ:.c=.o)
 
-CFLAGS		=	-Wall -Wextra -Werror 
+CFLAGS		=	-Wall -Wextra -Werror
 
 LIB			= libftprintf.h
 

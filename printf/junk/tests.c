@@ -6,31 +6,14 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 18:13:08 by tidminta          #+#    #+#             */
-/*   Updated: 2020/02/29 21:21:38 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/03/04 15:33:40 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include "../lib/libft.h"
 #include <stdio.h>
 #include <stdlib.h>
-
-// int		ft_sumnum(int nb, ...)
-// {
-// 	va_list list_ptr;
-// 	int		sum;
-// 	int		i;
-
-// 	sum = 0;
-// 	i = 0;
-// 	va_start(list_ptr, nb);
-// 	while (i < nb)
-// 	{
-// 		sum += va_arg(list_ptr, int);
-// 		i++;
-// 	}
-// 	va_end(list_ptr);
-// 	return (sum);
-// }
+#include <stdarg.h>
 
 // int             ft_isdigit(int c)
 // {
@@ -102,15 +85,48 @@ t_infos_	*ft_init_struct(void)
 	return (ptr);
 }
 
+int		ft_sumnum(int nb, ...)
+{
+	va_list list_ptr;
+	int		sum;
+	int		i;
+
+	sum = 0;
+	i = 0;
+	va_start(list_ptr, nb);
+	while (i < nb)
+	{
+		printf("argument[%d] = %d\n", i, va_arg(list_ptr, int));
+		i++;
+	}
+	va_end(list_ptr);
+	return (sum);
+}
+
+int			ft_isprint(int c)
+{
+	return (c >= 32 && c <= 126);
+}
+
+char	ft_convert_char(int char_)
+{
+	if (ft_isprint(char_))
+		return ((char)char_);
+	return (0);
+}
+
 int		main(void)
 {
 	t_infos_	*test_ptr;
 	char		*str;
+	int			char_;
+	// void		*char_convert;
 	int			nb;
 	int			i;
 
 	i = 0;
 	nb = 1234;
+	char_ = 66;
 	str = "paris est %-c\n";
 	test_ptr = ft_init_struct();
 	printf("[init_struct] = %i\n", test_ptr->flag_zero);
@@ -119,7 +135,9 @@ int		main(void)
 	printf("[struct.zero] = %i\n", test_ptr->flag_zero);
 	printf("[struct.moins] = %i\n", test_ptr->flag_moins);
 	free(test_ptr);
-	// printf("[printf]\n%-0.10d\n", nb);
+	ft_sumnum(5, 0, 1, 2, 3, 4);
+	// printf("[test c] [%-c]\n", char_);
+	// printf("[char_convert] = [%c]", (char)char_convert);
 	// system("leaks a.out");
 	return (0);
 }

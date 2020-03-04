@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:01:24 by tidminta          #+#    #+#             */
-/*   Updated: 2020/01/16 20:57:45 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/03/04 17:43:22 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ char		*ft_strdup(const char *s1);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 
 char		*ft_strjoin(char const *s1, char const *s2);
+
+void		ft_putchar(char c);
 
 void		ft_putchar_fd(char c, int fd);
 

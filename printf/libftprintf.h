@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:44:41 by tidminta          #+#    #+#             */
-/*   Updated: 2020/02/29 22:24:08 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/03/04 18:32:07 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,31 +19,89 @@
 # include <stdarg.h>
 # include <stdio.h>
 
-/* check bits fields pour les flags */
+/*
+*************************************
+**		TESTS FONCTIONS
+*************************************
+** int				ft_sumnum(int nb, ...);
+*/
+
+/*
+*************************************
+**		MACROS (VA_LIST & VA_ARGS)
+*************************************
+** typedef unsigned char *va_list;
+** #define va_start(list, param) (list = (((va_list)&param) + sizeof(param)))
+** #define va_arg(list, type)    (*(type *)((list += sizeof(type)) - sizeof(type)))
+*/
+
+/*
+*************************************
+**			STRUCT_
+*************************************
+** check bits fields pour les flags (optimisation)
+** prevoir un autre .h pour les lignes +80
+*/
 
 typedef struct	s_infos_
 {
-	char		conv_spe;
-	int			flag_zero;
-	int			flag_moins;
-	int			width;
-	int			precis;
-	int			conv_len;
+	char			conv_spe;
+	int				flag_zero;
+	int				flag_moins;
+	int				width;
+	int				precis;
+	int				conv_len;
+	int				arg_char;
+	int				arg_int;
 }				t_infos_;
-
-int				ft_printf(const char *str, ...);
-
-/*int				ft_sumnum(int nb, ...);*/
 
 t_infos_		*ft_init_struct(void);
 
-void			ft_get_flag(char *s, int *index, t_infos_ *struct_ptr_);
+void			ft_display_struct(t_infos_ *struct_ptr, int *index);
 
-int				ft_get_width(char *s, int *index);
+void			ft_fill_struct(t_infos_ *stct_p, va_list *lst_p, const char *s, int *i);
+
+/*
+*************************************
+**		FONCTIONS D'AFFICHAGE
+*************************************
+*/
+
+void		ft_print_loop(t_infos_ *struct_ptr, const char *str, int *index);
+
+void		ft_printf_arg(t_infos_ *struct_, va_list *list, const char *s, int *i);
+
+/*
+*************************************
+**		FONCTIONS DE CONVERSION
+*************************************
+*/
+
+int				ft_printf(const char *str, ...);
+
+char			ft_convert_char(int char_);
+
+/*
+*************************************
+**		FONCTION WHO GET INFOS
+*************************************
+*/
 
 char			ft_check_conv_spe(char car);
 
-int				ft_get_precis(char *s, int *index);
+void			ft_get_flag(const char *s, int *index, t_infos_ *struct_ptr_);
+
+int				ft_get_width(const char *s, int *index);
+
+int				ft_get_precis(const char *s, int *index, t_infos_ *struct_ptr_);
+
+void			ft_get_arg(va_list *list_ptr, t_infos_ *struct_ptr);
+
+/*
+*************************************
+**		LIBFT FONCTIONS
+*************************************
+*/
 
 void			*ft_memset(void *b, int c, size_t len);
 
@@ -105,7 +163,11 @@ void			ft_putstr_fd(char *s, int fd);
 
 void			ft_putendl_fd(char *s, int fd);
 
+void			ft_putchar(char c);
+
 void			ft_putnbr_fd(int n, int fd);
+
+void			ft_putnbr(int nb);
 
 char			*ft_strtrim(char const *s1, char const *set);
 
