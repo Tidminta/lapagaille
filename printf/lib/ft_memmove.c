@@ -6,11 +6,11 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 19:37:34 by tidminta          #+#    #+#             */
-/*   Updated: 2020/01/16 04:26:20 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/03/06 17:25:57 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
 void		*ft_memmove(void *dst, const void *src, size_t len)
 {

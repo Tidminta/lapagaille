@@ -6,11 +6,11 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 18:01:33 by tidminta          #+#    #+#             */
-/*   Updated: 2020/01/17 19:36:51 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/03/06 17:27:34 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
 int		ft_strncmp(const char *s1, const char *s2, size_t n)
 {

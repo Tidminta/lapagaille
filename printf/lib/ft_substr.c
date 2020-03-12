@@ -6,12 +6,11 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 20:25:42 by tidminta          #+#    #+#             */
-/*   Updated: 2020/01/17 19:47:06 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/03/06 17:27:49 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdlib.h>
+#include "libftprintf.h"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {

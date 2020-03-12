@@ -6,11 +6,11 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 12:30:29 by tidminta          #+#    #+#             */
-/*   Updated: 2020/01/16 02:06:57 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/03/06 17:27:24 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
 size_t	ft_strlen(const char *s)
 {

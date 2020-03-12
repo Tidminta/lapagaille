@@ -6,11 +6,11 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 17:22:57 by tidminta          #+#    #+#             */
-/*   Updated: 2020/01/17 18:53:31 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/03/06 17:25:42 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
 void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 {

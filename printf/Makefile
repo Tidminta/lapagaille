@@ -6,7 +6,7 @@
 #    By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/13 00:09:25 by tidminta          #+#    #+#              #
-#    Updated: 2020/03/04 18:26:14 by tidminta         ###   ########.fr        #
+#    Updated: 2020/03/09 17:36:29 by tidminta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,9 +42,9 @@ OBJ =	./lib/ft_memset.c\
 		./lib/ft_putchar.c\
 		./lib/ft_putchar_fd.c\
 		./lib/ft_putstr_fd.c\
-		./lib/ft_putendl_fd.c\
 		./lib/ft_putnbr_fd.c\
 		./lib/ft_putnbr.c\
+		./lib/ft_putnbr_base.c\
 		./lib/ft_strchr.c\
 		./lib/ft_strrchr.c\
 		./lib/ft_isascii.c\
@@ -56,15 +56,16 @@ OBJ =	./lib/ft_memset.c\
 		./lib/ft_format2.c\
 		./lib/ft_printf.c\
 		./lib/ft_convert.c\
-		./lib/ft_printing.c
-
+		./lib/ft_printing.c\
+		./lib/ft_init_structs.c\
+		./lib/ft_print_digits.c
 
 
 OBJ_OBJS	=	$(OBJ:.c=.o)
 
 CFLAGS		=	-Wall -Wextra -Werror
 
-LIB			= libftprintf.h
+LIB			= ./lib/libftprintf.h
 
 %.o : %.c
 	@$(CC) $(CFLAGS) -I. -o $@ -c $< 

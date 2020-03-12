@@ -6,11 +6,11 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:00:11 by tidminta          #+#    #+#             */
-/*   Updated: 2020/01/16 04:06:11 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/03/06 17:26:00 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
 void	*ft_memset(void *b, int c, size_t len)
 {

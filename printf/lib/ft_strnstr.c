@@ -6,11 +6,11 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 21:55:49 by tidminta          #+#    #+#             */
-/*   Updated: 2020/01/17 19:37:37 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/03/06 17:27:38 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {

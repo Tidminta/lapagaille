@@ -6,11 +6,11 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 17:32:37 by tidminta          #+#    #+#             */
-/*   Updated: 2020/01/17 18:28:24 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/03/06 17:24:36 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
 int		ft_atoi(const char *str)
 {

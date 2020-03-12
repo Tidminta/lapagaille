@@ -6,11 +6,11 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 20:14:24 by tidminta          #+#    #+#             */
-/*   Updated: 2020/01/17 18:59:03 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/03/06 17:25:50 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
 int		ft_memcmp(const void *s1, const void *s2, size_t n)
 {

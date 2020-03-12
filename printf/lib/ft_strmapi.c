@@ -6,11 +6,11 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 18:17:52 by tidminta          #+#    #+#             */
-/*   Updated: 2020/01/17 19:35:47 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/03/06 17:27:28 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {

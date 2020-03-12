@@ -6,13 +6,13 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 22:30:24 by tidminta          #+#    #+#             */
-/*   Updated: 2020/01/15 00:08:57 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/03/07 22:53:03 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "libftprintf.h"
 
-void		ft_putstr_fd(char *s, int fd)
+void		ft_putstr_fd(char *s, int fd, t_params_ *p)
 {
 	int len;
 
@@ -22,4 +22,5 @@ void		ft_putstr_fd(char *s, int fd)
 	while (s[len])
 		len++;
 	write(fd, s, len);
+	p->conv_len += len;
 }

@@ -6,11 +6,11 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 22:30:27 by tidminta          #+#    #+#             */
-/*   Updated: 2020/01/17 18:33:46 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/03/06 17:25:04 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
 int		ft_isalnum(int c)
 {

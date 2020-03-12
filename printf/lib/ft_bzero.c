@@ -6,11 +6,11 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 17:34:45 by tidminta          #+#    #+#             */
-/*   Updated: 2020/01/16 04:07:29 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/03/06 17:24:39 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
 void	ft_bzero(void *s, size_t n)
 {

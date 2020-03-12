@@ -6,11 +6,11 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 19:31:05 by tidminta          #+#    #+#             */
-/*   Updated: 2020/01/17 18:33:03 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/03/06 17:24:42 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
 void	*ft_calloc(size_t count, size_t size)
 {

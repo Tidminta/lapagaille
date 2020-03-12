@@ -6,11 +6,11 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 18:56:26 by tidminta          #+#    #+#             */
-/*   Updated: 2020/01/17 18:48:24 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/03/06 17:25:35 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
 static char		*fill(char *str, int n, int i)
 {

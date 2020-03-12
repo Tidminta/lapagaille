@@ -6,9 +6,11 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 22:14:19 by tidminta          #+#    #+#             */
-/*   Updated: 2020/01/16 21:30:46 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/03/06 17:25:26 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libftprintf.h"
 
 int		ft_isdigit(int c)
 {

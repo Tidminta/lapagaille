@@ -6,9 +6,11 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 15:55:17 by tidminta          #+#    #+#             */
-/*   Updated: 2020/01/17 19:48:45 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/03/06 17:27:55 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libftprintf.h"
 
 int		ft_tolower(int c)
 {
