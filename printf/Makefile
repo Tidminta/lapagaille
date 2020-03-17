@@ -6,7 +6,7 @@
 #    By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/13 00:09:25 by tidminta          #+#    #+#              #
-#    Updated: 2020/03/09 17:36:29 by tidminta         ###   ########.fr        #
+#    Updated: 2020/03/16 20:38:51 by tidminta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,8 @@ OBJ =	./lib/ft_memset.c\
 		./lib/ft_strtrim.c\
 		./lib/ft_split.c\
 		./lib/ft_itoa.c\
+		./lib/ft_itoa2.c\
+		./lib/ft_itoa_base.c\
 		./lib/ft_putchar.c\
 		./lib/ft_putchar_fd.c\
 		./lib/ft_putstr_fd.c\
@@ -58,6 +60,8 @@ OBJ =	./lib/ft_memset.c\
 		./lib/ft_convert.c\
 		./lib/ft_printing.c\
 		./lib/ft_init_structs.c\
+		./lib/ft_print_unsigned.c\
+		./lib/ft_print_hexa.c\
 		./lib/ft_print_digits.c
 
 

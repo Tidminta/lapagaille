@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 14:28:26 by tidminta          #+#    #+#             */
-/*   Updated: 2020/03/12 20:49:32 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/03/17 20:53:16 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		main(void)
 {
 	// int				nb;
 	int				nb2;
-	int				nb3;
+	unsigned int	nb3;
 	int				ret;
 	int				ret2;
 	// int				real_ret;
@@ -28,14 +28,14 @@ int		main(void)
 	// c = 'z';
 	// nb = 2147483647;
 	nb2 = -12345;
-	nb3 = 12345;
+	nb3 = 4294967295;
 	// hexa = 4294967295;
 	// octal = 0;
 	// str = "tidiane";
 	// p = &str;
-	ret = ft_printf("[ft_ digit-][%-15.d]", nb2);
+	ret = ft_printf("[ft_[hexa][%#-15.1X]", nb3);
 	printf("[%d]\n", ret);
-	ret2 = printf("[fct digit-][%-15.d]", nb2);
+	ret2 = printf("[fct[hexa][%#-15.1X]", nb3);
 	printf("[%d]\n", ret2);
 	// ret = ft_printf("[ft_ digit+][%-25.3d]", nb3);
 	// printf("[%d]\n", ret);

@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:44:41 by tidminta          #+#    #+#             */
-/*   Updated: 2020/03/10 16:23:13 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/03/16 20:53:01 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,12 @@ void			ft_fill_struct(t_infos_ *stct_p, va_list *lst_p, const char *s, int *i);
 t_params_		*ft_init_params(void);
 
 void			ft_printf_digits(t_infos_ *stct_, t_params_ *p);
+
+void			ft_printf_unsigned(t_infos_ *st_, t_params_ *p);
+
+void			ft_printf_unsigned(t_infos_ *st_, t_params_ *p);
+
+void			ft_printf_hexa(t_infos_ *st_, t_params_ *p);
 
 void			ft_print_loop(const char *str, t_params_ *p);
 
@@ -194,6 +200,10 @@ void			ft_putnbr(int nb);
 char			*ft_strtrim(char const *s1, char const *set);
 
 char			*ft_itoa(int n);
+
+char			*ft_itoa2(unsigned int n);
+
+char			*ft_itoa_base(unsigned int n);
 
 char			**ft_split(char const *s, char c);
 
