@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 18:05:24 by tidminta          #+#    #+#             */
-/*   Updated: 2020/03/17 20:52:40 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/03/18 18:33:34 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,13 @@ void	ft_print_arg(t_infos_ *stct_, va_list *lst, const char *s, t_params_ *p)
 		if (stct_->conv_spe == 'd' || stct_->conv_spe == 'i')
 			ft_printf_digits(stct_, p);
 		else if (stct_->conv_spe == 'c')
-			ft_putchar_fd(stct_->arg_char, 1, p);
+			ft_printf_char(stct_, p);
 		else if (stct_->conv_spe == 's')
-			ft_putstr_fd(stct_->arg_str, 1, p);
+			ft_printf_string(stct_, p);
 		else if (stct_->conv_spe == 'u')
 			ft_printf_unsigned(stct_, p);
 		else if (stct_->conv_spe == 'x' || stct_->conv_spe == 'X')
-		{
-			// if (stct_->flag_diez)
-			// 	ft_putstr_fd("0x", 1, p);
-			// ft_putnbr_base(stct_->arg_hexa, "0123456789abcdef", p);
 			ft_printf_hexa(stct_, p);
-		}
 		else if (stct_->conv_spe == 'p')
 		{
 			ft_putstr_fd("0x", 1, p);

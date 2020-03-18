@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 14:28:26 by tidminta          #+#    #+#             */
-/*   Updated: 2020/03/17 20:53:16 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/03/18 22:06:19 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,27 @@
 int		main(void)
 {
 	// int				nb;
-	int				nb2;
-	unsigned int	nb3;
+	// int				nb2;
+	// unsigned int	nb3;
 	int				ret;
 	int				ret2;
 	// int				real_ret;
 	// unsigned int	hexa;
 	// unsigned int	octal;
 	// char			c;
-	// char			*str;
+	char			*str;
 	// void			*p;
 	// c = 'z';
 	// nb = 2147483647;
-	nb2 = -12345;
-	nb3 = 4294967295;
+	// nb2 = -12345;
+	// nb3 = 4294967295;
 	// hexa = 4294967295;
 	// octal = 0;
-	// str = "tidiane";
+	str = "tidiane";
 	// p = &str;
-	ret = ft_printf("[ft_[hexa][%#-15.1X]", nb3);
+	ret = ft_printf("[ft_[string][%-10.10s]", str);
 	printf("[%d]\n", ret);
-	ret2 = printf("[fct[hexa][%#-15.1X]", nb3);
+	ret2 = printf("[fct[string][%-10.10s]", str);
 	printf("[%d]\n", ret2);
 	// ret = ft_printf("[ft_ digit+][%-25.3d]", nb3);
 	// printf("[%d]\n", ret);

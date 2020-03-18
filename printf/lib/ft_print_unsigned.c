@@ -6,22 +6,24 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/16 14:38:38 by tidminta          #+#    #+#             */
-/*   Updated: 2020/03/16 19:53:59 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/03/18 17:26:04 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
 /*
- ** 1. Fonction s'occupant du bon affichage du %u
- ** [flag zero] only matter if (width) | force number to be padded with 0 | ("%05d", 10) => [00010]
- ** [flag moins] only matter if (width) | force number to be left justified | ("%-3d", 10) => [10 ]
- ** ex ("%8.5d", 1234) ==> " | | |0|1234" [width = 8 | precis = 5 | len = 4]
- ** if (precision) flag zero ignoré
- ** ft_display_struct(st_); 
- ** sans width "%.10d" | precision = len (flag zero too) |  
- ** modifier touts les ft_itoa pour pouvoir free
- ** supprimer les lignes ne servant a rien au decoupage --> (st_->arg_uint > 0)
+** *******************************************************************************************************
+** 1. Fonction s'occupant du bon affichage du %u														**
+** [flag zero] only matter if (width) | force number to be padded with 0 | ("%05d", 10) => [00010]		**
+** [flag moins] only matter if (width) | force number to be left justified | ("%-3d", 10) => [10 ]		**
+** ex ("%8.5d", 1234) ==> " | | |0|1234" [width = 8 | precis = 5 | len = 4]								**
+** if (precision) flag zero ignoré																		**
+** ft_display_struct(st_); 																				**
+** sans width "%.10d" | precision = len (flag zero too) |  												**
+** modifier touts les ft_itoa pour pouvoir free															**
+** supprimer les lignes ne servant a rien au decoupage --> (st_->arg_uint > 0)							**
+** *******************************************************************************************************
  */
 
 void		ft_printf_unsigned(t_infos_ *st_, t_params_ *p)

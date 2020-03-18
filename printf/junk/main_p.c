@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 23:08:44 by tidminta          #+#    #+#             */
-/*   Updated: 2020/03/17 20:18:50 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/03/18 20:30:42 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(void)
 	size_t			len;
 	
 
-	ret = ft_strlen("0xffffffff");
+	ret = ft_strlen("    ");
 	len = 1;
 	printf("[len][%lu]\n", ret);
 	tmp = 10;
