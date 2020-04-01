@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 14:28:26 by tidminta          #+#    #+#             */
-/*   Updated: 2020/03/18 22:06:19 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/03/30 19:43:37 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int		main(void)
 	// unsigned int	hexa;
 	// unsigned int	octal;
 	// char			c;
-	char			*str;
+	// char			*str;
+	// char			*str2;
 	// void			*p;
 	// c = 'z';
 	// nb = 2147483647;
@@ -31,12 +32,14 @@ int		main(void)
 	// nb3 = 4294967295;
 	// hexa = 4294967295;
 	// octal = 0;
-	str = "tidiane";
+	// str = "tidiane";
 	// p = &str;
-	ret = ft_printf("[ft_[string][%-10.10s]", str);
-	printf("[%d]\n", ret);
-	ret2 = printf("[fct[string][%-10.10s]", str);
-	printf("[%d]\n", ret2);
+	// str2 = "[fct 2=n 5=f]\n[2\n][5\f]";
+	// printf("[18 %c][19 %c][20 %c]", str2[18], str2[19], str2[20]);
+		ret = ft_printf("[ft_][%.5s%7s]", "yo", "boi");
+		printf("[%d]\n", ret);
+		ret2 = printf("[fct][%.5s%7s]", "yo", "boi");
+		printf("[%d]\n", ret2);
 	// ret = ft_printf("[ft_ digit+][%-25.3d]", nb3);
 	// printf("[%d]\n", ret);
 	// ret2 = printf("[fct digit+][%-25.3d]", nb3);

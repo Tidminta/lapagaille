@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/16 19:55:20 by tidminta          #+#    #+#             */
-/*   Updated: 2020/03/18 16:46:21 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/03/30 19:39:47 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
  ** modifier touts les ft_itoa pour pouvoir free 
  ** supprimer les lignes ne servant a rien au decoupage --> (st_->arg_uint > 0)
  ** len3 = (st_->flag_diez) ? (st_->is_precis + 2) : st_->is_precis;
+ **	FLAG ZERO ET MOINS A TESTER AVEC #
  */
 
 void		ft_printf_hexa(t_infos_ *st_, t_params_ *p)
@@ -44,7 +45,7 @@ void		ft_printf_hexa(t_infos_ *st_, t_params_ *p)
 	{
 		tmp = st_->arg_hexa;
 		len = 1;
-		while (tmp && ((tmp/10) > 16))
+		while (tmp && ((tmp/16) > 0))
 		{
 			tmp = tmp/16;
 			len++;
@@ -60,22 +61,23 @@ void		ft_printf_hexa(t_infos_ *st_, t_params_ *p)
 			if ((size_t)st_->precis > len)
 			{
 				len2 = (st_->flag_diez) ? ((st_->width > 1) ? st_->width - 2 : 0) : st_->width;
-				while (len2 > (size_t)st_->precis)
+				len2 = (st_->flag_diez && !st_->arg_hexa) ? st_->width : len2;
+				while (len2 > (size_t)st_->precis) 
 				{
 					ft_putchar_fd(' ', 1, p);
-					len2++;
+					len2--;
 				}
 			}
 			else
 			{
-				len3 = (st_->flag_diez) ? (len + 2) : len;
+				len3 = (st_->flag_diez) ? ((st_->arg_hexa) ? len + 2 : len) : len;
 				while (len3 < (size_t)st_->width)
 				{
 					ft_putchar_fd(' ', 1, p);
 					len3++;
 				}
 			}
-			if (st_->flag_diez)
+			if (st_->flag_diez && st_->arg_hexa)
 				ft_putstr_fd("0x", 1, p);
 			while (len < (size_t)st_->precis)
 			{
@@ -96,18 +98,23 @@ void		ft_printf_hexa(t_infos_ *st_, t_params_ *p)
 		 */		
 		else if (st_->width && !(st_->precis))
 		{
-			len2 = (st_->flag_diez) ? (len + 2) : len;
+			len2 = (st_->flag_diez) ? ((st_->arg_hexa) ? len + 2 : len) : len;
 			while (len2 < (size_t)st_->width)
 			{	
 				ft_putchar_fd(' ', 1, p);
 				len2++;
 			}
-			if (st_->flag_diez)
-				ft_putstr_fd("0x", 1, p);
-			if (st_->conv_spe == 'x')
-				ft_putnbr_base(st_->arg_hexa, "0123456789abcdef", p);
+			if (!st_->arg_hexa && st_->is_precis)
+				ft_putchar_fd(' ', 1, p);
 			else
-				ft_putnbr_base(st_->arg_hexa, "0123456789ABCDEF", p);
+			{
+				if (st_->flag_diez && st_->arg_hexa)
+					ft_putstr_fd("0x", 1, p);
+				if (st_->conv_spe == 'x')
+					ft_putnbr_base(st_->arg_hexa, "0123456789abcdef", p);
+				else
+					ft_putnbr_base(st_->arg_hexa, "0123456789ABCDEF", p);
+			}
 		}
 		/*
 		 ** pas de flag zero pas de flag moins
@@ -115,23 +122,31 @@ void		ft_printf_hexa(t_infos_ *st_, t_params_ *p)
 		 */
 		else if (!(st_->width) && st_->precis)
 		{
-			if (st_->flag_diez)
+			if (st_->flag_diez && st_->arg_hexa)
 				ft_putstr_fd("0x", 1, p);
 			while (len < (size_t)st_->precis)
 			{
 				ft_putchar_fd('0', 1, p);
 				len++;
 			}
-			ft_putnbr_base(st_->arg_hexa, "0123456789abcdef", p);
-		}
-		else
-		{
-			if (st_->flag_diez)
-				ft_putstr_fd("0x", 1, p);
 			if (st_->conv_spe == 'x')
 				ft_putnbr_base(st_->arg_hexa, "0123456789abcdef", p);
 			else
 				ft_putnbr_base(st_->arg_hexa, "0123456789ABCDEF", p);
+		}
+		else
+		{
+			if (!st_->arg_hexa && st_->is_precis)
+				;
+			else
+			{
+				if (st_->flag_diez && st_->arg_hexa)
+					ft_putstr_fd("0x", 1, p);
+				if (st_->conv_spe == 'x')
+					ft_putnbr_base(st_->arg_hexa, "0123456789abcdef", p);
+				else
+					ft_putnbr_base(st_->arg_hexa, "0123456789ABCDEF", p);
+			}
 		}
 	}
 	/*
@@ -145,7 +160,7 @@ void		ft_printf_hexa(t_infos_ *st_, t_params_ *p)
 	{
 		tmp = st_->arg_hexa;
 		len = 1;
-		while (tmp && ((tmp/10) > 16))
+		while (tmp && ((tmp/16) > 0))
 		{
 			tmp = tmp/16;
 			len++;
@@ -159,7 +174,7 @@ void		ft_printf_hexa(t_infos_ *st_, t_params_ *p)
 		{
 			if ((size_t)st_->precis >= len)
 			{
-				len2 = (st_->flag_diez) ? ((st_->width > 1) ? st_->width - 2 : 0) : st_->width;
+				len2 = ( st_->flag_diez && st_->arg_hexa) ? ((st_->width > 1) ? st_->width - 2 : 0) : st_->width;
 				while (len2 > (size_t)st_->precis)
 				{
 					ft_putchar_fd(' ', 1, p);
@@ -168,7 +183,7 @@ void		ft_printf_hexa(t_infos_ *st_, t_params_ *p)
 			}
 			else if ((size_t)st_->precis < len)
 			{
-				len3 = (st_->flag_diez) ? (len + 2) : len;
+				len3 = (st_->flag_diez && st_->arg_hexa) ? (len + 2) : len;
 				while (len3 < (size_t)st_->width)
 				{
 					ft_putchar_fd(' ', 1, p);
@@ -178,7 +193,7 @@ void		ft_printf_hexa(t_infos_ *st_, t_params_ *p)
 		}
 		else if (((st_->width && !st_->precis) && st_->is_precis))
 		{
-			len3 = (st_->flag_diez) ? (len + 2) : len;
+			len3 = (st_->flag_diez && st_->arg_hexa) ? (len + 2) : (st_->arg_hexa) ? len : 0;
 			while (len3 < (size_t)st_->width)
 			{
 				ft_putchar_fd(' ', 1, p);
@@ -190,7 +205,7 @@ void		ft_printf_hexa(t_infos_ *st_, t_params_ *p)
 		 **	gestion affichage precision | et gestion du cas sans precision
 		 ** *************************************************************
 		 */
-		if (st_->flag_diez)
+		if (st_->flag_diez && st_->arg_hexa)
 				ft_putstr_fd("0x", 1, p);
 		if (((st_->width && st_->precis) || (!st_->width && st_->precis)))
 		{
@@ -203,17 +218,22 @@ void		ft_printf_hexa(t_infos_ *st_, t_params_ *p)
 		else if ((st_->width) && !st_->is_precis)
 		{
 			// printf("cas 3\n");
-			len = (st_->flag_diez) ? (len + 2) : len ;
+			len = (st_->flag_diez && st_->arg_hexa) ? (len + 2) : len ;
 			while ((len < (size_t)st_->width))
 			{
 				ft_putchar_fd('0', 1, p);
 				len++;
 			}
 		}
-		if (st_->conv_spe == 'x')
-			ft_putnbr_base(st_->arg_hexa, "0123456789abcdef", p);
+		if (!st_->arg_hexa && !st_->precis && st_->is_precis)
+			;
 		else
-			ft_putnbr_base(st_->arg_hexa, "0123456789ABCDEF", p);
+		{
+			if (st_->conv_spe == 'x')
+				ft_putnbr_base(st_->arg_hexa, "0123456789abcdef", p);
+			else
+				ft_putnbr_base(st_->arg_hexa, "0123456789ABCDEF", p);
+		}
 	}
 	/*
 	 ** **********************************
@@ -226,7 +246,7 @@ void		ft_printf_hexa(t_infos_ *st_, t_params_ *p)
 	{
 		tmp = st_->arg_hexa;
 		len = 1;
-		while (tmp && ((tmp/10) > 16))
+		while (tmp && ((tmp/16) > 0))
 		{
 			tmp = tmp/16;
 			len++;
@@ -236,6 +256,7 @@ void		ft_printf_hexa(t_infos_ *st_, t_params_ *p)
 		/*
 		 ** *************************************************************
 		 **	gestion affichage precision | et gestion du cas sans width
+		 ** FAIL ("%-#5x", 0)
 		 ** *************************************************************c
 		 */
 		if (((st_->width && st_->precis) || (!st_->width && st_->precis)))
@@ -247,11 +268,16 @@ void		ft_printf_hexa(t_infos_ *st_, t_params_ *p)
 				ft_putchar_fd('0', 1, p);
 				len++;
 			}
-		}	
-		if (st_->conv_spe == 'x')
-			ft_putnbr_base(st_->arg_hexa, "0123456789abcdef", p);
+		}
+		if (!st_->arg_hexa && (st_->is_precis && !st_->precis))
+			;
 		else
-			ft_putnbr_base(st_->arg_hexa, "0123456789ABCDEF", p);
+		{
+			if (st_->conv_spe == 'x')
+				ft_putnbr_base(st_->arg_hexa, "0123456789abcdef", p);
+			else
+				ft_putnbr_base(st_->arg_hexa, "0123456789ABCDEF", p);
+		}
 		/*
 		 ** *************************************************************
 		 ** 				gestion affichage width
@@ -259,7 +285,8 @@ void		ft_printf_hexa(t_infos_ *st_, t_params_ *p)
 		 */
 		if (st_->width && !st_->precis)
 		{
-			len2 = (st_->flag_diez) ? (len + 2) : len;
+			len2 = (st_->flag_diez) ? ((st_->arg_hexa) ? len + 2 : 0) : ((st_->arg_hexa) ? len : 0);
+			len2 = (!st_->arg_hexa && !st_->is_precis) ? 1 : len2;
 			while ((len2 < (size_t)st_->width))
 			{
 				ft_putchar_fd(' ', 1, p);
@@ -270,7 +297,7 @@ void		ft_printf_hexa(t_infos_ *st_, t_params_ *p)
 		{
 			if ((st_->width) && (st_->is_precis) && (size_t)st_->precis >= len)
 			{
-				len2 = (st_->flag_diez) ? ((st_->width > 1) ? st_->width - 2 : 0) : st_->width;
+				len2 = (st_->flag_diez && st_->arg_hexa) ? ((st_->width > 1) ? st_->width - 2 : 0) : st_->width;
 				while (len2 > (size_t)st_->precis)
 				{
 					ft_putchar_fd(' ', 1, p);

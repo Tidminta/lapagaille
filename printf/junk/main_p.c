@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 23:08:44 by tidminta          #+#    #+#             */
-/*   Updated: 2020/03/18 20:30:42 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/04/01 14:29:36 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,38 @@
 
 int	main(void)
 {
+	// t_params_		*p;
 	size_t			ret;
+	size_t			ret2;
+	size_t			ret3;
+	unsigned int	ret4;
 	size_t			tmp;
-	size_t			len;
-	
+	// unsigned char char_spe;
 
-	ret = ft_strlen("    ");
-	len = 1;
-	printf("[len][%lu]\n", ret);
-	tmp = 10;
-	while (tmp && (tmp/10 > 0))
+/*
+**	*******************************
+**			PRINTF TESTS
+**	*******************************
+*/
+	ret4 = 0;
+	ret = ft_printf("[ft_][%.s]", "hello");
+	printf("[%lu]\n", ret);
+	ret2 = printf("[fct][%.s]", "hello");
+	printf("[%lu]\n", ret2);
+/*
+**	*******************************
+**			OTHERS
+**	*******************************
+*/
+	ret4 = 42949672;
+	ret3 = ret4;
+	tmp = (ret3 >= 0) ? 1 : 2;
+	ret3 = (ret4 < 0) ? -ret4 : ret4;
+	while(ret3 && (ret3/10) > 0)
 	{
-		tmp /= 10;
-		len++;
+		ret3 /= 10;
+		tmp++;
 	}
-	printf("[len2][%lu]", len);
-	// printf("[hexa long][%#20.10x]\n", 4294967295);
+	// printf("[TMP][%lu]\n[LEN][%lu]\n", tmp, ft_strlen("   "));
 	return (0);
 }

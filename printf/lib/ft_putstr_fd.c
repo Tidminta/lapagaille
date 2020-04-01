@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 22:30:24 by tidminta          #+#    #+#             */
-/*   Updated: 2020/03/07 22:53:03 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/03/25 20:53:09 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@ void		ft_putstr_fd(char *s, int fd, t_params_ *p)
 
 	len = 0;
 	if (!s || !fd)
+	{
+		write(1, "(null)", 6);
+		p->conv_len += 6;
 		return ;
+	}
 	while (s[len])
 		len++;
 	write(fd, s, len);

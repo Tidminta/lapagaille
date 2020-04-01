@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/29 21:23:00 by tidminta          #+#    #+#             */
-/*   Updated: 2020/03/09 15:33:41 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/04/01 14:16:02 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,11 @@ void	ft_get_arg(va_list *list_ptr, t_infos_ *struct_ptr)
 	if (struct_ptr->conv_spe == 'c')
 		struct_ptr->arg_char = va_arg(*list_ptr, int);
 	else if (struct_ptr->conv_spe == 's')
+	{
 		struct_ptr->arg_str = va_arg(*list_ptr, char *);
+		if (!struct_ptr->arg_str)
+			struct_ptr->arg_str = "(null)";
+	}
 	else if (struct_ptr->conv_spe == 'p')
 		struct_ptr->arg_addr = va_arg(*list_ptr, unsigned long);
 	else if (struct_ptr->conv_spe == 'd' || struct_ptr->conv_spe == 'i')
@@ -33,16 +37,19 @@ void	ft_get_arg(va_list *list_ptr, t_infos_ *struct_ptr)
 		struct_ptr->arg_hexa = va_arg(*list_ptr, unsigned long);
 	else if (struct_ptr->conv_spe == 'X')
 		struct_ptr->arg_hexa = va_arg(*list_ptr, unsigned long);
+	else if (struct_ptr->conv_spe == '%')
+		struct_ptr->arg_char = '%';
 }
 
 /*
 ** 2. Fonction rempli la struct avec les differentes infos
 */
 
-void	ft_fill_struct(t_infos_ *stct_p, va_list *lst_p, const char *s, int *i)
+void	ft_fill_struct(t_infos_ *stct_p, va_list *lst_p, const char *s, unsigned int *i)
 {
 	ft_get_flag(s, i, stct_p);
-	stct_p->width = ft_get_width(s, i);
-	stct_p->precis = ft_get_precis(s, i, stct_p);
+	stct_p->width = ft_get_width(s, i, lst_p);
+	stct_p->precis = ft_get_precis(s, i, stct_p, lst_p);
 	ft_get_arg(lst_p, stct_p);
+	// ft_display_struct(stct_p);
 }

@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:44:41 by tidminta          #+#    #+#             */
-/*   Updated: 2020/03/18 18:07:10 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/03/30 23:25:06 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ typedef struct	s_infos_
 
 typedef struct	s_params_
 {
-	int		index;
-	int		conv_len;
+	unsigned int		index;
+	int					conv_len;
 }				t_params_;
 
 t_infos_		*ft_init_struct(void);
@@ -73,7 +73,7 @@ void			ft_display_struct(t_infos_ *struct_ptr);
 
 void			ft_display_params(t_params_ *struct_ptr);
 
-void			ft_fill_struct(t_infos_ *stct_p, va_list *lst_p, const char *s, int *i);
+void			ft_fill_struct(t_infos_ *stct_p, va_list *lst_p, const char *s, unsigned int *i);
 
 /*
 *************************************
@@ -83,13 +83,17 @@ void			ft_fill_struct(t_infos_ *stct_p, va_list *lst_p, const char *s, int *i);
 
 t_params_		*ft_init_params(void);
 
+void			ft_printf_char(t_infos_ *st_, t_params_ *p);
+
+void			ft_printf_pourcent(t_infos_ *st_, t_params_ *p);
+
+void			ft_printf_string(t_infos_ *st_, t_params_ *p);
+
+void			ft_printf_addr(t_infos_ *st_, t_params_ *p);
+
 void			ft_printf_digits(t_infos_ *stct_, t_params_ *p);
 
 void			ft_printf_unsigned(t_infos_ *st_, t_params_ *p);
-
-void			ft_printf_char(t_infos_ *st_, t_params_ *p);
-
-void			ft_printf_string(t_infos_ *st_, t_params_ *p);
 
 void			ft_printf_hexa(t_infos_ *st_, t_params_ *p);
 
@@ -106,6 +110,8 @@ void			ft_putstr_fd(char *s, int fd, t_params_ *p);
 void			ft_putchar_fd(char c, int fd, t_params_ *p);
 
 void			ft_putnbr_fd(int n, int fd, t_params_ *p);
+
+int				ft_specific_print(char c);
 
 /*
 *************************************
@@ -127,11 +133,11 @@ char			ft_check_conv_spe(char car);
 
 char			ft_check_flag(char car);
 
-void			ft_get_flag(const char *s, int *index, t_infos_ *struct_ptr_);
+void			ft_get_flag(const char *s, unsigned int *index, t_infos_ *struct_ptr_);
 
-int				ft_get_width(const char *s, int *index);
+int				ft_get_width(const char *s, unsigned int *index, va_list *lst_ptr);
 
-int				ft_get_precis(const char *s, int *index, t_infos_ *struct_ptr_);
+int				ft_get_precis(const char *s, unsigned int *index, t_infos_ *struct_ptr_, va_list *lst_ptr);
 
 void			ft_get_arg(va_list *list_ptr, t_infos_ *struct_ptr);
 

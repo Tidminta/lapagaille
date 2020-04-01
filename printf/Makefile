@@ -6,7 +6,7 @@
 #    By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/13 00:09:25 by tidminta          #+#    #+#              #
-#    Updated: 2020/03/18 18:06:49 by tidminta         ###   ########.fr        #
+#    Updated: 2020/03/21 15:27:26 by tidminta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,9 @@ OBJ =	./lib/ft_memset.c\
 		./lib/ft_print_hexa.c\
 		./lib/ft_print_digits.c\
 		./lib/ft_print_char.c\
-		./lib/ft_print_string.c
+		./lib/ft_print_string.c\
+		./lib/ft_print_addr.c\
+		./lib/ft_print_pourcent.c
 
 
 OBJ_OBJS	=	$(OBJ:.c=.o)
