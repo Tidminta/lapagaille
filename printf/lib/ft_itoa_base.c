@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/16 20:39:21 by tidminta          #+#    #+#             */
-/*   Updated: 2020/03/17 12:01:26 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/04/01 16:20:54 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ char			*ft_itoa_base(unsigned int n)
     size_t          len;
     char            *alloc;
 
-    tmp = n;
-    len = 1;
+    tmp = (n > 0) ? n : -n;
+    len = (n > 0) ? 1 : 2;
     i = 0;
     while (tmp && ((tmp/10) > 0))
     {
@@ -36,6 +36,8 @@ char			*ft_itoa_base(unsigned int n)
     alloc = (char *)malloc(sizeof(char) * len + 1);
     ft_bzero(alloc, len + 1);
     tmp = n;
+    if (n < 0)
+        alloc[0] = '-';
     while ((--len) && tmp && ((tmp/10) > 0))
     {
         alloc[len] = (tmp % 16) + 48;

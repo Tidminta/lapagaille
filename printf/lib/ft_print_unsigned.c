@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/16 14:38:38 by tidminta          #+#    #+#             */
-/*   Updated: 2020/03/27 18:21:08 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/04/03 23:31:55 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,15 @@ void		ft_printf_unsigned(t_infos_ *st_, t_params_ *p)
 				}
 			}
 		}
+		else if (st_->width && !st_->precis && st_->is_precis)
+		{
+			len2 = (st_->arg_uint) ? first_len : 0;
+			while (len2 < (size_t)st_->width)
+			{
+				ft_putchar_fd(' ', 1, p);
+				len2++;
+			}
+		}
 		/*
 		 **	gestion affichage precision | et gestion du cas sans precision
 		 */
@@ -181,7 +190,12 @@ void		ft_printf_unsigned(t_infos_ *st_, t_params_ *p)
 				len++;
 			}
 		}
-		ft_putnbr_base(st_->arg_uint, "0123456789", p);
+		if (!st_->arg_uint && (!st_->width && !st_->precis) && st_->is_precis)
+			;
+		else if (!st_->arg_uint && st_->is_precis && !st_->precis)
+			;
+		else
+			ft_putnbr_base(st_->arg_uint, "0123456789", p);
 	}
 	/*
 	 ** **********************************

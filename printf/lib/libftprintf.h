@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:44:41 by tidminta          #+#    #+#             */
-/*   Updated: 2020/03/30 23:25:06 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/04/01 16:48:28 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct	s_infos_
 	unsigned int		arg_uint;
 	unsigned int		arg_hexa;
 	unsigned long		arg_addr;
+	unsigned long		arg_bin;
 }				t_infos_;
 
 typedef struct	s_params_
@@ -68,6 +69,8 @@ typedef struct	s_params_
 }				t_params_;
 
 t_infos_		*ft_init_struct(void);
+
+t_params_		*ft_init_params(void);
 
 void			ft_display_struct(t_infos_ *struct_ptr);
 
@@ -81,7 +84,7 @@ void			ft_fill_struct(t_infos_ *stct_p, va_list *lst_p, const char *s, unsigned 
 *************************************
 */
 
-t_params_		*ft_init_params(void);
+int				ft_printf(const char *s, ...) __attribute__((format(printf, 1, 2)));
 
 void			ft_printf_char(t_infos_ *st_, t_params_ *p);
 
@@ -96,6 +99,8 @@ void			ft_printf_digits(t_infos_ *stct_, t_params_ *p);
 void			ft_printf_unsigned(t_infos_ *st_, t_params_ *p);
 
 void			ft_printf_hexa(t_infos_ *st_, t_params_ *p);
+
+void			ft_printf_bin(t_infos_ *st_, t_params_ *p);
 
 void			ft_print_loop(const char *str, t_params_ *p);
 

@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 16:00:08 by tidminta          #+#    #+#             */
-/*   Updated: 2020/04/01 14:29:58 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/04/01 16:43:16 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char		ft_check_conv_spe(char car)
 {
 	if (car == 'c' || car == 's' || car == 'p' || car == 'd' || car == 'i'
 		|| car == 'o' || car == 'u' || car == 'u' || car == 'x' || car == 'X'
-			|| car == '%')
+			|| car == '%' || car == 'b')
 		return (car);
 	return (0);
 }
@@ -78,15 +78,12 @@ int			ft_get_width(const char *s, unsigned int *index, va_list *lst_ptr)
 	len = 0;
 	j = *index;
 
-	(void)lst_ptr;
-	// printf("[width][%c]", s[*index]);
-	// if(s[*index] == '*')
-	// {
-	// 	width = va_arg(*lst_ptr, int);
-	// 	*index += 1;
-	// 	// printf("[width][%i]", width);
-	// 	return (width);
-	// }
+	if(s[*index] == '*')
+	{
+		width = va_arg(*lst_ptr, int);
+		*index += 1;
+		return (width);
+	}
 	while (s[*index] && ft_isdigit(s[*index])
 		&& (s[*index != '.'] || !(ft_check_conv_spe(s[*index]))))
 	{
@@ -128,21 +125,19 @@ int			ft_get_precis(const char *s, unsigned int *i, t_infos_ *struct_ptr_, va_li
 	j = *i + 1;
 	len = 0;
 	alloc = NULL;
-	(void)lst_ptr;
 	if ((*i > 0) && s[*i] == '.')
 	{
 		struct_ptr_->is_precis = 1;
-		// if(s[++(*i)] == '*')
-		// {
-		// 	precis = va_arg(*lst_ptr, int);
-		// 	*i += 1;
-		// 	ft_get_precis2(s, i, struct_ptr_);
-		// 	return (precis);
-		// }
-		while (s[++(*i)] && ft_isdigit(s[*i]) && !(ft_check_conv_spe(s[*i])))
+		if(s[(*i) + 1] == '*')
 		{
-			len++;
+			*i += 1;
+			precis = va_arg(*lst_ptr, int);
+			*i += 1;
+			ft_get_precis2(s, i, struct_ptr_);
+			return (precis);
 		}
+		while (s[++(*i)] && ft_isdigit(s[*i]) && !(ft_check_conv_spe(s[*i])))
+			len++;
 		if (len)
 		{
 			if (!(alloc = ft_substr(s, j, len)))

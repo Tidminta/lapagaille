@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/29 21:23:00 by tidminta          #+#    #+#             */
-/*   Updated: 2020/04/01 14:16:02 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/04/01 16:24:59 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	ft_get_arg(va_list *list_ptr, t_infos_ *struct_ptr)
 		struct_ptr->arg_hexa = va_arg(*list_ptr, unsigned long);
 	else if (struct_ptr->conv_spe == '%')
 		struct_ptr->arg_char = '%';
+	else if (struct_ptr->conv_spe == 'b')
+		struct_ptr->arg_bin = va_arg(*list_ptr, unsigned long);
 }
 
 /*
@@ -51,5 +53,13 @@ void	ft_fill_struct(t_infos_ *stct_p, va_list *lst_p, const char *s, unsigned in
 	stct_p->width = ft_get_width(s, i, lst_p);
 	stct_p->precis = ft_get_precis(s, i, stct_p, lst_p);
 	ft_get_arg(lst_p, stct_p);
+	// ft_display_struct(stct_p);
+	if(stct_p->width < 0)
+	{
+		stct_p->width *= -1;
+		stct_p->flag_moins = 1;
+	}
+	stct_p->is_precis = (stct_p->precis < 0) ? 0 : stct_p->is_precis;
+	stct_p->precis = (stct_p->precis < 0) ? 0 : stct_p->precis;
 	// ft_display_struct(stct_p);
 }

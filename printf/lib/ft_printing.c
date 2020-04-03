@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 18:05:24 by tidminta          #+#    #+#             */
-/*   Updated: 2020/04/01 14:19:52 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/04/01 16:20:51 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,7 @@ void	ft_print_arg(t_infos_ *stct_, va_list *lst, const char *s, t_params_ *p)
 			ft_printf_hexa(stct_, p);
 		else if (stct_->conv_spe == 'p')
 			ft_printf_addr(stct_, p);
+		else if (stct_->conv_spe == 'b')
+			ft_printf_bin(stct_, p);
 	}
 }
