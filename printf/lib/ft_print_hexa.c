@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/16 19:55:20 by tidminta          #+#    #+#             */
-/*   Updated: 2020/03/30 19:39:47 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/04/04 18:59:12 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,10 @@ void		ft_printf_hexa(t_infos_ *st_, t_params_ *p)
 				}
 			}
 			if (st_->flag_diez && st_->arg_hexa)
-				ft_putstr_fd("0x", 1, p);
+			{
+				ft_putchar_fd('0', 1, p);
+				ft_putchar_fd(st_->conv_spe, 1, p);
+			}
 			while (len < (size_t)st_->precis)
 			{
 				ft_putchar_fd('0', 1, p);
@@ -109,7 +112,10 @@ void		ft_printf_hexa(t_infos_ *st_, t_params_ *p)
 			else
 			{
 				if (st_->flag_diez && st_->arg_hexa)
-					ft_putstr_fd("0x", 1, p);
+				{
+					ft_putchar_fd('0', 1, p);
+					ft_putchar_fd(st_->conv_spe, 1, p);
+				}
 				if (st_->conv_spe == 'x')
 					ft_putnbr_base(st_->arg_hexa, "0123456789abcdef", p);
 				else
@@ -123,7 +129,10 @@ void		ft_printf_hexa(t_infos_ *st_, t_params_ *p)
 		else if (!(st_->width) && st_->precis)
 		{
 			if (st_->flag_diez && st_->arg_hexa)
-				ft_putstr_fd("0x", 1, p);
+			{
+				ft_putchar_fd('0', 1, p);
+				ft_putchar_fd(st_->conv_spe, 1, p);
+			}
 			while (len < (size_t)st_->precis)
 			{
 				ft_putchar_fd('0', 1, p);
@@ -141,7 +150,10 @@ void		ft_printf_hexa(t_infos_ *st_, t_params_ *p)
 			else
 			{
 				if (st_->flag_diez && st_->arg_hexa)
-					ft_putstr_fd("0x", 1, p);
+				{
+					ft_putchar_fd('0', 1, p);
+					ft_putchar_fd(st_->conv_spe, 1, p);
+				}
 				if (st_->conv_spe == 'x')
 					ft_putnbr_base(st_->arg_hexa, "0123456789abcdef", p);
 				else
@@ -206,7 +218,10 @@ void		ft_printf_hexa(t_infos_ *st_, t_params_ *p)
 		 ** *************************************************************
 		 */
 		if (st_->flag_diez && st_->arg_hexa)
-				ft_putstr_fd("0x", 1, p);
+		{
+			ft_putchar_fd('0', 1, p);
+			ft_putchar_fd(st_->conv_spe, 1, p);
+		}
 		if (((st_->width && st_->precis) || (!st_->width && st_->precis)))
 		{
 			while (len < (size_t)st_->precis)
@@ -252,7 +267,10 @@ void		ft_printf_hexa(t_infos_ *st_, t_params_ *p)
 			len++;
 		}
 		if (st_->flag_diez && (st_->arg_hexa != 0))
-			ft_putstr_fd("0x", 1, p);	
+		{
+			ft_putchar_fd('0', 1, p);
+			ft_putchar_fd(st_->conv_spe, 1, p);
+		}
 		/*
 		 ** *************************************************************
 		 **	gestion affichage precision | et gestion du cas sans width

@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 23:08:44 by tidminta          #+#    #+#             */
-/*   Updated: 2020/04/03 23:45:00 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/04/04 18:46:14 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ int	main(void)
 **			PRINTF TESTS
 **	*******************************
 */
-	ret3 = -135;
-	ret = ft_printf("[ft_][%4.3i]", ret3);
+	ret3 = 198;
+	ret = ft_printf("[ft_][%#-4.4X]", ret3);
 	printf("[%lu]\n", ret);
-	ret2 = printf("[FCT][%4.3i]", ret3);
+	ret2 = printf("[FCT][%#-4.4X]", ret3);
 	printf("[%lu]\n", ret2);
 /*
 **	*******************************
