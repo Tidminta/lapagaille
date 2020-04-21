@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/18 19:47:08 by tidminta          #+#    #+#             */
-/*   Updated: 2020/01/17 19:27:05 by tidminta         ###   ########.fr       */
+/*   Created: 2020/01/13 18:17:52 by tidminta          #+#    #+#             */
+/*   Updated: 2020/01/17 19:35:47 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-char	*ft_strdup(const char *s1)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char	*tab;
-	int		len;
-	int		i;
+	char			*alloc;
+	unsigned int	len;
+	unsigned int	i;
 
-	len = 0;
-	while (s1[len] != '\0')
-		len++;
-	if ((tab = (char *)malloc(sizeof(char) * (len + 1))) == NULL)
+	if (!s || !f)
 		return (NULL);
 	i = 0;
-	while (s1[i] != '\0')
+	len = ft_strlen(s);
+	if (!(alloc = (char *)malloc(sizeof(char) * len + 1)))
+		return (NULL);
+	while (s[i] != '\0')
 	{
-		tab[i] = s1[i];
+		alloc[i] = f(i, s[i]);
 		i++;
 	}
-	tab[i] = '\0';
-	return (tab);
+	alloc[i] = '\0';
+	return (alloc);
 }

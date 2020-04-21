@@ -6,80 +6,91 @@
 #    By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/13 00:09:25 by tidminta          #+#    #+#              #
-#    Updated: 2020/04/16 17:47:28 by tidminta         ###   ########.fr        #
+#    Updated: 2020/04/21 14:43:20 by tidminta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
+LIB_DIR = libft/
+LIB = libft.a
 
-CC  = gcc
+FLAGS	=	-Wall -Wextra -Werror
 
-RM	= rm -f
+# [ src ]
 
-OBJ =	./libft/ft_bzero.c\
-		./libft/ft_strlen.c\
-		./libft/ft_atoi.c\
-		./libft/ft_strdup.c\
-		./libft/ft_calloc.c\
-		./libft/ft_substr.c\
-		./libft/ft_init_structs.c\
-		./libft/ft_putchar_fd.c\
-		./libft/ft_putstr_fd.c\
-		./libft/ft_putnbr_fd.c\
-		./libft/ft_putnbr_base.c\
-		./libft/ft_isprint.c\
-		./libft/ft_isdigit.c\
-		./libft/ft_format.c\
-		./libft/ft_format2.c\
-		./libft/ft_printf.c\
-		./libft/ft_printing.c\
-		./libft/ft_print_unsigned.c\
-		./libft/ft_unsigned_0flag.c\
-		./libft/ft_unsigned_flag0.c\
-		./libft/ft_unsigned_flagm.c\
-		./libft/ft_print_hexa.c\
-		./libft/ft_hexa_flag0.c\
-		./libft/ft_hexa_0flag.c\
-		./libft/ft_hexa_flagmoins.c\
-		./libft/ft_print_digits.c\
-		./libft/ft_d_0flag.c\
-		./libft/ft_d_flag0.c\
-		./libft/ft_d_flagmoins.c\
-		./libft/ft_print_char.c\
-		./libft/ft_print_string.c\
-		./libft/ft_string_0flag.c\
-		./libft/ft_string_flagm.c\
-		./libft/ft_print_addr.c\
-		./libft/ft_addr_0flag.c\
-		./libft/ft_addr_flagmoins.c\
-		./libft/ft_print_pourcent.c\
-		./libft/ft_print_bin_bonus.c\
-		./libft/ft_bin_0flag.c\
-		./libft/ft_bin_flag0.c\
-		./libft/ft_bin_flagm.c
+SRC =	./ft_init_structs.c\
+		./ft_putchar_fd2.c\
+		./ft_putstr_fd2.c\
+		./ft_putnbr_fd2.c\
+		./ft_putnbr_base.c\
+		./ft_isprint.c\
+		./ft_isdigit.c\
+		./ft_format.c\
+		./ft_format2.c\
+		./ft_printf.c\
+		./ft_printing.c\
+		./ft_print_unsigned.c\
+		./ft_unsigned_0flag.c\
+		./ft_unsigned_flag0.c\
+		./ft_unsigned_flagm.c\
+		./ft_print_hexa.c\
+		./ft_hexa_flag0.c\
+		./ft_hexa_0flag.c\
+		./ft_hexa_flagminus.c\
+		./ft_print_digits.c\
+		./ft_d_0flag.c\
+		./ft_d_flag0.c\
+		./ft_d_flagminus.c\
+		./ft_print_char.c\
+		./ft_print_string.c\
+		./ft_string_0flag.c\
+		./ft_string_flagm.c\
+		./ft_print_addr.c\
+		./ft_addr_0flag.c\
+		./ft_addr_flagminus.c\
+		./ft_print_pourcent.c\
+		./ft_print_bin_bonus.c\
+		./ft_bin_0flag.c\
+		./ft_bin_flag0.c\
+		./ft_bin_flagm.c
 
-OBJ_OBJS	=	$(OBJ:.c=.o)
+# [ obj]
 
-CFLAGS		=	-Wall -Wextra -Werror
+OBJ_DIR = obj/
+OBJ_NAME = $(SRC:.c=.o)
+OBJ = $(addprefix $(OBJ_DIR), $(OBJ_NAME))
 
-LIB			= ./libft/libftprintf.h
+all : $(NAME)
 
-%.o : %.c
-	@$(CC) $(CFLAGS) -I. -o $@ -c $<
+$(NAME): $(OBJ)
+	@ar rc $@ $?
+	@ranlib $@
+	@echo "Indexing ... OK"
 
+$(OBJ): |$(OBJ_DIR)
 
-$(NAME): $(OBJ_OBJS) $(LIB) Makefile
-			ar rc $(NAME) $(OBJ_OBJS)
-			ranlib $(NAME)
+$(OBJ_DIR):
+	@make -C $(LIB_DIR)
+	cp $(LIB_DIR)$(LIB) $(NAME)
+	@echo "Creating [$(LIB)] ... OK"
+	@mkdir $@
+	@echo "Creating [$@] directory ... OK"
 
-all: $(NAME)
+$(OBJ_DIR)%.o: %.c
+	gcc $(FLAG) -I . -I $(LIB_DIR) -c $? -o $@
+	@echo "Compiling [$?] ... OK"
+
+bonus: $(NAME)
 
 clean:
-	$(RM) $(OBJ_OBJS)
+	@rm -rf $(OBJ_DIR)
+	@rm -rf $(LIB_DIR)*.o
+	@echo "Cleaning ... OK"
 
-fclean:	clean
-	$(RM) $(NAME)
+fclean: clean
+	@rm -f $(NAME)
+	@rm -f $(LIB_DIR)$(LIB)
 
 re:	fclean all
 
-.PHONY:	clean fclean all re
+.PHONY:	all bonus clean fclean re

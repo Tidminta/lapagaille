@@ -1,35 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/18 19:47:08 by tidminta          #+#    #+#             */
-/*   Updated: 2020/01/17 19:27:05 by tidminta         ###   ########.fr       */
+/*   Created: 2019/12/14 21:55:49 by tidminta          #+#    #+#             */
+/*   Updated: 2020/01/17 19:37:37 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-char	*ft_strdup(const char *s1)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	char	*tab;
-	int		len;
-	int		i;
+	size_t	i;
+	int		j;
+	char	*src;
+	char	*to_find;
 
-	len = 0;
-	while (s1[len] != '\0')
-		len++;
-	if ((tab = (char *)malloc(sizeof(char) * (len + 1))) == NULL)
-		return (NULL);
 	i = 0;
-	while (s1[i] != '\0')
+	src = (char *)haystack;
+	if (!needle[0])
+		return (src);
+	to_find = (char *)needle;
+	while (src[i] != '\0' && i < len)
 	{
-		tab[i] = s1[i];
+		j = 0;
+		while (to_find[j] == src[i + j] && (i + j) < len)
+		{
+			if (to_find[j + 1] == '\0')
+			{
+				return (src + i);
+			}
+			j++;
+		}
 		i++;
 	}
-	tab[i] = '\0';
-	return (tab);
+	return (NULL);
 }

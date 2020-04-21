@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/18 19:47:08 by tidminta          #+#    #+#             */
-/*   Updated: 2020/01/17 19:27:05 by tidminta         ###   ########.fr       */
+/*   Created: 2019/12/18 20:25:42 by tidminta          #+#    #+#             */
+/*   Updated: 2020/04/11 17:25:52 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdlib.h>
+#include "libftprintf.h"
 
-char	*ft_strdup(const char *s1)
+char	*ft_substr2(char const *s, size_t start, size_t len)
 {
-	char	*tab;
-	int		len;
-	int		i;
+	char			*tab;
+	unsigned int	i;
 
-	len = 0;
-	while (s1[len] != '\0')
-		len++;
-	if ((tab = (char *)malloc(sizeof(char) * (len + 1))) == NULL)
+	if (!s)
+		return (NULL);
+	if (start > ft_strlen(s))
+		return (ft_strdup(""));
+	if (!(tab = (char *)malloc(sizeof(char) * len + 1)))
 		return (NULL);
 	i = 0;
-	while (s1[i] != '\0')
+	while (s[start] != '\0' && i < len)
 	{
-		tab[i] = s1[i];
+		tab[i] = s[start + i];
 		i++;
 	}
 	tab[i] = '\0';

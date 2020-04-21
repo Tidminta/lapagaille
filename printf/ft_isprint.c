@@ -1,35 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/18 19:47:08 by tidminta          #+#    #+#             */
-/*   Updated: 2020/01/17 19:27:05 by tidminta         ###   ########.fr       */
+/*   Created: 2019/11/14 11:49:56 by tidminta          #+#    #+#             */
+/*   Updated: 2020/04/11 19:11:39 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdlib.h>
+#include "libftprintf.h"
 
-char	*ft_strdup(const char *s1)
+int		ft_isprint(int c)
 {
-	char	*tab;
-	int		len;
-	int		i;
-
-	len = 0;
-	while (s1[len] != '\0')
-		len++;
-	if ((tab = (char *)malloc(sizeof(char) * (len + 1))) == NULL)
-		return (NULL);
-	i = 0;
-	while (s1[i] != '\0')
-	{
-		tab[i] = s1[i];
-		i++;
-	}
-	tab[i] = '\0';
-	return (tab);
+	return ((c >= 32 && c <= 126) || (c > 126));
 }

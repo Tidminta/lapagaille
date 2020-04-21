@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_print_addr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/18 19:47:08 by tidminta          #+#    #+#             */
-/*   Updated: 2020/01/17 19:27:05 by tidminta         ###   ########.fr       */
+/*   Created: 2020/03/19 20:22:39 by tidminta          #+#    #+#             */
+/*   Updated: 2020/04/18 16:47:23 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdlib.h>
+#include "libftprintf.h"
 
-char	*ft_strdup(const char *s1)
+void	ft_printf_addr(t_infos_ *st_, t_params_ *p)
 {
-	char	*tab;
-	int		len;
-	int		i;
+	size_t	len;
+	size_t	tmp;
 
-	len = 0;
-	while (s1[len] != '\0')
-		len++;
-	if ((tab = (char *)malloc(sizeof(char) * (len + 1))) == NULL)
-		return (NULL);
-	i = 0;
-	while (s1[i] != '\0')
+	len = 1;
+	tmp = st_->arg_addr;
+	while (tmp && ((tmp / 16) > 0))
 	{
-		tab[i] = s1[i];
-		i++;
+		tmp = tmp / 16;
+		len++;
 	}
-	tab[i] = '\0';
-	return (tab);
+	if (!st_->flag_zero && !st_->flag_diez && !st_->flag_moins)
+		ft_addr_0flag(st_, p, len);
+	else if (!(st_->flag_zero && st_->flag_diez) && (st_->flag_moins))
+		ft_addr_flagminus(st_, p, len);
 }

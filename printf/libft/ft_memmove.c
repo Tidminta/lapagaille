@@ -1,35 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/18 19:47:08 by tidminta          #+#    #+#             */
-/*   Updated: 2020/01/17 19:27:05 by tidminta         ###   ########.fr       */
+/*   Created: 2019/11/07 19:37:34 by tidminta          #+#    #+#             */
+/*   Updated: 2020/01/16 04:26:20 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-char	*ft_strdup(const char *s1)
+void		*ft_memmove(void *dst, const void *src, size_t len)
 {
-	char	*tab;
-	int		len;
-	int		i;
+	size_t			i;
+	unsigned char	*src_tmp;
+	unsigned char	*dst_tmp;
 
-	len = 0;
-	while (s1[len] != '\0')
-		len++;
-	if ((tab = (char *)malloc(sizeof(char) * (len + 1))) == NULL)
-		return (NULL);
+	src_tmp = (unsigned char *)src;
+	dst_tmp = (unsigned char *)dst;
 	i = 0;
-	while (s1[i] != '\0')
+	if (src == dst)
+		return (dst);
+	if (dst_tmp > src_tmp)
 	{
-		tab[i] = s1[i];
-		i++;
+		while (++i <= len)
+			dst_tmp[len - i] = src_tmp[len - i];
 	}
-	tab[i] = '\0';
-	return (tab);
+	else
+	{
+		i = 0;
+		while (i < len)
+		{
+			dst_tmp[i] = src_tmp[i];
+			i++;
+		}
+	}
+	return (dst);
 }

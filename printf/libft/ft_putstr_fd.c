@@ -6,25 +6,20 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 22:30:24 by tidminta          #+#    #+#             */
-/*   Updated: 2020/03/25 20:53:09 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/01/15 00:08:57 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include <unistd.h>
 
-void		ft_putstr_fd(char *s, int fd, t_params_ *p)
+void		ft_putstr_fd(char *s, int fd)
 {
 	int len;
 
 	len = 0;
 	if (!s || !fd)
-	{
-		write(1, "(null)", 6);
-		p->conv_len += 6;
 		return ;
-	}
 	while (s[len])
 		len++;
 	write(fd, s, len);
-	p->conv_len += len;
 }

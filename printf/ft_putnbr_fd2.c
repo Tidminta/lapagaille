@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/18 19:47:08 by tidminta          #+#    #+#             */
-/*   Updated: 2020/01/17 19:27:05 by tidminta         ###   ########.fr       */
+/*   Created: 2019/12/18 22:40:24 by tidminta          #+#    #+#             */
+/*   Updated: 2020/04/20 20:38:04 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdlib.h>
+#include "libftprintf.h"
 
-char	*ft_strdup(const char *s1)
+void		ft_putnbr_fd2(int n, int fd, t_params_ *p)
 {
-	char	*tab;
-	int		len;
-	int		i;
-
-	len = 0;
-	while (s1[len] != '\0')
-		len++;
-	if ((tab = (char *)malloc(sizeof(char) * (len + 1))) == NULL)
-		return (NULL);
-	i = 0;
-	while (s1[i] != '\0')
+	if (n == -2147483648)
 	{
-		tab[i] = s1[i];
-		i++;
+		ft_putchar_fd2('2', fd, p);
+		ft_putnbr_fd2(147483648, fd, p);
 	}
-	tab[i] = '\0';
-	return (tab);
+	else if (n < 0)
+	{
+		n = -n;
+		ft_putnbr_fd2(n, fd, p);
+	}
+	else if (n >= 0 && n <= 9)
+	{
+		ft_putchar_fd2((n + 48), fd, p);
+	}
+	else
+	{
+		ft_putnbr_fd2((n / 10), fd, p);
+		ft_putchar_fd2(((n % 10) + 48), fd, p);
+	}
 }

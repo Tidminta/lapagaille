@@ -6,14 +6,13 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 22:25:53 by tidminta          #+#    #+#             */
-/*   Updated: 2020/03/07 22:53:00 by tidminta         ###   ########.fr       */
+/*   Updated: 2019/12/18 22:28:45 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include <unistd.h>
 
-void		ft_putchar_fd(char c, int fd, t_params_ *p)
+void		ft_putchar_fd(char c, int fd)
 {
 	write(fd, &c, 1);
-	p->conv_len += 1;
 }

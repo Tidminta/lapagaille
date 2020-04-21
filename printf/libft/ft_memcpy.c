@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/18 19:47:08 by tidminta          #+#    #+#             */
-/*   Updated: 2020/01/17 19:27:05 by tidminta         ###   ########.fr       */
+/*   Created: 2019/11/07 16:46:13 by tidminta          #+#    #+#             */
+/*   Updated: 2020/01/16 04:15:52 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-char	*ft_strdup(const char *s1)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	char	*tab;
-	int		len;
-	int		i;
+	size_t		i;
+	char		*dst_tmp;
+	char		*src_tmp;
 
-	len = 0;
-	while (s1[len] != '\0')
-		len++;
-	if ((tab = (char *)malloc(sizeof(char) * (len + 1))) == NULL)
-		return (NULL);
+	if (dst == src || n == 0)
+		return (dst);
+	dst_tmp = dst;
+	src_tmp = (char *)src;
 	i = 0;
-	while (s1[i] != '\0')
+	while (i < n)
 	{
-		tab[i] = s1[i];
+		dst_tmp[i] = src_tmp[i];
 		i++;
 	}
-	tab[i] = '\0';
-	return (tab);
+	return (dst);
 }

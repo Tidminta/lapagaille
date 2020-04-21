@@ -6,19 +6,17 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 12:30:29 by tidminta          #+#    #+#             */
-/*   Updated: 2020/03/25 20:06:03 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/01/16 02:06:57 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft.h"
 
 size_t	ft_strlen(const char *s)
 {
 	int i;
 
 	i = 0;
-	if (s == NULL)
-		return (i);
 	while (s[i])
 	{
 		i++;

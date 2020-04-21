@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/18 19:47:08 by tidminta          #+#    #+#             */
-/*   Updated: 2020/01/17 19:27:05 by tidminta         ###   ########.fr       */
+/*   Created: 2019/11/26 18:01:33 by tidminta          #+#    #+#             */
+/*   Updated: 2020/01/17 19:36:51 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-char	*ft_strdup(const char *s1)
+int		ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	char	*tab;
-	int		len;
-	int		i;
+	unsigned int i;
 
-	len = 0;
-	while (s1[len] != '\0')
-		len++;
-	if ((tab = (char *)malloc(sizeof(char) * (len + 1))) == NULL)
-		return (NULL);
 	i = 0;
-	while (s1[i] != '\0')
+	if ((s1[i] == '\0' && s2[i] == '\0') || n == 0)
+		return (0);
+	while (i < n && (s1[i] || s2[i]))
 	{
-		tab[i] = s1[i];
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 		i++;
 	}
-	tab[i] = '\0';
-	return (tab);
+	if (s1[i - 1] == s2[i - 1])
+		return (0);
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

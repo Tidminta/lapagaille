@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/18 19:47:08 by tidminta          #+#    #+#             */
-/*   Updated: 2020/01/17 19:27:05 by tidminta         ###   ########.fr       */
+/*   Created: 2019/11/05 13:00:11 by tidminta          #+#    #+#             */
+/*   Updated: 2020/01/16 04:06:11 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-char	*ft_strdup(const char *s1)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	char	*tab;
-	int		len;
-	int		i;
+	unsigned char *dst;
 
-	len = 0;
-	while (s1[len] != '\0')
-		len++;
-	if ((tab = (char *)malloc(sizeof(char) * (len + 1))) == NULL)
-		return (NULL);
-	i = 0;
-	while (s1[i] != '\0')
+	dst = b;
+	if (len == 0)
+		return (b);
+	while (len > 0)
 	{
-		tab[i] = s1[i];
-		i++;
+		*dst = (unsigned char)c;
+		dst++;
+		len--;
 	}
-	tab[i] = '\0';
-	return (tab);
+	return (b);
 }

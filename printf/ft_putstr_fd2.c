@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_putstr_fd2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/18 19:47:08 by tidminta          #+#    #+#             */
-/*   Updated: 2020/01/17 19:27:05 by tidminta         ###   ########.fr       */
+/*   Created: 2019/12/18 22:30:24 by tidminta          #+#    #+#             */
+/*   Updated: 2020/04/20 20:31:45 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdlib.h>
+#include "libftprintf.h"
 
-char	*ft_strdup(const char *s1)
+void		ft_putstr_fd2(char *s, int fd, t_params_ *p)
 {
-	char	*tab;
-	int		len;
-	int		i;
+	int len;
 
 	len = 0;
-	while (s1[len] != '\0')
-		len++;
-	if ((tab = (char *)malloc(sizeof(char) * (len + 1))) == NULL)
-		return (NULL);
-	i = 0;
-	while (s1[i] != '\0')
+	if (!s || !fd)
 	{
-		tab[i] = s1[i];
-		i++;
+		write(1, "(null)", 6);
+		p->conv_len += 6;
+		return ;
 	}
-	tab[i] = '\0';
-	return (tab);
+	while (s[len])
+		len++;
+	write(fd, s, len);
+	p->conv_len += len;
 }
