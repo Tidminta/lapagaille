@@ -1,0 +1,13 @@
+docker image ls : lister les images
+docker image rm [IMAGE ID] : supp une image
+
+docker container ls : lister les container
+docker container rm [CONTAINER ID]: supp un container
+
+docker system prune: supp tout les container a l'arret, les dangling images, et les reseau unitilises
+
+docker build [OPTIONS] PATH | URL | - : construire une image a partir d'un Dockerfile
+
+docker run [OPTIONS] IMAGE [COMMAND] [ARG...]: lancer une image
+
+
