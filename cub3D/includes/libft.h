@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:01:24 by tidminta          #+#    #+#             */
-/*   Updated: 2020/06/05 17:19:28 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/06/08 13:45:47 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 #  define BUFFER_SIZE 1
 # endif
 
-
-// # include "libftprintf.h"
+# include "libftprintf.h"
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/uio.h>
@@ -106,7 +105,5 @@ int			ft_check(int fd, char **line, char **str, void *buff);
 char		*ft_strdup2(char *s1);
 
 char		*ft_strjoin2(char *s1, char *s2);
-
-
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:44:41 by tidminta          #+#    #+#             */
-/*   Updated: 2020/06/05 15:19:28 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/06/08 20:46:44 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,32 +195,33 @@ size_t			ft_strlen(const char *s);
 /*				LISTES					*/
 /* ************************************ */
 
-
 typedef struct	s_list
 {
 	void			*content;
 	struct s_list	*next;
 }				t_list;
 
-t_list		*ft_lstnew(void *content);
+t_list			*ft_lstnew(void *content);
 
-void 		ft_lstadd_back(t_list **alst, t_list *new);
+void			ft_lstadd_back(t_list **alst, t_list *new);
 
-void		ft_lstadd_front(t_list **alst, t_list *new);
+void			ft_lstadd_front(t_list **alst, t_list *new);
 
-int 		ft_lstsize(t_list *lst);
+int				ft_lstsize(t_list *lst);
 
-t_list 		*ft_lstlast(t_list *lst);
+t_list			*ft_lstlast(t_list *lst);
 
-void 		ft_lstdelone(t_list *lst, void (*del)(void*));
+void			ft_lstdelone(t_list *lst, void (*del)(void*));
 
-void 		ft_lstclear(t_list **lst, void (*del)(void *));
+void			ft_lstclear(t_list **lst, void (*del)(void *));
 
-void		ft_lstiter(t_list *lst, void (*f)(void *));
+void			ft_lstiter(t_list *lst, void (*f)(void *));
 
-t_list 		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
+	void (*del)(void *));
 
-t_list 		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
+	void (*del)(void *));
 
 
 /*
@@ -230,27 +231,59 @@ t_list 		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 *************************************
 */
 
-// typedef struct map_list
-// {
-// 	void 			*content;
-// 	struct s_list	*next;
-	
-// }				m_list;
-
-typedef struct map_infos
+typedef struct	s_res
 {
-	char *res;
-	char *no;
-	char *so;
-	char *we;
-	char *ea;
-	char *sprite;
-	char *floor;
-	char *ceill;		
-}				m_infos;
+	size_t	res_x;
+	size_t	res_y;
+}				t_res;
 
-t_list			*ft_parsemap(int fd);
+typedef struct	s_rgb
+{
+	size_t	red;
+	size_t	green;
+	size_t	bleue;
+}				t_rgb;
+
+typedef	struct		s_mapinfos
+{
+	t_res	*resolution;
+	t_rgb	*floor;
+	t_rgb	*ceil;
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	char	*sprite;
+}					t_mapinfos;
+
+/*
+*************************************
+**			  CUB3D                **
+**			 PARSING			   **
+*************************************
+*/
+
+size_t			ft_parsemap(t_list *list, t_mapinfos *map, int fd);
+
+t_list			*ft_map_gnl(int fd);
+
+size_t			ft_get_res_x(t_list *infos, t_res *res);
+
+size_t			ft_get_res_y(t_list *infos, t_res *res);
+
+size_t			ft_get_path(char *to_find, t_list *lst, char **s);
+
+size_t			ft_get_rgb(char *to_find, t_list *lst, t_rgb *rgb);
+//ft_get_path
+//ft_get_rgb
+
+/*
+*************************************
+**			  TOOLS                **
+*************************************
+*/
 
 void			ft_print_list(t_list *map);
+void			ft_print_mapinfos(t_mapinfos *map);
 
 #endif
