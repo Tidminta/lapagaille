@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:44:41 by tidminta          #+#    #+#             */
-/*   Updated: 2020/06/09 12:29:12 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/06/09 17:55:27 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,19 +260,27 @@ typedef	struct		s_mapinfos
 **			  CUB3D                **
 **			 PARSING			   **
 *************************************
+**			A REVOIR			   **
+**voidft_freemap(t_mapinfos **map);**
+**  ?? 0 leaks sans ft_listclear   **
+*************************************
 */
 
-size_t			ft_parsemap(t_list *list, t_mapinfos *map, int fd);
+size_t			ft_parsemap(t_list **list, t_mapinfos **map, int fd);
 
 t_list			*ft_map_gnl(int fd);
 
-size_t			ft_get_res_x(t_list *infos, t_res *res);
+void			ft_get_res_x(t_list *infos, t_res *res);
 
 size_t			ft_get_res_y(t_list *infos, t_res *res);
 
 size_t			ft_get_path(char *to_find, t_list *lst, char **s);
 
 size_t			ft_get_rgb(char *to_find, t_list *lst, t_rgb *rgb);
+
+// 
+
+
 //ft_get_path
 //ft_get_rgb
 
