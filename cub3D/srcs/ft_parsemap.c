@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 13:00:34 by tidminta          #+#    #+#             */
-/*   Updated: 2020/06/08 20:47:01 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/06/09 12:55:07 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 size_t		ft_get_res_x(t_list *infos, t_res *res)
 {
 	char		*tmp;
+	char		*tmp2;
 	size_t		i;
 	size_t		j;
 
@@ -34,7 +35,9 @@ size_t		ft_get_res_x(t_list *infos, t_res *res)
 			{
 				j++;
 			}
-			res->res_x = ft_atoi(ft_substr(tmp, i, j));
+			tmp2 = ft_substr(tmp, i, j);
+			res->res_x = ft_atoi(tmp2);
+			free(tmp2);
 			return (1);
 		}
 		infos = infos->next;
@@ -47,6 +50,7 @@ size_t		ft_get_res_y(t_list *infos, t_res *res)
 	size_t	len;
 	size_t	i;
 	char	*tmp;
+	char	*tmp2;
 
 	while (infos->next)
 	{
@@ -63,7 +67,9 @@ size_t		ft_get_res_y(t_list *infos, t_res *res)
 			{
 				i--;
 			}
-			res->res_y = ft_atoi(ft_substr(tmp, i, (len - i)));
+			tmp2 = ft_substr(tmp, i, (len - i));
+			res->res_y = ft_atoi(tmp2);
+			free(tmp2);
 			return (1);
 		}
 		infos = infos->next;
@@ -87,6 +93,7 @@ t_list		*ft_map_gnl(int fd)
 			ft_lstadd_back(&map, tmp);
 		}
 	}
+	free(line);
 	return (map);
 }
 
@@ -121,16 +128,14 @@ size_t		ft_get_path(char *to_find, t_list *lst, char **s)
 
 size_t		ft_parsemap(t_list *list, t_mapinfos *map, int fd)
 {
-	(void)map;
 	list = ft_map_gnl(fd);
-	// ft_print_list(list);
+	ft_print_list(list);
 	map->resolution = (t_res*)malloc(sizeof(t_res));
 	map->floor = (t_rgb*)malloc(sizeof(t_rgb));
 	map->ceil = (t_rgb*)malloc(sizeof(t_rgb));
 	ft_get_res_x(list, map->resolution);
 	ft_get_res_y(list, map->resolution);
 	ft_get_path("NO", list, &map->no);
-	printf("[pathtest][%s]\n", map->no);
 	ft_get_path("SO", list, &map->so);
 	ft_get_path("WE", list, &map->we);
 	ft_get_path("EA", list, &map->ea);

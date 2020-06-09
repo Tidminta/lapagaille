@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:44:41 by tidminta          #+#    #+#             */
-/*   Updated: 2020/06/08 20:46:44 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/06/09 12:29:12 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,7 +222,6 @@ t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
 
 t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
 	void (*del)(void *));
-
 
 /*
 *************************************

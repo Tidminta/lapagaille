@@ -6,14 +6,14 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 20:15:28 by tidminta          #+#    #+#             */
-/*   Updated: 2020/06/06 18:57:30 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/06/09 12:11:54 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10000
+#  define BUFFER_SIZE 100
 # endif
 
 # include <stdlib.h>

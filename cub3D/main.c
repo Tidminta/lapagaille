@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 18:42:32 by tidminta          #+#    #+#             */
-/*   Updated: 2020/06/08 20:50:52 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/06/09 12:31:15 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,17 @@ int		main(int ac, char **av)
 			return (0);
 		}
 		free(list);
+		free(map->resolution);
+		free(map->floor);
+		free(map->ceil);
+		free(map->no);
+		free(map->so);
+		free(map->ea);
+		free(map->we);
+		free(map->sprite);
 		free(map);
-		// system("leaks Cub3D");
+		close(fd);
+		system("leaks Cub3D");
 		return (0);
 	}
 	ft_printf("Error\nInvalide number of arguments!\n");

@@ -6,56 +6,45 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 14:43:45 by tidminta          #+#    #+#             */
-/*   Updated: 2020/06/08 20:12:47 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/06/09 13:00:44 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libftprintf.h"
 #include "includes/libft.h"
 
-size_t		ft_get_path(char *to_find, t_list *lst, char *s)
+size_t		ft_parsemap2(t_list *list, t_mapinfos *map, int fd)
 {
-	int		i;
-	char	*tmp;
-	char	**tab;
-
-	i = 0;
-	while (lst->next)
-	{
-		tmp = lst->content;
-		tab = ft_split(tmp, ' ');
-		while (tab[i])
-		{
-			if (ft_strncmp(to_find, tab[i], 2) == 0)
-			{
-				s = tab[i + 1];
-				return (1);
-			}
-		}
-		lst = lst->next;
-	}
-	return (0);
+	(void)map;
+	list = ft_map_gnl(fd);
+	// ft_print_list(list);
+	return (1);
 }
 
 int 	main(int ac, char **av)
 {
-	t_list	*list;
-	t_list	*list2;
-	t_res	*res_tmp;
-	char 	*path = NULL;
-	int 	i;
-	int 	j;
+	int			fd;
+	t_list		*list;
+	t_mapinfos	*map;
 
-	(void)ac;
-	(void)av;
-	i = 0;
-	j = 0;
-	res_tmp = malloc(sizeof(t_res));
-	list = ft_lstnew("");
-	list2 = ft_lstnew("SO       ./path_to_so_texture");
-	ft_lstadd_front(&list, list2);
-	ft_print_list(list);
-	ft_get_path("SO", list, path);
+	if (ac == 2)
+	{
+		list = NULL;
+		map = NULL;
+		if ((fd = open(av[1], O_RDONLY)) == -1)
+		{
+			ft_printf("Error\nMap open failed\n");
+			return (0);
+		}
+		if (!ft_parsemap2(list, map, fd))
+		{
+			ft_printf("Error\nMap parsing failed\n");
+			return (0);
+		}
+		printf("fin test2\n");
+		free(list);
+		free(map);
+	}
 	system("leaks a.out");
 	return (0);
 }
