@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:44:41 by tidminta          #+#    #+#             */
-/*   Updated: 2020/06/10 16:13:09 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/06/10 18:44:09 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,6 +249,7 @@ typedef	struct		s_mapinfos
 	t_rgb	*floor;
 	t_rgb	*ceil;
 	t_list	*map;
+	char	**map_tab;
 	char	*no;
 	char	*so;
 	char	*we;
@@ -287,6 +288,9 @@ size_t			ft_is_map_char(char c);
 
 size_t			ft_is_map_line(char *s);
 
+char			**ft_lst_to_tab(t_list *lst);
+
+void		ft_print_tab(char **tab);
 
 //ft_get_path
 //ft_get_rgb

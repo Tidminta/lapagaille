@@ -1,0 +1,3 @@
+parsing ok reste a check les leaks
+mettre a la norme ft_parsemap.c (ft_getrgb)
+Hundle MinilibX

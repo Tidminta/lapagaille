@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 13:00:34 by tidminta          #+#    #+#             */
-/*   Updated: 2020/06/10 16:19:53 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/06/10 18:46:52 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,9 +129,7 @@ size_t		ft_parseinfos(t_list **list, t_mapinfos **map, int fd)
 	*map = ft_init_mapinfos();
 	map_tmp = *map;
 	*list = ft_infos_gnl(fd, &map_tmp->map);
-	// ft_print_list(map_tmp->map);
 	lst_tmp = *list;
-	ft_print_list(lst_tmp);
 	ft_get_res_x(lst_tmp, map_tmp->resolution);
 	ft_get_res_y(lst_tmp, map_tmp->resolution);
 	ft_get_path("NO", lst_tmp, &map_tmp->no);
@@ -140,6 +138,8 @@ size_t		ft_parseinfos(t_list **list, t_mapinfos **map, int fd)
 	ft_get_path("EA", lst_tmp, &map_tmp->ea);
 	ft_get_path("S ", lst_tmp, &map_tmp->sprite);
 	ft_get_rgb("F ", lst_tmp, &map_tmp->floor);
-	// ft_print_mapinfos(*map);
+	ft_get_rgb("C ", lst_tmp, &map_tmp->ceil);
+	map_tmp->map_tab = ft_lst_to_tab(map_tmp->map);
+	ft_print_tab(map_tmp->map_tab);
 	return (1);
 }

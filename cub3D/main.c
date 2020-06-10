@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 18:42:32 by tidminta          #+#    #+#             */
-/*   Updated: 2020/06/10 15:21:17 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/06/10 18:49:44 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int		main(int ac, char **av)
 			ft_printf("Error\nMap parsing failed\n");
 			return (0);
 		}
+		// ft_print_mapinfos(map);
 		// ft_lstclear(&list, del);
 		// ft_print_list(list);
 		close(fd);

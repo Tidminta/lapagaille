@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 13:00:34 by tidminta          #+#    #+#             */
-/*   Updated: 2020/06/10 16:32:45 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/06/10 18:55:36 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_mapinfos	*ft_init_mapinfos(void)
 	map->floor = (t_rgb*)malloc(sizeof(t_rgb));
 	map->ceil = (t_rgb*)malloc(sizeof(t_rgb));
 	map->map = ft_lstnew("");
+	map->map_tab = NULL;
 	map->no = NULL;
 	map->so = NULL;
 	map->we = NULL;
@@ -39,24 +40,29 @@ void			ft_get_rgb(char *to_find, t_list *lst, t_rgb **rgb)
 	t_rgb	*tmp;
 
 	tmp = *rgb;
-	while (lst->next)
+	while (lst->next || lst->content)
 	{
 		str = lst->content;
 		if (ft_strncmp(str, to_find, 2) == 0)
 		{
 			while (ft_isalpha(*str) || *str == ' ')
-				(*str)++;
+				str++;
 			if (ft_isdigit(*str))
 			{
 				tab = ft_split(str, ',');
-				printf("tab[0][%s] tab[1][%s] tab[2][%s]\n", tab[0], tab[1], tab[2]);
 				tmp->red = ft_atoi(tab[0]);
 				tmp->green = ft_atoi(tab[1]);
 				tmp->bleue = ft_atoi(tab[2]);
+				free(tab[0]);
+				free(tab[1]);
+				free(tab[2]);
 				free(tab);
 			}
 		}
-		lst = lst->next;
+		if (lst->next)
+			lst = lst->next;
+		else
+			return ;
 	}
 }
 
@@ -86,4 +92,27 @@ size_t		ft_is_map_line(char *s)
 	if (i == ft_strlen(s))
 		return (1);
 	return (0);
+}
+
+char		**ft_lst_to_tab(t_list *lst)
+{
+	char	**tab;
+	char	*tmp;
+	size_t	i;
+	size_t	len;
+
+	i = 0;
+	len = ft_lstsize(lst);
+	tab = (char**)malloc(sizeof(char*) * (len));
+	tab[len] = 0;
+	while (lst->next)
+	{
+		tmp = lst->content;
+		if (tmp[0])
+			tab[i++] = tmp;
+		lst = lst->next;
+	}
+	if (lst->content)
+		tab[i] = lst->content;
+	return (tab);
 }
