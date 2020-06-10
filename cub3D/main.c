@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 18:42:32 by tidminta          #+#    #+#             */
-/*   Updated: 2020/06/09 17:49:15 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/06/10 15:21:17 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,19 @@ int		main(int ac, char **av)
 	if (ac == 2)
 	{
 		list = NULL;
-		map = (t_mapinfos*)malloc(sizeof(t_mapinfos));
 		fd = open(av[1], O_RDONLY);
 		if (fd == -1)
 		{
 			ft_printf("Error\nMap open failed\n");
 			return (0);
 		}
-		if (!ft_parsemap(&list, &map, fd))
+		if (!ft_parseinfos(&list, &map, fd))
 		{
 			ft_printf("Error\nMap parsing failed\n");
 			return (0);
 		}
 		// ft_lstclear(&list, del);
+		// ft_print_list(list);
 		close(fd);
 		system("leaks Cub3D");
 		return (0);

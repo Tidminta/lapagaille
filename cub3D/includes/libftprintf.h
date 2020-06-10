@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:44:41 by tidminta          #+#    #+#             */
-/*   Updated: 2020/06/09 17:55:27 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/06/10 16:13:09 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,6 +248,7 @@ typedef	struct		s_mapinfos
 	t_res	*resolution;
 	t_rgb	*floor;
 	t_rgb	*ceil;
+	t_list	*map;
 	char	*no;
 	char	*so;
 	char	*we;
@@ -266,19 +267,25 @@ typedef	struct		s_mapinfos
 *************************************
 */
 
-size_t			ft_parsemap(t_list **list, t_mapinfos **map, int fd);
+size_t			ft_parseinfos(t_list **list, t_mapinfos **map, int fd);
+
+t_mapinfos		*ft_init_mapinfos(void);
+
+t_list			*ft_infos_gnl(int fd, t_list **t_mapinfos);
 
 t_list			*ft_map_gnl(int fd);
 
 void			ft_get_res_x(t_list *infos, t_res *res);
 
-size_t			ft_get_res_y(t_list *infos, t_res *res);
+void			ft_get_res_y(t_list *infos, t_res *res);
 
-size_t			ft_get_path(char *to_find, t_list *lst, char **s);
+void			ft_get_path(char *to_find, t_list *lst, char **s);
 
-size_t			ft_get_rgb(char *to_find, t_list *lst, t_rgb *rgb);
+void			ft_get_rgb(char *to_find, t_list *lst, t_rgb **rgb);
 
-// 
+size_t			ft_is_map_char(char c);
+
+size_t			ft_is_map_line(char *s);
 
 
 //ft_get_path

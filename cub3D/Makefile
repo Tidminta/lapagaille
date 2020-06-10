@@ -6,7 +6,7 @@
 #    By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/04 18:20:36 by tidminta          #+#    #+#              #
-#    Updated: 2020/06/08 17:01:10 by tidminta         ###   ########.fr        #
+#    Updated: 2020/06/10 13:14:12 by tidminta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ SRC_NAME =		ft_memset.c\
                 ft_toupper.c\
                 ft_tolower.c \
 				ft_parsemap.c\
+				ft_parsemap2.c\
 				ft_tools.c\
 
 SRC_GNL_NAME = 	get_next_line.c\

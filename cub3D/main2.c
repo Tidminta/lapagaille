@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 14:43:45 by tidminta          #+#    #+#             */
-/*   Updated: 2020/06/09 15:55:07 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/06/10 12:28:26 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int		main(int ac, char **av)
 	int			fd;
 	t_list		*list;
 	t_mapinfos	*map;
-	void	(*del)(void*) = free;
+	void		(*del)(void*) = free;
+	char 		*str;
 
 	if (ac == 2)
 	{
@@ -43,6 +44,7 @@ int		main(int ac, char **av)
 		}
 		ft_print_list(list);
 		ft_lstclear(&list, del);
+		printf("")
 	}
 	system("leaks a.out");
 	return (0);
