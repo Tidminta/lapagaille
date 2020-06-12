@@ -3,6 +3,7 @@
 		"libft.h": "c",
 		"uio.h": "c",
 		"libftprintf.h": "c",
-		"fcntl.h": "c"
+		"fcntl.h": "c",
+		"lib.h": "c"
 	}
 }

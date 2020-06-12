@@ -6,7 +6,7 @@
 #    By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/04 18:20:36 by tidminta          #+#    #+#              #
-#    Updated: 2020/06/10 13:14:12 by tidminta         ###   ########.fr        #
+#    Updated: 2020/06/11 19:11:34 by tidminta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,10 @@ SRC_PATH = ./srcs/
 SRC_GNL_PATH = ./srcs_gnl/
 
 SRC_PRINTF_PATH = ./srcs_printf/
+
+MLX_PATH = ./mlx/
+
+MLX = -Lmlx -lmlx -framework OpenGL -framework AppKit
 
 INCLUDE_PATH = ./includes/
 
@@ -126,7 +130,6 @@ SRC = $(addprefix $(SRC_PATH), $(SRC_NAME) \
 				$(SRC_GNL_NAME)) \
 				$(SRC_PRINTF_NAME)) \
 				
-
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME) $(OBJ_GNL_NAME) $(OBJ_PRINTF_NAME))
 
 HEADER_SRC = $(addprefix $(INCLUDE_PATH), $(INCLUDE_SRC_NAME))
@@ -137,13 +140,12 @@ HEADER_SRC_PRINTF = $(addprefix $(INCLUDE_PATH), $(INCLUDE_SRC_NAME) $(INCLUDE_P
 
 INCLUDE = -I$(INCLUDE_PATH)
 
-
 FLAGS = -Wall -Werror -Wextra
 
 .PHONY: all, clean, fclean, re, f
 
 all: $(NAME)
-	@gcc $(FLAGS) -o Cub3D $(MAIN) $(NAME)
+	@gcc $(FLAGS) $(MLX) -o Cub3D $(MAIN) $(NAME)
 
 $(NAME): $(OBJ)
 	@ar rc $(NAME) $(OBJ)
@@ -160,6 +162,9 @@ $(OBJ_PATH)%.o: $(SRC_GNL_PATH)%.c $(HEADER_GNL_SRC)
 $(OBJ_PATH)%.o: $(SRC_PRINTF_PATH)%.c $(HEADER_SRC_PRINTF)
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
 	@gcc $(FLAGS) $(INCLUDE) -o $@ -c $<
+
+$(OBJ_PATH)%.o: $(MLX_PATH)%.c
+	gcc $(FLAGS) -Imlx -c $< -o $@
 
 clean:
 	@/bin/rm -f $(OBJ)

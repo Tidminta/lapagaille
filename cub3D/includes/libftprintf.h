@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:44:41 by tidminta          #+#    #+#             */
-/*   Updated: 2020/06/10 18:44:09 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/06/11 13:01:52 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -290,10 +290,6 @@ size_t			ft_is_map_line(char *s);
 
 char			**ft_lst_to_tab(t_list *lst);
 
-void		ft_print_tab(char **tab);
-
-//ft_get_path
-//ft_get_rgb
 
 /*
 *************************************
@@ -301,6 +297,7 @@ void		ft_print_tab(char **tab);
 *************************************
 */
 
+void			ft_print_tab(char **tab);
 void			ft_print_list(t_list *map);
 void			ft_print_mapinfos(t_mapinfos *map);
 
