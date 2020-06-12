@@ -6,7 +6,7 @@
 #    By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/04 18:20:36 by tidminta          #+#    #+#              #
-#    Updated: 2020/06/11 19:11:34 by tidminta         ###   ########.fr        #
+#    Updated: 2020/06/12 16:21:59 by tidminta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -145,7 +145,7 @@ FLAGS = -Wall -Werror -Wextra
 .PHONY: all, clean, fclean, re, f
 
 all: $(NAME)
-	@gcc $(FLAGS) $(MLX) -o Cub3D $(MAIN) $(NAME)
+	@gcc $(FLAGS) -Imlx -Lmlx -lmlx -framework OpenGL -framework Appkit -o Cub3D $(MAIN) $(NAME)
 
 $(NAME): $(OBJ)
 	@ar rc $(NAME) $(OBJ)
@@ -162,9 +162,6 @@ $(OBJ_PATH)%.o: $(SRC_GNL_PATH)%.c $(HEADER_GNL_SRC)
 $(OBJ_PATH)%.o: $(SRC_PRINTF_PATH)%.c $(HEADER_SRC_PRINTF)
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
 	@gcc $(FLAGS) $(INCLUDE) -o $@ -c $<
-
-$(OBJ_PATH)%.o: $(MLX_PATH)%.c
-	gcc $(FLAGS) -Imlx -c $< -o $@
 
 clean:
 	@/bin/rm -f $(OBJ)

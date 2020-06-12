@@ -5,15 +5,22 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/11 19:02:44 by tidminta          #+#    #+#             */
-/*   Updated: 2020/06/11 19:03:24 by tidminta         ###   ########.fr       */
+/*   Created: 2020/06/12 15:19:50 by tidminta          #+#    #+#             */
+/*   Updated: 2020/06/12 16:08:36 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/lib.h"
+#include "mlx.h"
+#include <stdio.h>
 
-int main(void)
+int	main(void)
 {
-	ft_display();
+	void *mlx_ptr;
+	void *mlx_win;
+
+	mlx_ptr = mlx_init();
+	mlx_win = mlx_new_window(mlx_ptr, 500, 500, "mlx42");
+	mlx_loop(mlx_ptr);
+	printf("SUCCES\n");
 	return (0);
 }
