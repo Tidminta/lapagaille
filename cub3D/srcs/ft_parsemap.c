@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 13:00:34 by tidminta          #+#    #+#             */
-/*   Updated: 2020/06/11 12:38:40 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/06/22 18:42:38 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ t_mapinfos	*ft_init_mapinfos(void)
 	map->we = NULL;
 	map->ea = NULL;
 	map->sprite = NULL;
+	map->line_max = 0;
+	map->col_max = 0;
 	return (map);
 }
 
@@ -94,7 +96,7 @@ size_t		ft_is_map_line(char *s)
 	return (0);
 }
 
-char		**ft_lst_to_tab(t_list *lst)
+char		**ft_lst_to_tab(t_list *lst, t_mapinfos *map)
 {
 	char	**tab;
 	char	*tmp;
@@ -103,13 +105,18 @@ char		**ft_lst_to_tab(t_list *lst)
 
 	i = 0;
 	len = ft_lstsize(lst);
+	map->col_max = len;
 	tab = (char**)malloc(sizeof(char*) * (len));
 	tab[len] = 0;
 	while (lst->next)
 	{
 		tmp = lst->content;
 		if (tmp[0])
+		{
+			if ((len = ft_strlen(tmp)) > map->line_max)
+				map->line_max = len;
 			tab[i++] = tmp;
+		}
 		lst = lst->next;
 	}
 	if (lst->content)

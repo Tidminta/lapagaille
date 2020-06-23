@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:44:41 by tidminta          #+#    #+#             */
-/*   Updated: 2020/06/11 13:01:52 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/06/22 20:24:22 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include <stdio.h>
+
+# define WIN_WIDTH 800 
+# define WIN_HEIGHT 800 
+# define TILE_SIZE 120
 
 typedef struct	s_infos_
 {
@@ -38,7 +42,7 @@ typedef struct	s_infos_
 	unsigned long		arg_addr;
 	unsigned long		arg_bin;
 }				t_infos_;
-
+ 
 typedef struct	s_params_
 {
 	unsigned int		index;
@@ -226,10 +230,33 @@ t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
 /*
 *************************************
 **			  CUB3D                **
+**			MLX INFOS			   **
+*************************************
+*/
+typedef struct  s_img
+{
+        void            		*img_ptr;
+        int                     *data;
+        int                     size_l;
+        int                     bpp;
+        int                     endian;
+}                               t_img;
+
+typedef struct  s_mlx
+{
+        void            *mlx_ptr;
+        void            *win;
+        t_img           img;
+}                               t_mlx;
+
+
+
+/*
+*************************************
+**			  CUB3D                **
 **			MAP INFOS			   **
 *************************************
 */
-
 typedef struct	s_res
 {
 	size_t	res_x;
@@ -255,8 +282,28 @@ typedef	struct		s_mapinfos
 	char	*we;
 	char	*ea;
 	char	*sprite;
+	size_t	line_max;
+	size_t	col_max;
+	size_t	win_w;
+	size_t	win_h;
 }					t_mapinfos;
 
+
+// typedef struct	s_data
+// {
+// 	void	*img;
+// 	int		*addr;
+// 	int		bits_per_pixel;
+// 	int		line_length;
+// 	int		endian;
+// }				t_data;
+
+// typedef struct s_img
+// {
+// 	void	*mlx_ptr;
+// 	void	*win_ptr;
+// 	t_data	img;
+// }				t_img;
 /*
 *************************************
 **			  CUB3D                **
@@ -288,7 +335,7 @@ size_t			ft_is_map_char(char c);
 
 size_t			ft_is_map_line(char *s);
 
-char			**ft_lst_to_tab(t_list *lst);
+char			**ft_lst_to_tab(t_list *lst, t_mapinfos *map);
 
 
 /*
@@ -300,5 +347,6 @@ char			**ft_lst_to_tab(t_list *lst);
 void			ft_print_tab(char **tab);
 void			ft_print_list(t_list *map);
 void			ft_print_mapinfos(t_mapinfos *map);
+void			map_render(int **data, char **map, t_mapinfos *infos);
 
 #endif
