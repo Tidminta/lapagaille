@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:01:24 by tidminta          #+#    #+#             */
-/*   Updated: 2020/06/08 13:45:47 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/06/26 16:30:04 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #  define BUFFER_SIZE 1
 # endif
 
-# include "libftprintf.h"
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/uio.h>
@@ -105,5 +104,40 @@ int			ft_check(int fd, char **line, char **str, void *buff);
 char		*ft_strdup2(char *s1);
 
 char		*ft_strjoin2(char *s1, char *s2);
+
+/*
+*************************************
+**			  LISTES               **
+**	 A REMETTRE MAKEFILE LIBFT	   **
+*************************************
+*/
+
+typedef struct	s_list
+{
+	void			*content;
+	struct s_list	*next;
+}				t_list;
+
+t_list			*ft_lstnew(void *content);
+
+void			ft_lstadd_back(t_list **alst, t_list *n);
+
+void			ft_lstadd_front(t_list **alst, t_list *n);
+
+int				ft_lstsize(t_list *lst);
+
+t_list			*ft_lstlast(t_list *lst);
+
+void			ft_lstdelone(t_list *lst, void (*del)(void*));
+
+void			ft_lstclear(t_list **lst, void (*del)(void *));
+
+void			ft_lstiter(t_list *lst, void (*f)(void *));
+
+t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
+	void (*del)(void *));
+
+t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
+	void (*del)(void *));
 
 #endif

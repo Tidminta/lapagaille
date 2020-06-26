@@ -6,12 +6,11 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 13:00:34 by tidminta          #+#    #+#             */
-/*   Updated: 2020/06/10 18:46:52 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/06/26 16:32:18 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
-#include "../includes/libftprintf.h"
+#include "../includes/cub3d.h"
 
 void		ft_get_res_x(t_list *infos, t_res *res)
 {

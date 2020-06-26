@@ -6,12 +6,11 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 18:42:32 by tidminta          #+#    #+#             */
-/*   Updated: 2020/06/10 18:49:44 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/06/26 16:38:43 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libftprintf.h"
-#include "includes/libft.h"
+#include "includes/cub3d.h"
 
 int		main(int ac, char **av)
 {
@@ -26,12 +25,12 @@ int		main(int ac, char **av)
 		fd = open(av[1], O_RDONLY);
 		if (fd == -1)
 		{
-			ft_printf("Error\nMap open failed\n");
+			printf("Error\nMap open failed\n");
 			return (0);
 		}
 		if (!ft_parseinfos(&list, &map, fd))
 		{
-			ft_printf("Error\nMap parsing failed\n");
+			printf("Error\nMap parsing failed\n");
 			return (0);
 		}
 		// ft_print_mapinfos(map);
@@ -41,6 +40,6 @@ int		main(int ac, char **av)
 		system("leaks Cub3D");
 		return (0);
 	}
-	ft_printf("Error\nInvalide number of arguments!\n");
+	printf("Error\nInvalide number of arguments!\n");
 	return (0);
 }

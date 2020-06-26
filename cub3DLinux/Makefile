@@ -6,7 +6,7 @@
 #    By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/04 18:20:36 by tidminta          #+#    #+#              #
-#    Updated: 2020/06/10 13:14:12 by tidminta         ###   ########.fr        #
+#    Updated: 2020/06/26 16:40:34 by tidminta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,12 +58,7 @@ SRC_NAME =		ft_memset.c\
                 ft_strmapi.c\
                 ft_toupper.c\
                 ft_tolower.c \
-
-SRC_GNL_NAME = 	get_next_line.c\
-				get_next_line_utils.c\
-
-SRC_CUB_NAME =
-                ft_lstsize.c\
+				ft_lstsize.c\
                 ft_lstnew.c\
                 ft_lstmap.c\
                 ft_lstlast.c\
@@ -72,7 +67,11 @@ SRC_CUB_NAME =
                 ft_lstclear.c\
                 ft_lstadd_front.c\
                 ft_lstadd_back.c \
-                ft_parsemap.c\
+
+SRC_GNL_NAME = 	get_next_line.c\
+				get_next_line_utils.c\
+
+SRC_CUB_NAME =	ft_parsemap.c\
 				ft_parsemap2.c\
 				ft_tools.c\
 
@@ -80,17 +79,17 @@ INCLUDE_SRC_NAME = libft.h
 
 INCLUDE_GNL_NAME = get_next_line.h
 
-INCLUDE_PRINTF_NAME = libftprintf.h
+INCLUDE_CUB_NAME = cub3d.h
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
 OBJ_GNL_NAME = $(SRC_GNL_NAME:.c=.o)
 
-OBJ_PRINTF_NAME = $(SRC_PRINTF_NAME:.c=.o)
+OBJ_PRINTF_NAME = $(SRC_CUB_NAME:.c=.o)
 
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME) \
 				$(SRC_GNL_NAME)) \
-				$(SRC_PRINTF_NAME)) \
+				$(SRC_CUB_NAME)) \
 				
 
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME) $(OBJ_GNL_NAME) $(OBJ_PRINTF_NAME))
@@ -99,7 +98,7 @@ HEADER_SRC = $(addprefix $(INCLUDE_PATH), $(INCLUDE_SRC_NAME))
 
 HEADER_GNL_SRC = $(addprefix $(INCLUDE_PATH), $(INCLUDE_GNL_NAME))
 
-HEADER_SRC_PRINTF = $(addprefix $(INCLUDE_PATH), $(INCLUDE_SRC_NAME) $(INCLUDE_PRINTF_NAME))
+HEADER_CUB_SRC = $(addprefix $(INCLUDE_PATH), $(INCLUDE_SRC_NAME) $(INCLUDE_CUB_NAME))
 
 INCLUDE = -I$(INCLUDE_PATH)
 
@@ -109,6 +108,7 @@ FLAGS = -Wall -Werror -Wextra
 .PHONY: all, clean, fclean, re, f
 
 all: $(NAME)
+	sudo cp minilibx-linux/mlx.h /usr/local/include
 	@gcc $(FLAGS) -lmlx -lXext -lX11 -lbsd -o Cub3D $(MAIN) $(NAME)
 
 $(NAME): $(OBJ)
@@ -123,7 +123,7 @@ $(OBJ_PATH)%.o: $(SRC_GNL_PATH)%.c $(HEADER_GNL_SRC)
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
 	@gcc $(FLAGS) $(INCLUDE) -o $@ -c $<
 
-$(OBJ_PATH)%.o: $(SRC_PRINTF_PATH)%.c $(HEADER_SRC_PRINTF)
+$(OBJ_PATH)%.o: $(SRC_CUB_PATH)%.c $(HEADER_CUB_SRC)
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
 	@gcc $(FLAGS) $(INCLUDE) -o $@ -c $<
 

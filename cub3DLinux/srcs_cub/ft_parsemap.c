@@ -6,12 +6,11 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 13:00:34 by tidminta          #+#    #+#             */
-/*   Updated: 2020/06/10 18:55:36 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/06/26 16:32:02 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
-#include "../includes/libftprintf.h"
+#include "../includes/cub3d.h"
 
 t_mapinfos	*ft_init_mapinfos(void)
 {
