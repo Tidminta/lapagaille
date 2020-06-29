@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 15:52:09 by tidminta          #+#    #+#             */
-/*   Updated: 2020/06/26 16:37:48 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/06/26 19:42:21 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define CUB3D_H
 
 # include "libft.h"
+# include "../mlx/mlx.h"
+# include "../mlx/mlx_int.h"
 # include <stdio.h>
 
 /*
@@ -83,7 +85,7 @@ size_t			ft_is_map_line(char *s);
 
 char			**ft_lst_to_tab(t_list *lst);
 
-void		ft_print_tab(char **tab);
+void			ft_print_tab(char **tab);
 
 /*
 *************************************

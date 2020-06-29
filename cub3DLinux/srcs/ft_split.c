@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 22:30:24 by tidminta          #+#    #+#             */
-/*   Updated: 2020/06/04 18:38:28 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/06/26 16:54:12 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char		**ft_free(char **tab, int len)
 {
-	if (tab != '\0')
+	if (tab)
 	{
 		while (len >= 0)
 		{

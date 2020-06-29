@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+         #
+#    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/04 18:20:36 by tidminta          #+#    #+#              #
-#    Updated: 2020/06/26 16:40:34 by tidminta         ###   ########.fr        #
+#    Updated: 2020/06/26 19:45:06 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,8 @@ SRC_CUB_PATH = ./srcs_cub/
 INCLUDE_PATH = ./includes/
 
 OBJ_PATH = ./objs/
+
+MLX_NAME = ./mlx/libmlx.a
 
 MAIN = main.c
 
@@ -87,6 +89,7 @@ OBJ_GNL_NAME = $(SRC_GNL_NAME:.c=.o)
 
 OBJ_PRINTF_NAME = $(SRC_CUB_NAME:.c=.o)
 
+
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME) \
 				$(SRC_GNL_NAME)) \
 				$(SRC_CUB_NAME)) \
@@ -102,14 +105,12 @@ HEADER_CUB_SRC = $(addprefix $(INCLUDE_PATH), $(INCLUDE_SRC_NAME) $(INCLUDE_CUB_
 
 INCLUDE = -I$(INCLUDE_PATH)
 
-
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall
 
 .PHONY: all, clean, fclean, re, f
 
 all: $(NAME)
-	sudo cp minilibx-linux/mlx.h /usr/local/include
-	@gcc $(FLAGS) -lmlx -lXext -lX11 -lbsd -o Cub3D $(MAIN) $(NAME)
+	@gcc $(FLAGS) -lmlx -lXext -lX11 -lbsd -o Cub3D $(MAIN) $(NAME) mlx/libmlx.a
 
 $(NAME): $(OBJ)
 	@ar rc $(NAME) $(OBJ)
@@ -125,7 +126,7 @@ $(OBJ_PATH)%.o: $(SRC_GNL_PATH)%.c $(HEADER_GNL_SRC)
 
 $(OBJ_PATH)%.o: $(SRC_CUB_PATH)%.c $(HEADER_CUB_SRC)
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
-	@gcc $(FLAGS) $(INCLUDE) -o $@ -c $<
+	@gcc $(FLAGS) $(INCLUDE) -Imlx_linux -O3 -o $@ -c $<
 
 clean:
 	@/bin/rm -f $(OBJ)

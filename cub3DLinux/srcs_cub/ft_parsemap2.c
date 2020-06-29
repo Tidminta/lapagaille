@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parsemap2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 13:00:34 by tidminta          #+#    #+#             */
-/*   Updated: 2020/06/26 16:32:18 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/06/26 16:55:54 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void		ft_get_res_y(t_list *infos, t_res *res)
 	char	*tmp2;
 
 	i = 0;
+	len = 0;
 	while (infos->next)
 	{
 		tmp = infos->content;

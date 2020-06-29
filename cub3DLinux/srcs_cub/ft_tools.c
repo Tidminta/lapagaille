@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tools.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 16:57:50 by tidminta          #+#    #+#             */
-/*   Updated: 2020/06/26 16:38:06 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/06/26 18:22:43 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ void		ft_print_list(t_list *map)
 	printf("************ LIST ************\n");
 	while (map->next)
 	{
-		printf("[%s]\n", map->content);
+		printf("[%s]\n", (char*)map->content);
 		map = map->next;
 	}
 	if (map->content)
-		printf("[%s]\n", map->content);
+		printf("[%s]\n", (char*)map->content);
 	printf("************* END *************\n");
 }
 

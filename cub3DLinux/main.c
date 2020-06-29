@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 18:42:32 by tidminta          #+#    #+#             */
-/*   Updated: 2020/06/26 16:38:43 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/06/26 19:18:48 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int		main(int ac, char **av)
 	int			fd;
 	t_list		*list;
 	t_mapinfos	*map;
+	void		*mlx;
+	void		*mlx_win;
 	// void	(*del)(void*) = free;
 
 	if (ac == 2)
@@ -36,6 +38,9 @@ int		main(int ac, char **av)
 		// ft_print_mapinfos(map);
 		// ft_lstclear(&list, del);
 		// ft_print_list(list);
+		mlx = mlx_init();
+		mlx_win = mlx_new_window(mlx, 600, 600, "mlx42");
+		mlx_loop(mlx);
 		close(fd);
 		system("leaks Cub3D");
 		return (0);
