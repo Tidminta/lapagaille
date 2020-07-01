@@ -5,17 +5,43 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/22 14:43:54 by tidminta          #+#    #+#             */
-/*   Updated: 2020/06/22 14:46:34 by tidminta         ###   ########.fr       */
+/*   Created: 2020/06/25 19:01:40 by tidminta          #+#    #+#             */
+/*   Updated: 2020/07/01 19:08:11 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_H
 # define CUB_H
 
-# include "./libft.h"
-# include "./get_next_line.h"
-# include "./libftprintf.h"
+# include "libft.h"
+# include "libftprintf.h"
+# include "mlx.h"
+# define WIN_WIDTH 800
+# define WIN_HEIGHT 800
+# define TILE_SIZE 120
+
+/*
+*************************************
+**			  CUB3D                **
+**			MLX INFOS			   **
+*************************************
+*/
+
+typedef struct		s_img
+{
+	void	*img_ptr;
+	int		*data;
+	int		size_l;
+	int		bpp;
+	int		endian;
+}					t_img;
+
+typedef struct		s_mlx
+{
+	void	*mlx_ptr;
+	void	*win;
+	t_img	*img;
+}					t_mlx;
 
 /*
 *************************************
@@ -23,20 +49,18 @@
 **			MAP INFOS			   **
 *************************************
 */
-
-
-typedef struct	s_res
+typedef struct		s_res
 {
 	size_t	res_x;
 	size_t	res_y;
-}				t_res;
+}					t_res;
 
-typedef struct	s_rgb
+typedef struct		s_rgb
 {
 	size_t	red;
 	size_t	green;
 	size_t	bleue;
-}				t_rgb;
+}					t_rgb;
 
 typedef	struct		s_mapinfos
 {
@@ -50,57 +74,101 @@ typedef	struct		s_mapinfos
 	char	*we;
 	char	*ea;
 	char	*sprite;
+	size_t	line_max;
+	size_t	col_max;
+	size_t	win_w;
+	size_t	win_h;
+	size_t	start_x;
+	size_t	start_y;
 }					t_mapinfos;
 
-
-// typedef struct	s_data
-// {
-// 	void	*img;
-// 	int		*addr;
-// 	int		bits_per_pixel;
-// 	int		line_length;
-// 	int		endian;
-// }				t_data;
-
-// typedef struct s_img
-// {
-// 	void	*mlx_ptr;
-// 	void	*win_ptr;
-// 	t_data	img;
-// }				t_img;
 /*
 *************************************
-**			  CUB3D                **
-**			 PARSING			   **
-*************************************
-**			A REVOIR			   **
-**voidft_freemap(t_mapinfos **map);**
-**  ?? 0 leaks sans ft_listclear   **
+**			  RAYCAST              **
 *************************************
 */
 
-size_t			ft_parseinfos(t_list **list, t_mapinfos **map, int fd);
+typedef struct		s_player
+{
+	double	posx;
+	double	posy;
+	double	dirx;
+	double	diry;
+	double	planex;
+	double	planey;
+	double	time;
+	double	oldtime;
+	double	camerax;
+	double	cameray;
+	double	raydirx;
+	double	raydiry;
+	int		mapx;
+	int		mapy;
+	double	sidedistx;
+	double	sidedisty;
+	double	deltadistx;
+	double	deltadisty;
+	double	perpwalldist;
+	int		stepx;
+	int		stepy;
+	int		hit;
+	int		side;
+	int		x;
+}					t_player;
 
-t_mapinfos		*ft_init_mapinfos(void);
+/*
+*************************************
+**			  FCTS                 **
+*************************************
+*/
 
-t_list			*ft_infos_gnl(int fd, t_list **t_mapinfos);
 
-t_list			*ft_map_gnl(int fd);
 
-void			ft_get_res_x(t_list *infos, t_res *res);
+// void				ft_raycast(t_player *infos_p, );
 
-void			ft_get_res_y(t_list *infos, t_res *res);
+t_mlx				*ft_start_mlx(void);
 
-void			ft_get_path(char *to_find, t_list *lst, char **s);
+/*
+*************************************
+**			  PARSING              **
+*************************************
+*/
 
-void			ft_get_rgb(char *to_find, t_list *lst, t_rgb **rgb);
+int						ft_parse_open(char **av, t_mapinfos **map, t_list **list);
 
-size_t			ft_is_map_char(char c);
+size_t                  ft_parseinfos(t_list **list, t_mapinfos **map, int fd);
 
-size_t			ft_is_map_line(char *s);
+t_mapinfos              *ft_init_mapinfos(void);
 
-char			**ft_lst_to_tab(t_list *lst);
+t_list                  *ft_infos_gnl(int fd, t_list **t_mapinfos);
 
+t_list                  *ft_map_gnl(int fd);
+
+int						ft_get_res_x(t_list *infos, t_res *res);
+
+int						ft_get_res_y(t_list *infos, t_res *res, int index);
+
+void                    ft_get_path(char *to_find, t_list *lst, char **s);
+
+void                    ft_get_rgb(char *to_find, t_list *lst, t_rgb **rgb);
+
+size_t                  ft_is_map_char(char c);
+
+size_t                  ft_is_map_line(char *s);
+
+size_t                  ft_check_rfc(t_mapinfos *map);
+
+char                    **ft_lst_to_tab(t_list *lst, t_mapinfos *map);
+
+void                    ft_print_tab(char **tab);
+
+size_t					ft_check_rfc(t_mapinfos *map);
+
+int						ft_get_start_position(t_mapinfos *map);
+
+int						ft_map_is_closed(char **map);
+
+void					ft_free_split(char **tab);
 
 /*
 *************************************
@@ -108,9 +176,9 @@ char			**ft_lst_to_tab(t_list *lst);
 *************************************
 */
 
-void			ft_print_tab(char **tab);
-void			ft_print_list(t_list *map);
-void			ft_print_mapinfos(t_mapinfos *map);
-
+void				ft_print_tab(char **tab);
+void				ft_print_list(t_list *map);
+void				ft_print_mapinfos(t_mapinfos *map);
+void				map_render(int **data, char **map, t_mapinfos *infos);
 
 #endif

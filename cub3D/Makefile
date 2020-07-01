@@ -6,17 +6,19 @@
 #    By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/04 18:20:36 by tidminta          #+#    #+#              #
-#    Updated: 2020/06/22 14:50:43 by tidminta         ###   ########.fr        #
+#    Updated: 2020/07/01 16:31:54 by tidminta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
+NAME = cub.a
 
 SRC_PATH = ./srcs/
 
 SRC_GNL_PATH = ./srcs_gnl/
 
 SRC_PRINTF_PATH = ./srcs_printf/
+
+SRC_CUB_PATH = ./srcs_cub/
 
 MLX_PATH = ./mlx/
 
@@ -64,7 +66,11 @@ SRC_NAME =		ft_memset.c\
                 ft_tolower.c \
 				ft_parsemap.c\
 				ft_parsemap2.c\
+				ft_check_map.c\
 				ft_tools.c\
+				ft_start_mlx.c\
+				ft_raycast.c\
+				ft_check_map.c\
 
 SRC_GNL_NAME = 	get_next_line.c\
 				get_next_line_utils.c\
@@ -112,7 +118,7 @@ SRC_PRINTF_NAME = ft_init_structs.c\
                 ft_lstdelone.c\
                 ft_lstclear.c\
                 ft_lstadd_front.c\
-                ft_lstadd_back.c \
+                ft_lstadd_back.c\
 
 INCLUDE_SRC_NAME = libft.h
 
@@ -120,23 +126,30 @@ INCLUDE_GNL_NAME = get_next_line.h
 
 INCLUDE_PRINTF_NAME = libftprintf.h
 
+INCLUDE_CUB_NAME = 	cub3d.h
+
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
 OBJ_GNL_NAME = $(SRC_GNL_NAME:.c=.o)
 
 OBJ_PRINTF_NAME = $(SRC_PRINTF_NAME:.c=.o)
 
+OBJ_CUB_NAME = $(SRC_CUB_NAME:.c=.o)
+
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME) \
-				$(SRC_GNL_NAME)) \
-				$(SRC_PRINTF_NAME)) \
+				$(SRC_GNL_NAME) \
+				$(SRC_PRINTF_NAME) \
+				$(SRC_CUB_NAME))
 				
-OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME) $(OBJ_GNL_NAME) $(OBJ_PRINTF_NAME))
+OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME) $(OBJ_GNL_NAME) $(OBJ_PRINTF_NAME) $(OBJ_CUB_NAME))
 
 HEADER_SRC = $(addprefix $(INCLUDE_PATH), $(INCLUDE_SRC_NAME))
 
 HEADER_GNL_SRC = $(addprefix $(INCLUDE_PATH), $(INCLUDE_GNL_NAME))
 
 HEADER_SRC_PRINTF = $(addprefix $(INCLUDE_PATH), $(INCLUDE_SRC_NAME) $(INCLUDE_PRINTF_NAME))
+
+HEADER_SRC_CUB = $(addprefix $(INCLUDE_PATH), $(INCLUDE_SRC_NAME) $(INCLUDE_PRINTF_NAME) $(INCLUDE_CUB_NAME))
 
 INCLUDE = -I$(INCLUDE_PATH)
 
@@ -160,6 +173,10 @@ $(OBJ_PATH)%.o: $(SRC_GNL_PATH)%.c $(HEADER_GNL_SRC)
 	@gcc $(FLAGS) $(INCLUDE) -o $@ -c $<
 
 $(OBJ_PATH)%.o: $(SRC_PRINTF_PATH)%.c $(HEADER_SRC_PRINTF)
+	@mkdir $(OBJ_PATH) 2> /dev/null || true
+	@gcc $(FLAGS) $(INCLUDE) -o $@ -c $<
+	
+$(OBJ_PATH)%.o: $(SRC_CUB_PATH)%.c $(HEADER_SRC_CUB)
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
 	@gcc $(FLAGS) $(INCLUDE) -o $@ -c $<
 
