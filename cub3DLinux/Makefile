@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
+#    By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/04 18:20:36 by tidminta          #+#    #+#              #
-#    Updated: 2020/06/26 19:45:06 by user42           ###   ########.fr        #
+#    Updated: 2020/06/29 11:16:37 by tidminta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,6 +76,7 @@ SRC_GNL_NAME = 	get_next_line.c\
 SRC_CUB_NAME =	ft_parsemap.c\
 				ft_parsemap2.c\
 				ft_tools.c\
+				ft_check_map.c\
 
 INCLUDE_SRC_NAME = libft.h
 
@@ -110,7 +111,7 @@ FLAGS = -Wall
 .PHONY: all, clean, fclean, re, f
 
 all: $(NAME)
-	@gcc $(FLAGS) -lmlx -lXext -lX11 -lbsd -o Cub3D $(MAIN) $(NAME) mlx/libmlx.a
+	@gcc $(FLAGS) -o Cub3D $(MAIN) $(NAME)
 
 $(NAME): $(OBJ)
 	@ar rc $(NAME) $(OBJ)

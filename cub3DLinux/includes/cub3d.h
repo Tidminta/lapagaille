@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 15:52:09 by tidminta          #+#    #+#             */
-/*   Updated: 2020/06/26 19:42:21 by user42           ###   ########.fr       */
+/*   Updated: 2020/06/29 12:05:46 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define CUB3D_H
 
 # include "libft.h"
-# include "../mlx/mlx.h"
-# include "../mlx/mlx_int.h"
+# include "mlx.h"
+// # include "mlx_int.h"
 # include <stdio.h>
 
 /*
@@ -71,9 +71,9 @@ t_list			*ft_infos_gnl(int fd, t_list **t_mapinfos);
 
 t_list			*ft_map_gnl(int fd);
 
-void			ft_get_res_x(t_list *infos, t_res *res);
+int 			ft_get_res_x(t_list *infos, t_res *res);
 
-void			ft_get_res_y(t_list *infos, t_res *res);
+int				ft_get_res_y(t_list *infos, t_res *res, int index);
 
 void			ft_get_path(char *to_find, t_list *lst, char **s);
 
@@ -83,9 +83,13 @@ size_t			ft_is_map_char(char c);
 
 size_t			ft_is_map_line(char *s);
 
+size_t			ft_check_rfc(t_mapinfos *map);
+
 char			**ft_lst_to_tab(t_list *lst);
 
 void			ft_print_tab(char **tab);
+
+
 
 /*
 *************************************

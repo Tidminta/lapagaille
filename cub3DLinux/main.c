@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 18:42:32 by tidminta          #+#    #+#             */
-/*   Updated: 2020/06/26 19:18:48 by user42           ###   ########.fr       */
+/*   Updated: 2020/06/29 12:15:37 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ int		main(int ac, char **av)
 	int			fd;
 	t_list		*list;
 	t_mapinfos	*map;
-	void		*mlx;
-	void		*mlx_win;
+	int		ret;
 	// void	(*del)(void*) = free;
 
 	if (ac == 2)
@@ -30,17 +29,17 @@ int		main(int ac, char **av)
 			printf("Error\nMap open failed\n");
 			return (0);
 		}
-		if (!ft_parseinfos(&list, &map, fd))
+		if ((ret = ft_parseinfos(&list, &map, fd)) <= 0)
 		{
 			printf("Error\nMap parsing failed\n");
 			return (0);
 		}
-		// ft_print_mapinfos(map);
+		ft_print_mapinfos(map);
 		// ft_lstclear(&list, del);
 		// ft_print_list(list);
-		mlx = mlx_init();
-		mlx_win = mlx_new_window(mlx, 600, 600, "mlx42");
-		mlx_loop(mlx);
+		// mlx = mlx_init();
+		// mlx_win = mlx_new_window(mlx, 600, 600, "mlx42");
+		// mlx_loop(mlx);
 		close(fd);
 		system("leaks Cub3D");
 		return (0);

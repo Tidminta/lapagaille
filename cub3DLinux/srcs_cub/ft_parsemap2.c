@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parsemap2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 13:00:34 by tidminta          #+#    #+#             */
-/*   Updated: 2020/06/26 16:55:54 by user42           ###   ########.fr       */
+/*   Updated: 2020/06/29 12:46:18 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void		ft_get_res_x(t_list *infos, t_res *res)
+int		ft_get_res_x(t_list *infos, t_res *res)
 {
 	char		*tmp;
-	char		*tmp2;
 	size_t		i;
 	size_t		j;
 
@@ -28,46 +27,45 @@ void		ft_get_res_x(t_list *infos, t_res *res)
 			;
 		if (tmp[i] == 'R')
 		{
-			while ((tmp[++i] < '0' || tmp[i] > '9'))
-				;
+			while (tmp[++i] && (tmp[i] < '0' || tmp[i] > '9'))
+			{
+				if (tmp[i] == '-')
+					return (-1);
+			}
 			while ((tmp[i + (++j)] >= '0' && tmp[i + j] <= '9'))
-				;
-			tmp2 = ft_substr(tmp, i, j);
-			res->res_x = ft_atoi(tmp2);
-			free(tmp2);
-			return ;
+				res->res_x = (res->res_x * 10) + (tmp[i + j] - 48);
+			res->res_x = (res->res_x <= 0) ? -1 : res->res_x;
+			return (i + j);
 		}
 		infos = infos->next;
 	}
+	return (0);
 }
 
-void		ft_get_res_y(t_list *infos, t_res *res)
+int			ft_get_res_y(t_list *infos, t_res *res, int index)
 {
-	size_t	len;
 	size_t	i;
 	char	*tmp;
-	char	*tmp2;
 
-	i = 0;
-	len = 0;
 	while (infos->next)
 	{
+		i = -1;
 		tmp = infos->content;
-		len = ft_strlen(tmp);
+		while (tmp[++i] != 'R')
+			;
 		if (tmp[i] == 'R')
 		{
-			i = ft_strlen(tmp);
-			while (tmp[i--] && (tmp[i] == ' ' || tmp[i] != '\t'))
-				;
-			while (tmp[i--] && (tmp[i] >= '0' && tmp[i] <= '9'))
-				;
-			tmp2 = ft_substr(tmp, i + 1, ft_strlen(tmp) - i);
-			res->res_y = ft_atoi(tmp2);
-			free(tmp2);
-			return ;
+			i = index - 1;
+			while (tmp[i++] && (tmp[i] < '0' || tmp[i] > '9'))
+				if (tmp[i] == '-')
+					return (-1);
+			while (tmp[i] && (tmp[i] >= '0' && tmp[i] <= '9'))
+				res->res_y= (res->res_y * 10) + (tmp[i++] - 48);
+			return (res->res_y);
 		}
 		infos = infos->next;
 	}
+	return (0);
 }
 
 t_list		*ft_infos_gnl(int fd, t_list **mapinfos)
@@ -125,13 +123,17 @@ size_t		ft_parseinfos(t_list **list, t_mapinfos **map, int fd)
 {
 	t_list		*lst_tmp;
 	t_mapinfos	*map_tmp;
+	int			ret;
 
 	*map = ft_init_mapinfos();
 	map_tmp = *map;
 	*list = ft_infos_gnl(fd, &map_tmp->map);
 	lst_tmp = *list;
-	ft_get_res_x(lst_tmp, map_tmp->resolution);
-	ft_get_res_y(lst_tmp, map_tmp->resolution);
+	ret = 0;
+	if ((ret = ft_get_res_x(lst_tmp, map_tmp->resolution)) <= 0)
+		return (-1);
+	if ((ret = ft_get_res_y(lst_tmp, map_tmp->resolution, ret)) <= 0)
+		return (-1);
 	ft_get_path("NO", lst_tmp, &map_tmp->no);
 	ft_get_path("SO", lst_tmp, &map_tmp->so);
 	ft_get_path("WE", lst_tmp, &map_tmp->we);
@@ -140,6 +142,8 @@ size_t		ft_parseinfos(t_list **list, t_mapinfos **map, int fd)
 	ft_get_rgb("F ", lst_tmp, &map_tmp->floor);
 	ft_get_rgb("C ", lst_tmp, &map_tmp->ceil);
 	map_tmp->map_tab = ft_lst_to_tab(map_tmp->map);
-	ft_print_tab(map_tmp->map_tab);
+	// ft_print_tab(map_tmp->map_tab);
+	if (!(ft_check_rfc(map_tmp)))
+		return (0);
 	return (1);
 }
