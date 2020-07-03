@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 16:57:50 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/01 19:10:41 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/03 14:39:28 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_print_mapinfos(t_mapinfos *map)
 {
-	ft_printf("************ MAP INFOS ************\n");
+	printf("************ MAP INFOS ************\n");
 	printf("[line max][%zu]\n", map->line_max);
 	printf("[res x][%zu]", map->resolution->res_x);
 	printf("[res y][%zu]\n", map->resolution->res_y);
@@ -30,7 +30,39 @@ void	ft_print_mapinfos(t_mapinfos *map)
 	printf("[START POSITION][%zu][%zu]\n", map->start_y, map->start_x);
 	// ft_print_list(map->map);
 	ft_print_tab(map->map_tab);
-	ft_printf("************* END *************\n");
+	printf("[WIN H][%zu]\n", map->win_h);
+	printf("[WIN W][%zu]\n", map->win_w);
+	printf("************* END *************\n");
+}
+
+void		ft_print_playerinfos(t_player *player)
+{
+	printf("************ PLAYER INFOS ************\n");
+	printf("[posx][%lf]\n", player->posy);
+	printf("[posy][%lf]\n", player->posy);
+	printf("[dirx][%lf]\n", player->dirx);
+	printf("[diry][%lf]\n", player->diry);
+	printf("[planex][%lf]\n", player->planx);
+	printf("[planey][%lf]\n", player->plany);
+	printf("[time][%lf]\n", player->time);
+	printf("[oldtime][%lf]\n", player->oldtime);
+	printf("[camerax][%lf]\n", player->camx);
+	printf("[cameray][%lf]\n", player->camy);
+	printf("[raydirx][%lf]\n", player->raydx);
+	printf("[raydiry][%lf]\n", player->raydy);
+	printf("[sidedistx][%lf]\n", player->sidedx);
+	printf("[sidedisty][%lf]\n", player->sidedy);
+	printf("[deltadistx][%lf]\n", player->deltadx);
+	printf("[deltadisty][%lf]\n", player->deltady);
+	printf("[perpwalldist][%lf]\n", player->perpwd);
+	printf("[mapx][%d]\n", player->mapx);
+	printf("[mapy][%d]\n", player->mapy);
+	printf("[stepx][%d]\n", player->stepx);
+	printf("[stepy][%d]\n", player->stepy);
+	printf("[hit][%d]\n", player->hit);
+	printf("[side][%d]\n", player->side);
+	printf("[X][%d]\n", player->x);
+	printf("************* END *************\n");
 }
 
 void		ft_print_list(t_list *map)

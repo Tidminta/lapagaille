@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 13:38:44 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/01 19:27:25 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/02 15:14:26 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,4 @@ int				ft_get_start_position(t_mapinfos *map)
 		}
 	}
 	return (0);
-}
-
-int			ft_map_is_closed(char **map)
-{
-	ft_check_left(map);
-	return (1);
 }

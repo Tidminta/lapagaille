@@ -6,13 +6,14 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 19:01:40 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/01 19:08:11 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/03 15:47:18 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_H
 # define CUB_H
 
+# include <math.h>
 # include "libft.h"
 # include "libftprintf.h"
 # include "mlx.h"
@@ -94,26 +95,26 @@ typedef struct		s_player
 	double	posy;
 	double	dirx;
 	double	diry;
-	double	planex;
-	double	planey;
+	double	planx;
+	double	plany;
 	double	time;
 	double	oldtime;
-	double	camerax;
-	double	cameray;
-	double	raydirx;
-	double	raydiry;
+	double	camx;
+	double	camy;
+	double	raydx;
+	double	raydy;
+	double	sidedx;
+	double	sidedy;
+	double	deltadx;
+	double	deltady;
+	double	perpwd;
 	int		mapx;
 	int		mapy;
-	double	sidedistx;
-	double	sidedisty;
-	double	deltadistx;
-	double	deltadisty;
-	double	perpwalldist;
 	int		stepx;
 	int		stepy;
+	int		x;
 	int		hit;
 	int		side;
-	int		x;
 }					t_player;
 
 /*
@@ -122,15 +123,17 @@ typedef struct		s_player
 *************************************
 */
 
-
-
-// void				ft_raycast(t_player *infos_p, );
+int					ft_raycast(t_mapinfos **map);
 
 t_mlx				*ft_start_mlx(void);
+
+t_player			*ft_playerinit(void);
+
 
 /*
 *************************************
 **			  PARSING              **
+** 		CHECKER SI MAP FERMÉE 	   **
 *************************************
 */
 
@@ -180,5 +183,6 @@ void				ft_print_tab(char **tab);
 void				ft_print_list(t_list *map);
 void				ft_print_mapinfos(t_mapinfos *map);
 void				map_render(int **data, char **map, t_mapinfos *infos);
+void				ft_print_playerinfos(t_player *player);
 
 #endif

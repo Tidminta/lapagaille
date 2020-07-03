@@ -6,7 +6,7 @@
 #    By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/04 18:20:36 by tidminta          #+#    #+#              #
-#    Updated: 2020/07/01 16:31:54 by tidminta         ###   ########.fr        #
+#    Updated: 2020/07/02 15:19:13 by tidminta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,7 @@ SRC_NAME =		ft_memset.c\
 				ft_start_mlx.c\
 				ft_raycast.c\
 				ft_check_map.c\
+				ft_raycast.c\
 
 SRC_GNL_NAME = 	get_next_line.c\
 				get_next_line_utils.c\
