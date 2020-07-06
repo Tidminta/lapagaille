@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 16:57:50 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/03 14:39:28 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/06 14:39:34 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,12 @@ void	ft_print_mapinfos(t_mapinfos *map)
 	printf("[WE][%s]\n", map->we);
 	printf("[EA][%s]\n", map->ea);
 	printf("[S][%s]\n", map->sprite);
-	printf("[F][R][%zu][G][%zu][B][%zu]\n",
-		map->floor->red, map->floor->green, map->floor->bleue);
-	printf("[C][R][%zu][G][%zu][B][%zu]\n",
-		map->ceil->red, map->ceil->green, map->ceil->bleue);
+	// printf("[F][R][%zu][G][%zu][B][%zu]\n",
+		// map->floor->red, map->floor->green, map->floor->bleue);
+	// printf("[C][R][%zu][G][%zu][B][%zu]\n",
+		// map->ceil->red, map->ceil->green, map->ceil->bleue);
+	printf("[FLOOR RGB][%d]\n", map->floor_rgb);
+	printf("[CEIL  RGB][%d]\n", map->ceil_rgb);
 	printf("[START POSITION][%zu][%zu]\n", map->start_y, map->start_x);
 	// ft_print_list(map->map);
 	ft_print_tab(map->map_tab);
@@ -37,7 +39,7 @@ void	ft_print_mapinfos(t_mapinfos *map)
 
 void		ft_print_playerinfos(t_player *player)
 {
-	printf("************ PLAYER INFOS ************\n");
+	printf("************ RAY INFOS ************\n");
 	printf("[posx][%lf]\n", player->posy);
 	printf("[posy][%lf]\n", player->posy);
 	printf("[dirx][%lf]\n", player->dirx);
@@ -61,6 +63,9 @@ void		ft_print_playerinfos(t_player *player)
 	printf("[stepy][%d]\n", player->stepy);
 	printf("[hit][%d]\n", player->hit);
 	printf("[side][%d]\n", player->side);
+	printf("[lineheight][%d]\n", player->lineheight);
+	printf("[drawstart][%d]\n", player->drawstart);
+	printf("[drawend][%d]\n", player->drawend);
 	printf("[X][%d]\n", player->x);
 	printf("************* END *************\n");
 }

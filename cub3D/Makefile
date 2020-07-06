@@ -6,7 +6,7 @@
 #    By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/04 18:20:36 by tidminta          #+#    #+#              #
-#    Updated: 2020/07/02 15:19:13 by tidminta         ###   ########.fr        #
+#    Updated: 2020/07/06 14:08:02 by tidminta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,6 +72,7 @@ SRC_NAME =		ft_memset.c\
 				ft_raycast.c\
 				ft_check_map.c\
 				ft_raycast.c\
+				ft_raycast2.c\
 
 SRC_GNL_NAME = 	get_next_line.c\
 				get_next_line_utils.c\
@@ -191,4 +192,7 @@ fclean: clean
 re: fclean all
 
 f: re
-	./Cub3D maps/test.cub
+	./Cub3D maps/test2.cub
+
+f2: re
+	./Cub3D maps/mini.cub

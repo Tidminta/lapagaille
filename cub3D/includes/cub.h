@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 19:01:40 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/03 15:47:18 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/06 16:37:18 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 # include "libft.h"
 # include "libftprintf.h"
 # include "mlx.h"
-# define WIN_WIDTH 800
-# define WIN_HEIGHT 800
+
+# define WIN_WIDTH 300
+# define WIN_HEIGHT 300
 # define TILE_SIZE 120
 
 /*
@@ -56,31 +57,25 @@ typedef struct		s_res
 	size_t	res_y;
 }					t_res;
 
-typedef struct		s_rgb
-{
-	size_t	red;
-	size_t	green;
-	size_t	bleue;
-}					t_rgb;
-
 typedef	struct		s_mapinfos
 {
 	t_res	*resolution;
-	t_rgb	*floor;
-	t_rgb	*ceil;
 	t_list	*map;
-	char	**map_tab;
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
-	char	*sprite;
 	size_t	line_max;
 	size_t	col_max;
 	size_t	win_w;
 	size_t	win_h;
 	size_t	start_x;
 	size_t	start_y;
+	t_mlx	*mlx;
+	int		floor_rgb;
+	int		ceil_rgb;
+	char	**map_tab;
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	char	*sprite;
 }					t_mapinfos;
 
 /*
@@ -115,6 +110,9 @@ typedef struct		s_player
 	int		x;
 	int		hit;
 	int		side;
+	int		lineheight;
+	int		drawstart;
+	int		drawend;
 }					t_player;
 
 /*
@@ -123,17 +121,22 @@ typedef struct		s_player
 *************************************
 */
 
-int					ft_raycast(t_mapinfos **map);
+int					ft_raycast(t_mapinfos **map, t_mlx **mlx);
 
 t_mlx				*ft_start_mlx(void);
 
 t_player			*ft_playerinit(void);
 
+void				ft_draw_wall(t_mapinfos *map, t_player *player);
+
+int					ft_create_trgb(int t, int r, int g, int b);
 
 /*
 *************************************
 **			  PARSING              **
 ** 		CHECKER SI MAP FERMÉE 	   **
+**		CHECK SI NSEW PRESENT      **
+**		FOIS DANS LA MAP		   **
 *************************************
 */
 
@@ -153,7 +156,7 @@ int						ft_get_res_y(t_list *infos, t_res *res, int index);
 
 void                    ft_get_path(char *to_find, t_list *lst, char **s);
 
-void                    ft_get_rgb(char *to_find, t_list *lst, t_rgb **rgb);
+void                    ft_get_rgb(char *to_find, t_list *lst, int *rgb);
 
 size_t                  ft_is_map_char(char c);
 

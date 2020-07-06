@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 14:21:41 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/03 15:48:41 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/06 15:46:25 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,6 @@ t_player	*ft_playerinit(void)
 	player->raydy = 0;
 	player->sidedx = 0;
 	ft_init_player2(&player);
-	ft_print_playerinfos(player);
+	// ft_print_playerinfos(player);
 	return (player);
 }

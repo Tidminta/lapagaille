@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 13:00:34 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/02 16:17:58 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/06 15:49:18 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,12 +135,13 @@ size_t				ft_parseinfos(t_list **list, t_mapinfos **map, int fd)
 	ft_get_path("WE", lst_tmp, &map_tmp->we);
 	ft_get_path("EA", lst_tmp, &map_tmp->ea);
 	ft_get_path("S ", lst_tmp, &map_tmp->sprite);
-	ft_get_rgb("F ", lst_tmp, &map_tmp->floor);
-	ft_get_rgb("C ", lst_tmp, &map_tmp->ceil);
+	ft_get_rgb("F ", lst_tmp, &map_tmp->floor_rgb);
+	ft_get_rgb("C ", lst_tmp, &map_tmp->ceil_rgb);
 	map_tmp->map_tab = ft_lst_to_tab(map_tmp->map, map_tmp);
-	if (!(ft_get_start_position(map_tmp)) || !(ft_check_rfc(map_tmp)))
+	if (!(ft_get_start_position(map_tmp)))
 		return (-1);
 	map_tmp->win_h = WIN_HEIGHT;
 	map_tmp->win_w = WIN_WIDTH;
+	// ft_print_mapinfos(*map);
 	return (1);
 }

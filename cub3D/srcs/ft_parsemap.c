@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 13:00:34 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/01 19:28:05 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/06 14:41:39 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ t_mapinfos	*ft_init_mapinfos(void)
 	map->resolution = (t_res*)malloc(sizeof(t_res));
 	map->resolution->res_x = 0;
 	map->resolution->res_y = 0;
-	map->floor = (t_rgb*)malloc(sizeof(t_rgb));
-	map->ceil = (t_rgb*)malloc(sizeof(t_rgb));
 	map->map = ft_lstnew("");
 	map->map_tab = NULL;
 	map->no = NULL;
@@ -36,13 +34,11 @@ t_mapinfos	*ft_init_mapinfos(void)
 	return (map);
 }
 
-void			ft_get_rgb(char *to_find, t_list *lst, t_rgb **rgb)
+void			ft_get_rgb(char *to_find, t_list *lst, int *rgb)
 {
 	char	**tab;
 	char	*str;
-	t_rgb	*tmp;
 
-	tmp = *rgb;
 	while (lst->next || lst->content)
 	{
 		str = lst->content;
@@ -53,9 +49,7 @@ void			ft_get_rgb(char *to_find, t_list *lst, t_rgb **rgb)
 			if (ft_isdigit(*str))
 			{
 				tab = ft_split(str, ',');
-				tmp->red = ft_atoi(tab[0]);
-				tmp->green = ft_atoi(tab[1]);
-				tmp->bleue = ft_atoi(tab[2]);
+				*rgb = ft_create_trgb(0, ft_atoi(tab[0]), ft_atoi(tab[1]), ft_atoi(tab[2]));
 				ft_free_split(tab);
 			}
 		}

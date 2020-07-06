@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 19:10:15 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/03 15:50:55 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/06 16:13:41 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 **	DO FONCTION QUI SET DIRX/Y     **
 **	EN FONCTION DE N,S,E OU W      **
 **	RECAP FINIR DDA				   **
+**	14443600					   **	
 *************************************
 */
 
@@ -81,6 +82,8 @@ static	void		ft_ray_dda(t_mapinfos **map_tmp, t_player **player_tmp)
 	map = *map_tmp;
 	player = *player_tmp;
 	map2d = map->map_tab;
+	player->hit = 0;
+	player->side = 0;
 	while (!player->hit)
 	{
 		if (player->sidedx < player->sidedy)
@@ -95,24 +98,44 @@ static	void		ft_ray_dda(t_mapinfos **map_tmp, t_player **player_tmp)
 			player->mapy += player->stepy;
 			player->side = 1;
 		}
-		if (map2d[player->mapx][player->mapy] == 1)
+		if (map2d[player->mapy][player->mapx] == '1')
+		{
 			player->hit = 1;
+		}
 	}
-	if (!player->side)
+	if (player->side == 0)
+	{
 		player->perpwd = (((player->mapx - player->posx +
 			(1 - player->stepx)) / 2) / player->raydx);
+	}
 	else
 		player->perpwd = (((player->mapy - player->posy +
 			(1 - player->stepy)) / 2) / player->raydy);
 }
 
-int				ft_raycast(t_mapinfos **map)
+static	void			ft_get_draw_height(t_mapinfos **map_tmp, t_player **player_tmp)
+{
+	t_mapinfos		*map;
+	t_player		*player;
+
+	map = *map_tmp;
+	player = *player_tmp;
+	player->lineheight = ((int)map->win_h / player->perpwd);
+	player->drawstart = (- player->lineheight / 2) + (map->win_h / 2);
+	player->drawstart = (player->drawstart < 0) ? 0 : player->drawstart;
+	player->drawend = (player->lineheight / 2) + (map->win_h / 2);
+	player->drawend = (player->drawend >= (int)map->win_h) ? (map->win_h - 1): player->drawend;
+	ft_draw_wall(map, player);
+}
+
+int				ft_raycast(t_mapinfos **map, t_mlx	**mlx)
 {
 	t_mapinfos	*tmp;
 	t_player	*player;
 
 	tmp = *map;
 	player = ft_playerinit();
+	tmp->mlx = *mlx;
 	if (!player)
 		return (-1);
 	player->posx = tmp->start_x;
@@ -127,8 +150,10 @@ int				ft_raycast(t_mapinfos **map)
 		ft_ray_pos_dir(&tmp, &player);
 		ft_set_sidedist(&tmp, &player);
 		ft_ray_dda(&tmp, &player);
-		player->x += 1;
+		ft_get_draw_height(&tmp, &player);
 		ft_print_playerinfos(player);
+		player->x += 1;
 	}
+	mlx_put_image_to_window(tmp->mlx->mlx_ptr, tmp->mlx->win, tmp->mlx->img->img_ptr, 0, 0);
 	return (1);
 }

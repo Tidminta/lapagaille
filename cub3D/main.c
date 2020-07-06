@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 18:42:32 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/03 15:43:34 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/06 16:16:53 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,10 @@ int				main(int ac, char **av)
 		if ((fd = ft_parse_open(av, &map, &list)) < 0)
 			return (0);
 		mlx = ft_start_mlx();
-		ft_raycast(&map);
+		ft_raycast(&map, &mlx);
 		mlx_loop(mlx->mlx_ptr);
-		// mlx_put_image_to_window(mlx->mlx_ptr, mlx->win, mlx->img->img_ptr, 0, 0);
-		// free(mlx);
-		// free(mlx->img);
 		close(fd);
-		system("leaks Cub3D");
+		// system("leaks Cub3D");
 		return (0);
 	}
 	ft_printf("Error\nInvalide number of arguments!\n");
