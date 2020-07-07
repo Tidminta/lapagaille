@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 14:21:41 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/06 15:46:25 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/07 13:38:07 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,15 @@ int			ft_parse_open(char **av, t_mapinfos **map, t_list **list)
 	return (fd);
 }
 
-t_mlx		*ft_start_mlx(void)
+t_mlx		*ft_start_mlx(t_mapinfos *map)
 {
 	t_mlx	*mlx;
 
 	mlx = (t_mlx*)malloc(sizeof(t_mlx));
 	mlx->img = (t_img*)malloc(sizeof(t_img));
 	mlx->mlx_ptr = mlx_init();
-	mlx->win = mlx_new_window(mlx->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "mlx42");
-	mlx->img->img_ptr = mlx_new_image(mlx->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
+	mlx->win = mlx_new_window(mlx->mlx_ptr, map->resolution->res_x, map->resolution->res_y, "mlx42");
+	mlx->img->img_ptr = mlx_new_image(mlx->mlx_ptr, map->resolution->res_x, map->resolution->res_y);
 	mlx->img->data = (int *)mlx_get_data_addr(mlx->img->img_ptr, &mlx->img->bpp,
 			&mlx->img->size_l, &mlx->img->endian);
 	return (mlx);
