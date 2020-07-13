@@ -1,0 +1,3 @@
+raycasting done (do some checks -> not working with the test.c map's)
+
+hundle keys pressings (redraw images) 
