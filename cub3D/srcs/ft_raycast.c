@@ -6,22 +6,22 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 19:10:15 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/10 20:41:56 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/13 20:07:51 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
 
 /*
-*************************************
-**			  FCTS                 **
-**	(DIRX/Y)?? |                   **
-**	DO FONCTION QUI SET DIRX/Y     **
-**	EN FONCTION DE N,S,E OU W      **
-**	RECAP : RAYCAST REFACT		   **
-** 								   **
-*************************************
-*/
+ *************************************
+ **			  FCTS                 **
+ **	(DIRX/Y)?? |                   **
+ **	DO FONCTION QUI SET DIRX/Y     **
+ **	EN FONCTION DE N,S,E OU W      **
+ **	RECAP : RAYCAST REFACT		   **
+ ** 							   **
+ *************************************
+ */
 
 int				ft_raycast(t_mapinfos **map_tmp, t_mlx	**mlx)
 {
@@ -45,6 +45,12 @@ int				ft_raycast(t_mapinfos **map_tmp, t_mlx	**mlx)
 	p->posy = map->start_y;
 	p->dirx = -1;
 	p->plany = 0.66;
+/*
+*************************************
+**			  RAYCAST LOOP         **
+**				 START			   **
+*************************************
+*/
 	while (p->x < (int)map->resolution->res_x)
 	{
 		p->hit = 0;
@@ -57,6 +63,11 @@ int				ft_raycast(t_mapinfos **map_tmp, t_mlx	**mlx)
 		p->deltady = fabs(1 / p->raydy);
 		p->deltadx = (p->raydy == 0) ? 0 : ((p->raydx == 0) ? 1 : fabs(1 / p->raydx));
 		p->deltady = (p->raydx == 0) ? 0 : ((p->raydy == 0) ? 1 : fabs(1 / p->raydy));
+/*
+*************************************
+**			  STEP & SIDEDIST      **
+*************************************
+*/
 		if (p->raydx < 0)
 		{
 			p->stepx = -1;
@@ -77,6 +88,12 @@ int				ft_raycast(t_mapinfos **map_tmp, t_mlx	**mlx)
 			p->stepy = 1;
 			p->sidedy = (p->mapy + 1.0 - p->posy) * p->deltady;
 		}
+/*
+*************************************
+**			  D D A                **
+**		PERPWALLDIST CALCULS       **
+*************************************
+*/
 		while (p->hit == 0)
 		{
 			if (p->sidedx < p->sidedy)
@@ -108,42 +125,22 @@ int				ft_raycast(t_mapinfos **map_tmp, t_mlx	**mlx)
 		p->drawend = p->lineheight / 2 + map->resolution->res_y / 2;
 		if (p->drawend >= (int)map->resolution->res_y)
 			p->drawend = map->resolution->res_y - 1;
-		ft_print_playerinfos(p);
+		// ft_print_playerinfos(p);
 /*
 *************************************
 **			  DRAWING              **
 *************************************
 */
-	size_t y;
-	int *tab;
-
-	y = 0;
-	tab = map->mlx->img->data;
-	// while (y < p->drawstart)
-	// {
-	// 	tab[ y * map->resolution->res_x * p->x] = ft_create_trgb(0, 0, 0, 0);
-	// }
-	y = p->drawstart;
-	while((int)y < p->drawend - 1)
-	{
-		tab[ y * map->resolution->res_x * p->x] = 0x808080;
-		y++;
-		printf("print wall\n");
-	}
-	while (y < map->resolution->res_y - 1)
-	{
-		tab[ y * map->resolution->res_x * p->x] = 0x77b5fe;
-		y++;
-		printf("print ceil\n");
-	}
-	
-/*
-*************************************
-**			  END             		**
-*************************************
-*/
+		ft_draw_all(map, p);
+		mlx_put_image_to_window(map->mlx->mlx_ptr, map->mlx->win, map->mlx->img->img_ptr, 0, 0);
 		p->x += 1;
 	}
+/*
+*************************************
+**			  FPS                  **
+*************************************
+*/
+	ft_clr(map, p);
 	mlx_put_image_to_window(map->mlx->mlx_ptr, map->mlx->win, map->mlx->img->img_ptr, 0, 0);
 	mlx_loop(map->mlx->mlx_ptr);
 	return (1);

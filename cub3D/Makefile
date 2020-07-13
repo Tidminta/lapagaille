@@ -6,7 +6,7 @@
 #    By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/04 18:20:36 by tidminta          #+#    #+#              #
-#    Updated: 2020/07/06 14:08:02 by tidminta         ###   ########.fr        #
+#    Updated: 2020/07/13 19:28:26 by tidminta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -193,6 +193,3 @@ re: fclean all
 
 f: re
 	./Cub3D maps/test2.cub
-
-f2: re
-	./Cub3D maps/mini.cub

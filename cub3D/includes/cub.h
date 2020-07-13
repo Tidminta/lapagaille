@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 19:01:40 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/07 13:53:59 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/13 20:01:05 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 # define CUB_H
 
 # include <math.h>
+# include <time.h>
 # include "libft.h"
 # include "libftprintf.h"
 # include "mlx.h"
 
 # define WIN_WIDTH 800
 # define WIN_HEIGHT 800
-# define TILE_SIZE 120
+// # define TILE_SIZE 30
 
 /*
 *************************************
@@ -121,15 +122,17 @@ typedef struct		s_player
 *************************************
 */
 
-int					ft_raycast(t_mapinfos **map, t_mlx **mlx);
+int					ft_raycast(t_mapinfos **map_tmp, t_mlx **mlx_tmp);
 
 t_mlx				*ft_start_mlx(t_mapinfos *map);
 
 t_player			*ft_playerinit(void);
 
-void				ft_draw_wall(t_mapinfos **map_tmp, t_player *player);
+void				ft_draw_all(t_mapinfos *map_tmp, t_player *player);
 
 int					ft_create_trgb(int t, int r, int g, int b);
+
+void				ft_clr(t_mapinfos *map, t_player *p);
 
 /*
 *************************************
