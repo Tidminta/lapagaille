@@ -1,5 +1,12 @@
+********************************************
+**				TO DO					  **
+********************************************
 raycasting done (do some checks -> not working well with the test.c map's)
 
 norme mostly done (ft_raycast l112)
 
+
+********************************************
+**				IN PROCESS			      **
+********************************************
 hundle keys pressings (redraw images) -> in process 
