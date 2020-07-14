@@ -6,7 +6,7 @@
 #    By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/04 18:20:36 by tidminta          #+#    #+#              #
-#    Updated: 2020/07/13 19:28:26 by tidminta         ###   ########.fr        #
+#    Updated: 2020/07/14 15:38:56 by tidminta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -157,7 +157,7 @@ INCLUDE = -I$(INCLUDE_PATH)
 
 FLAGS = -Wall -Werror -Wextra
 
-.PHONY: all, clean, fclean, re, f
+.PHONY: all, clean, fclean, re, f, f2
 
 all: $(NAME)
 	@gcc $(FLAGS) -Imlx -Lmlx -lmlx -framework OpenGL -framework Appkit -o Cub3D $(MAIN) $(NAME)
@@ -192,4 +192,7 @@ fclean: clean
 re: fclean all
 
 f: re
+	./Cub3D maps/test.cub
+
+f2: re
 	./Cub3D maps/test2.cub

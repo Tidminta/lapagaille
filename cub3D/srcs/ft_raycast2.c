@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 14:08:59 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/13 20:09:07 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/14 17:40:12 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,19 @@ void		ft_clr(t_mapinfos *map, t_player *p)
 	}
 }
 
-void				ft_draw_all(t_mapinfos *map, t_player *p)
+void				ft_draw_all(t_mapinfos *map, t_player **player)
 {
-	int y;
+	t_player	*p;
+	int			y;
 
+	p = *player;
+	p->lineheight = (int)(map->resolution->res_y / p->perpwd);
+	p->drawstart = -p->lineheight / 2 + map->resolution->res_y / 2;
+	if (p->drawstart < 0)
+		p->drawstart = 0;
+	p->drawend = p->lineheight / 2 + map->resolution->res_y / 2;
+	if (p->drawend >= (int)map->resolution->res_y)
+		p->drawend = map->resolution->res_y - 1;
 	y = p->drawstart;
 	if (p->x < (int)map->resolution->res_x - 1)
 	{

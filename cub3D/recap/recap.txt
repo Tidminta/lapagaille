@@ -1,3 +1,5 @@
-raycasting done (do some checks -> not working with the test.c map's)
+raycasting done (do some checks -> not working well with the test.c map's)
+
+norme mostly done (ft_raycast l112)
 
 hundle keys pressings (redraw images) 

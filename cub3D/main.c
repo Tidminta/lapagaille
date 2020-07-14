@@ -6,12 +6,12 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 18:42:32 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/13 19:42:58 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/14 16:47:57 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub.h"
-#include "mlx/mlx.h"
+// #include "mlx/mlx.h"
 
 /*
 *************************************
@@ -42,3 +42,4 @@ int				main(int ac, char **av)
 	ft_printf("Error\nInvalide number of arguments!\n");
 	return (0);
 }
+

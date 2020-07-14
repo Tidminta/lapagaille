@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 19:01:40 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/13 20:01:05 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/14 17:19:07 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ t_mlx				*ft_start_mlx(t_mapinfos *map);
 
 t_player			*ft_playerinit(void);
 
-void				ft_draw_all(t_mapinfos *map_tmp, t_player *player);
+void				ft_draw_all(t_mapinfos *map_tmp, t_player **player);
 
 int					ft_create_trgb(int t, int r, int g, int b);
 
