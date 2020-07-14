@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 19:01:40 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/14 17:19:07 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/14 19:24:06 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 
 typedef struct		s_img
 {
-	void	*img_ptr;
+	void	*img_p;
 	int		*data;
 	int		size_l;
 	int		bpp;
@@ -41,7 +41,7 @@ typedef struct		s_img
 
 typedef struct		s_mlx
 {
-	void	*mlx_ptr;
+	void	*mlx_p;
 	void	*win;
 	t_img	*img;
 }					t_mlx;
@@ -54,13 +54,13 @@ typedef struct		s_mlx
 */
 typedef struct		s_res
 {
-	size_t	res_x;
-	size_t	res_y;
+	size_t	x;
+	size_t	y;
 }					t_res;
 
 typedef	struct		s_mapinfos
 {
-	t_res	*resolution;
+	t_res	*res;
 	t_list	*map;
 	size_t	line_max;
 	size_t	col_max;
@@ -128,11 +128,12 @@ t_mlx				*ft_start_mlx(t_mapinfos *map);
 
 t_player			*ft_playerinit(void);
 
-void				ft_draw_all(t_mapinfos *map_tmp, t_player **player);
-
 int					ft_create_trgb(int t, int r, int g, int b);
 
 void				ft_clr(t_mapinfos *map, t_player *p);
+
+int					ft_deal_key(int key, t_mlx *mlx);
+
 
 /*
 *************************************

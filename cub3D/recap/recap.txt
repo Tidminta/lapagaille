@@ -2,4 +2,4 @@ raycasting done (do some checks -> not working well with the test.c map's)
 
 norme mostly done (ft_raycast l112)
 
-hundle keys pressings (redraw images) 
+hundle keys pressings (redraw images) -> in process 

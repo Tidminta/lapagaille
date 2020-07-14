@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 16:57:50 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/10 19:14:54 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/14 19:25:53 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	ft_print_mapinfos(t_mapinfos *map)
 {
 	printf("************ MAP INFOS ************\n");
 	printf("[line max][%zu]\n", map->line_max);
-	printf("[res x][%zu]", map->resolution->res_x);
-	printf("[res y][%zu]\n", map->resolution->res_y);
+	printf("[res x][%zu]", map->res->x);
+	printf("[res y][%zu]\n", map->res->y);
 	printf("[NO][%s]\n", map->no);
 	printf("[SO][%s]\n", map->so);
 	printf("[WE][%s]\n", map->we);

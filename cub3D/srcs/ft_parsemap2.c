@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 13:00:34 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/07 17:21:16 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/14 19:12:01 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int					ft_get_res_x(t_list *infos, t_res *res)
 				if (tmp[i] == '-')
 					return (-1);
 			while ((tmp[i + (++j)] >= '0' && tmp[i + j] <= '9'))
-				res->res_x = (res->res_x * 10) + (tmp[i + j] - 48);
-			res->res_x = (res->res_x <= 0) ? -1 : res->res_x;
+				res->x = (res->x * 10) + (tmp[i + j] - 48);
+			res->x = (res->x <= 0) ? -1 : res->x;
 			return (i + j);
 		}
 		infos = infos->next;
@@ -40,7 +40,7 @@ int					ft_get_res_x(t_list *infos, t_res *res)
 	return (0);
 }
 
-int				ft_get_res_y(t_list *infos, t_res *res, int index)
+int					ft_get_res_y(t_list *infos, t_res *res, int index)
 {
 	size_t	i;
 	char	*tmp;
@@ -58,15 +58,15 @@ int				ft_get_res_y(t_list *infos, t_res *res, int index)
 				if (tmp[i] == '-')
 					return (-1);
 			while (tmp[i] && (tmp[i] >= '0' && tmp[i] <= '9'))
-				res->res_y = (res->res_y * 10) + (tmp[i++] - 48);
-			return (res->res_y);
+				res->y = (res->y * 10) + (tmp[i++] - 48);
+			return (res->y);
 		}
 		infos = infos->next;
 	}
 	return (0);
 }
 
-t_list		*ft_infos_gnl(int fd, t_list **mapinfos)
+t_list				*ft_infos_gnl(int fd, t_list **mapinfos)
 {
 	int			ret;
 	t_list		*infos;
@@ -91,7 +91,7 @@ t_list		*ft_infos_gnl(int fd, t_list **mapinfos)
 	return (infos);
 }
 
-void		ft_get_path(char *to_find, t_list *lst, char **s)
+void				ft_get_path(char *to_find, t_list *lst, char **s)
 {
 	int		i;
 	char	*tmp;
@@ -126,9 +126,9 @@ size_t				ft_parseinfos(t_list **list, t_mapinfos **map, int fd)
 	*list = ft_infos_gnl(fd, &map_tmp->map);
 	lst_tmp = *list;
 	ret = 0;
-	if ((ret = ft_get_res_x(lst_tmp, map_tmp->resolution)) <= 0)
+	if ((ret = ft_get_res_x(lst_tmp, map_tmp->res)) <= 0)
 		return (-1);
-	if ((ret = ft_get_res_y(lst_tmp, map_tmp->resolution, ret)) <= 0)
+	if ((ret = ft_get_res_y(lst_tmp, map_tmp->res, ret)) <= 0)
 		return (-1);
 	ft_get_path("NO", lst_tmp, &map_tmp->no);
 	ft_get_path("SO", lst_tmp, &map_tmp->so);
@@ -140,8 +140,7 @@ size_t				ft_parseinfos(t_list **list, t_mapinfos **map, int fd)
 	map_tmp->map_tab = ft_lst_to_tab(map_tmp->map, map_tmp);
 	if (!(ft_get_start_position(map_tmp)))
 		return (-1);
-	map_tmp->win_h = map_tmp->resolution->res_y;
-	map_tmp->win_w = map_tmp->resolution->res_x;
-	// ft_print_mapinfos(*map);
+	map_tmp->win_h = map_tmp->res->y;
+	map_tmp->win_w = map_tmp->res->x;
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 13:00:34 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/14 16:16:00 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/14 19:07:12 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ t_mapinfos	*ft_init_mapinfos(void)
 	t_mapinfos	*map;
 
 	map = (t_mapinfos*)malloc(sizeof(t_mapinfos));
-	map->resolution = (t_res*)malloc(sizeof(t_res));
-	map->resolution->res_x = 0;
-	map->resolution->res_y = 0;
+	map->res = (t_res*)malloc(sizeof(t_res));
+	map->res->x = 0;
+	map->res->y = 0;
 	map->map = ft_lstnew("");
 	map->map_tab = NULL;
 	map->no = NULL;

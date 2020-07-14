@@ -6,11 +6,18 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 14:21:41 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/14 17:48:43 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/14 19:06:10 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
+
+/*
+*************************************
+**		FONCTIONS A DEPLACER	   **
+**		DANS MAIN            	   **
+*************************************
+*/
 
 int			ft_parse_open(char **av, t_mapinfos **map, t_list **list)
 {
@@ -37,8 +44,8 @@ t_mlx		*ft_start_mlx(t_mapinfos *map)
 	mlx = (t_mlx*)malloc(sizeof(t_mlx));
 	mlx->img = (t_img*)malloc(sizeof(t_img));
 	mlx->mlx_p = mlx_init();
-	mlx->win = mlx_new_window(mlx->mlx_p, map->resolution->res_x, map->resolution->res_y, "mlx");
-	mlx->img->img_p = mlx_new_image(mlx->mlx_p, map->resolution->res_x, map->resolution->res_y);
+	mlx->win = mlx_new_window(mlx->mlx_p, map->res->x, map->res->y, "mlx");
+	mlx->img->img_p = mlx_new_image(mlx->mlx_p, map->res->x, map->res->y);
 	mlx->img->data = (int *)mlx_get_data_addr(mlx->img->img_p, &mlx->img->bpp,
 			&mlx->img->size_l, &mlx->img->endian);
 	return (mlx);
