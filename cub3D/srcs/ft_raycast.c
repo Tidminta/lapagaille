@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 19:10:15 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/14 19:27:02 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/15 19:27:11 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,20 +125,15 @@ static void		ft_dda(t_player **player, char **map2d)
 		p->perpwd = (p->mapy - p->posy + (1 - p->stepy) / 2) / p->raydy;
 }
 
-int				ft_raycast(t_mapinfos **map_tmp, t_mlx **mlx)
+int				ft_raycast(t_mapinfos **map_tmp, t_mlx **mlx, t_player *p)
 {
 	char		**map2d;
 	t_mapinfos	*map;
-	t_player	*p;
 
 	map = *map_tmp;
 	map2d = map->map_tab;
-	p = ft_playerinit();
-	if (!p)
-		return (-1);
-	// map->mlx = *mlx;
-	p->posx = map->start_x;
-	p->posy = map->start_y;
+	p->posx = (p->posx == 0) ? map->start_x : p->posx;
+	p->posy = (p->posy == 0) ? map->start_y : p->posy;
 	p->dirx = -1;
 	p->diry = 0;
 	map->mlx = *mlx;
@@ -151,7 +146,7 @@ int				ft_raycast(t_mapinfos **map_tmp, t_mlx **mlx)
 		mlx_put_image_to_window(map->mlx->mlx_p, map->mlx->win, map->mlx->img->img_p, 0, 0);
 		p->x += 1;
 	}
-	mlx_key_hook(map->mlx->win, ft_deal_key, map->mlx);
+	mlx_key_hook(map->mlx->win, ft_deal_key, map);
 	mlx_loop(map->mlx->mlx_p);
 	return (0);
 }

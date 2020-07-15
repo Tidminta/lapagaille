@@ -9,4 +9,7 @@ norme mostly done (ft_raycast l112)
 ********************************************
 **				IN PROCESS			      **
 ********************************************
-hundle keys pressings (redraw images) -> in process 
+hundle keys pressings (redraw images) -> in process
+continuer ft_deal_key et modifier ft_raycast en consequence, faire en sorte
+de povoir appeler la fonction dans un while qui modifira les valeur de calculs
+en fonction de la touche pressee.

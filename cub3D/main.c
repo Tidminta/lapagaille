@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 18:42:32 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/14 16:47:57 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/15 19:27:07 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int				main(int ac, char **av)
 	t_list		*list;
 	t_mapinfos	*map;
 	t_mlx		*mlx;
+	t_player	*p;
 	int			fd;
 
 	if (ac == 2)
@@ -33,8 +34,10 @@ int				main(int ac, char **av)
 		mlx = NULL;
 		if ((fd = ft_parse_open(av, &map, &list)) < 0)
 			return (0);
+		p = ft_playerinit();
 		mlx = ft_start_mlx(map);
-		ft_raycast(&map, &mlx);
+		map->p = &p;
+		ft_raycast(&map, &mlx, p);
 		close(fd);
 		system("leaks Cub3D");
 		return (0);

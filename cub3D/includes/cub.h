@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 19:01:40 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/14 19:24:06 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/15 19:19:50 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,38 +46,6 @@ typedef struct		s_mlx
 	t_img	*img;
 }					t_mlx;
 
-/*
-*************************************
-**			  CUB3D                **
-**			MAP INFOS			   **
-*************************************
-*/
-typedef struct		s_res
-{
-	size_t	x;
-	size_t	y;
-}					t_res;
-
-typedef	struct		s_mapinfos
-{
-	t_res	*res;
-	t_list	*map;
-	size_t	line_max;
-	size_t	col_max;
-	size_t	win_w;
-	size_t	win_h;
-	size_t	start_x;
-	size_t	start_y;
-	t_mlx	*mlx;
-	int		floor_rgb;
-	int		ceil_rgb;
-	char	**map_tab;
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
-	char	*sprite;
-}					t_mapinfos;
 
 /*
 *************************************
@@ -118,11 +86,44 @@ typedef struct		s_player
 
 /*
 *************************************
+**			  CUB3D                **
+**			MAP INFOS			   **
+*************************************
+*/
+typedef struct		s_res
+{
+	size_t	x;
+	size_t	y;
+}					t_res;
+
+typedef	struct		s_mapinfos
+{
+	t_res	*res;
+	t_list	*map;
+	size_t	line_max;
+	size_t	col_max;
+	size_t	win_w;
+	size_t	win_h;
+	size_t	start_x;
+	size_t	start_y;
+	t_mlx	*mlx;
+	t_player	**p;
+	int		floor_rgb;
+	int		ceil_rgb;
+	char	**map_tab;
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	char	*sprite;
+}					t_mapinfos;
+/*
+*************************************
 **			  FCTS                 **
 *************************************
 */
 
-int					ft_raycast(t_mapinfos **map_tmp, t_mlx **mlx_tmp);
+int					ft_raycast(t_mapinfos **map_tmp, t_mlx **mlx_tmp, t_player *p);
 
 t_mlx				*ft_start_mlx(t_mapinfos *map);
 
@@ -132,7 +133,7 @@ int					ft_create_trgb(int t, int r, int g, int b);
 
 void				ft_clr(t_mapinfos *map, t_player *p);
 
-int					ft_deal_key(int key, t_mlx *mlx);
+int					ft_deal_key(int key, t_mapinfos *mlx);
 
 
 /*
@@ -191,5 +192,7 @@ void				ft_print_list(t_list *map);
 void				ft_print_mapinfos(t_mapinfos *map);
 void				map_render(int **data, char **map, t_mapinfos *infos);
 void				ft_print_playerinfos(t_player *player);
+
+
 
 #endif
