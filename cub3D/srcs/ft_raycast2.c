@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 14:08:59 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/16 17:18:37 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/16 18:49:15 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@ static void		ft_clr_win(t_mapinfos *map)
 {
 	size_t	x;
 	size_t	y;
-	t_mlx	*mlx;
 
 	y = -1;
-	mlx = map->mlx;
 	while (++y < map->res->y)
 	{
 		x = -1;
@@ -40,14 +38,10 @@ int				ft_deal_key(int key, t_mapinfos *map)
 
 	p = *map->p;
 	mlx2 = map->mlx;
-	if (key == 124)
-		ft_printf("[fleche droite]\n");
-	else if (key == 13)
+	if (key == 13)
 	{
 		ft_clr_win(map);
-		mlx_put_image_to_window(mlx2->mlx_p, mlx2->win, mlx2->img->img_p, 0, 0);
-		ft_print_playerinfos(p);
-		ft_set_forward(map);
+		ft_set_forward(&map);
 	}
 	else if (key == 53)
 	{

@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 19:01:40 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/16 17:14:51 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/16 18:21:51 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ int					ft_deal_key(int key, t_mapinfos *mlx);
 
 int					ft_do_thejob(t_mapinfos **map_tmp);
 
-void				ft_set_forward(t_mapinfos *map);
+void				ft_set_forward(t_mapinfos **map_tmp);
 
 
 /*

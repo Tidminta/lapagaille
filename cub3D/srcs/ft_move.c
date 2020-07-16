@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 16:56:23 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/16 17:21:28 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/16 18:29:19 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,16 @@
 ***************************************
 */
 
-
 // int				ft_raycast(t_mapinfos **map_tmp, t_mlx *mlx, t_player *p)
 
-void				ft_set_forward(t_mapinfos *map)
+void				ft_set_forward(t_mapinfos **map_tmp)
 {
 	char		**map2d;
 	t_player	*p;
 	t_mlx		*mlx2;
+	t_mapinfos	*map;
 
+	map = *map_tmp;
 	p = *map->p;
 	map2d = map->map_tab;
 	mlx2 = map->mlx;
@@ -36,6 +37,5 @@ void				ft_set_forward(t_mapinfos *map)
 	if (map2d[(int)p->posx][(int)(p->posy + p->diry * p->movespeed)] == '0')
 		p->posy += p->diry * p->movespeed;
 	ft_raycast(&map, map->mlx, p);
-	ft_print_playerinfos(p);
-	mlx_put_image_to_window(mlx2->mlx_p, mlx2->win, mlx2->img->img_p, 0, 0);
+	// ft_print_playerinfos(p);
 }
