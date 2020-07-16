@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 19:10:15 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/15 19:27:11 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/16 17:07:57 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,32 +18,18 @@
  **	(DIRX/Y)?? |                   **
  **	DO FONCTION QUI SET DIRX/Y     **
  **	EN FONCTION DE N,S,E OU W      **
- **	RECAP : RAYCAST REFACT		   **
- ** 							   **
+ **	remove ** from parameters	   **
  *************************************
  */
 
-void		ft_clr(t_mapinfos *map, t_player *p)
+static void		ft_draw_all(t_mapinfos **map_tmp, t_player **player, t_mlx *mlx)
 {
-	int x;
-	int y;
-
-	x = -1;
-	(void)p;
-	while (++x < (int)map->res->x)
-	{
-		y = -1;
-		while (++y < (int)map->res->y - 1)
-			map->mlx->img->data[y * map->res->x + x] = 0;
-	}
-}
-
-static void				ft_draw_all(t_mapinfos *map, t_player **player)
-{
+	t_mapinfos	*map;
 	t_player	*p;
 	int			y;
 
 	p = *player;
+	map = *map_tmp;
 	p->lineheight = (int)(map->res->y / p->perpwd);
 	p->drawstart = -p->lineheight / 2 + map->res->y / 2;
 	if (p->drawstart < 0)
@@ -52,13 +38,10 @@ static void				ft_draw_all(t_mapinfos *map, t_player **player)
 	if (p->drawend >= (int)map->res->y)
 		p->drawend = map->res->y - 1;
 	y = p->drawstart;
-	if (p->x < (int)map->res->x - 1)
-	{
-		while (++y <= p->drawend)
-			map->mlx->img->data[y * map->res->x + p->x] = 0x808080;
-		while (++y < (int)map->res->y - 1)
-			map->mlx->img->data[y * map->res->x + p->x] = map->floor_rgb;
-	}
+	while (y++ <= p->drawend)
+		mlx->img->data[(int)(y * map->res->x + p->x)] = 0x808080;
+	while (y++ < (int)map->res->y - 1)
+		mlx->img->data[y * map->res->x + p->x] = map->floor_rgb;
 }
 
 static void		ft_step_init(t_mapinfos *map, t_player **p_tmp)
@@ -125,7 +108,7 @@ static void		ft_dda(t_player **player, char **map2d)
 		p->perpwd = (p->mapy - p->posy + (1 - p->stepy) / 2) / p->raydy;
 }
 
-int				ft_raycast(t_mapinfos **map_tmp, t_mlx **mlx, t_player *p)
+int				ft_raycast(t_mapinfos **map_tmp, t_mlx *mlx, t_player *p)
 {
 	char		**map2d;
 	t_mapinfos	*map;
@@ -134,19 +117,16 @@ int				ft_raycast(t_mapinfos **map_tmp, t_mlx **mlx, t_player *p)
 	map2d = map->map_tab;
 	p->posx = (p->posx == 0) ? map->start_x : p->posx;
 	p->posy = (p->posy == 0) ? map->start_y : p->posy;
-	p->dirx = -1;
+	p->dirx = 1;
 	p->diry = 0;
-	map->mlx = *mlx;
 	while (p->x < (int)map->res->x)
 	{
 		p->hit = 0;
 		ft_step_init(map, &p);
 		ft_dda(&p, map->map_tab);
-		ft_draw_all(map, &p);
-		mlx_put_image_to_window(map->mlx->mlx_p, map->mlx->win, map->mlx->img->img_p, 0, 0);
+		ft_draw_all(&map, &p, mlx);
 		p->x += 1;
 	}
-	mlx_key_hook(map->mlx->win, ft_deal_key, map);
-	mlx_loop(map->mlx->mlx_p);
+	mlx_put_image_to_window(mlx->mlx_p, mlx->win, mlx->img->img_p, 0, 0);
 	return (0);
 }

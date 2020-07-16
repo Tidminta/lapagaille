@@ -6,13 +6,13 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 14:08:59 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/15 19:23:47 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/16 17:18:37 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
 
-int			ft_create_trgb(int t, int r, int g, int b)
+int				ft_create_trgb(int t, int r, int g, int b)
 {
 	return (t << 24 | r << 16 | g << 8 | b);
 }
@@ -33,23 +33,21 @@ static void		ft_clr_win(t_mapinfos *map)
 	}
 }
 
-int			ft_deal_key(int key, t_mapinfos *map)
+int				ft_deal_key(int key, t_mapinfos *map)
 {
 	t_player	*p;
+	t_mlx		*mlx2;
 
 	p = *map->p;
+	mlx2 = map->mlx;
 	if (key == 124)
 		ft_printf("[fleche droite]\n");
 	else if (key == 13)
 	{
-		printf("W\n");
 		ft_clr_win(map);
-		// if (map->map_tab[(int)(p->posx + p->dirx)][(int)p->posx] == '0')
-		// 	p->posx += p->dirx;
-		// if (map->map_tab[(int)p->posx][(int)(p->posy + p->diry)] == '0')
-		// 	p->posy += p->diry;
-		// ft_raycast(&map, &map->mlx, p);
-		mlx_put_image_to_window(map->mlx->mlx_p, map->mlx->win, map->mlx->img->img_p, 0, 0);
+		mlx_put_image_to_window(mlx2->mlx_p, mlx2->win, mlx2->img->img_p, 0, 0);
+		ft_print_playerinfos(p);
+		ft_set_forward(map);
 	}
 	else if (key == 53)
 	{
@@ -59,5 +57,16 @@ int			ft_deal_key(int key, t_mapinfos *map)
 	}
 	else
 		printf("[KEY][%d]\n", key);
+	return (0);
+}
+
+int				ft_do_thejob(t_mapinfos **map_tmp)
+{
+	t_mapinfos *map;
+
+	map = *map_tmp;
+	ft_raycast(map_tmp, map->mlx, *map->p);
+	mlx_key_hook(map->mlx->win, ft_deal_key, map);
+	mlx_loop(map->mlx->mlx_p);
 	return (0);
 }

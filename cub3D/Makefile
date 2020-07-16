@@ -6,7 +6,7 @@
 #    By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/04 18:20:36 by tidminta          #+#    #+#              #
-#    Updated: 2020/07/14 15:38:56 by tidminta         ###   ########.fr        #
+#    Updated: 2020/07/16 17:15:30 by tidminta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,11 +68,11 @@ SRC_NAME =		ft_memset.c\
 				ft_parsemap2.c\
 				ft_check_map.c\
 				ft_tools.c\
-				ft_start_mlx.c\
 				ft_raycast.c\
 				ft_check_map.c\
 				ft_raycast.c\
 				ft_raycast2.c\
+				ft_move.c
 
 SRC_GNL_NAME = 	get_next_line.c\
 				get_next_line_utils.c\
@@ -160,7 +160,7 @@ FLAGS = -Wall -Werror -Wextra
 .PHONY: all, clean, fclean, re, f, f2
 
 all: $(NAME)
-	@gcc $(FLAGS) -Imlx -Lmlx -lmlx -framework OpenGL -framework Appkit -o Cub3D $(MAIN) $(NAME)
+	@gcc -g3 -fsanitize=address $(FLAGS) -Imlx -Lmlx -lmlx -framework OpenGL -framework Appkit -o Cub3D $(MAIN) $(NAME)
 
 $(NAME): $(OBJ)
 	@ar rc $(NAME) $(OBJ)
