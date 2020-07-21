@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 19:10:15 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/16 18:28:29 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/22 01:15:13 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  **	(DIRX/Y)?? |                   **
  **	DO FONCTION QUI SET DIRX/Y     **
  **	EN FONCTION DE N,S,E OU W      **
- **	remove ** from parameters	   **
+ **	remove ** from parameters ?    **
  *************************************
  */
 
@@ -119,6 +119,7 @@ int				ft_raycast(t_mapinfos **map_tmp, t_mlx *mlx, t_player *p)
 	p->posy = (p->posy == 0) ? map->start_y : p->posy;
 	p->dirx = 1;
 	p->diry = 0;
+	p->x = 0;
 	while (p->x < (int)map->res->x)
 	{
 		p->hit = 0;
@@ -127,6 +128,5 @@ int				ft_raycast(t_mapinfos **map_tmp, t_mlx *mlx, t_player *p)
 		ft_draw_all(&map, &p, mlx);
 		p->x += 1;
 	}
-	mlx_put_image_to_window(mlx->mlx_p, mlx->win, mlx->img->img_p, 0, 0);
 	return (0);
 }

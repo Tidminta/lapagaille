@@ -6,7 +6,7 @@
 #    By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/04 18:20:36 by tidminta          #+#    #+#              #
-#    Updated: 2020/07/16 17:15:30 by tidminta         ###   ########.fr        #
+#    Updated: 2020/07/21 16:11:13 by tidminta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -160,7 +160,7 @@ FLAGS = -Wall -Werror -Wextra
 .PHONY: all, clean, fclean, re, f, f2
 
 all: $(NAME)
-	@gcc -g3 -fsanitize=address $(FLAGS) -Imlx -Lmlx -lmlx -framework OpenGL -framework Appkit -o Cub3D $(MAIN) $(NAME)
+	@gcc $(FLAGS) -Imlx -Lmlx -lmlx -framework OpenGL -framework Appkit -o Cub3D $(MAIN) $(NAME)
 
 $(NAME): $(OBJ)
 	@ar rc $(NAME) $(OBJ)

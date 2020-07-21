@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 16:56:23 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/16 18:29:19 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/20 17:48:30 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void				ft_set_forward(t_mapinfos **map_tmp)
 	t_mapinfos	*map;
 
 	map = *map_tmp;
-	p = *map->p;
+	p = map->p;
 	map2d = map->map_tab;
 	mlx2 = map->mlx;
 	if (map2d[(int)(p->posx + p->dirx * p->movespeed)][(int)p->posx] == '0')

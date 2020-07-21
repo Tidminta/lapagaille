@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 18:42:32 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/16 17:07:07 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/21 15:56:49 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,19 @@ static int			ft_parse_open(char **av, t_mapinfos **map, t_list **list)
 	return (fd);
 }
 
-static t_mlx		*ft_start_mlx(t_mapinfos *map)
+static t_mlx		*ft_start_mlx(t_mapinfos *map, t_player *p)
 {
 	t_mlx	*mlx;
 
 	mlx = (t_mlx*)malloc(sizeof(t_mlx));
 	mlx->img = (t_img*)malloc(sizeof(t_img));
 	mlx->mlx_p = mlx_init();
-	mlx->win = mlx_new_window(mlx->mlx_p, map->res->x, map->res->y, "mlx");
-	mlx->img->img_p = mlx_new_image(mlx->mlx_p, map->res->x, map->res->y);
-	mlx->img->data = (int *)mlx_get_data_addr(mlx->img->img_p, &mlx->img->bpp,
-			&mlx->img->size_l, &mlx->img->endian);
+	mlx->win = mlx_new_window(mlx->mlx_p, map->res->x, map->res->y, "Cub3D");
+	// mlx->img->img_p = mlx_new_image(mlx->mlx_p, map->res->x, map->res->y);
+	// mlx->img->data = (int *)mlx_get_data_addr(mlx->img->img_p, &mlx->img->bpp,
+	// 	&mlx->img->size_l, &mlx->img->endian);
+	map->p = p;
+	map->mlx = mlx;
 	return (mlx);
 }
 
@@ -105,10 +107,38 @@ static t_player		*ft_playerinit(void)
 	return (player);
 }
 
+static int				ft_create_img(t_mapinfos *map, t_mlx **mlx_tmp)
+{
+	t_mlx *mlx;
+
+	mlx = *mlx_tmp;
+	mlx->img->img_p = mlx_new_image(map->mlx->mlx_p, map->res->x, map->res->y);
+	mlx->img->data = (int *)mlx_get_data_addr(map->mlx->img->img_p, &map->mlx->img->bpp,
+			&map->mlx->img->size_l, &map->mlx->img->endian);
+	return (0);
+}
+
+static int				ft_game_loop(t_mapinfos **map_tmp)
+{
+	t_mlx		*mlx;
+	t_mapinfos *map;
+
+	map = *map_tmp;
+	mlx = map->mlx;
+	ft_create_img(map, &mlx);
+	ft_raycast(&map, mlx, map->p);
+	// ft_print_playerinfos(map->p);
+	mlx_clear_window(map->mlx->mlx_p, map->mlx->win);
+	mlx_put_image_to_window(map->mlx->mlx_p, map->mlx->win, map->mlx->img->img_p, 0, 0);
+	return (0);
+}
+
 /*
 **************************************
 **			  	MAIN              	**
 **     PENSER A TOUT FREE         	**
+** 		-g3 -fsanitize=address      **
+** mlx_hoock keypress/release	    **
 **************************************
 */
 
@@ -126,12 +156,14 @@ int					main(int ac, char **av)
 		mlx = NULL;
 		if ((fd = ft_parse_open(av, &map, &list)) < 0)
 			return (0);
-		p = ft_playerinit();
-		mlx = ft_start_mlx(map);
-		map->p = &p;
-		map->mlx = mlx;
-		ft_do_thejob(&map);
 		close(fd);
+		p = ft_playerinit();
+		mlx = ft_start_mlx(map, p);
+		// ft_game_loop(&map);
+		// mlx_hook(mlx->win, KEYPRESS, KEYPRESSMASK, &ft_dealkey, &map);
+		mlx_key_hook(mlx->win, &ft_dealkey, &map);
+		mlx_loop_hook(mlx->mlx_p, &ft_game_loop, &map);
+		mlx_loop(mlx->mlx_p);
 		system("leaks Cub3D");
 		return (0);
 	}

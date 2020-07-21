@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 19:01:40 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/16 18:21:51 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/21 15:51:54 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@
 # include "libftprintf.h"
 # include "mlx.h"
 
+
+# define KEYPRESS 02
+# define KEYPRESSMASK 1L<<0
+# define KEYRELEASE 03
+# define KEYRELEASEMASK 1L<<1
 # define WIN_WIDTH 800
 # define WIN_HEIGHT 800
 
@@ -99,7 +104,7 @@ typedef	struct		s_mapinfos
 	size_t		start_x;
 	size_t		start_y;
 	t_mlx		*mlx;
-	t_player	**p;
+	t_player	*p;
 	int			floor_rgb;
 	int			ceil_rgb;
 	char		**map_tab;
@@ -119,9 +124,9 @@ int					ft_raycast(t_mapinfos **map_tmp, t_mlx *mlx_tmp, t_player *p);
 
 int					ft_create_trgb(int t, int r, int g, int b);
 
-int					ft_deal_key(int key, t_mapinfos *mlx);
+int					ft_dealkey(int key, t_mapinfos **map_tmp);
 
-int					ft_do_thejob(t_mapinfos **map_tmp);
+// int					ft_game_loop(t_mapinfos **map_tmp);
 
 void				ft_set_forward(t_mapinfos **map_tmp);
 
