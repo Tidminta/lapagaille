@@ -73,15 +73,15 @@ LIB			= libft.h
 
 $(NAME): $(OBJ_OBJS) $(LIB) Makefile
 			@ar rc $(NAME) $(OBJ_OBJS)
-			ranlib $(NAME)
+			@ranlib $(NAME)
 
 all: $(NAME)
 
 clean:
-	$(RM) $(OBJ_OBJS)
+	@$(RM) $(OBJ_OBJS)
 
 fclean:	clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re:	fclean all
 

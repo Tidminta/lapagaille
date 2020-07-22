@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 19:01:40 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/21 15:51:54 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/22 02:43:46 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 # define CUB_H
 
 # include <math.h>
+# include <fcntl.h>
+# include <stdio.h>
 # include "libft.h"
-# include "libftprintf.h"
+# include "get_next_line.h"
 # include "mlx.h"
 
 

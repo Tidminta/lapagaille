@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 18:42:32 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/21 15:56:49 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/22 02:09:01 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ static int			ft_parse_open(char **av, t_mapinfos **map, t_list **list)
 	fd = open(av[1], O_RDONLY);
 	if (fd < 0)
 	{
-		ft_printf("Error\nMap file open failed\n");
+		printf("Error\nMap file open failed\n");
 		return (fd);
 	}
 	if ((ft_parseinfos(list, map, fd)) <= 0)
 	{
-		ft_printf("Error\nMap parsing failed\n");
+		printf("Error\nMap parsing failed\n");
 		return (-1);
 	}
 	return (fd);
@@ -107,17 +107,6 @@ static t_player		*ft_playerinit(void)
 	return (player);
 }
 
-static int				ft_create_img(t_mapinfos *map, t_mlx **mlx_tmp)
-{
-	t_mlx *mlx;
-
-	mlx = *mlx_tmp;
-	mlx->img->img_p = mlx_new_image(map->mlx->mlx_p, map->res->x, map->res->y);
-	mlx->img->data = (int *)mlx_get_data_addr(map->mlx->img->img_p, &map->mlx->img->bpp,
-			&map->mlx->img->size_l, &map->mlx->img->endian);
-	return (0);
-}
-
 static int				ft_game_loop(t_mapinfos **map_tmp)
 {
 	t_mlx		*mlx;
@@ -125,9 +114,10 @@ static int				ft_game_loop(t_mapinfos **map_tmp)
 
 	map = *map_tmp;
 	mlx = map->mlx;
-	ft_create_img(map, &mlx);
+	mlx->img->img_p = mlx_new_image(map->mlx->mlx_p, map->res->x, map->res->y);
+	mlx->img->data = (int *)mlx_get_data_addr(map->mlx->img->img_p, &map->mlx->img->bpp,
+			&map->mlx->img->size_l, &map->mlx->img->endian);
 	ft_raycast(&map, mlx, map->p);
-	// ft_print_playerinfos(map->p);
 	mlx_clear_window(map->mlx->mlx_p, map->mlx->win);
 	mlx_put_image_to_window(map->mlx->mlx_p, map->mlx->win, map->mlx->img->img_p, 0, 0);
 	return (0);
@@ -167,6 +157,6 @@ int					main(int ac, char **av)
 		system("leaks Cub3D");
 		return (0);
 	}
-	ft_printf("Error\nInvalide number of arguments!\n");
+	printf("Error\nInvalide number of arguments!\n");
 	return (0);
 }

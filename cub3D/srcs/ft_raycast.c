@@ -6,11 +6,16 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 19:10:15 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/22 01:15:13 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/22 01:20:31 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
+
+int				ft_create_trgb(int t, int r, int g, int b)
+{
+	return (t << 24 | r << 16 | g << 8 | b);
+}
 
 /*
  *************************************

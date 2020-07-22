@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 16:56:23 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/20 17:48:30 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/22 02:45:03 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,26 @@ void				ft_set_forward(t_mapinfos **map_tmp)
 		p->posy += p->diry * p->movespeed;
 	ft_raycast(&map, map->mlx, p);
 	// ft_print_playerinfos(p);
+}
+
+int				ft_dealkey(int key, t_mapinfos **map_tmp)
+{
+	t_mapinfos *map;
+	t_player	*p;
+	t_mlx		*mlx2;
+
+	map = *map_tmp;
+	p = map->p;
+	mlx2 = map->mlx;
+	if (key == 13)
+		ft_set_forward(&map);
+	else if (key == 53)
+	{
+		printf("ECHAP\n");
+		mlx_destroy_window(map->mlx->mlx_p, map->mlx->win);
+		exit(EXIT_SUCCESS);
+	}
+	else
+		printf("[KEY][%d]\n", key);
+	return (0);
 }
