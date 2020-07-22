@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 19:01:40 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/22 02:43:46 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/22 16:06:04 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,10 @@ typedef struct		s_player
 	double	posx;
 	double	posy;
 	double	dirx;
+	double	odirx;
 	double	diry;
 	double	planx;
+	double	oplanx;
 	double	plany;
 	double	time;
 	double	oldtime;
@@ -130,7 +132,7 @@ int					ft_dealkey(int key, t_mapinfos **map_tmp);
 
 // int					ft_game_loop(t_mapinfos **map_tmp);
 
-void				ft_set_forward(t_mapinfos **map_tmp);
+// void				ft_set_forward(t_mapinfos **map_tmp);
 
 
 /*

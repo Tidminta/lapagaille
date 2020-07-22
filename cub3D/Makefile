@@ -6,7 +6,7 @@
 #    By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/04 18:20:36 by tidminta          #+#    #+#              #
-#    Updated: 2020/07/22 02:50:15 by tidminta         ###   ########.fr        #
+#    Updated: 2020/07/22 15:30:30 by tidminta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,8 +59,6 @@ INCLUDE = -I$(INCLUDE_PATH)
 
 FLAGS = -Wall -Werror -Wextra
 
-.PHONY: all, clean, fclean, re, f, f2
-
 all: $(NAME)
 	@$(MAKE) -C libft
 	@gcc $(FLAGS) -Imlx -Lmlx -lmlx -framework OpenGL -framework Appkit $(MAIN) $(NAME) ./libft/libft.a -o Cub3D 
@@ -93,3 +91,5 @@ f: re
 
 f2: re
 	./Cub3D maps/test2.cub
+
+.PHONY: all, clean, fclean, re, f, f2

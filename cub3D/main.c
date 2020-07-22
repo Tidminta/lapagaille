@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 18:42:32 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/22 02:09:01 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/22 18:08:56 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,6 @@ static t_mlx		*ft_start_mlx(t_mapinfos *map, t_player *p)
 	mlx->img = (t_img*)malloc(sizeof(t_img));
 	mlx->mlx_p = mlx_init();
 	mlx->win = mlx_new_window(mlx->mlx_p, map->res->x, map->res->y, "Cub3D");
-	// mlx->img->img_p = mlx_new_image(mlx->mlx_p, map->res->x, map->res->y);
-	// mlx->img->data = (int *)mlx_get_data_addr(mlx->img->img_p, &mlx->img->bpp,
-	// 	&mlx->img->size_l, &mlx->img->endian);
 	map->p = p;
 	map->mlx = mlx;
 	return (mlx);
@@ -90,9 +87,11 @@ static t_player		*ft_playerinit(void)
 		return (player);
 	player->posx = 0;
 	player->posy = 0;
-	player->dirx = 0;
+	player->dirx = -1;
+	player->odirx = 0;
 	player->diry = 0;
 	player->planx = 0;
+	player->oplanx = 0;
 	player->plany = 0.66;
 	player->time = 0;
 	player->oldtime = 0;
@@ -101,8 +100,8 @@ static t_player		*ft_playerinit(void)
 	player->raydx = 0;
 	player->raydy = 0;
 	player->sidedx = 0;
-	player->movespeed = 5.0;
-	player->rotspeed = 3.0;
+	player->movespeed = 0.2;
+	player->rotspeed = 0.2;
 	ft_init_player2(&player);
 	return (player);
 }
@@ -149,9 +148,7 @@ int					main(int ac, char **av)
 		close(fd);
 		p = ft_playerinit();
 		mlx = ft_start_mlx(map, p);
-		// ft_game_loop(&map);
-		// mlx_hook(mlx->win, KEYPRESS, KEYPRESSMASK, &ft_dealkey, &map);
-		mlx_key_hook(mlx->win, &ft_dealkey, &map);
+		mlx_hook(mlx->win, KEYPRESS, KEYPRESSMASK, &ft_dealkey, &map);
 		mlx_loop_hook(mlx->mlx_p, &ft_game_loop, &map);
 		mlx_loop(mlx->mlx_p);
 		system("leaks Cub3D");

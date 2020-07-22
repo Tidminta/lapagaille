@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 19:10:15 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/22 01:20:31 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/22 18:08:47 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,8 +122,8 @@ int				ft_raycast(t_mapinfos **map_tmp, t_mlx *mlx, t_player *p)
 	map2d = map->map_tab;
 	p->posx = (p->posx == 0) ? map->start_x : p->posx;
 	p->posy = (p->posy == 0) ? map->start_y : p->posy;
-	p->dirx = 1;
-	p->diry = 0;
+	// p->dirx = 1;
+	// p->diry = 0;
 	p->x = 0;
 	while (p->x < (int)map->res->x)
 	{
