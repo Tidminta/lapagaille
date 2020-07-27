@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 18:42:32 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/22 18:08:56 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/27 20:24:37 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,10 @@ static	void		ft_init_player2(t_player **player_tmp)
 	player->lineheight = 0;
 	player->drawstart = 0;
 	player->drawend = 0;
+	player->m_up = 0;
+	player->m_down = 0;
+	player->m_right = 0;
+	player->m_left = 0;
 }
 
 static t_player		*ft_playerinit(void)
@@ -100,7 +104,7 @@ static t_player		*ft_playerinit(void)
 	player->raydx = 0;
 	player->raydy = 0;
 	player->sidedx = 0;
-	player->movespeed = 0.2;
+	player->movespeed = 0.1;
 	player->rotspeed = 0.2;
 	ft_init_player2(&player);
 	return (player);
@@ -109,16 +113,18 @@ static t_player		*ft_playerinit(void)
 static int				ft_game_loop(t_mapinfos **map_tmp)
 {
 	t_mlx		*mlx;
-	t_mapinfos *map;
+	t_mapinfos	*map;
 
 	map = *map_tmp;
 	mlx = map->mlx;
 	mlx->img->img_p = mlx_new_image(map->mlx->mlx_p, map->res->x, map->res->y);
-	mlx->img->data = (int *)mlx_get_data_addr(map->mlx->img->img_p, &map->mlx->img->bpp,
-			&map->mlx->img->size_l, &map->mlx->img->endian);
+	mlx->img->data = (int *)mlx_get_data_addr(mlx->img->img_p, &mlx->img->bpp,
+			&mlx->img->size_l, &mlx->img->endian);
+	ft_setmove(map_tmp);
 	ft_raycast(&map, mlx, map->p);
 	mlx_clear_window(map->mlx->mlx_p, map->mlx->win);
-	mlx_put_image_to_window(map->mlx->mlx_p, map->mlx->win, map->mlx->img->img_p, 0, 0);
+	mlx_put_image_to_window(mlx->mlx_p, mlx->win, mlx->img->img_p, 0, 0);
+	mlx_destroy_image(mlx->mlx_p, mlx->img->img_p);
 	return (0);
 }
 
@@ -128,6 +134,10 @@ static int				ft_game_loop(t_mapinfos **map_tmp)
 **     PENSER A TOUT FREE         	**
 ** 		-g3 -fsanitize=address      **
 ** mlx_hoock keypress/release	    **
+** mlx_keyhook(exit)				**
+** recap : 	key handle almost done  **
+** fix direction handling           **
+** check segfault -> player/wall    **
 **************************************
 */
 
@@ -148,7 +158,8 @@ int					main(int ac, char **av)
 		close(fd);
 		p = ft_playerinit();
 		mlx = ft_start_mlx(map, p);
-		mlx_hook(mlx->win, KEYPRESS, KEYPRESSMASK, &ft_dealkey, &map);
+		mlx_hook(mlx->win, KEYPRESS, KEYPRESSMASK, &ft_keypress, &map);
+		mlx_hook(mlx->win, KEYRELEASE, KEYRELEASEMASK, &ft_keyrelease, &map);
 		mlx_loop_hook(mlx->mlx_p, &ft_game_loop, &map);
 		mlx_loop(mlx->mlx_p);
 		system("leaks Cub3D");

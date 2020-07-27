@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 19:01:40 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/22 16:06:04 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/27 19:48:33 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,10 @@ typedef struct		s_player
 	int		lineheight;
 	int		drawstart;
 	int		drawend;
+	int		m_up;
+	int		m_down;
+	int		m_right;
+	int		m_left;
 }					t_player;
 
 /*
@@ -128,7 +132,11 @@ int					ft_raycast(t_mapinfos **map_tmp, t_mlx *mlx_tmp, t_player *p);
 
 int					ft_create_trgb(int t, int r, int g, int b);
 
-int					ft_dealkey(int key, t_mapinfos **map_tmp);
+int					ft_keypress(int key, t_mapinfos **map_tmp);
+
+int					ft_keyrelease(int key, t_mapinfos **map_tmp);
+
+int					ft_setmove(t_mapinfos **map_tmp);
 
 // int					ft_game_loop(t_mapinfos **map_tmp);
 
