@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/04 18:42:32 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/27 20:24:37 by tidminta         ###   ########.fr       */
+/*   Created: 2020/07/28 16:25:51 by tidminta          #+#    #+#             */
+/*   Updated: 2020/08/03 18:03:07 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub.h"
+#include "../includes/cub.h"
 
 /*
 **************************************
@@ -19,7 +19,7 @@
 **************************************
 */
 
-static int			ft_parse_open(char **av, t_mapinfos **map, t_list **list)
+int					ft_parse_open(char **av, t_mapinfos **map, t_list **list)
 {
 	int		fd;
 
@@ -27,7 +27,7 @@ static int			ft_parse_open(char **av, t_mapinfos **map, t_list **list)
 	if (fd < 0)
 	{
 		printf("Error\nMap file open failed\n");
-		return (fd);
+		return (-1);
 	}
 	if ((ft_parseinfos(list, map, fd)) <= 0)
 	{
@@ -37,14 +37,47 @@ static int			ft_parse_open(char **av, t_mapinfos **map, t_list **list)
 	return (fd);
 }
 
-static t_mlx		*ft_start_mlx(t_mapinfos *map, t_player *p)
+t_mapinfos	*ft_init_mapinfos(void)
+{
+	t_mapinfos	*map;
+
+	map = (t_mapinfos*)malloc(sizeof(t_mapinfos));
+	map->res = (t_res*)malloc(sizeof(t_res));
+	map->no = (t_text*)malloc(sizeof(t_text));
+	map->so = (t_text*)malloc(sizeof(t_text));
+	map->we = (t_text*)malloc(sizeof(t_text));
+	map->ea = (t_text*)malloc(sizeof(t_text));
+	map->no->s_l = 0;
+	map->no->bpp = 0;
+	map->no->end = 0;
+	map->res->x = 0;
+	map->res->y = 0;
+	map->map = ft_lstnew("");
+	map->map_tab = NULL;
+	map->sprite = NULL;
+	map->line_max = 0;
+	map->col_max = 0;
+	map->start_x = 0;
+	map->start_y = 0;
+	return (map);
+}
+
+t_mlx				*ft_start_mlx(t_mapinfos *map, t_player *p)
 {
 	t_mlx	*mlx;
 
-	mlx = (t_mlx*)malloc(sizeof(t_mlx));
-	mlx->img = (t_img*)malloc(sizeof(t_img));
-	mlx->mlx_p = mlx_init();
+	if (!(mlx = (t_mlx*)malloc(sizeof(t_mlx))))
+		return (NULL);
+	if (!(mlx->img = (t_img*)malloc(sizeof(t_img))))
+	{
+		free(mlx);
+		return (NULL);
+	}
+	if (!(mlx->mlx_p = mlx_init()))
+		return (NULL);
 	mlx->win = mlx_new_window(mlx->mlx_p, map->res->x, map->res->y, "Cub3D");
+	if (!mlx->win)
+		return (NULL);
 	map->p = p;
 	map->mlx = mlx;
 	return (mlx);
@@ -83,12 +116,12 @@ static	void		ft_init_player2(t_player **player_tmp)
 	player->m_left = 0;
 }
 
-static t_player		*ft_playerinit(void)
+t_player			*ft_playerinit(void)
 {
 	t_player *player;
 
 	if (!(player = (t_player*)malloc(sizeof(t_player))))
-		return (player);
+		return (NULL);
 	player->posx = 0;
 	player->posy = 0;
 	player->dirx = -1;
@@ -105,66 +138,7 @@ static t_player		*ft_playerinit(void)
 	player->raydy = 0;
 	player->sidedx = 0;
 	player->movespeed = 0.1;
-	player->rotspeed = 0.2;
+	player->rot_s = 0.01;
 	ft_init_player2(&player);
 	return (player);
-}
-
-static int				ft_game_loop(t_mapinfos **map_tmp)
-{
-	t_mlx		*mlx;
-	t_mapinfos	*map;
-
-	map = *map_tmp;
-	mlx = map->mlx;
-	mlx->img->img_p = mlx_new_image(map->mlx->mlx_p, map->res->x, map->res->y);
-	mlx->img->data = (int *)mlx_get_data_addr(mlx->img->img_p, &mlx->img->bpp,
-			&mlx->img->size_l, &mlx->img->endian);
-	ft_setmove(map_tmp);
-	ft_raycast(&map, mlx, map->p);
-	mlx_clear_window(map->mlx->mlx_p, map->mlx->win);
-	mlx_put_image_to_window(mlx->mlx_p, mlx->win, mlx->img->img_p, 0, 0);
-	mlx_destroy_image(mlx->mlx_p, mlx->img->img_p);
-	return (0);
-}
-
-/*
-**************************************
-**			  	MAIN              	**
-**     PENSER A TOUT FREE         	**
-** 		-g3 -fsanitize=address      **
-** mlx_hoock keypress/release	    **
-** mlx_keyhook(exit)				**
-** recap : 	key handle almost done  **
-** fix direction handling           **
-** check segfault -> player/wall    **
-**************************************
-*/
-
-int					main(int ac, char **av)
-{
-	t_list		*list;
-	t_mapinfos	*map;
-	t_mlx		*mlx;
-	t_player	*p;
-	int			fd;
-
-	if (ac == 2)
-	{
-		list = NULL;
-		mlx = NULL;
-		if ((fd = ft_parse_open(av, &map, &list)) < 0)
-			return (0);
-		close(fd);
-		p = ft_playerinit();
-		mlx = ft_start_mlx(map, p);
-		mlx_hook(mlx->win, KEYPRESS, KEYPRESSMASK, &ft_keypress, &map);
-		mlx_hook(mlx->win, KEYRELEASE, KEYRELEASEMASK, &ft_keyrelease, &map);
-		mlx_loop_hook(mlx->mlx_p, &ft_game_loop, &map);
-		mlx_loop(mlx->mlx_p);
-		system("leaks Cub3D");
-		return (0);
-	}
-	printf("Error\nInvalide number of arguments!\n");
-	return (0);
 }

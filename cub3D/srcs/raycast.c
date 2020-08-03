@@ -1,21 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_raycast.c                                       :+:      :+:    :+:   */
+/*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 19:10:15 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/22 18:08:47 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/08/03 19:48:34 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
-
-int				ft_create_trgb(int t, int r, int g, int b)
-{
-	return (t << 24 | r << 16 | g << 8 | b);
-}
 
 /*
  *************************************
@@ -26,28 +21,6 @@ int				ft_create_trgb(int t, int r, int g, int b)
  **	remove ** from parameters ?    **
  *************************************
  */
-
-static void		ft_draw_all(t_mapinfos **map_tmp, t_player **player, t_mlx *mlx)
-{
-	t_mapinfos	*map;
-	t_player	*p;
-	int			y;
-
-	p = *player;
-	map = *map_tmp;
-	p->lineheight = (int)(map->res->y / p->perpwd);
-	p->drawstart = -p->lineheight / 2 + map->res->y / 2;
-	if (p->drawstart < 0)
-		p->drawstart = 0;
-	p->drawend = p->lineheight / 2 + map->res->y / 2;
-	if (p->drawend >= (int)map->res->y)
-		p->drawend = map->res->y - 1;
-	y = p->drawstart;
-	while (y++ <= p->drawend)
-		mlx->img->data[(int)(y * map->res->x + p->x)] = 0x808080;
-	while (y++ < (int)map->res->y - 1)
-		mlx->img->data[y * map->res->x + p->x] = map->floor_rgb;
-}
 
 static void		ft_step_init(t_mapinfos *map, t_player **p_tmp)
 {
@@ -113,6 +86,29 @@ static void		ft_dda(t_player **player, char **map2d)
 		p->perpwd = (p->mapy - p->posy + (1 - p->stepy) / 2) / p->raydy;
 }
 
+static void		ft_draw(t_mapinfos **map_tmp, t_player **player, t_mlx *mlx)
+{
+	t_mapinfos	*map;
+	t_player	*p;
+	int			y;
+
+	p = *player;
+	map = *map_tmp;
+	p->lineheight = (int)(map->res->y / p->perpwd);
+	p->drawstart = -p->lineheight / 2 + map->res->y / 2;
+	if (p->drawstart < 0)
+		p->drawstart = 0;
+	p->drawend = p->lineheight / 2 + map->res->y / 2;
+	if (p->drawend >= (int)map->res->y)
+		p->drawend = map->res->y - 1;
+	y = 0;
+	while (y++ <= p->drawstart)
+		mlx->img->data[(int)(y * map->res->x + p->x)] = map->ceil_rgb;
+	y = p->drawend;
+	while (y++ < (int)map->res->y - 1)
+		mlx->img->data[y * map->res->x + p->x] = map->floor_rgb;
+}
+
 int				ft_raycast(t_mapinfos **map_tmp, t_mlx *mlx, t_player *p)
 {
 	char		**map2d;
@@ -122,15 +118,15 @@ int				ft_raycast(t_mapinfos **map_tmp, t_mlx *mlx, t_player *p)
 	map2d = map->map_tab;
 	p->posx = (p->posx == 0) ? map->start_x : p->posx;
 	p->posy = (p->posy == 0) ? map->start_y : p->posy;
-	// p->dirx = 1;
-	// p->diry = 0;
 	p->x = 0;
 	while (p->x < (int)map->res->x)
 	{
 		p->hit = 0;
 		ft_step_init(map, &p);
 		ft_dda(&p, map->map_tab);
-		ft_draw_all(&map, &p, mlx);
+		ft_draw(&map, &p, mlx);
+		ft_text1(&map, mlx);
+		// ft_bzero(map->no->data, 0);
 		p->x += 1;
 	}
 	return (0);

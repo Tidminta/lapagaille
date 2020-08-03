@@ -6,7 +6,7 @@
 #    By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/04 18:20:36 by tidminta          #+#    #+#              #
-#    Updated: 2020/07/22 15:30:30 by tidminta         ###   ########.fr        #
+#    Updated: 2020/08/03 17:33:44 by tidminta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,22 +18,23 @@ SRC_GNL_PATH = ./srcs_gnl/
 
 MLX_PATH = ./mlx/
 
-MLX = -Lmlx -lmlx -framework OpenGL -framework AppKit
+MLX = -Imlx -Lmlx -lmlx -framework OpenGL -framework Appkit
 
 INCLUDE_PATH = ./includes/
 
 OBJ_PATH = ./objs/
 
-MAIN = main.c
-
-SRC_NAME =		ft_parsemap.c\
-				ft_parsemap2.c\
-				ft_check_map.c\
-				ft_tools.c\
-				ft_raycast.c\
-				ft_check_map.c\
-				ft_raycast.c\
-				ft_move.c\
+SRC_NAME =		main.c\
+				init.c\
+				parsemap.c\
+				parsemap2.c\
+				check_map.c\
+				tools.c\
+				check_map.c\
+				raycast.c\
+				move.c\
+				keys.c\
+				textures.c\
 
 SRC_GNL_NAME = 	get_next_line.c\
 				get_next_line_utils.c\
@@ -61,7 +62,7 @@ FLAGS = -Wall -Werror -Wextra
 
 all: $(NAME)
 	@$(MAKE) -C libft
-	@gcc $(FLAGS) -Imlx -Lmlx -lmlx -framework OpenGL -framework Appkit $(MAIN) $(NAME) ./libft/libft.a -o Cub3D 
+	@gcc -g3 -fsanitize=address $(FLAGS) $(MLX) $(NAME) ./libft/libft.a -o Cub3D 
 
 $(NAME): $(OBJ)
 	@ar rc $(NAME) $(OBJ)
@@ -82,7 +83,7 @@ clean:
 
 fclean: clean
 	@$(MAKE) fclean -C ./libft
-	@/bin/rm -f $(NAME)
+	@/bin/rm -f $(NAME) Cub3D
 
 re: fclean all
 

@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 19:01:40 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/27 19:48:33 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/08/03 19:18:21 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,14 @@
 # include "mlx.h"
 
 
-# define KEYPRESS 02
+# define KEYPRESS 2
 # define KEYPRESSMASK 1L<<0
-# define KEYRELEASE 03
+# define KEYRELEASE 3
 # define KEYRELEASEMASK 1L<<1
 # define WIN_WIDTH 800
 # define WIN_HEIGHT 800
+# define TEXWIDTH 64
+# define TEXHEIGHT 64
 
 /*
 *************************************
@@ -56,7 +58,11 @@ typedef struct		s_player
 	double	deltady;
 	double	perpwd;
 	double	movespeed;
-	double	rotspeed;
+	double	rot_s;
+	double	texnum;
+	double	wallx;
+	double	step;
+	double	texpos;
 	int		mapx;
 	int		mapy;
 	int		stepx;
@@ -71,6 +77,8 @@ typedef struct		s_player
 	int		m_down;
 	int		m_right;
 	int		m_left;
+	int		texx;
+	int		texy;
 }					t_player;
 
 /*
@@ -97,50 +105,73 @@ typedef struct		s_mlx
 
 typedef struct		s_res
 {
-	size_t	x;
-	size_t	y;
+	int	x;
+	int	y;
 }					t_res;
+
+typedef struct		s_text
+{
+	char	*path;
+	void	*img_p;
+	int		*data;
+	int		s_l;
+	int		bpp;
+	int		end;
+}					t_text;
 
 typedef	struct		s_mapinfos
 {
+	t_mlx		*mlx;
+	t_player	*p;
 	t_res		*res;
 	t_list		*map;
+	t_text		*no;
+	t_text		*so;
+	t_text		*we;
+	t_text		*ea;
 	size_t		line_max;
 	size_t		col_max;
 	size_t		win_w;
 	size_t		win_h;
 	size_t		start_x;
 	size_t		start_y;
-	t_mlx		*mlx;
-	t_player	*p;
 	int			floor_rgb;
 	int			ceil_rgb;
 	char		**map_tab;
-	char		*no;
-	char		*so;
-	char		*we;
-	char		*ea;
 	char		*sprite;
 }					t_mapinfos;
+
+/*
+*************************************
+**			  INIT                 **
+*************************************
+*/
+
+int						ft_parse_open(char **av, t_mapinfos **map, t_list **list);
+
+t_mlx					*ft_start_mlx(t_mapinfos *map, t_player *p);
+
+t_player				*ft_playerinit(void);
+
+void					ft_init_text(t_mapinfos **map_tmp);
+
 /*
 *************************************
 **			  FCTS                 **
 *************************************
 */
 
-int					ft_raycast(t_mapinfos **map_tmp, t_mlx *mlx_tmp, t_player *p);
+int						ft_raycast(t_mapinfos **map_tmp, t_mlx *mlx_tmp, t_player *p);
 
-int					ft_create_trgb(int t, int r, int g, int b);
+int						ft_create_trgb(int t, int r, int g, int b);
 
-int					ft_keypress(int key, t_mapinfos **map_tmp);
+int						ft_keypress(int key, t_mapinfos **map_tmp);
 
-int					ft_keyrelease(int key, t_mapinfos **map_tmp);
+int						ft_keyrelease(int key, t_mapinfos **map_tmp);
 
-int					ft_setmove(t_mapinfos **map_tmp);
+int						ft_setmove(t_mapinfos **map_tmp);
 
-// int					ft_game_loop(t_mapinfos **map_tmp);
-
-// void				ft_set_forward(t_mapinfos **map_tmp);
+void					ft_text1(t_mapinfos **map_tmp, t_mlx *mlx);
 
 
 /*
@@ -148,11 +179,9 @@ int					ft_setmove(t_mapinfos **map_tmp);
 **			  PARSING              **
 ** 		CHECKER SI MAP FERMÉE 	   **
 **		CHECK SI NSEW PRESENT      **
-**		FOIS DANS LA MAP		   **
+**		X FOIS DANS LA MAP		   **
 *************************************
 */
-
-// int						ft_parse_open(char **av, t_mapinfos **map, t_list **list);
 
 size_t                  ft_parseinfos(t_list **list, t_mapinfos **map, int fd);
 

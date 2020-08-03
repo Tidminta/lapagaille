@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tools.c                                         :+:      :+:    :+:   */
+/*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 16:57:50 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/22 02:44:37 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/08/03 18:10:37 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ void	ft_print_mapinfos(t_mapinfos *map)
 {
 	printf("************ MAP INFOS ************\n");
 	printf("[line max][%zu]\n", map->line_max);
-	printf("[res x][%zu]", map->res->x);
-	printf("[res y][%zu]\n", map->res->y);
-	printf("[NO][%s]\n", map->no);
-	printf("[SO][%s]\n", map->so);
-	printf("[WE][%s]\n", map->we);
-	printf("[EA][%s]\n", map->ea);
+	printf("[res x][%d]", map->res->x);
+	printf("[res y][%d]\n", map->res->y);
+	printf("[NO][%s]\n", map->no->path);
+	printf("[SO][%s]\n", map->so->path);
+	printf("[WE][%s]\n", map->we->path);
+	printf("[EA][%s]\n", map->ea->path);
 	printf("[S][%s]\n", map->sprite);
 	// printf("[F][R][%zu][G][%zu][B][%zu]\n",
 	// 	map->floor->red, map->floor->green, map->floor->bleue);

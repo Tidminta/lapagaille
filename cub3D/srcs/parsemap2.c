@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parsemap2.c                                     :+:      :+:    :+:   */
+/*   parsemap2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 13:00:34 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/14 19:12:01 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/07/30 18:43:18 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,10 +130,10 @@ size_t				ft_parseinfos(t_list **list, t_mapinfos **map, int fd)
 		return (-1);
 	if ((ret = ft_get_res_y(lst_tmp, map_tmp->res, ret)) <= 0)
 		return (-1);
-	ft_get_path("NO", lst_tmp, &map_tmp->no);
-	ft_get_path("SO", lst_tmp, &map_tmp->so);
-	ft_get_path("WE", lst_tmp, &map_tmp->we);
-	ft_get_path("EA", lst_tmp, &map_tmp->ea);
+	ft_get_path("NO", lst_tmp, &map_tmp->no->path);
+	ft_get_path("SO", lst_tmp, &map_tmp->so->path);
+	ft_get_path("WE", lst_tmp, &map_tmp->we->path);
+	ft_get_path("EA", lst_tmp, &map_tmp->ea->path);
 	ft_get_path("S ", lst_tmp, &map_tmp->sprite);
 	ft_get_rgb("F ", lst_tmp, &map_tmp->floor_rgb);
 	ft_get_rgb("C ", lst_tmp, &map_tmp->ceil_rgb);
