@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 19:01:40 by tidminta          #+#    #+#             */
-/*   Updated: 2020/08/03 19:18:21 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/08/04 19:27:48 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ t_mlx					*ft_start_mlx(t_mapinfos *map, t_player *p);
 
 t_player				*ft_playerinit(void);
 
-void					ft_init_text(t_mapinfos **map_tmp);
+void					ft_init_text(t_mapinfos *map);
 
 /*
 *************************************
@@ -161,7 +161,7 @@ void					ft_init_text(t_mapinfos **map_tmp);
 *************************************
 */
 
-int						ft_raycast(t_mapinfos **map_tmp, t_mlx *mlx_tmp, t_player *p);
+int						ft_raycast(t_mapinfos *map_tmp, t_mlx *mlx_tmp, t_player *p);
 
 int						ft_create_trgb(int t, int r, int g, int b);
 
@@ -169,9 +169,9 @@ int						ft_keypress(int key, t_mapinfos **map_tmp);
 
 int						ft_keyrelease(int key, t_mapinfos **map_tmp);
 
-int						ft_setmove(t_mapinfos **map_tmp);
+int						ft_setmove(t_mapinfos *map_tmp);
 
-void					ft_text1(t_mapinfos **map_tmp, t_mlx *mlx);
+void					ft_drawtext(t_mapinfos *map_tmp, t_mlx *mlx);
 
 
 /*

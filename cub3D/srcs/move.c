@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_move.c                                          :+:      :+:    :+:   */
+/*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 16:56:23 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/28 16:00:36 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/08/04 19:30:00 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,11 @@
 ***************************************
 */
 
-static void				ft_up(t_mapinfos **map_tmp)
+static void				ft_up(t_mapinfos *map)
 {
 	t_player	*p;
-	t_mapinfos	*map;
 	char		**map2d;
 
-	map = *map_tmp;
 	p = map->p;
 	map2d = map->map_tab;
 	if (map2d[(int)(p->posy + p->diry * p->movespeed)][(int)p->posx] == '0')
@@ -34,13 +32,11 @@ static void				ft_up(t_mapinfos **map_tmp)
 		p->posx += p->dirx * p->movespeed;
 }
 
-static void				ft_down(t_mapinfos **map_tmp)
+static void				ft_down(t_mapinfos *map)
 {
 	t_player	*p;
-	t_mapinfos	*map;
 	char		**map2d;
 
-	map = *map_tmp;
 	p = map->p;
 	map2d = map->map_tab;
 	if (map2d[(int)(p->posy - p->diry)][(int)p->posx] == '0')
@@ -49,12 +45,10 @@ static void				ft_down(t_mapinfos **map_tmp)
 		p->posx -= ((p->dirx) * p->movespeed);
 }
 
-static void				ft_rot(t_mapinfos **map_tmp, int s)
+static void				ft_rot(t_mapinfos *map, int s)
 {
 	t_player	*p;
-	t_mapinfos	*map;
 
-	map = *map_tmp;
 	p = map->p;
 	p->odirx = p->dirx;
 	p->dirx = p->dirx * cos(s * p->rot_s) - p->diry * sin(s * p->rot_s);
@@ -64,39 +58,33 @@ static void				ft_rot(t_mapinfos **map_tmp, int s)
 	p->plany = p->oplanx * sin(s * p->rot_s) + p->plany * cos(s * p->rot_s);
 }
 
-static int				ft_setmove2(t_mapinfos **map_tmp)
+static int				ft_setmove2(t_mapinfos *map)
 {
-	t_mapinfos	*map;
 	t_player	*p;
-	t_mlx		*mlx2;
 
-	map = *map_tmp;
 	p = map->p;
-	mlx2 = map->mlx;
 	if (p->m_left)
-		ft_rot(&map, 1);
+		ft_rot(map, 1);
 	else if (p->m_right)
-		ft_rot(&map, -1);
+		ft_rot(map, -1);
 	return (0);
 }
 
-int						ft_setmove(t_mapinfos **map_tmp)
+int						ft_setmove(t_mapinfos *map)
 {
-	t_mapinfos	*map;
 	t_player	*p;
 	t_mlx		*mlx2;
 
-	map = *map_tmp;
 	p = map->p;
 	mlx2 = map->mlx;
 	if (p->m_up)
-		ft_up(&map);
+		ft_up(map);
 	else if (p->m_down)
-		ft_down(&map);
+		ft_down(map);
 	else if (p->m_left)
-		ft_rot(&map, 1);
+		ft_rot(map, 1);
 	else if (p->m_right)
-		ft_rot(&map, -1);
-	ft_setmove2(map_tmp);
+		ft_rot(map, -1);
+	ft_setmove2(map);
 	return (0);
 }
