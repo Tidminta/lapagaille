@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_map.c                                     :+:      :+:    :+:   */
+/*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 13:38:44 by tidminta          #+#    #+#             */
-/*   Updated: 2020/07/06 15:44:09 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/08/05 17:37:39 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,18 @@ int				ft_get_start_position(t_mapinfos *map)
 			}
 		}
 	}
+	return (0);
+}
+
+int				ft_free(t_mapinfos *map)
+{
+	free(map->mlx);
+	free(map->p);
+	free(map->res);
+	free(map->map);
+	free(map->no);
+	free(map->so);
+	free(map->we);
+	free(map->ea);
 	return (0);
 }
