@@ -6,7 +6,7 @@
 #    By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/04 18:20:36 by tidminta          #+#    #+#              #
-#    Updated: 2020/08/03 17:33:44 by tidminta         ###   ########.fr        #
+#    Updated: 2020/08/05 18:19:41 by tidminta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,8 @@ MLX = -Imlx -Lmlx -lmlx -framework OpenGL -framework Appkit
 INCLUDE_PATH = ./includes/
 
 OBJ_PATH = ./objs/
+
+ASAN = -g3 -fsanitize=address
 
 SRC_NAME =		main.c\
 				init.c\
@@ -62,7 +64,7 @@ FLAGS = -Wall -Werror -Wextra
 
 all: $(NAME)
 	@$(MAKE) -C libft
-	@gcc -g3 -fsanitize=address $(FLAGS) $(MLX) $(NAME) ./libft/libft.a -o Cub3D 
+	@gcc $(FLAGS) $(MLX) $(NAME) ./libft/libft.a -o Cub3D 
 
 $(NAME): $(OBJ)
 	@ar rc $(NAME) $(OBJ)

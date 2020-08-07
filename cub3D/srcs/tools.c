@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 16:57:50 by tidminta          #+#    #+#             */
-/*   Updated: 2020/08/04 17:20:29 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/08/07 16:41:01 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,3 +56,29 @@ void		ft_print_tab(char **tab)
 	}
 }
 
+void			ft_print_previous(t_player *p)
+{
+	printf("************ PREVIOUS INFOS ************\n");
+	printf("[dir x][%f]\n", p->dirx);
+	printf("[dir y][%f]\n", p->diry);
+	printf("[plan x][%f]\n", p->planx);
+	printf("[plan y][%f]\n", p->plany);
+	printf("[raydir x][%f]\n", p->raydx);
+	printf("[raydir y][%f]\n", p->raydy);
+	printf("************* END *************\n");
+}
+
+void			ft_print_playerinfos(t_player *p)
+{
+	printf("************ PLAYER INFOS ************\n");
+	printf("[mapx][%d]\n", p->mapx);
+	printf("[mapy][%d]\n", p->mapy);
+	printf("[camy][%f]\n", p->camy);
+	printf("[dir x][%f]\n", p->dirx);
+	printf("[dir y][%f]\n", p->diry);
+	printf("[plan x][%f]\n", p->planx);
+	printf("[plan y][%f]\n", p->plany);
+	printf("[raydir x][%f]\n", p->raydx);
+	printf("[raydir y][%f]\n", p->raydy);
+	printf("************* END *************\n");
+}

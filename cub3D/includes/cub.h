@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 19:01:40 by tidminta          #+#    #+#             */
-/*   Updated: 2020/08/04 19:27:48 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/08/05 18:32:46 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,9 @@ t_player				*ft_playerinit(void);
 
 void					ft_init_text(t_mapinfos *map);
 
+int						ft_free(t_mapinfos *map);
+
+
 /*
 *************************************
 **			  FCTS                 **
@@ -228,7 +231,5 @@ void				ft_print_list(t_list *map);
 void				ft_print_mapinfos(t_mapinfos *map);
 void				map_render(int **data, char **map, t_mapinfos *infos);
 void				ft_print_playerinfos(t_player *player);
-
-
-
+void				ft_print_previous(t_player *p);
 #endif

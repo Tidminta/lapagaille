@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 16:25:51 by tidminta          #+#    #+#             */
-/*   Updated: 2020/08/04 19:09:20 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/08/07 16:50:00 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int					ft_parse_open(char **av, t_mapinfos **map, t_list **list)
 	return (fd);
 }
 
-t_mapinfos	*ft_init_mapinfos(void)
+t_mapinfos			*ft_init_mapinfos(void)
 {
 	t_mapinfos	*map;
 
@@ -124,16 +124,15 @@ t_player			*ft_playerinit(void)
 		return (NULL);
 	player->posx = 0;
 	player->posy = 0;
-	player->dirx = -1;
+	player->dirx = 0;
 	player->odirx = 0;
-	player->diry = 0;
-	player->planx = 0;
-	player->oplanx = 0;
-	player->plany = 0.66;
+	player->diry = 1;
+	player->planx = 0.66;
+	player->oplanx = 0.0;
+	player->plany = 0;
 	player->time = 0;
 	player->oldtime = 0;
 	player->camx = 0;
-	player->camy = 0;
 	player->raydx = 0;
 	player->raydy = 0;
 	player->sidedx = 0;

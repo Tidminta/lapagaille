@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 18:42:32 by tidminta          #+#    #+#             */
-/*   Updated: 2020/08/04 19:36:00 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/08/07 17:02:12 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static int			ft_game_loop(t_mapinfos *map)
 	ft_init_text(map);
 	ft_setmove(map);
 	ft_raycast(map, mlx, map->p);
+	ft_print_playerinfos(map->p);
 	mlx_clear_window(map->mlx->mlx_p, map->mlx->win);
 	mlx_put_image_to_window(mlx->mlx_p, mlx->win, mlx->img->img_p, 0, 0);
 	mlx_destroy_image(mlx->mlx_p, mlx->img->img_p);
@@ -38,10 +39,11 @@ static int			ft_game_loop(t_mapinfos *map)
 /*
 **************************************
 **			  	MAIN              	**
-**     	PENSER A TOUT FREE         	**
 ** 		-g3 -fsanitize=address      **
+**		system("leaks Cub3D");      **
+**		refaire ft_free			    **
 **		refaire ft_printplayerinfos **
-**	RECAP : TEXTURE DONE | SET DIR  **
+**	RECAP : SET DIR DONE            **
 **************************************
 */
 
@@ -59,15 +61,16 @@ int					main(int ac, char **av)
 		mlx = NULL;
 		if ((fd = ft_parse_open(av, &map, &list)) < 0)
 			return (0);
-		close(fd);
 		if (!(p = ft_playerinit()))
 			return (0);
 		if (!(mlx = ft_start_mlx(map, p)))
 			return (0);
+		// ft_set_dir(p);
 		mlx_hook(mlx->win, KEYPRESS, KEYPRESSMASK, ft_keypress, &map);
 		mlx_hook(mlx->win, KEYRELEASE, KEYRELEASEMASK, ft_keyrelease, &map);
 		mlx_loop_hook(mlx->mlx_p, &ft_game_loop, map);
 		mlx_loop(mlx->mlx_p);
+		close(fd);
 		return (0);
 	}
 	printf("Error\nInvalide number of arguments!\n");

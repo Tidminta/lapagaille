@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 13:38:44 by tidminta          #+#    #+#             */
-/*   Updated: 2020/08/05 17:37:39 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/08/05 18:18:10 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,10 @@ int				ft_free(t_mapinfos *map)
 	free(map->p);
 	free(map->res);
 	free(map->map);
-	free(map->no);
-	free(map->so);
-	free(map->we);
-	free(map->ea);
-	return (0);
+	free(map->no->path);
+	free(map->so->path);
+	free(map->we->path);
+	free(map->ea->path);
+	// system("leaks Cub3D");
+	exit(EXIT_SUCCESS);
 }
