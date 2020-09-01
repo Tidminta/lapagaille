@@ -6,11 +6,19 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 18:32:20 by tidminta          #+#    #+#             */
-/*   Updated: 2020/08/04 19:30:16 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/09/01 19:52:59 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
+
+int						ft_get_index(t_player *p)
+{
+	if ((-1 >= p->dirx <= 0) && (-1 >= p->diry <= 0) &&
+		(-0.66 >= p->planx <= 0) && (0 >= p->plany <= 0.66))
+		return (1);
+	return (0);
+}
 
 void					ft_init_text(t_mapinfos *map)
 {
@@ -19,24 +27,39 @@ void					ft_init_text(t_mapinfos *map)
 
 	resx = map->res->x;
 	resy = map->res->y;
-	map->no->img_p = mlx_xpm_file_to_image(map->mlx->mlx_p, map->no->path,
-		&resx, &resy);
-	map->no->data = (int*)mlx_get_data_addr(map->no->img_p, &map->no->bpp,
-		&map->no->s_l, &map->no->end);
+	map->text[0]->img_p = mlx_xpm_file_to_image(map->mlx->mlx_p,
+		map->text[0]->path, &resx, &resy);
+	map->text[0]->data = (int*)mlx_get_data_addr(map->text[0]->img_p,
+		&map->text[0]->bpp, &map->text[0]->s_l, &map->text[0]->end);
+	map->text[1]->img_p = mlx_xpm_file_to_image(map->mlx->mlx_p,
+		map->text[1]->path, &resx, &resy);
+	map->text[1]->data = (int*)mlx_get_data_addr(map->text[1]->img_p,
+		&map->text[1]->bpp, &map->text[1]->s_l, &map->text[1]->end);
+	map->text[2]->img_p = mlx_xpm_file_to_image(map->mlx->mlx_p,
+		map->text[2]->path, &resx, &resy);
+	map->text[2]->data = (int*)mlx_get_data_addr(map->text[2]->img_p,
+		&map->text[2]->bpp, &map->text[2]->s_l, &map->text[2]->end);
+	map->text[3]->img_p = mlx_xpm_file_to_image(map->mlx->mlx_p,
+		map->text[3]->path, &resx, &resy);
+	map->text[3]->data = (int*)mlx_get_data_addr(map->text[3]->img_p,
+		&map->text[3]->bpp, &map->text[3]->s_l, &map->text[3]->end);
 }
 
 static void				ft_drawtext2(t_mapinfos *map, t_mlx *mlx)
 {
 	int			y;
 	int			color;
+	int			nb;
 	t_player	*p;
 
 	p = map->p;
 	y = p->drawstart;
+	// nb = ft_get_index(map->p);
+	nb = 3;
 	while (y++ < p->drawend)
 	{
 		p->texy = (int)p->texpos & (TEXHEIGHT - 1);
-		color = map->no->data[TEXHEIGHT * p->texy + p->texx];
+		color = map->text[nb]->data[TEXHEIGHT * p->texy + p->texx];
 		p->texpos += p->step;
 		color = (p->side == 1) ? (color >> 1) & 8355711 : color;
 		mlx->img->data[(int)(y * map->res->x + p->x)] = color;

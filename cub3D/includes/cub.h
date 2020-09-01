@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 19:01:40 by tidminta          #+#    #+#             */
-/*   Updated: 2020/08/05 18:32:46 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/09/01 19:54:01 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ typedef	struct		s_mapinfos
 	t_text		*so;
 	t_text		*we;
 	t_text		*ea;
+	t_text		**text;
 	size_t		line_max;
 	size_t		col_max;
 	size_t		win_w;
@@ -137,6 +138,7 @@ typedef	struct		s_mapinfos
 	size_t		start_y;
 	int			floor_rgb;
 	int			ceil_rgb;
+	char		dir;
 	char		**map_tab;
 	char		*sprite;
 }					t_mapinfos;
