@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 19:01:40 by tidminta          #+#    #+#             */
-/*   Updated: 2020/09/01 19:54:01 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/09/07 17:17:39 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,10 +125,10 @@ typedef	struct		s_mapinfos
 	t_player	*p;
 	t_res		*res;
 	t_list		*map;
-	t_text		*no;
-	t_text		*so;
-	t_text		*we;
-	t_text		*ea;
+	// t_text		*no;
+	// t_text		*so;
+	// t_text		*we;
+	// t_text		*ea;
 	t_text		**text;
 	size_t		line_max;
 	size_t		col_max;
@@ -153,11 +153,13 @@ int						ft_parse_open(char **av, t_mapinfos **map, t_list **list);
 
 t_mlx					*ft_start_mlx(t_mapinfos *map, t_player *p);
 
-t_player				*ft_playerinit(void);
+t_player				*ft_playerinit(t_mapinfos *map);
 
 void					ft_init_text(t_mapinfos *map);
 
 int						ft_free(t_mapinfos *map);
+
+void					ft_get_dir(t_mapinfos *map);
 
 
 /*

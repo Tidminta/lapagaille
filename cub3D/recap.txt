@@ -1,9 +1,5 @@
 recap
 
-fix ft_get_index : textures en fonction de no so we ea
-
-refaire ft_set dir en fonction de no so we ea
-
-vider ft_player_init();
+texture almost done (revoir ft_getindex)
 
 voir si besoin de la fonction floor ou ceil pour arrondir

@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 15:59:58 by tidminta          #+#    #+#             */
-/*   Updated: 2020/08/07 16:14:59 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/09/03 17:29:05 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,6 @@ int				ft_keyrelease(int key, t_mapinfos **map_tmp)
 		p->m_left = 0;
 	else if (key == 2 || key == 124)
 		p->m_right = 0;
-	ft_print_playerinfos(p);
+	// ft_print_playerinfos(p);
 	return (0);
 }

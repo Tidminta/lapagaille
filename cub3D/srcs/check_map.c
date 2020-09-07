@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 13:38:44 by tidminta          #+#    #+#             */
-/*   Updated: 2020/09/01 19:54:19 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/09/07 17:38:26 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,47 @@ int				ft_free(t_mapinfos *map)
 	free(map->map);
 	// system("leaks Cub3D");
 	exit(EXIT_SUCCESS);
+}
+
+static void		ft_get_dir2(t_player *p, char c)
+{
+	if (c == 'S')
+	{
+		p->dirx = 0;
+		p->diry = 1;
+		p->planx = 0.66;
+		p->plany = 0;
+	}
+	else
+	{
+		p->dirx = 1;
+		p->diry = 0;
+		p->planx = 0;
+		p->plany = -0.66;
+	}
+}
+
+void		ft_get_dir(t_mapinfos *map)
+{
+	char		c;
+	t_player	*p;
+
+	c = map->dir;
+	p = map->p;
+	if (c == 'N')
+	{
+		p->dirx = 0;
+		p->diry = -1;
+		p->planx = -0.66;
+		p->plany = 0;
+	}
+	else if (c == 'E')
+	{
+		p->dirx = -1;
+		p->diry = 0;
+		p->planx = 0;
+		p->plany = 0.66;
+	}
+	else
+		ft_get_dir2(p, c);
 }

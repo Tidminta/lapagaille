@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 18:32:20 by tidminta          #+#    #+#             */
-/*   Updated: 2020/09/01 19:52:59 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/09/07 19:10:15 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,20 @@
 
 int						ft_get_index(t_player *p)
 {
-	if ((-1 >= p->dirx <= 0) && (-1 >= p->diry <= 0) &&
-		(-0.66 >= p->planx <= 0) && (0 >= p->plany <= 0.66))
+	/** NO **/
+	if ((-1 >= p->diry <= 0) && (p->planx == 0))
 		return (1);
-	return (0);
+	/** SO **/
+	else if ((-1 >= p->dirx <= 0) && (-1 >= p->diry <= 0) &&
+		(-0.66 >= p->planx <= 0) && (0 >= p->plany <= 0.66))
+		return (2);
+	/** EA **/
+	// else if ((-1 >= p->dirx <= 0) && (-1 >= p->diry <= 0) &&
+	// 	(-0.66 >= p->planx <= 0) && (0 >= p->plany <= 0.66))
+	// 	return (3);
+	/** WE **/
+	else
+		return (0);
 }
 
 void					ft_init_text(t_mapinfos *map)
@@ -54,10 +64,10 @@ static void				ft_drawtext2(t_mapinfos *map, t_mlx *mlx)
 
 	p = map->p;
 	y = p->drawstart;
-	// nb = ft_get_index(map->p);
-	nb = 3;
+	// nb = 3;
 	while (y++ < p->drawend)
 	{
+		nb = ft_get_index(map->p);
 		p->texy = (int)p->texpos & (TEXHEIGHT - 1);
 		color = map->text[nb]->data[TEXHEIGHT * p->texy + p->texx];
 		p->texpos += p->step;
