@@ -1,8 +1,8 @@
 R 900 900                   
-NO ./textures/xpm_greystone.xpm
-SO ./textures/colorstone.xpm
-WE ./textures/bluestone.xpm
-EA ./textures/redbrick.xpm
+NO ./textures/bluestone.xpm
+SO ./textures/eagle.xpm
+WE ./textures/redbrick.xpm
+EA ./textures/xpm_greystone.xpm
 S  ./textures/greenlight.png                               
 
 F 185,122,87
@@ -30,7 +30,7 @@ C 153,217,234
 1000000000001
 1000000000001
 1000000000001
-100000S000001
+100000N000001
 1000000000001
 1000000000001
 1111111111111

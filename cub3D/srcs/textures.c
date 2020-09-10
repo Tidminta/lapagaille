@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 18:32:20 by tidminta          #+#    #+#             */
-/*   Updated: 2020/09/07 19:10:15 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/09/10 17:05:38 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,17 @@
 int						ft_get_index(t_player *p)
 {
 	/** NO **/
-	if ((-1 >= p->diry <= 0) && (p->planx == 0))
-		return (1);
-	/** SO **/
-	else if ((-1 >= p->dirx <= 0) && (-1 >= p->diry <= 0) &&
-		(-0.66 >= p->planx <= 0) && (0 >= p->plany <= 0.66))
-		return (2);
-	/** EA **/
-	// else if ((-1 >= p->dirx <= 0) && (-1 >= p->diry <= 0) &&
-	// 	(-0.66 >= p->planx <= 0) && (0 >= p->plany <= 0.66))
-	// 	return (3);
-	/** WE **/
-	else
+	if ((p->side == 1) && (p->raydy < 0))
 		return (0);
+	/** EA **/
+	else if ((p->side == 0) && (p->raydx < 0))
+		return (3);
+	/** WE **/
+	else if ((p->side == 0) && (p->raydx > 0))
+		return (2);
+	/** SO **/
+	else
+		return (1);
 }
 
 void					ft_init_text(t_mapinfos *map)

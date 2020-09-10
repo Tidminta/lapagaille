@@ -1,5 +1,6 @@
 recap
+textures done !
 
-texture almost done (revoir ft_getindex)
-
-voir si besoin de la fonction floor ou ceil pour arrondir
+- sprite
+- screenshot
+- gestion d'erreur
