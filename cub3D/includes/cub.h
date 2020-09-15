@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 19:01:40 by tidminta          #+#    #+#             */
-/*   Updated: 2020/09/14 16:46:25 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/09/15 18:05:16 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 
 typedef struct		s_player
 {
+	double	*zbuff;
 	double	posx;
 	double	posy;
 	double	dirx;
@@ -123,6 +124,7 @@ typedef	struct		s_sprite
 {
 	double	x;
 	double	y;
+	double	dist;
 }					t_sprite;
 
 typedef	struct		s_mapinfos
@@ -134,16 +136,19 @@ typedef	struct		s_mapinfos
 	t_player	*p;
 	t_res		*res;
 	t_list		*map;
+	int			*zbuff;
+	int			*spritordr;
+	double		*spritedst;			
+	int			floor_rgb;
+	int			ceil_rgb;
+	int			nbspt;
+	char		dir;
 	size_t		line_max;
 	size_t		col_max;
 	size_t		win_w;
 	size_t		win_h;
 	size_t		start_x;
 	size_t		start_y;
-	int			floor_rgb;
-	int			ceil_rgb;
-	char		dir;
-	int			nbspt;
 }					t_mapinfos;
 
 /*
@@ -233,9 +238,11 @@ void					ft_free_split(char **tab);
 **************************************
 */
 
-static				ft_sprites_init(t_mapinfos *map);
+int					ft_sprites_init(t_mapinfos *map);
+
 void				ft_sprite_infos(t_mapinfos *map);
 
+void				ft_spritecast(map);
 
 /*
 *************************************
@@ -249,4 +256,5 @@ void				ft_print_mapinfos(t_mapinfos *map);
 void				map_render(int **data, char **map, t_mapinfos *infos);
 void				ft_print_playerinfos(t_player *player);
 void				ft_print_previous(t_player *p);
+
 #endif

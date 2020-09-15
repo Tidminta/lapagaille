@@ -1,10 +1,13 @@
 recap
-textures done !
-
+start sprites sorting
+init arrays : sprite order & sprite distance
+sort sprites
+...
+*********************************************
 - sprite
 - screenshot
 - gestion d'erreur
+- easy malloc
+- ft_parseopen() -> creer ft_free qui free les elements previous en cas de malloc foireux
+- ft_get_start_position a revoir | cas d'erreur non pris en compte
 
-****************
-ft_parseopen() -> creer ft_free qui free les elements previous en cas de malloc foireux
-ft_get_start_position a revoir | cas d'erreur non pris en compte
