@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 18:42:32 by tidminta          #+#    #+#             */
-/*   Updated: 2020/09/07 17:41:51 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/09/14 15:26:46 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int			ft_game_loop(t_mapinfos *map)
 			&mlx->img->size_l, &mlx->img->endian);
 	ft_setmove(map);
 	ft_raycast(map, mlx, map->p);
-	ft_print_playerinfos(map->p);
+	// ft_print_playerinfos(map->p);
 	mlx_clear_window(map->mlx->mlx_p, map->mlx->win);
 	mlx_put_image_to_window(mlx->mlx_p, mlx->win, mlx->img->img_p, 0, 0);
 	mlx_destroy_image(mlx->mlx_p, mlx->img->img_p);

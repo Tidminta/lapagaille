@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 18:32:20 by tidminta          #+#    #+#             */
-/*   Updated: 2020/09/10 17:05:38 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/09/14 12:15:02 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,10 @@ void					ft_init_text(t_mapinfos *map)
 		map->text[3]->path, &resx, &resy);
 	map->text[3]->data = (int*)mlx_get_data_addr(map->text[3]->img_p,
 		&map->text[3]->bpp, &map->text[3]->s_l, &map->text[3]->end);
+	map->text[4]->img_p = mlx_xpm_file_to_image(map->mlx->mlx_p,
+		map->text[4]->path, &resx, &resy);
+	map->text[4]->data = (int*)mlx_get_data_addr(map->text[4]->img_p,
+		&map->text[4]->bpp, &map->text[4]->s_l, &map->text[4]->end);
 }
 
 static void				ft_drawtext2(t_mapinfos *map, t_mlx *mlx)
@@ -62,7 +66,6 @@ static void				ft_drawtext2(t_mapinfos *map, t_mlx *mlx)
 
 	p = map->p;
 	y = p->drawstart;
-	// nb = 3;
 	while (y++ < p->drawend)
 	{
 		nb = ft_get_index(map->p);

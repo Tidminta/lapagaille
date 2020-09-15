@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 16:57:50 by tidminta          #+#    #+#             */
-/*   Updated: 2020/09/07 18:16:44 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/09/14 16:24:28 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,7 @@ void	ft_print_mapinfos(t_mapinfos *map)
 	printf("[line max][%zu]\n", map->line_max);
 	printf("[res x][%d]", map->res->x);
 	printf("[res y][%d]\n", map->res->y);
-	printf("[S][%s]\n", map->sprite);
-	// printf("[F][R][%zu][G][%zu][B][%zu]\n",
-	// 	map->floor->red, map->floor->green, map->floor->bleue);
-	// printf("[C][R][%zu][G][%zu][B][%zu]\n",
-	// 	map->ceil->red, map->ceil->green, map->ceil->bleue);
+	printf("[Sprite][%d]\n", map->nbspt);
 	ft_print_list(map->map);
 	printf("************* END *************\n");
 }

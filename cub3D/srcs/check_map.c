@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 13:38:44 by tidminta          #+#    #+#             */
-/*   Updated: 2020/09/07 17:38:26 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/09/14 16:40:23 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,14 @@ int				ft_get_start_position(t_mapinfos *map)
 	size_t	i;
 	size_t	j;
 
-	i = 0;
+	i = -1;
 	tab = map->map_tab;
-	while (tab[i++])
+	map->nbspt = ft_sprites_init(map);
+	ft_sprite_infos(map);
+	while (tab[++i])
 	{
-		j = 0;
-		while (tab[i][j++])
+		j = -1;
+		while (tab[i][++j])
 		{
 			if (tab[i][j] == 'N' || tab[i][j] == 'S' || tab[i][j] == 'E'
 				|| tab[i][j] == 'W')
@@ -49,16 +51,6 @@ int				ft_get_start_position(t_mapinfos *map)
 		}
 	}
 	return (0);
-}
-
-int				ft_free(t_mapinfos *map)
-{
-	free(map->mlx);
-	free(map->p);
-	free(map->res);
-	free(map->map);
-	// system("leaks Cub3D");
-	exit(EXIT_SUCCESS);
 }
 
 static void		ft_get_dir2(t_player *p, char c)

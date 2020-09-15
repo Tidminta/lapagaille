@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 16:25:51 by tidminta          #+#    #+#             */
-/*   Updated: 2020/09/07 17:40:36 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/09/14 16:31:21 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,12 @@
 
 int					ft_parse_open(char **av, t_mapinfos **map, t_list **list)
 {
-	int		fd;
+	int			fd;
+	int			ret;
+	// t_mapinfos	*tmp;
 
 	fd = open(av[1], O_RDONLY);
+	ret = -1;
 	if (fd < 0)
 	{
 		printf("Error\nMap file open failed\n");
@@ -43,23 +46,17 @@ t_mapinfos			*ft_init_mapinfos(void)
 
 	map = (t_mapinfos*)malloc(sizeof(t_mapinfos));
 	map->res = (t_res*)malloc(sizeof(t_res));
-	// map->no = (t_text*)malloc(sizeof(t_text));
-	// map->so = (t_text*)malloc(sizeof(t_text));
-	// map->we = (t_text*)malloc(sizeof(t_text));
-	// map->ea = (t_text*)malloc(sizeof(t_text));
-	map->text = (t_text**)malloc(sizeof(t_text*) * 3);
+	map->text = (t_text**)malloc(sizeof(t_text*) * 5);
 	map->text[0] = (t_text*)malloc(sizeof(t_text));
 	map->text[1] = (t_text*)malloc(sizeof(t_text));
 	map->text[2] = (t_text*)malloc(sizeof(t_text));
 	map->text[3] = (t_text*)malloc(sizeof(t_text));
-	// map->no->s_l = 0;
-	// map->no->bpp = 0;
-	// map->no->end = 0;
-	map->res->x = 0;
-	map->res->y = 0;
+	map->text[4] = (t_text*)malloc(sizeof(t_text));
 	map->map = ft_lstnew("");
 	map->map_tab = NULL;
-	map->sprite = NULL;
+	map->nbspt = 0;
+	map->res->x = 0;
+	map->res->y = 0;
 	map->line_max = 0;
 	map->col_max = 0;
 	map->start_x = 0;

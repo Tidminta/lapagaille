@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 19:01:40 by tidminta          #+#    #+#             */
-/*   Updated: 2020/09/07 17:17:39 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/09/14 16:46:25 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,17 +119,21 @@ typedef struct		s_text
 	int		end;
 }					t_text;
 
+typedef	struct		s_sprite
+{
+	double	x;
+	double	y;
+}					t_sprite;
+
 typedef	struct		s_mapinfos
 {
+	char		**map_tab;
+	t_text		**text;
+	t_sprite	**sprites;
 	t_mlx		*mlx;
 	t_player	*p;
 	t_res		*res;
 	t_list		*map;
-	// t_text		*no;
-	// t_text		*so;
-	// t_text		*we;
-	// t_text		*ea;
-	t_text		**text;
 	size_t		line_max;
 	size_t		col_max;
 	size_t		win_w;
@@ -139,8 +143,7 @@ typedef	struct		s_mapinfos
 	int			floor_rgb;
 	int			ceil_rgb;
 	char		dir;
-	char		**map_tab;
-	char		*sprite;
+	int			nbspt;
 }					t_mapinfos;
 
 /*
@@ -223,6 +226,16 @@ int						ft_get_start_position(t_mapinfos *map);
 int						ft_map_is_closed(char **map);
 
 void					ft_free_split(char **tab);
+
+/*
+**************************************
+**			SPRITE					**
+**************************************
+*/
+
+static				ft_sprites_init(t_mapinfos *map);
+void				ft_sprite_infos(t_mapinfos *map);
+
 
 /*
 *************************************

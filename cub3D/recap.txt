@@ -4,3 +4,7 @@ textures done !
 - sprite
 - screenshot
 - gestion d'erreur
+
+****************
+ft_parseopen() -> creer ft_free qui free les elements previous en cas de malloc foireux
+ft_get_start_position a revoir | cas d'erreur non pris en compte
