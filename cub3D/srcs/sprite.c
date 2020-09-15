@@ -6,13 +6,21 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 16:37:01 by tidminta          #+#    #+#             */
-/*   Updated: 2020/09/14 16:46:15 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/09/15 17:03:20 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
 
-static				ft_sprites_init(t_mapinfos *map)
+/*
+******************************************
+**			  CUB3D                		**
+**			SPRITES INIT		   		**
+**			L41-48 p.e pas necessaire	**
+******************************************
+*/
+
+int				ft_sprites_init(t_mapinfos *map)
 {
 	int		nb;
 	int		i;
@@ -61,4 +69,15 @@ void			ft_sprite_infos(t_mapinfos *map)
 			}
 		}
 	}
+}
+
+static void			ft_spritesrt(map)
+{
+	
+}
+
+
+void				ft_spritecast(t_mapinfos *map)
+{
+	ft_spritesrt(map);
 }

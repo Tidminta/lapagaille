@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 19:10:15 by tidminta          #+#    #+#             */
-/*   Updated: 2020/09/03 17:37:14 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/09/15 16:48:19 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ int				ft_raycast(t_mapinfos *map, t_mlx *mlx, t_player *p)
 		ft_dda(p, map->map_tab);
 		ft_drawall(map, p, mlx);
 		ft_drawtext(map, mlx);
+		p->zbuff[p->x] = p->perpwd;
 		p->x += 1;
 	}
 	return (0);

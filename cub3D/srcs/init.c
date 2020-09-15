@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 16:25:51 by tidminta          #+#    #+#             */
-/*   Updated: 2020/09/14 16:31:21 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/09/15 15:44:49 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ t_player			*ft_playerinit(t_mapinfos *map)
 
 	if (!(player = (t_player*)malloc(sizeof(t_player))))
 		return (NULL);
+	player->zbuff = (double*)malloc(sizeof(double) * map->res->x);
 	player->dirx = 0;
 	player->diry = 0;
 	player->planx = 0;
