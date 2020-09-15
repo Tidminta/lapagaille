@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 19:01:40 by tidminta          #+#    #+#             */
-/*   Updated: 2020/09/15 18:05:16 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/09/15 18:44:37 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,21 +124,25 @@ typedef	struct		s_sprite
 {
 	double	x;
 	double	y;
-	double	dist;
 }					t_sprite;
+
+typedef	struct		t_infosprt
+{
+	t_sprite	**sp;
+	int			*sporder;
+	double		*spdist;
+}					t_infosprt;
 
 typedef	struct		s_mapinfos
 {
 	char		**map_tab;
 	t_text		**text;
-	t_sprite	**sprites;
 	t_mlx		*mlx;
 	t_player	*p;
 	t_res		*res;
 	t_list		*map;
+	t_infosprt	*spinfos;
 	int			*zbuff;
-	int			*spritordr;
-	double		*spritedst;			
 	int			floor_rgb;
 	int			ceil_rgb;
 	int			nbspt;
@@ -242,7 +246,7 @@ int					ft_sprites_init(t_mapinfos *map);
 
 void				ft_sprite_infos(t_mapinfos *map);
 
-void				ft_spritecast(map);
+void				ft_spritecast(t_mapinfos *map);
 
 /*
 *************************************

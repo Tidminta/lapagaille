@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 16:25:51 by tidminta          #+#    #+#             */
-/*   Updated: 2020/09/15 15:44:49 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/09/15 18:27:31 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int					ft_parse_open(char **av, t_mapinfos **map, t_list **list)
 {
 	int			fd;
 	int			ret;
-	// t_mapinfos	*tmp;
 
 	fd = open(av[1], O_RDONLY);
 	ret = -1;
@@ -46,6 +45,7 @@ t_mapinfos			*ft_init_mapinfos(void)
 
 	map = (t_mapinfos*)malloc(sizeof(t_mapinfos));
 	map->res = (t_res*)malloc(sizeof(t_res));
+	map->spinfos = (t_infosprt*)malloc(sizeof(t_infosprt));
 	map->text = (t_text**)malloc(sizeof(t_text*) * 5);
 	map->text[0] = (t_text*)malloc(sizeof(t_text));
 	map->text[1] = (t_text*)malloc(sizeof(t_text));

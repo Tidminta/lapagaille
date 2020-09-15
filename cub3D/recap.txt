@@ -1,13 +1,14 @@
 recap
-start sprites sorting
-init arrays : sprite order & sprite distance
-sort sprites
+start sprites sorting DONE!
+init arrays : sprite order & sprite distance DONE!
+sort sprites DONE !
 ...
 *********************************************
+- est et ouest inverse
 - sprite
 - screenshot
 - gestion d'erreur
-- easy malloc
+- /!\ easy malloc /!\
 - ft_parseopen() -> creer ft_free qui free les elements previous en cas de malloc foireux
 - ft_get_start_position a revoir | cas d'erreur non pris en compte
 
