@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 19:01:40 by tidminta          #+#    #+#             */
-/*   Updated: 2020/09/15 18:44:37 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/09/16 18:47:52 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ typedef	struct		s_sprite
 {
 	double	x;
 	double	y;
+	double	dist;
 }					t_sprite;
 
 typedef	struct		t_infosprt
@@ -131,6 +132,22 @@ typedef	struct		t_infosprt
 	t_sprite	**sp;
 	int			*sporder;
 	double		*spdist;
+	double		spx;
+	double		spy;
+	double		invdet;
+	double		transx;
+	double		transy;
+	int			spscreenx;
+	int			spheight;
+	int			starty;
+	int			startx;
+	int			endy;
+	int			endx;
+	int			spwidth;
+	int			stripe;
+	int			texx;
+	int			texy;
+	int			d;
 }					t_infosprt;
 
 typedef	struct		s_mapinfos
@@ -145,7 +162,7 @@ typedef	struct		s_mapinfos
 	int			*zbuff;
 	int			floor_rgb;
 	int			ceil_rgb;
-	int			nbspt;
+	int			nbsp;
 	char		dir;
 	size_t		line_max;
 	size_t		col_max;
@@ -242,11 +259,11 @@ void					ft_free_split(char **tab);
 **************************************
 */
 
-int					ft_sprites_init(t_mapinfos *map);
-
-void				ft_sprite_infos(t_mapinfos *map);
-
 void				ft_spritecast(t_mapinfos *map);
+// void				ft_bubblesort(int * tab);
+void				ft_sprites_projections(t_mapinfos *map);
+int					ft_sprite_cpt(t_mapinfos *map);
+
 
 /*
 *************************************
@@ -257,7 +274,6 @@ void				ft_spritecast(t_mapinfos *map);
 void				ft_print_tab(char **tab);
 void				ft_print_list(t_list *map);
 void				ft_print_mapinfos(t_mapinfos *map);
-void				map_render(int **data, char **map, t_mapinfos *infos);
 void				ft_print_playerinfos(t_player *player);
 void				ft_print_previous(t_player *p);
 

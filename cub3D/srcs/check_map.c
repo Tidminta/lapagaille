@@ -6,24 +6,11 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 13:38:44 by tidminta          #+#    #+#             */
-/*   Updated: 2020/09/14 16:40:23 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/09/16 17:01:32 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
-
-void			ft_free_split(char **tab)
-{
-	int i;
-
-	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-}
 
 int				ft_get_start_position(t_mapinfos *map)
 {
@@ -33,8 +20,6 @@ int				ft_get_start_position(t_mapinfos *map)
 
 	i = -1;
 	tab = map->map_tab;
-	map->nbspt = ft_sprites_init(map);
-	ft_sprite_infos(map);
 	while (tab[++i])
 	{
 		j = -1;
