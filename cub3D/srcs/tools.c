@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 16:57:50 by tidminta          #+#    #+#             */
-/*   Updated: 2020/09/16 17:08:13 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/09/17 19:41:16 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,25 @@ void			ft_print_playerinfos(t_player *p)
 	printf("[raydir x][%f]\n", p->raydx);
 	printf("[raydir y][%f]\n", p->raydy);
 	printf("[wall x][%f]\n", p->wallx);
+	printf("************* END *************\n");
+}
+
+void			ft_print_spriteinfos(t_infosprt *sp)
+{
+	printf("*********  SPRITES INFOS  *********\n");
+	printf("[spx][%f]\n", sp->spx);
+	printf("[spy][%f]\n", sp->spy);
+	printf("[invdet][%f]\n", sp->invdet);
+	printf("[transx][%f]\n", sp->transx);
+	printf("[transy][%f]\n", sp->transy);
+	printf("[spscreenx][%d]\n", sp->spscreenx);
+	printf("[spheight][%d]\n", sp->spheight);
+	printf("[startx][%d]\n", sp->startx);
+	printf("[starty][%d]\n", sp->starty);
+	printf("[endx][%d]\n", sp->endx);
+	printf("[endy][%d]\n", sp->endy);
+	printf("[width][%d]\n", sp->spwidth);
+	printf("[stripe][%d]\n", sp->stripe);
+	printf("[texX][%d]\n", sp->texx);
 	printf("************* END *************\n");
 }

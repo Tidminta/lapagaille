@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 16:37:01 by tidminta          #+#    #+#             */
-/*   Updated: 2020/09/16 18:47:59 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/09/17 19:34:14 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static int				ft_sprites_init(t_mapinfos *map)
 	nb = map->nbsp;
 	if (!(map->spinfos->sp = (t_sprite**)malloc(sizeof(t_sprite) * (nb))))
 		return (-1);
-	while (--nb >= 0)
-		if (!(map->spinfos->sp[nb] = (t_sprite*)malloc(sizeof(t_sprite))))
+	while (++i < map->nbsp)
+		if (!(map->spinfos->sp[i] = (t_sprite*)malloc(sizeof(t_sprite))))
 			return (-1);
 	// map->spinfos->sporder = (int*)malloc(sizeof(int) * map->nbsp);
 	// map->spinfos->spdist = (double*)malloc(sizeof(double) * map->nbsp);
@@ -38,6 +38,8 @@ static int				ft_sprites_init(t_mapinfos *map)
 	// 	return (-1);
 	// ft_bzero(map->spinfos->sporder, (size_t)map->nbsp);
 	// ft_bzero(map->spinfos->spdist, (size_t)map->nbsp);
+	map->spinfos->spx = 0;
+	map->spinfos->spy = 0;
 	map->spinfos->invdet = 0;
 	map->spinfos->transx = 0;
 	map->spinfos->transy = 0;
@@ -55,7 +57,7 @@ static int				ft_sprites_init(t_mapinfos *map)
 	return (1);
 }
 
-static void				ft_fill_sprites(t_mapinfos *map)
+void				ft_fill_sprites(t_mapinfos *map)
 {
 	int			i;
 	int			j;
@@ -83,33 +85,35 @@ static void				ft_fill_sprites(t_mapinfos *map)
 	}
 }
 
-static void				ft_spritesort(t_mapinfos *map)
-{
-	t_player	*p;
-	t_sprite	**sp;
-	t_sprite	*tmp;
-	int			i;
-	int			j;
+// void				ft_spritesort(t_mapinfos *map)
+// {
+// 	t_player	*p;
+// 	t_sprite	**sp;
+// 	t_sprite	*tmp;
+// 	int			i;
+// 	int			j;
 
-	p = map->p;
-	sp = map->spinfos->sp;
-	i = 0;
-	while (sp[i])
-	{
-		j = i + 1;
-		while (sp[j])
-		{
-			if (sp[i]->dist < sp[j]->dist)
-			{
-				tmp = sp[i];
-				sp[i] = sp[j];
-				sp[j] = tmp;
-			}
-			j++;
-		}
-		i++;
-	}
-}
+// 	p = map->p;
+// 	sp = map->spinfos->sp;
+// 	i = 0;
+// 	printf("in sprite sort ...\n");
+// 	while (sp[i])
+// 	{
+// 		j = i + 1;
+// 		while (sp[j])
+// 		{
+// 			if (sp[i]->dist < sp[j]->dist)
+// 			{
+// 				tmp = sp[i];
+// 				sp[i] = sp[j];
+// 				sp[j] = tmp;
+// 			}
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	printf("sprite sorted ...\n");
+// }
 
 int					ft_sprite_cpt(t_mapinfos *map)
 {
@@ -133,6 +137,9 @@ int					ft_sprite_cpt(t_mapinfos *map)
 void				ft_spritecast(t_mapinfos *map)
 {
 	ft_fill_sprites(map);
-	ft_spritesort(map);
-	// ft_sprites_projections(map);
+	// printf("fill sprites ...\n");
+	// ft_spritesort(map);
+	// printf("sprite sorting ...\n");
+	ft_sprites_projections(map);
+	// printf("sprite projection ...\n");
 }

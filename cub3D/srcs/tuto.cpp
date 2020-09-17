@@ -362,7 +362,7 @@ int main(int /*argc*/, char */*argv*/[])
 #define uDiv 1
 #define vDiv 1
 #define vMove 0.0
-			int vMoveScreen = int(vMove / transformY);
+			int vMoveScreen = int(vMove / transformY); 
 
 			//calculate height of the sprite on screen
 			int spriteHeight = abs(int(h / (transformY))) / vDiv; //using "transformY" instead of the real distance prevents fisheye
