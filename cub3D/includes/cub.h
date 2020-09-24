@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 19:01:40 by tidminta          #+#    #+#             */
-/*   Updated: 2020/09/17 16:14:07 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/09/24 12:21:12 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,16 +122,9 @@ typedef struct		s_text
 
 typedef	struct		s_sprite
 {
-	double	x;
-	double	y;
-	double	dist;
-}					t_sprite;
-
-typedef	struct		t_infosprt
-{
-	t_sprite	**sp;
-	int			*sporder;
-	double		*spdist;
+	double		x;
+	double		y;
+	double		dist;
 	double		spx;
 	double		spy;
 	double		invdet;
@@ -148,6 +141,13 @@ typedef	struct		t_infosprt
 	int			texx;
 	int			texy;
 	int			d;
+}					t_sprite;
+
+typedef	struct		t_infosprt
+{
+	t_sprite	**sp;
+	int			*sporder;
+	double		*spdist;
 }					t_infosprt;
 
 typedef	struct		s_mapinfos

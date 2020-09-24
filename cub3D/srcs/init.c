@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 16:25:51 by tidminta          #+#    #+#             */
-/*   Updated: 2020/09/16 16:59:06 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/09/24 12:28:19 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ t_mapinfos			*ft_init_mapinfos(void)
 	map = (t_mapinfos*)malloc(sizeof(t_mapinfos));
 	map->res = (t_res*)malloc(sizeof(t_res));
 	map->spinfos = (t_infosprt*)malloc(sizeof(t_infosprt));
-	map->spinfos->spx = 0;
-	map->spinfos->spy = 0;
+	// map->spinfos->spx = 0;
+	// map->spinfos->spy = 0;
 	map->text = (t_text**)malloc(sizeof(t_text*) * 5);
 	map->text[0] = (t_text*)malloc(sizeof(t_text));
 	map->text[1] = (t_text*)malloc(sizeof(t_text));

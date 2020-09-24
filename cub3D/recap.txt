@@ -4,8 +4,8 @@ init arrays : sprite order & sprite distance DONE!
 sort sprites DONE !
 ...
 
-projection de sprite faill (segfault)
-chercher le segfault et fix le probleme
+projection de sprite faill (pixelisation du sprite)
+suspecter while l.57 && stripe
 *********************************************
 - est et ouest inverse
 - sprite

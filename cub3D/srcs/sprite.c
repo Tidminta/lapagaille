@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 16:37:01 by tidminta          #+#    #+#             */
-/*   Updated: 2020/09/17 19:34:14 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/09/24 12:38:20 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,26 @@ static int				ft_sprites_init(t_mapinfos *map)
 	// 	return (-1);
 	// ft_bzero(map->spinfos->sporder, (size_t)map->nbsp);
 	// ft_bzero(map->spinfos->spdist, (size_t)map->nbsp);
-	map->spinfos->spx = 0;
-	map->spinfos->spy = 0;
-	map->spinfos->invdet = 0;
-	map->spinfos->transx = 0;
-	map->spinfos->transy = 0;
-	map->spinfos->spscreenx = 0;
-	map->spinfos->spheight = 0;
-	map->spinfos->startx = 0;
-	map->spinfos->starty = 0;
-	map->spinfos->endx = 0;
-	map->spinfos->endy = 0;
-	map->spinfos->spwidth = 0;
-	map->spinfos->stripe = 0;
-	map->spinfos->texx = 0;
-	map->spinfos->texy = 0;
-	map->spinfos->d = 0;
+	i = -1;
+	while (++i < nb)
+	{
+		map->spinfos->sp[i]->spx = 0;
+		map->spinfos->sp[i]->spy = 0;
+		map->spinfos->sp[i]->invdet = 0;
+		map->spinfos->sp[i]->transx = 0;
+		map->spinfos->sp[i]->transy = 0;
+		map->spinfos->sp[i]->spscreenx = 0;
+		map->spinfos->sp[i]->spheight = 0;
+		map->spinfos->sp[i]->startx = 0;
+		map->spinfos->sp[i]->starty = 0;
+		map->spinfos->sp[i]->endx = 0;
+		map->spinfos->sp[i]->endy = 0;
+		map->spinfos->sp[i]->spwidth = 0;
+		map->spinfos->sp[i]->stripe = 0;
+		map->spinfos->sp[i]->texx = 0;
+		map->spinfos->sp[i]->texy = 0;
+		map->spinfos->sp[i]->d = 0;
+	}
 	return (1);
 }
 
