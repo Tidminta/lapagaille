@@ -6,6 +6,7 @@ sort sprites DONE !
 
 projection de sprite faill (pixelisation du sprite)
 suspecter while l.57 && stripe
+des modifs on ete faites en fonction du cub3d fonctionnel (segfault pour le moment)
 *********************************************
 - est et ouest inverse
 - sprite

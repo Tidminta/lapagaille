@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:16:32 by tidminta          #+#    #+#             */
-/*   Updated: 2020/09/24 12:56:02 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/09/24 16:45:59 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,24 +47,30 @@ void			ft_sprites_projections(t_mapinfos *map)
 		sp[nb]->endx = sp[nb]->spwidth / 2 + sp[nb]->spscreenx;
 		sp[nb]->endx = (sp[nb]->endx >= map->res->x) ? map->res->x - 1 : sp[nb]->endx;
 //loop through every vertical stripe of the sprite on screen
-		stripe = sp[nb]->startx - 1;
+		stripe = sp[nb]->startx;
 		// ft_print_spriteinfos(map->spinfos);
-		while (++stripe < sp[nb]->endx)
+		while (stripe < sp[nb]->endx)
 		{
-			sp[nb]->texx = (int)(256 * (stripe - (-sp[nb]->spwidth / 2 + sp[nb]->spscreenx)) * TEXWIDTH / sp[nb]->spwidth) / 256;
+			sp[nb]->texx = (int)(256 * (stripe - (-sp[nb]->spwidth / 2 + sp[nb]->spscreenx)) * 512 / sp[nb]->spwidth) / 256;
 			if (sp[nb]->transy > 0 && stripe > 0 && stripe < map->res->x && sp[nb]->transy < p->zbuff[stripe])
 			{
 				y = sp[nb]->starty;
-				while (y++ < sp[nb]->endy)
+				while (y < sp[nb]->endy)
 				{
-					int d = (y) * 256 - map->res->y * 128 + sp[nb]->spheight * 128;
-					sp[nb]->texy = ((d * TEXHEIGHT) / sp[nb]->spheight) / 256;
-					color = map->text[4]->data[TEXWIDTH * sp[nb]->texy * sp[nb]->texx];
+					// int d = (y) * 256 - map->res->y * 128 + sp[nb]->spheight * 128;
+					sp[nb]->texy = ((((y) * 256 - map->res->y * 128 + sp[nb]->spheight * 128) * 512) / sp[nb]->spheight) / 256;
+					color = map->text[4]->data[512 * sp[nb]->texy * sp[nb]->texx];
+					// [4][(int)(s->tex_y * SPRITE + s->tex_x)];
 					// if ((color & 0x00FFFFFF) != 0)
 					// 	map->mlx->img->data[(int)(y * sp->stripe)] = color;
-						map->mlx->img->data[(int)(y * map->res->x + stripe)] = color;
+						map->mlx->img->data[(int)(y * map->res->x + sp[nb]->startx)] = color;
+					y++;
 				}
 			}
+			stripe++;
 		}
 	}
 } 
+
+				// if (cub->img->data_textures[4][(int)(s->tex_y * SPRITE + s->tex_x)] != cub->img->data_textures[4][0])
+					// cub->img->img_buf[(s->y_start + cub->sprites->check_y) * cub->map->res_x + (s->x_start + cub->sprites->check_x)] = cub->img->data_textures[4][(int)(s->tex_y * SPRITE + s->tex_x)];
