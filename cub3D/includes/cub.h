@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 19:01:40 by tidminta          #+#    #+#             */
-/*   Updated: 2020/09/24 15:47:12 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/09/25 16:19:43 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define WIN_HEIGHT 800
 # define TEXWIDTH 64
 # define TEXHEIGHT 64
+# define SPRITE 64
 
 /*
 *************************************

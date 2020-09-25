@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:16:32 by tidminta          #+#    #+#             */
-/*   Updated: 2020/09/24 16:45:59 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/09/25 16:23:17 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void			ft_sprites_projections(t_mapinfos *map)
 		sp[nb]->spx = sp[nb]->x - p->posx;
 		sp[nb]->spy = sp[nb]->y - p->posy;
 		sp[nb]->invdet = 1.0 / (p->planx * p->diry - p->dirx * p->plany);
-		sp[nb]->transx = sp[nb]->invdet * (p->diry * sp[nb]->spx - p->dirx * sp[nb]->spx);
+		sp[nb]->transx = sp[nb]->invdet * (p->diry * sp[nb]->spx - p->dirx * sp[nb]->spy);
 		sp[nb]->transy = sp[nb]->invdet * (-p->plany * sp[nb]->spx + p->planx * sp[nb]->spy);
 		sp[nb]->spscreenx = (int)((map->res->x / 2)
 			* (1 + sp[nb]->transx / sp[nb]->transy));
@@ -51,18 +51,16 @@ void			ft_sprites_projections(t_mapinfos *map)
 		// ft_print_spriteinfos(map->spinfos);
 		while (stripe < sp[nb]->endx)
 		{
-			sp[nb]->texx = (int)(256 * (stripe - (-sp[nb]->spwidth / 2 + sp[nb]->spscreenx)) * 512 / sp[nb]->spwidth) / 256;
+			sp[nb]->texx = (int)(256 * (stripe - (-sp[nb]->spwidth / 2 + sp[nb]->spscreenx)) * 64 / sp[nb]->spwidth) / 256;
 			if (sp[nb]->transy > 0 && stripe > 0 && stripe < map->res->x && sp[nb]->transy < p->zbuff[stripe])
 			{
 				y = sp[nb]->starty;
 				while (y < sp[nb]->endy)
 				{
-					// int d = (y) * 256 - map->res->y * 128 + sp[nb]->spheight * 128;
-					sp[nb]->texy = ((((y) * 256 - map->res->y * 128 + sp[nb]->spheight * 128) * 512) / sp[nb]->spheight) / 256;
-					color = map->text[4]->data[512 * sp[nb]->texy * sp[nb]->texx];
-					// [4][(int)(s->tex_y * SPRITE + s->tex_x)];
-					// if ((color & 0x00FFFFFF) != 0)
-					// 	map->mlx->img->data[(int)(y * sp->stripe)] = color;
+					int d = (y) * 256 - map->res->y * 128 + sp[nb]->spheight * 128;
+					sp[nb]->texy = ((d * SPRITE) / sp[nb]->spheight) / 256;
+					color = map->text[4]->data[ * sp[nb]->texy * sp[nb]->texx];
+					if ((color & 0x00FFFFFF) != 0)
 						map->mlx->img->data[(int)(y * map->res->x + sp[nb]->startx)] = color;
 					y++;
 				}

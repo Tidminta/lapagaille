@@ -6,7 +6,7 @@
 #    By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/04 18:20:36 by tidminta          #+#    #+#              #
-#    Updated: 2020/09/24 16:48:44 by tidminta         ###   ########.fr        #
+#    Updated: 2020/09/25 16:07:20 by tidminta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,7 @@ FLAGS = -Wall -Werror -Wextra
 
 all: $(NAME)
 	@$(MAKE) -C libft
-	@gcc $(ASAN) $(FLAGS) $(MLX) $(NAME) ./libft/libft.a -o Cub3D 
+	@gcc $(FLAGS) $(MLX) $(NAME) ./libft/libft.a -o Cub3D 
 
 $(NAME): $(OBJ)
 	@ar rc $(NAME) $(OBJ)
