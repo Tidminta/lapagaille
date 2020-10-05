@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 18:42:32 by tidminta          #+#    #+#             */
-/*   Updated: 2020/09/25 16:09:09 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/09/30 15:44:52 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static int			ft_game_loop(t_mapinfos *map)
 	mlx_clear_window(map->mlx->mlx_p, map->mlx->win);
 	mlx_put_image_to_window(mlx->mlx_p, mlx->win, mlx->img->img_p, 0, 0);
 	mlx_destroy_image(mlx->mlx_p, mlx->img->img_p);
-	// mlx_destroy_image(mlx->mlx_p, map->no->img_p);
 	return (0);
 }
 

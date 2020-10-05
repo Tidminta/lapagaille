@@ -15,4 +15,4 @@ des modifs on ete faites en fonction du cub3d fonctionnel (segfault pour le mome
 - /!\ easy malloc /!\
 - ft_parseopen() -> creer ft_free qui free les elements previous en cas de malloc foireux
 - ft_get_start_position a revoir | cas d'erreur non pris en compte
-
+- penser a free les sprites

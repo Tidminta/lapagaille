@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 19:01:40 by tidminta          #+#    #+#             */
-/*   Updated: 2020/09/25 16:19:43 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/09/30 15:35:45 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,7 +264,7 @@ void				ft_spritecast(t_mapinfos *map);
 // void				ft_bubblesort(int * tab);
 void				ft_sprites_projections(t_mapinfos *map);
 int					ft_sprite_cpt(t_mapinfos *map);
-
+void				ft_sprites(t_mapinfos *map);
 void				ft_fill_sprites(t_mapinfos *map);
 void				ft_spritesort(t_mapinfos *map);
 
@@ -278,6 +278,6 @@ void				ft_print_tab(char **tab);
 void				ft_print_list(t_list *map);
 void				ft_print_mapinfos(t_mapinfos *map);
 void				ft_print_playerinfos(t_player *player);
-void				ft_print_spriteinfos(t_infosprt *sp);
+void				ft_print_spriteinfos(t_sprite *sp);
 
 #endif
