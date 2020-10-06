@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 16:25:51 by tidminta          #+#    #+#             */
-/*   Updated: 2020/09/25 16:09:05 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/06 19:52:22 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ t_mapinfos			*ft_init_mapinfos(void)
 	map = (t_mapinfos*)malloc(sizeof(t_mapinfos));
 	map->res = (t_res*)malloc(sizeof(t_res));
 	map->spinfos = (t_infosprt*)malloc(sizeof(t_infosprt));
-	// map->spinfos->spx = 0;
-	// map->spinfos->spy = 0;
 	map->text = (t_text**)malloc(sizeof(t_text*) * 5);
 	map->text[0] = (t_text*)malloc(sizeof(t_text));
 	map->text[1] = (t_text*)malloc(sizeof(t_text));
@@ -132,7 +130,7 @@ t_player			*ft_playerinit(t_mapinfos *map)
 	player->dirx = 0;
 	player->diry = 0;
 	player->planx = 0;
-	player->planx = 0;
+	player->plany = 0;
 	player->posx = 0;
 	player->posy = 0;
 	player->odirx = 0;
@@ -143,7 +141,7 @@ t_player			*ft_playerinit(t_mapinfos *map)
 	player->raydx = 0;
 	player->raydy = 0;
 	player->sidedx = 0;
-	player->movespeed = 0.1;
+	player->movespeed = 0.2;
 	player->rot_s = 0.01;
 	player->sidedy = 0;
 	player->deltadx = 0;

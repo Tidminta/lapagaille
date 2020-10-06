@@ -1,17 +1,10 @@
 recap
-start sprites sorting DONE!
-init arrays : sprite order & sprite distance DONE!
-sort sprites DONE !
-...
 
-projection de sprite faill (pixelisation du sprite)
-suspecter while l.57 && stripe
-des modifs on ete faites en fonction du cub3d fonctionnel (segfault pour le moment)
+parsing + error quit propre
+screenshot
 *********************************************
+- init elements sprite a 0 ?
 - est et ouest inverse
-- sprite
-- screenshot
-- gestion d'erreur
 - /!\ easy malloc /!\
 - ft_parseopen() -> creer ft_free qui free les elements previous en cas de malloc foireux
 - ft_get_start_position a revoir | cas d'erreur non pris en compte

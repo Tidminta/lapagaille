@@ -6,36 +6,40 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:16:32 by tidminta          #+#    #+#             */
-/*   Updated: 2020/09/30 15:37:05 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/06 19:29:12 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
 
-static void			ft_width_height(t_mapinfos *map, t_sprite **sp, t_player *p, int nb)
+static void			ft_width_height(t_mapinfos *map, t_sprite **sp,
+	t_player *p, int nb)
 {
 	sp[nb]->spx = sp[nb]->x - p->posx;
 	sp[nb]->spy = sp[nb]->y - p->posy;
 	sp[nb]->invdet = 1.0 / (p->planx * p->diry - p->dirx * p->plany);
-	sp[nb]->transx = sp[nb]->invdet * (p->diry * sp[nb]->spx - p->dirx * sp[nb]->spy);
-	sp[nb]->transy = sp[nb]->invdet * (-p->plany * sp[nb]->spx + p->planx * sp[nb]->spy);
+	sp[nb]->transx = sp[nb]->invdet *
+		(p->diry * sp[nb]->spx - p->dirx * sp[nb]->spy);
+	sp[nb]->transy = sp[nb]->invdet *
+		(-p->plany * sp[nb]->spx + p->planx * sp[nb]->spy);
 	sp[nb]->spscreenx = (int)((map->res->x / 2)
-		* (1 + sp[nb]->transx / sp[nb]->transy));
-//calculate height of the sprite on screen
-	sp[nb]->spheight = abs((int)(map->res->y / sp[nb]->transy));
+		* (1 + sp[nb]->transx / (sp[nb]->transy)));
+	sp[nb]->spheight = abs((int)(map->res->y / (sp[nb]->transy)));
 	sp[nb]->starty = -sp[nb]->spheight / 2 + map->res->y / 2;
 	sp[nb]->starty = (sp[nb]->starty < 0) ? 0 : sp[nb]->starty;
 	sp[nb]->endy = sp[nb]->spheight / 2 + map->res->y / 2;
-	sp[nb]->endy = (sp[nb]->endy >= map->res->y) ? map->res->y - 1 : sp[nb]->endy;
-//calculate width of the sprite
-	sp[nb]->spwidth = abs((map->res->y / (int)sp[nb]->transy));
+	sp[nb]->endy = (sp[nb]->endy >= map->res->y)
+		? map->res->y - 1 : sp[nb]->endy;
+	sp[nb]->spwidth = fabs((double)map->res->y / (sp[nb]->transy));
 	sp[nb]->startx = -sp[nb]->spwidth / 2 + sp[nb]->spscreenx;
 	sp[nb]->startx = (sp[nb]->startx < 0) ? 0 : sp[nb]->startx;
 	sp[nb]->endx = sp[nb]->spwidth / 2 + sp[nb]->spscreenx;
-	sp[nb]->endx = (sp[nb]->endx >= map->res->x) ? map->res->x - 1 : sp[nb]->endx;
+	sp[nb]->endx = (sp[nb]->endx >= map->res->x)
+		? map->res->x - 1 : sp[nb]->endx;
 }
 
-static void		ft_stripe_while(t_mapinfos *map, t_sprite **sp, int nb, int stripe)
+static void		ft_stripe_while(t_mapinfos *map,
+	t_sprite **sp, int nb, int stripe)
 {
 	t_player	*p;
 	int			y;
@@ -43,8 +47,10 @@ static void		ft_stripe_while(t_mapinfos *map, t_sprite **sp, int nb, int stripe)
 	int			d;
 
 	p = map->p;
-	sp[nb]->texx = (256 * (stripe - (-sp[nb]->spwidth / 2 + sp[nb]->spscreenx)) * 64 / sp[nb]->spwidth) / 256;
-	if (sp[nb]->transy > 0 && stripe > 0 && stripe < map->res->x && sp[nb]->transy < p->zbuff[stripe])
+	sp[nb]->texx = (256 * (stripe - (-sp[nb]->spwidth / 2 + sp[nb]->spscreenx))
+		* 64 / sp[nb]->spwidth) / 256;
+	if (sp[nb]->transy > 0 && stripe > 0 && stripe < map->res->x
+		&& sp[nb]->transy < p->zbuff[stripe])
 	{
 		y = sp[nb]->starty;
 		while (y < sp[nb]->endy)
@@ -73,11 +79,7 @@ void			ft_sprites_projections(t_mapinfos *map)
 	{
 		ft_width_height(map, map->spinfos->sp, map->p, nb);
 		stripe = sp[nb]->startx;
-		while (stripe < sp[nb]->endx)
-		{
+		while (stripe++ < sp[nb]->endx)
 			ft_stripe_while(map, sp, nb, stripe);
-			// ft_print_spriteinfos(sp[nb]);
-			stripe++;
-		}
 	}
 }
