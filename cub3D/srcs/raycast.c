@@ -6,20 +6,11 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 19:10:15 by tidminta          #+#    #+#             */
-/*   Updated: 2020/09/15 16:48:19 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/07 18:47:39 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
-
-/*
- *************************************
- **			  FCTS                 **
- **	(DIRX/Y)?? |                   **
- **	DO FONCTION QUI SET DIRX/Y     **
- **	EN FONCTION DE N,S,E OU W      **
- *************************************
- */
 
 static void		ft_step_init(t_mapinfos *map, t_player *p)
 {

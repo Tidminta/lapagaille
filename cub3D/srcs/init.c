@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 16:25:51 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/06 19:52:22 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/07 18:47:22 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,12 @@
 int					ft_parse_open(char **av, t_mapinfos **map, t_list **list)
 {
 	int			fd;
-	int			ret;
 
-	fd = open(av[1], O_RDONLY);
-	ret = -1;
-	if (fd < 0)
-	{
-		printf("Error\nMap file open failed\n");
+	fd = 0;
+	if ((fd = open(av[1], O_RDONLY)) < 0)
 		return (-1);
-	}
 	if ((ft_parseinfos(list, map, fd)) <= 0)
-	{
-		printf("Error\nMap parsing failed\n");
-		return (-1);
-	}
+		return (-2);
 	return (fd);
 }
 
@@ -82,7 +74,6 @@ t_mlx				*ft_start_mlx(t_mapinfos *map, t_player *p)
 		return (NULL);
 	map->p = p;
 	map->mlx = mlx;
-	ft_init_text(map);
 	if (!(ft_sprite_cpt(map)))
 		return (NULL);
 	return (mlx);

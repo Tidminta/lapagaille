@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 13:00:34 by tidminta          #+#    #+#             */
-/*   Updated: 2020/09/14 15:27:00 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/07 15:42:05 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,14 +95,4 @@ char		**ft_lst_to_tab(t_list *lst, t_mapinfos *map)
 	if (lst->content)
 		tab[i] = lst->content;
 	return (tab);
-}
-
-int				ft_free(t_mapinfos *map)
-{
-	free(map->mlx);
-	free(map->p);
-	free(map->res);
-	free(map->map);
-	// system("leaks Cub3D");
-	exit(EXIT_SUCCESS);
 }

@@ -6,13 +6,13 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:16:32 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/06 19:29:12 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/06 20:25:38 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
 
-static void			ft_width_height(t_mapinfos *map, t_sprite **sp,
+static void		ft_width_height(t_mapinfos *map, t_sprite **sp,
 	t_player *p, int nb)
 {
 	sp[nb]->spx = sp[nb]->x - p->posx;

@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 13:38:44 by tidminta          #+#    #+#             */
-/*   Updated: 2020/09/16 17:01:32 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/07 15:41:50 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void		ft_get_dir2(t_player *p, char c)
 	}
 }
 
-void		ft_get_dir(t_mapinfos *map)
+void			ft_get_dir(t_mapinfos *map)
 {
 	char		c;
 	t_player	*p;

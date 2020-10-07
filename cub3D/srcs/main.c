@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 18:42:32 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/06 13:45:13 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/07 18:58:23 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@ static int			ft_game_loop(t_mapinfos *map)
 	mlx->img->img_p = mlx_new_image(map->mlx->mlx_p, map->res->x, map->res->y);
 	mlx->img->data = (int *)mlx_get_data_addr(mlx->img->img_p, &mlx->img->bpp,
 			&mlx->img->size_l, &mlx->img->endian);
+	ft_init_text(map);
 	ft_setmove(map);
 	ft_raycast(map, mlx, map->p);
 	ft_spritecast(map);
-	// ft_print_playerinfos(map->p);
+	ft_free_text(map);
 	mlx_clear_window(map->mlx->mlx_p, map->mlx->win);
 	mlx_put_image_to_window(mlx->mlx_p, mlx->win, mlx->img->img_p, 0, 0);
 	mlx_destroy_image(mlx->mlx_p, mlx->img->img_p);
@@ -42,6 +43,7 @@ static int			ft_game_loop(t_mapinfos *map)
 **		system("leaks Cub3D");      **
 **		refaire ft_free			    **
 ** 		l.60->l.65 a factoriser		**
+** 		write au lieu de printf		**
 **************************************
 */
 
@@ -63,11 +65,11 @@ int					main(int ac, char **av)
 			return (0);
 		if (!(mlx = ft_start_mlx(map, p)))
 			return (0);
-		mlx_hook(mlx->win, KEYPRESS, KEYPRESSMASK, ft_keypress, &map);
-		mlx_hook(mlx->win, KEYRELEASE, KEYRELEASEMASK, ft_keyrelease, &map);
+		mlx_hook(mlx->win, KEYPRESS, 1L << 0, ft_keypress, &map);
+		mlx_hook(mlx->win, KEYRELEASE, 1L << 1, ft_keyrelease, &map);
 		mlx_loop_hook(mlx->mlx_p, &ft_game_loop, map);
 		mlx_loop(mlx->mlx_p);
-		close(fd);
+		close(fd);//a deplacer dans ft_free
 		return (0);
 	}
 	printf("Error\nInvalide number of arguments!\n");

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/25 19:01:40 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/06 19:37:24 by tidminta         ###   ########.fr       */
+/*   Created: 2020/10/07 17:58:41 by tidminta          #+#    #+#             */
+/*   Updated: 2020/10/07 18:52:40 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,8 @@
 # include "get_next_line.h"
 # include "mlx.h"
 
-
 # define KEYPRESS 2
-# define KEYPRESSMASK 1L<<0
 # define KEYRELEASE 3
-# define KEYRELEASEMASK 1L<<1
 # define WIN_WIDTH 800
 # define WIN_HEIGHT 800
 # define TEXWIDTH 64
@@ -89,6 +86,7 @@ typedef struct		s_player
 **			MAP INFOS			   **
 *************************************
 */
+
 typedef struct		s_img
 {
 	void	*img_p;
@@ -121,7 +119,7 @@ typedef struct		s_text
 	int		end;
 }					t_text;
 
-typedef	struct		s_sprite
+typedef struct		s_sprite
 {
 	double		x;
 	double		y;
@@ -144,14 +142,14 @@ typedef	struct		s_sprite
 	int			d;
 }					t_sprite;
 
-typedef	struct		t_infosprt
+typedef struct		s_infosprt
 {
 	t_sprite	**sp;
 	int			*sporder;
 	double		*spdist;
 }					t_infosprt;
 
-typedef	struct		s_mapinfos
+typedef struct		s_mapinfos
 {
 	char		**map_tab;
 	t_text		**text;
@@ -179,18 +177,19 @@ typedef	struct		s_mapinfos
 *************************************
 */
 
-int						ft_parse_open(char **av, t_mapinfos **map, t_list **list);
+int					ft_parse_open(char **av, t_mapinfos **map, t_list **list);
 
-t_mlx					*ft_start_mlx(t_mapinfos *map, t_player *p);
+t_mlx				*ft_start_mlx(t_mapinfos *map, t_player *p);
 
-t_player				*ft_playerinit(t_mapinfos *map);
+t_player			*ft_playerinit(t_mapinfos *map);
 
-void					ft_init_text(t_mapinfos *map);
+void				ft_init_text(t_mapinfos *map);
 
-int						ft_free(t_mapinfos *map);
+int					ft_free(t_mapinfos *map);
 
-void					ft_get_dir(t_mapinfos *map);
+void				ft_get_dir(t_mapinfos *map);
 
+void				ft_free_text(t_mapinfos *map);
 
 /*
 *************************************
@@ -198,18 +197,18 @@ void					ft_get_dir(t_mapinfos *map);
 *************************************
 */
 
-int						ft_raycast(t_mapinfos *map_tmp, t_mlx *mlx_tmp, t_player *p);
+int					ft_raycast(t_mapinfos *map_tmp,
+					t_mlx *mlx_tmp, t_player *p);
 
-int						ft_create_trgb(int t, int r, int g, int b);
+int					ft_create_trgb(int t, int r, int g, int b);
 
-int						ft_keypress(int key, t_mapinfos **map_tmp);
+int					ft_keypress(int key, t_mapinfos **map_tmp);
 
-int						ft_keyrelease(int key, t_mapinfos **map_tmp);
+int					ft_keyrelease(int key, t_mapinfos **map_tmp);
 
-int						ft_setmove(t_mapinfos *map_tmp);
+int					ft_setmove(t_mapinfos *map_tmp);
 
-void					ft_drawtext(t_mapinfos *map_tmp, t_mlx *mlx);
-
+void				ft_drawtext(t_mapinfos *map_tmp, t_mlx *mlx);
 
 /*
 *************************************
@@ -220,39 +219,41 @@ void					ft_drawtext(t_mapinfos *map_tmp, t_mlx *mlx);
 *************************************
 */
 
-size_t                  ft_parseinfos(t_list **list, t_mapinfos **map, int fd);
+t_list				*ft_map_gnl(int fd);
 
-t_mapinfos              *ft_init_mapinfos(void);
+int					ft_get_res_x(t_list *infos, t_res *res);
 
-t_list                  *ft_infos_gnl(int fd, t_list **t_mapinfos);
+size_t				ft_parseinfos(t_list **list, t_mapinfos **map, int fd);
 
-t_list                  *ft_map_gnl(int fd);
+t_mapinfos			*ft_init_mapinfos(void);
 
-int						ft_get_res_x(t_list *infos, t_res *res);
+int					ft_get_res_y(t_list *infos, t_res *res, int index);
 
-int						ft_get_res_y(t_list *infos, t_res *res, int index);
+void				ft_get_path(char *to_find, t_list *lst, char **s);
 
-void                    ft_get_path(char *to_find, t_list *lst, char **s);
+void				ft_get_rgb(char *to_find, t_list *lst, int *rgb);
 
-void                    ft_get_rgb(char *to_find, t_list *lst, int *rgb);
+size_t				ft_is_map_char(char c);
 
-size_t                  ft_is_map_char(char c);
+size_t				ft_is_map_line(char *s);
 
-size_t                  ft_is_map_line(char *s);
+size_t				ft_check_rfc(t_mapinfos *map);
 
-size_t                  ft_check_rfc(t_mapinfos *map);
+char				**ft_lst_to_tab(t_list *lst, t_mapinfos *map);
 
-char                    **ft_lst_to_tab(t_list *lst, t_mapinfos *map);
+void				ft_print_tab(char **tab);
 
-void                    ft_print_tab(char **tab);
+size_t				ft_check_rfc(t_mapinfos *map);
 
-size_t					ft_check_rfc(t_mapinfos *map);
+int					ft_get_start_position(t_mapinfos *map);
 
-int						ft_get_start_position(t_mapinfos *map);
+int					ft_map_is_closed(char **map);
 
-int						ft_map_is_closed(char **map);
+void				ft_free_split(char **tab);
 
-void					ft_free_split(char **tab);
+void				ft_error(t_mapinfos *map, int indice);
+
+t_list				*ft_infos_gnl(int fd, t_list **mapinfos);
 
 /*
 **************************************
@@ -261,7 +262,6 @@ void					ft_free_split(char **tab);
 */
 
 void				ft_spritecast(t_mapinfos *map);
-// void				ft_bubblesort(int * tab);
 void				ft_sprites_projections(t_mapinfos *map);
 int					ft_sprite_cpt(t_mapinfos *map);
 void				ft_sprites(t_mapinfos *map);

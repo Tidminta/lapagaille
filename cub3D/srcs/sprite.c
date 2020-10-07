@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 16:37:01 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/06 19:48:39 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/07 15:35:51 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,25 +95,29 @@ void					ft_spritesort(t_mapinfos *map)
 
 int						ft_sprite_cpt(t_mapinfos *map)
 {
+	char **tmp;
 	int i;
 	int j;
 	int nb;
 
 	i = 0;
 	nb = 0;
-	while (map->map_tab[i])
+	tmp = map->map_tab;
+	j = 0;
+	while (tmp[i] && (i < (int)map->line_max))
 	{
 		j = 0;
-		while (map->map_tab[i][j])
+		while (tmp[i][j] && (j < (int)map->col_max))
 		{
-			if (map->map_tab[i][j] == '2')
+			if (tmp[i][j] == '2')
 				nb++;
 			j++;
 		}
 		i++;
 	}
 	map->nbsp = nb;
-	return (ft_sprites_init(map));
+	ft_sprites_init(map);
+	return (1);
 }
 
 void					ft_spritecast(t_mapinfos *map)

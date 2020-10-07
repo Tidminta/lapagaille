@@ -1,10 +1,14 @@
 recap
-
+*********************************************
 parsing + error quit propre
+-1 map open failed
+-2 map parsing failed (in precess)
+*********************************************
 screenshot
 *********************************************
 - init elements sprite a 0 ?
 - est et ouest inverse
+- deplacements lateraux
 - /!\ easy malloc /!\
 - ft_parseopen() -> creer ft_free qui free les elements previous en cas de malloc foireux
 - ft_get_start_position a revoir | cas d'erreur non pris en compte
