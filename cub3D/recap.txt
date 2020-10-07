@@ -1,11 +1,19 @@
 recap
 *********************************************
 parsing + error quit propre
+
 -1 map open failed
--2 map parsing failed (in precess)
+-2 map parsing failed
+-3 ~ -6 error occur during builting
+in process :  - refact ft_parseinfos error quit
+			  - ft_error a faire correctement
+			  - chercher malloc sans protections
+			  - chercer d'autres cas ou utiliser ft_error
 *********************************************
 screenshot
 *********************************************
+map errors detection
+********************************************
 - init elements sprite a 0 ?
 - est et ouest inverse
 - deplacements lateraux
@@ -13,3 +21,4 @@ screenshot
 - ft_parseopen() -> creer ft_free qui free les elements previous en cas de malloc foireux
 - ft_get_start_position a revoir | cas d'erreur non pris en compte
 - penser a free les sprites
+- check leaks

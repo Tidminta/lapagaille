@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 16:25:51 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/07 18:47:22 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/07 20:56:27 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,23 @@
 
 int					ft_parse_open(char **av, t_mapinfos **map, t_list **list)
 {
+	t_mapinfos	*m;
 	int			fd;
 
+	m = *map;
 	fd = 0;
 	if ((fd = open(av[1], O_RDONLY)) < 0)
 		return (-1);
 	if ((ft_parseinfos(list, map, fd)) <= 0)
 		return (-2);
+	if (!((*(map))->p = ft_playerinit(*map)))
+		return (-3);
+	if (!((*(map))->mlx = ft_start_mlx(*map)))
+		return (-4);
+	if ((ft_sprite_cpt(*map)) < 0)
+		return (-5);
+	if (!(ft_sprites_init(*map)))
+		return (-6);
 	return (fd);
 }
 
@@ -56,10 +66,12 @@ t_mapinfos			*ft_init_mapinfos(void)
 	return (map);
 }
 
-t_mlx				*ft_start_mlx(t_mapinfos *map, t_player *p)
+t_mlx				*ft_start_mlx(t_mapinfos *map)
 {
+	int i;
 	t_mlx	*mlx;
 
+	i = -1;
 	if (!(mlx = (t_mlx*)malloc(sizeof(t_mlx))))
 		return (NULL);
 	if (!(mlx->img = (t_img*)malloc(sizeof(t_img))))
@@ -72,10 +84,7 @@ t_mlx				*ft_start_mlx(t_mapinfos *map, t_player *p)
 	mlx->win = mlx_new_window(mlx->mlx_p, map->res->x, map->res->y, "Cub3D");
 	if (!mlx->win)
 		return (NULL);
-	map->p = p;
 	map->mlx = mlx;
-	if (!(ft_sprite_cpt(map)))
-		return (NULL);
 	return (mlx);
 }
 

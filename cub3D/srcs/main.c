@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 18:42:32 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/07 18:58:23 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/07 20:49:29 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int					main(int ac, char **av)
 	t_list		*list;
 	t_mapinfos	*map;
 	t_mlx		*mlx;
-	t_player	*p;
 	int			fd;
 
 	if (ac == 2)
@@ -60,15 +59,11 @@ int					main(int ac, char **av)
 		list = NULL;
 		mlx = NULL;
 		if ((fd = ft_parse_open(av, &map, &list)) < 0)
-			return (0);
-		if (!(p = ft_playerinit(map)))
-			return (0);
-		if (!(mlx = ft_start_mlx(map, p)))
-			return (0);
-		mlx_hook(mlx->win, KEYPRESS, 1L << 0, ft_keypress, &map);
-		mlx_hook(mlx->win, KEYRELEASE, 1L << 1, ft_keyrelease, &map);
-		mlx_loop_hook(mlx->mlx_p, &ft_game_loop, map);
-		mlx_loop(mlx->mlx_p);
+			return (ft_error(map, fd));
+		mlx_hook(map->mlx->win, KEYPRESS, 1L << 0, ft_keypress, &map);
+		mlx_hook(map->mlx->win, KEYRELEASE, 1L << 1, ft_keyrelease, &map);
+		mlx_loop_hook(map->mlx->mlx_p, &ft_game_loop, map);
+		mlx_loop(map->mlx->mlx_p);
 		close(fd);//a deplacer dans ft_free
 		return (0);
 	}

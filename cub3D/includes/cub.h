@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 17:58:41 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/07 18:52:40 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/07 20:41:01 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,7 @@ typedef struct		s_mapinfos
 
 int					ft_parse_open(char **av, t_mapinfos **map, t_list **list);
 
-t_mlx				*ft_start_mlx(t_mapinfos *map, t_player *p);
+t_mlx				*ft_start_mlx(t_mapinfos *map);
 
 t_player			*ft_playerinit(t_mapinfos *map);
 
@@ -251,7 +251,7 @@ int					ft_map_is_closed(char **map);
 
 void				ft_free_split(char **tab);
 
-void				ft_error(t_mapinfos *map, int indice);
+int					ft_error(t_mapinfos *map, int indice);
 
 t_list				*ft_infos_gnl(int fd, t_list **mapinfos);
 
@@ -267,6 +267,8 @@ int					ft_sprite_cpt(t_mapinfos *map);
 void				ft_sprites(t_mapinfos *map);
 void				ft_fill_sprites(t_mapinfos *map, int nb);
 void				ft_spritesort(t_mapinfos *map);
+int					ft_sprites_init(t_mapinfos *map);
+
 
 /*
 *************************************
