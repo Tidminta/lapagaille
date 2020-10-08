@@ -6,58 +6,55 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 18:32:20 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/07 18:46:09 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/08 19:09:51 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
 
-int						ft_get_index(t_player *p)
+static int			ft_init_text2(t_mapinfos *map, int resx, int resy)
 {
-	/** NO **/
-	if ((p->side == 1) && (p->raydy < 0))
-		return (0);
-	/** EA **/
-	else if ((p->side == 0) && (p->raydx < 0))
-		return (3);
-	/** WE **/
-	else if ((p->side == 0) && (p->raydx > 0))
-		return (2);
-	/** SO **/
-	else
-		return (1);
+	if (!(map->text[3]->img_p = mlx_xpm_file_to_image(map->mlx->mlx_p,
+		map->text[3]->path, &resx, &resy)))
+		return (-1);
+	map->text[3]->data = (int*)mlx_get_data_addr(map->text[3]->img_p,
+		&map->text[3]->bpp, &map->text[3]->s_l, &map->text[3]->end);
+	if (!(map->text[4]->img_p = mlx_xpm_file_to_image(map->mlx->mlx_p,
+		map->text[4]->path, &resx, &resy)))
+		return (-1);
+	map->text[4]->data = (int*)mlx_get_data_addr(map->text[4]->img_p,
+		&map->text[4]->bpp, &map->text[4]->s_l, &map->text[4]->end);
+	return (0);
 }
 
-void					ft_init_text(t_mapinfos *map)
+int					ft_init_text(t_mapinfos *map)
 {
 	int			resx;
 	int			resy;
 
 	resx = map->res->x;
 	resy = map->res->y;
-	map->text[0]->img_p = mlx_xpm_file_to_image(map->mlx->mlx_p,
-		map->text[0]->path, &resx, &resy);
+	if (!(map->text[0]->img_p = mlx_xpm_file_to_image(map->mlx->mlx_p,
+		map->text[0]->path, &resx, &resy)))
+		return (-1);
 	map->text[0]->data = (int*)mlx_get_data_addr(map->text[0]->img_p,
 		&map->text[0]->bpp, &map->text[0]->s_l, &map->text[0]->end);
-	map->text[1]->img_p = mlx_xpm_file_to_image(map->mlx->mlx_p,
-		map->text[1]->path, &resx, &resy);
+	if (!(map->text[1]->img_p = mlx_xpm_file_to_image(map->mlx->mlx_p,
+		map->text[1]->path, &resx, &resy)))
+		return (-1);
 	map->text[1]->data = (int*)mlx_get_data_addr(map->text[1]->img_p,
 		&map->text[1]->bpp, &map->text[1]->s_l, &map->text[1]->end);
-	map->text[2]->img_p = mlx_xpm_file_to_image(map->mlx->mlx_p,
-		map->text[2]->path, &resx, &resy);
+	if (!(map->text[2]->img_p = mlx_xpm_file_to_image(map->mlx->mlx_p,
+		map->text[2]->path, &resx, &resy)))
+		return (-1);
 	map->text[2]->data = (int*)mlx_get_data_addr(map->text[2]->img_p,
 		&map->text[2]->bpp, &map->text[2]->s_l, &map->text[2]->end);
-	map->text[3]->img_p = mlx_xpm_file_to_image(map->mlx->mlx_p,
-		map->text[3]->path, &resx, &resy);
-	map->text[3]->data = (int*)mlx_get_data_addr(map->text[3]->img_p,
-		&map->text[3]->bpp, &map->text[3]->s_l, &map->text[3]->end);
-	map->text[4]->img_p = mlx_xpm_file_to_image(map->mlx->mlx_p,
-		map->text[4]->path, &resx, &resy);
-	map->text[4]->data = (int*)mlx_get_data_addr(map->text[4]->img_p,
-		&map->text[4]->bpp, &map->text[4]->s_l, &map->text[4]->end);
+	if (ft_init_text2(map, resx, resy) < 0)
+		return (-1);
+	return (0);
 }
 
-void					ft_free_text(t_mapinfos *map)
+void				ft_free_text(t_mapinfos *map)
 {
 	int i;
 
@@ -66,7 +63,7 @@ void					ft_free_text(t_mapinfos *map)
 		mlx_destroy_image(map->mlx->mlx_p, map->text[i]->img_p);
 }
 
-static void				ft_drawtext2(t_mapinfos *map, t_mlx *mlx)
+static void			ft_drawtext2(t_mapinfos *map, t_mlx *mlx)
 {
 	int			y;
 	int			color;
@@ -86,7 +83,7 @@ static void				ft_drawtext2(t_mapinfos *map, t_mlx *mlx)
 	}
 }
 
-void					ft_drawtext(t_mapinfos *map, t_mlx *mlx)
+void				ft_drawtext(t_mapinfos *map, t_mlx *mlx)
 {
 	char		**map2d;
 	t_player	*p;

@@ -6,13 +6,24 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 13:00:34 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/07 15:42:05 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/08 18:30:52 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
 
-void			ft_get_rgb(char *to_find, t_list *lst, int *rgb)
+static int			ft_check_rgb(char **tab)
+{
+	int i;
+
+	i = -1;
+	while (++i < 3)
+		if (ft_atoi(tab[i]) < 0 || ft_atoi(tab[i]) > 255)
+			return (0);
+	return (1);
+}
+
+int					ft_get_rgb(char *to_find, t_list *lst, int *rgb)
 {
 	char	**tab;
 	char	*str;
@@ -20,26 +31,29 @@ void			ft_get_rgb(char *to_find, t_list *lst, int *rgb)
 	while (lst->next || lst->content)
 	{
 		str = lst->content;
-		if (ft_strncmp(str, to_find, 2) == 0)
+		if (ft_strncmp((char *)lst->content, to_find, 2) == 0)
 		{
 			while (ft_isalpha(*str) || *str == ' ')
 				str++;
 			if (ft_isdigit(*str))
 			{
-				tab = ft_split(str, ',');
+				if ((!(tab = ft_split(str, ','))) || (!(ft_check_rgb(tab))))
+					return (-1);
 				*rgb = ft_create_trgb(0, ft_atoi(tab[0]),
 					ft_atoi(tab[1]), ft_atoi(tab[2]));
 				ft_free_split(tab);
+				return (1);
 			}
 		}
 		if (lst->next)
 			lst = lst->next;
 		else
-			return ;
+			return (-1);
 	}
+	return (-1);
 }
 
-size_t		ft_is_map_char(char c)
+size_t				ft_is_map_char(char c)
 {
 	char	*str;
 	size_t	i;
@@ -55,7 +69,7 @@ size_t		ft_is_map_char(char c)
 	return (0);
 }
 
-size_t		ft_is_map_line(char *s)
+size_t				ft_is_map_line(char *s)
 {
 	size_t	i;
 	size_t	len;
@@ -69,7 +83,7 @@ size_t		ft_is_map_line(char *s)
 	return (0);
 }
 
-char		**ft_lst_to_tab(t_list *lst, t_mapinfos *map)
+char				**ft_lst_to_tab(t_list *lst, t_mapinfos *map)
 {
 	char	**tab;
 	char	*tmp;
@@ -79,7 +93,8 @@ char		**ft_lst_to_tab(t_list *lst, t_mapinfos *map)
 	i = 0;
 	len = ft_lstsize(lst);
 	map->line_max = len;
-	tab = (char**)malloc(sizeof(char*) * (len + 1));
+	if (!(tab = (char**)malloc(sizeof(char*) * (len + 1))))
+		return (NULL);
 	tab[len] = 0;
 	while (lst->next)
 	{

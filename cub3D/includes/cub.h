@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 17:58:41 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/07 20:41:01 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/08 18:48:59 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,7 @@ t_mlx				*ft_start_mlx(t_mapinfos *map);
 
 t_player			*ft_playerinit(t_mapinfos *map);
 
-void				ft_init_text(t_mapinfos *map);
+int					ft_init_text(t_mapinfos *map);
 
 int					ft_free(t_mapinfos *map);
 
@@ -210,6 +210,8 @@ int					ft_setmove(t_mapinfos *map_tmp);
 
 void				ft_drawtext(t_mapinfos *map_tmp, t_mlx *mlx);
 
+int					ft_get_index(t_player *p);
+
 /*
 *************************************
 **			  PARSING              **
@@ -225,13 +227,13 @@ int					ft_get_res_x(t_list *infos, t_res *res);
 
 size_t				ft_parseinfos(t_list **list, t_mapinfos **map, int fd);
 
-t_mapinfos			*ft_init_mapinfos(void);
+t_mapinfos			*ft_init_mapinfos(int i);
 
 int					ft_get_res_y(t_list *infos, t_res *res, int index);
 
-void				ft_get_path(char *to_find, t_list *lst, char **s);
+int					ft_get_path(char *to_find, t_list *lst, char **s);
 
-void				ft_get_rgb(char *to_find, t_list *lst, int *rgb);
+int					ft_get_rgb(char *to_find, t_list *lst, int *rgb);
 
 size_t				ft_is_map_char(char c);
 
@@ -245,7 +247,7 @@ void				ft_print_tab(char **tab);
 
 size_t				ft_check_rfc(t_mapinfos *map);
 
-int					ft_get_start_position(t_mapinfos *map);
+int					ft_get_start_position(t_mapinfos *map, char **tab);
 
 int					ft_map_is_closed(char **map);
 
@@ -254,6 +256,8 @@ void				ft_free_split(char **tab);
 int					ft_error(t_mapinfos *map, int indice);
 
 t_list				*ft_infos_gnl(int fd, t_list **mapinfos);
+
+int					ft_check_path(t_list *lst, t_text **tex);
 
 /*
 **************************************
@@ -268,7 +272,6 @@ void				ft_sprites(t_mapinfos *map);
 void				ft_fill_sprites(t_mapinfos *map, int nb);
 void				ft_spritesort(t_mapinfos *map);
 int					ft_sprites_init(t_mapinfos *map);
-
 
 /*
 *************************************

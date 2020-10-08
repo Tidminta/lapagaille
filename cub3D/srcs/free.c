@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 16:50:53 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/07 20:17:41 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/08 18:39:10 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,18 @@ int			ft_error(t_mapinfos *map, int indice)
 {
 	(void)map;
 	if (indice == -1)
-	{
 		printf("Error\nMap file open failed\n");
-		exit(EXIT_SUCCESS);
-	}
 	else if (indice == -2)
-	{
 		printf("Error\nMap parsing failed\n");
-		// free(map);
-	}
-	return (0);
+	else if (indice == -3)
+		printf("Error\nIt's may be a malloc error\n");
+	else if (indice == -4)
+		printf("Error\nbad resolution\n");
+	else if (indice == -5)
+		printf("Error\nBad path for textures or sprite\n");
+	else if (indice == -6)
+		printf("Error\nBad RGB\n");
+	else if (indice == -7)
+		printf("Error\nNo/multiple player\n");
+	exit(EXIT_SUCCESS);
 }

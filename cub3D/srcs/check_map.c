@@ -6,20 +6,20 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 13:38:44 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/07 15:41:50 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/08 18:48:23 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
 
-int				ft_get_start_position(t_mapinfos *map)
+int				ft_get_start_position(t_mapinfos *map, char **tab)
 {
-	char	**tab;
+	int		cpt;
 	size_t	i;
 	size_t	j;
 
 	i = -1;
-	tab = map->map_tab;
+	cpt = 0;
 	while (tab[++i])
 	{
 		j = -1;
@@ -31,10 +31,12 @@ int				ft_get_start_position(t_mapinfos *map)
 				map->start_x = j;
 				map->start_y = i;
 				map->dir = tab[i][j];
-				return (1);
+				cpt++;
 			}
 		}
 	}
+	if (cpt == 1)
+		return (1);
 	return (0);
 }
 
@@ -79,4 +81,35 @@ void			ft_get_dir(t_mapinfos *map)
 	}
 	else
 		ft_get_dir2(p, c);
+}
+
+int				ft_check_path(t_list *lst_tmp, t_text **text)
+{
+	if (ft_get_path("NO", lst_tmp, &text[0]->path) < 0)
+		return (-1);
+	if (ft_get_path("SO", lst_tmp, &text[1]->path) < 0)
+		return (-1);
+	if (ft_get_path("WE", lst_tmp, &text[2]->path) < 0)
+		return (-1);
+	if (ft_get_path("EA", lst_tmp, &text[3]->path) < 0)
+		return (-1);
+	if (ft_get_path("S ", lst_tmp, &text[4]->path) < 0)
+		return (-1);
+	return (1);
+}
+
+int						ft_get_index(t_player *p)
+{
+	/** NO **/
+	if ((p->side == 1) && (p->raydy < 0))
+		return (0);
+	/** EA **/
+	else if ((p->side == 0) && (p->raydx < 0))
+		return (3);
+	/** WE **/
+	else if ((p->side == 0) && (p->raydx > 0))
+		return (2);
+	/** SO **/
+	else
+		return (1);
 }

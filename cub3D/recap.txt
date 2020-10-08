@@ -1,19 +1,37 @@
-recap
 *********************************************
-parsing + error quit propre
-
+					RECAP
+		DONT FORGET TO NORM THE PROJECT
+*********************************************
+			error quit
 -1 map open failed
 -2 map parsing failed
--3 ~ -6 error occur during builting
-in process :  - refact ft_parseinfos error quit
-			  - ft_error a faire correctement
+-3 error occur during builting, its may be a malloc error !
+-3 mapinfos init failled
+-4 bad resolution
+-5 bad path
+-6 bad rgb
+-7 no/multiple player on the map
+	*	*	*	*	*	*	*	*	*	*	*
+in process :  - ft_parseinfos error quit done | /!\ pas a la norme /!\
+			  - ft_error finitions
 			  - chercher malloc sans protections
 			  - chercer d'autres cas ou utiliser ft_error
 *********************************************
-screenshot
+				SCREENSHOT
 *********************************************
-map errors detection
+-
+*********************************************
+			MAP ERROR DETECCTION
+*********************************************
+- good extension
+- si caracteres present dans la map != (NSEW 012)
+- si map fermee
+- bad path
+- bad resolution
+- bad rgb
 ********************************************
+				FOIRE
+*********************************************
 - init elements sprite a 0 ?
 - est et ouest inverse
 - deplacements lateraux
@@ -22,3 +40,7 @@ map errors detection
 - ft_get_start_position a revoir | cas d'erreur non pris en compte
 - penser a free les sprites
 - check leaks
+- ft_get_rgb 26 lignes
+- croix rouge quit
+- gestion resolution max
+- close fd -> mettre fd dans mapinfos

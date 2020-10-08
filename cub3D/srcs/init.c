@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 16:25:51 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/07 20:56:27 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/08 17:28:31 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,33 +28,36 @@ int					ft_parse_open(char **av, t_mapinfos **map, t_list **list)
 	fd = 0;
 	if ((fd = open(av[1], O_RDONLY)) < 0)
 		return (-1);
-	if ((ft_parseinfos(list, map, fd)) <= 0)
-		return (-2);
+	if ((fd = ft_parseinfos(list, map, fd)) <= 0)
+		return (fd);
 	if (!((*(map))->p = ft_playerinit(*map)))
 		return (-3);
 	if (!((*(map))->mlx = ft_start_mlx(*map)))
-		return (-4);
+		return (-3);
 	if ((ft_sprite_cpt(*map)) < 0)
-		return (-5);
+		return (-3);
 	if (!(ft_sprites_init(*map)))
-		return (-6);
+		return (-3);
 	return (fd);
 }
 
-t_mapinfos			*ft_init_mapinfos(void)
+t_mapinfos			*ft_init_mapinfos(int i)
 {
 	t_mapinfos	*map;
 
-	map = (t_mapinfos*)malloc(sizeof(t_mapinfos));
-	map->res = (t_res*)malloc(sizeof(t_res));
-	map->spinfos = (t_infosprt*)malloc(sizeof(t_infosprt));
-	map->text = (t_text**)malloc(sizeof(t_text*) * 5);
-	map->text[0] = (t_text*)malloc(sizeof(t_text));
-	map->text[1] = (t_text*)malloc(sizeof(t_text));
-	map->text[2] = (t_text*)malloc(sizeof(t_text));
-	map->text[3] = (t_text*)malloc(sizeof(t_text));
-	map->text[4] = (t_text*)malloc(sizeof(t_text));
-	map->map = ft_lstnew("");
+	if (!(map = (t_mapinfos*)malloc(sizeof(t_mapinfos))))
+		return (NULL);
+	if (!(map->res = (t_res*)malloc(sizeof(t_res))))
+		return (NULL);
+	if (!(map->spinfos = (t_infosprt*)malloc(sizeof(t_infosprt))))
+		return (NULL);
+	if (!(map->text = (t_text**)malloc(sizeof(t_text*) * 5)))
+		return (NULL);
+	while (++i < 5)
+		if (!(map->text[i] = (t_text*)malloc(sizeof(t_text))))
+			return (NULL);
+	if (!(map->map = ft_lstnew("")))
+		return (NULL);
 	map->map_tab = NULL;
 	map->nbsp = 0;
 	map->res->x = 0;
@@ -68,7 +71,7 @@ t_mapinfos			*ft_init_mapinfos(void)
 
 t_mlx				*ft_start_mlx(t_mapinfos *map)
 {
-	int i;
+	int		i;
 	t_mlx	*mlx;
 
 	i = -1;
@@ -84,7 +87,7 @@ t_mlx				*ft_start_mlx(t_mapinfos *map)
 	mlx->win = mlx_new_window(mlx->mlx_p, map->res->x, map->res->y, "Cub3D");
 	if (!mlx->win)
 		return (NULL);
-	map->mlx = mlx;
+	// map->mlx = mlx;
 	return (mlx);
 }
 

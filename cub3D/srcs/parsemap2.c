@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 13:00:34 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/07 21:02:00 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/08 18:59:05 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ t_list				*ft_infos_gnl(int fd, t_list **mapinfos)
 	return (infos);
 }
 
-void				ft_get_path(char *to_find, t_list *lst, char **s)
+int					ft_get_path(char *to_find, t_list *lst, char **s)
 {
 	int		i;
 	char	*tmp;
@@ -106,13 +106,17 @@ void				ft_get_path(char *to_find, t_list *lst, char **s)
 			i = ft_strlen(tmp2);
 			while (tmp2[i] != ' ')
 				i--;
-			tmp = ft_substr(tmp2, i + 1, ft_strlen(tmp2));
-			*s = ft_strdup(tmp);
+			if (!(tmp = ft_substr(tmp2, i + 1, ft_strlen(tmp2))))
+				return (-1);
+			if (!(*s = ft_strdup(tmp)))
+				return (-1);
 			free(tmp);
-			return ;
+			if (*s)
+				return (1);
 		}
 		lst = lst->next;
 	}
+	return (0);
 }
 
 size_t				ft_parseinfos(t_list **list, t_mapinfos **map, int fd)
@@ -121,25 +125,25 @@ size_t				ft_parseinfos(t_list **list, t_mapinfos **map, int fd)
 	t_mapinfos		*map_tmp;
 	int				ret;
 
-	*map = ft_init_mapinfos();
+	if (!(*map = ft_init_mapinfos(-1)))
+		return (-3);
 	map_tmp = *map;
-	*list = ft_infos_gnl(fd, &map_tmp->map);
+	if (!(*list = ft_infos_gnl(fd, &map_tmp->map)))
+		return (-3);
 	lst_tmp = *list;
-	ret = 0;
 	if ((ret = ft_get_res_x(lst_tmp, map_tmp->res)) <= 0)
-		return (-1);
+		return (-4);
 	if ((ret = ft_get_res_y(lst_tmp, map_tmp->res, ret)) <= 0)
-		return (-1);
-	ft_get_path("NO", lst_tmp, &map_tmp->text[0]->path);
-	ft_get_path("SO", lst_tmp, &map_tmp->text[1]->path);
-	ft_get_path("WE", lst_tmp, &map_tmp->text[2]->path);
-	ft_get_path("EA", lst_tmp, &map_tmp->text[3]->path);
-	ft_get_path("S ", lst_tmp, &map_tmp->text[4]->path);
-	ft_get_rgb("F ", lst_tmp, &map_tmp->floor_rgb);
-	ft_get_rgb("C ", lst_tmp, &map_tmp->ceil_rgb);
-	map_tmp->map_tab = ft_lst_to_tab(map_tmp->map, map_tmp);
-	if (!(ft_get_start_position(map_tmp)))
-		return (-1);
+		return (-4);
+	if (!(ft_check_path(lst_tmp, map_tmp->text)))
+		return (-5);
+	ret = ft_get_rgb("F ", lst_tmp, &map_tmp->floor_rgb);
+	if (ret < 0 || ft_get_rgb("C ", lst_tmp, &map_tmp->ceil_rgb) < 0)
+		return (-6);
+	if (!(map_tmp->map_tab = ft_lst_to_tab(map_tmp->map, map_tmp)))
+		return (-3);
+	if (!(ft_get_start_position(map_tmp, map_tmp->map_tab)))
+		return (-7);
 	map_tmp->win_h = map_tmp->res->y;
 	map_tmp->win_w = map_tmp->res->x;
 	return (1);

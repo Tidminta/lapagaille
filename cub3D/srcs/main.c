@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 18:42:32 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/07 20:49:29 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/08 18:54:37 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,15 @@ int					ft_create_trgb(int t, int r, int g, int b)
 
 static int			ft_game_loop(t_mapinfos *map)
 {
+	int			ret;
 	t_mlx		*mlx;
 
 	mlx = map->mlx;
 	mlx->img->img_p = mlx_new_image(map->mlx->mlx_p, map->res->x, map->res->y);
 	mlx->img->data = (int *)mlx_get_data_addr(mlx->img->img_p, &mlx->img->bpp,
 			&mlx->img->size_l, &mlx->img->endian);
-	ft_init_text(map);
+	if ((ret = ft_init_text(map)) < 0)
+		return (ft_error(map, -5));
 	ft_setmove(map);
 	ft_raycast(map, mlx, map->p);
 	ft_spritecast(map);
