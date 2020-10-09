@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 18:42:32 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/08 18:54:37 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/09 17:38:05 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int			ft_game_loop(t_mapinfos *map)
 	mlx->img->data = (int *)mlx_get_data_addr(mlx->img->img_p, &mlx->img->bpp,
 			&mlx->img->size_l, &mlx->img->endian);
 	if ((ret = ft_init_text(map)) < 0)
-		return (ft_error(map, -5));
+		return (ft_error(&map->garbage, -5));
 	ft_setmove(map);
 	ft_raycast(map, mlx, map->p);
 	ft_spritecast(map);
@@ -52,6 +52,7 @@ static int			ft_game_loop(t_mapinfos *map)
 int					main(int ac, char **av)
 {
 	t_list		*list;
+	t_list		*garbage;
 	t_mapinfos	*map;
 	t_mlx		*mlx;
 	int			fd;
@@ -60,8 +61,10 @@ int					main(int ac, char **av)
 	{
 		list = NULL;
 		mlx = NULL;
-		if ((fd = ft_parse_open(av, &map, &list)) < 0)
-			return (ft_error(map, fd));
+		if (!(garbage = ft_lstnew("")))
+			return (ft_error(&garbage, -8));
+		if ((fd = ft_parse_open(av, &map, &list, &garbage)) < 0)
+			return (ft_error(&garbage, fd));
 		mlx_hook(map->mlx->win, KEYPRESS, 1L << 0, ft_keypress, &map);
 		mlx_hook(map->mlx->win, KEYRELEASE, 1L << 1, ft_keyrelease, &map);
 		mlx_loop_hook(map->mlx->mlx_p, &ft_game_loop, map);

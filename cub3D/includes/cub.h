@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 17:58:41 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/08 18:48:59 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/09 17:36:15 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,7 @@ typedef struct		s_infosprt
 typedef struct		s_mapinfos
 {
 	char		**map_tab;
+	t_list		*garbage;
 	t_text		**text;
 	t_mlx		*mlx;
 	t_player	*p;
@@ -169,6 +170,7 @@ typedef struct		s_mapinfos
 	size_t		win_h;
 	size_t		start_x;
 	size_t		start_y;
+	
 }					t_mapinfos;
 
 /*
@@ -177,7 +179,8 @@ typedef struct		s_mapinfos
 *************************************
 */
 
-int					ft_parse_open(char **av, t_mapinfos **map, t_list **list);
+int					ft_parse_open(char **av, t_mapinfos **map, t_list **list,
+					t_list **garb);
 
 t_mlx				*ft_start_mlx(t_mapinfos *map);
 
@@ -190,6 +193,9 @@ int					ft_free(t_mapinfos *map);
 void				ft_get_dir(t_mapinfos *map);
 
 void				ft_free_text(t_mapinfos *map);
+
+void				*ft_garbage_collector(t_list **garbage, unsigned int size);
+
 
 /*
 *************************************
@@ -225,9 +231,9 @@ t_list				*ft_map_gnl(int fd);
 
 int					ft_get_res_x(t_list *infos, t_res *res);
 
-size_t				ft_parseinfos(t_list **list, t_mapinfos **map, int fd);
+size_t				ft_parseinfos(t_list **list, t_mapinfos **map, int fd, t_list *g);
 
-t_mapinfos			*ft_init_mapinfos(int i);
+t_mapinfos			*ft_init_mapinfos(int i, t_list *garbage);
 
 int					ft_get_res_y(t_list *infos, t_res *res, int index);
 
@@ -253,7 +259,7 @@ int					ft_map_is_closed(char **map);
 
 void				ft_free_split(char **tab);
 
-int					ft_error(t_mapinfos *map, int indice);
+int					ft_error(t_list **garbage, int indice);
 
 t_list				*ft_infos_gnl(int fd, t_list **mapinfos);
 

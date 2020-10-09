@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 16:50:53 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/08 18:39:10 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/09 17:38:11 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,36 @@ void			ft_free_split(char **tab)
 **************************************
 */
 
-int			ft_error(t_mapinfos *map, int indice)
+void			*ft_garbage_collector(t_list **garbage, unsigned int size)
 {
-	(void)map;
+	t_list	*new;
+	void	*tmp;
+
+	if (!(tmp = (void*)malloc(size)))
+		ft_error(garbage, -3);
+	if (!(new = ft_lstnew(tmp)))
+		ft_error(garbage, -3);
+	ft_lstadd_back(garbage, new);
+	return (tmp);
+}
+
+static void		ft_clear(void *content)
+{
+	// printf("clear\n");
+	if (content)
+		free(content);
+}
+
+int			ft_error(t_list **garbage, int indice)
+{
+	void (*clear)(void*);
+
+	clear = &ft_clear;
 	if (indice == -1)
 		printf("Error\nMap file open failed\n");
 	else if (indice == -2)
 		printf("Error\nMap parsing failed\n");
-	else if (indice == -3)
+	else if (indice == -3 || indice == -8)
 		printf("Error\nIt's may be a malloc error\n");
 	else if (indice == -4)
 		printf("Error\nbad resolution\n");
@@ -59,5 +81,10 @@ int			ft_error(t_mapinfos *map, int indice)
 		printf("Error\nBad RGB\n");
 	else if (indice == -7)
 		printf("Error\nNo/multiple player\n");
+	while ((*garbage)->next)
+		free((*garbage)->content);
+	if (*garbage)
+		free(*garbage);
+	system("leaks Cub3D");
 	exit(EXIT_SUCCESS);
 }

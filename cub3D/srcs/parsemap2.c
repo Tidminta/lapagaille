@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 13:00:34 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/08 18:59:05 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/09 16:20:55 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,13 +119,13 @@ int					ft_get_path(char *to_find, t_list *lst, char **s)
 	return (0);
 }
 
-size_t				ft_parseinfos(t_list **list, t_mapinfos **map, int fd)
+size_t				ft_parseinfos(t_list **list, t_mapinfos **map, int fd, t_list *g)
 {
 	t_list			*lst_tmp;
 	t_mapinfos		*map_tmp;
 	int				ret;
 
-	if (!(*map = ft_init_mapinfos(-1)))
+	if (!(*map = ft_init_mapinfos(-1, g)))
 		return (-3);
 	map_tmp = *map;
 	if (!(*list = ft_infos_gnl(fd, &map_tmp->map)))

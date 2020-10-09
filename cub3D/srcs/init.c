@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 16:25:51 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/08 17:28:31 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/09 17:34:14 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 **************************************
 */
 
-int					ft_parse_open(char **av, t_mapinfos **map, t_list **list)
+int					ft_parse_open(char **av, t_mapinfos **map, t_list **list,
+					t_list **garb)
 {
 	t_mapinfos	*m;
 	int			fd;
@@ -28,7 +29,7 @@ int					ft_parse_open(char **av, t_mapinfos **map, t_list **list)
 	fd = 0;
 	if ((fd = open(av[1], O_RDONLY)) < 0)
 		return (-1);
-	if ((fd = ft_parseinfos(list, map, fd)) <= 0)
+	if ((fd = ft_parseinfos(list, map, fd, *garb)) <= 0)
 		return (fd);
 	if (!((*(map))->p = ft_playerinit(*map)))
 		return (-3);
@@ -41,21 +42,16 @@ int					ft_parse_open(char **av, t_mapinfos **map, t_list **list)
 	return (fd);
 }
 
-t_mapinfos			*ft_init_mapinfos(int i)
+t_mapinfos			*ft_init_mapinfos(int i, t_list *garbage)
 {
-	t_mapinfos	*map;
+	t_mapinfos		*map;
 
-	if (!(map = (t_mapinfos*)malloc(sizeof(t_mapinfos))))
-		return (NULL);
-	if (!(map->res = (t_res*)malloc(sizeof(t_res))))
-		return (NULL);
-	if (!(map->spinfos = (t_infosprt*)malloc(sizeof(t_infosprt))))
-		return (NULL);
-	if (!(map->text = (t_text**)malloc(sizeof(t_text*) * 5)))
-		return (NULL);
+	map = (t_mapinfos *)ft_garbage_collector(&garbage, sizeof(t_mapinfos));
+	map->res = (t_res*)ft_garbage_collector(&garbage, sizeof(t_res));
+	map->spinfos = (t_infosprt*)ft_garbage_collector(&garbage,sizeof(t_infosprt));
+	map->text = (t_text**)ft_garbage_collector(&garbage, sizeof(t_text*) * 5);
 	while (++i < 5)
-		if (!(map->text[i] = (t_text*)malloc(sizeof(t_text))))
-			return (NULL);
+		map->text[i] = (t_text*)ft_garbage_collector(&garbage, sizeof(t_text));
 	if (!(map->map = ft_lstnew("")))
 		return (NULL);
 	map->map_tab = NULL;
@@ -66,6 +62,7 @@ t_mapinfos			*ft_init_mapinfos(int i)
 	map->col_max = 0;
 	map->start_x = 0;
 	map->start_y = 0;
+	map->garbage = garbage;
 	return (map);
 }
 
@@ -129,7 +126,9 @@ t_player			*ft_playerinit(t_mapinfos *map)
 
 	if (!(player = (t_player*)malloc(sizeof(t_player))))
 		return (NULL);
+	// ft_bzero(player, sizeof(t_player));
 	player->zbuff = (double*)malloc(sizeof(double) * map->res->x);
+	// ft_bzero(player->zbuff, sizeof(player->zbuff));
 	player->dirx = 0;
 	player->diry = 0;
 	player->planx = 0;

@@ -1,8 +1,9 @@
 *********************************************
 					RECAP
-		DONT FORGET TO NORM THE PROJECT
+		DONT FORGET : NORM THE PROJECT
+					  LINUX IMPLEMENTATION
 *********************************************
-			error quit
+				ERROR QUIT
 -1 map open failed
 -2 map parsing failed
 -3 error occur during builting, its may be a malloc error !
@@ -13,8 +14,8 @@
 -7 no/multiple player on the map
 	*	*	*	*	*	*	*	*	*	*	*
 in process :  - ft_parseinfos error quit done | /!\ pas a la norme /!\
-			  - ft_error finitions
-			  - chercher malloc sans protections
+			  - ft_error garbage collector free a fix
+			  - error "pointer being freed was not allocated" depuis garbage collector
 			  - chercer d'autres cas ou utiliser ft_error
 *********************************************
 				SCREENSHOT
