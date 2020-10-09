@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 16:25:51 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/09 17:34:14 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/09 19:09:28 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,58 +96,22 @@ t_mlx				*ft_start_mlx(t_mapinfos *map)
 **************************************
 */
 
-static	void		ft_init_player2(t_player **player_tmp, t_mapinfos *map)
-{
-	t_player	*player;
-
-	player = *player_tmp;
-	player->perpwd = 0;
-	player->mapx = 0;
-	player->mapy = 0;
-	player->stepx = 0;
-	player->stepy = 0;
-	player->x = 0;
-	player->hit = 0;
-	player->side = 0;
-	player->lineheight = 0;
-	player->drawstart = 0;
-	player->drawend = 0;
-	player->m_up = 0;
-	player->m_down = 0;
-	player->m_right = 0;
-	player->m_left = 0;
-	map->p = player;
-	ft_get_dir(map);
-}
-
 t_player			*ft_playerinit(t_mapinfos *map)
 {
-	t_player *player;
+	unsigned int	nb;
+	t_player		*player;
 
+	nb = map->res->x;
 	if (!(player = (t_player*)malloc(sizeof(t_player))))
 		return (NULL);
-	// ft_bzero(player, sizeof(t_player));
+	ft_bzero(player, sizeof(t_player));
 	player->zbuff = (double*)malloc(sizeof(double) * map->res->x);
-	// ft_bzero(player->zbuff, sizeof(player->zbuff));
-	player->dirx = 0;
-	player->diry = 0;
-	player->planx = 0;
-	player->plany = 0;
-	player->posx = 0;
-	player->posy = 0;
-	player->odirx = 0;
-	player->oplanx = 0.0;
-	player->time = 0;
-	player->oldtime = 0;
-	player->camx = 0;
-	player->raydx = 0;
-	player->raydy = 0;
-	player->sidedx = 0;
+	printf("avant \n");
+	// ft_bzero(player->zbuff, sizeof(double*) * nb);
+	printf("apres \n");
 	player->movespeed = 0.2;
 	player->rot_s = 0.01;
-	player->sidedy = 0;
-	player->deltadx = 0;
-	player->deltady = 0;
-	ft_init_player2(&player, map);
+	map->p = player;
+	ft_get_dir(map);
 	return (player);
 }
