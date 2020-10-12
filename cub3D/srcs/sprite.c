@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 16:37:01 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/07 20:55:26 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/12 17:57:44 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void					ft_fill_sprites(t_mapinfos *map, int nb)
 
 	i = -1;
 	sp = map->spinfos->sp;
-	while (map->map_tab[++i])
+	while (map->map_tab[++i] && ((size_t)i < map->line_max - 1))
 	{
 		j = -1;
 		while (map->map_tab[i][++j])
@@ -106,7 +106,7 @@ int						ft_sprite_cpt(t_mapinfos *map)
 	j = 0;
 	if (!tmp[i])
 		return (-1);
-	while (tmp[i])
+	while (tmp[i] && ((size_t)i < map->line_max - 1))
 	{
 		j = 0;
 		while (tmp[i][j])

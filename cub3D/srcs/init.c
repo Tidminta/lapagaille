@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 16:25:51 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/09 19:09:28 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/12 16:36:25 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,8 @@
 int					ft_parse_open(char **av, t_mapinfos **map, t_list **list,
 					t_list **garb)
 {
-	t_mapinfos	*m;
 	int			fd;
 
-	m = *map;
 	fd = 0;
 	if ((fd = open(av[1], O_RDONLY)) < 0)
 		return (-1);
@@ -39,6 +37,8 @@ int					ft_parse_open(char **av, t_mapinfos **map, t_list **list,
 		return (-3);
 	if (!(ft_sprites_init(*map)))
 		return (-3);
+	(*map)->win_h = (*map)->res->y;
+	(*map)->win_w = (*map)->res->x;
 	return (fd);
 }
 
@@ -63,6 +63,7 @@ t_mapinfos			*ft_init_mapinfos(int i, t_list *garbage)
 	map->start_x = 0;
 	map->start_y = 0;
 	map->garbage = garbage;
+	// system("leaks Cub3D");
 	return (map);
 }
 
@@ -106,9 +107,7 @@ t_player			*ft_playerinit(t_mapinfos *map)
 		return (NULL);
 	ft_bzero(player, sizeof(t_player));
 	player->zbuff = (double*)malloc(sizeof(double) * map->res->x);
-	printf("avant \n");
 	// ft_bzero(player->zbuff, sizeof(double*) * nb);
-	printf("apres \n");
 	player->movespeed = 0.2;
 	player->rot_s = 0.01;
 	map->p = player;

@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 13:38:44 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/08 18:48:23 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/12 16:38:34 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@ int				ft_get_start_position(t_mapinfos *map, char **tab)
 
 	i = -1;
 	cpt = 0;
-	while (tab[++i])
+	printf("win w = %zu\n", map->line_max);
+	while (tab[++i] && (i < map->line_max - 1))
 	{
 		j = -1;
 		while (tab[i][++j])
 		{
+			// printf("pendant while i : %zu j : %zu\n", i, j);
 			if (tab[i][j] == 'N' || tab[i][j] == 'S' || tab[i][j] == 'E'
 				|| tab[i][j] == 'W')
 			{
@@ -37,6 +39,7 @@ int				ft_get_start_position(t_mapinfos *map, char **tab)
 	}
 	if (cpt == 1)
 		return (1);
+	printf("apres while\n");
 	return (0);
 }
 

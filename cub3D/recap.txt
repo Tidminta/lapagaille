@@ -16,6 +16,7 @@
 in process :  - ft_parseinfos error quit done | /!\ pas a la norme /!\
 			  - ft_error garbage collector free a fix
 			  - error "pointer being freed was not allocated" depuis garbage collector
+			  - ft_error msg d'erreur plutot que chiffres
 			  - chercer d'autres cas ou utiliser ft_error
 *********************************************
 				SCREENSHOT

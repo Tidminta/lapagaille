@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 13:00:34 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/09 16:20:55 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/12 16:36:22 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,8 @@ int					ft_get_path(char *to_find, t_list *lst, char **s)
 	return (0);
 }
 
-size_t				ft_parseinfos(t_list **list, t_mapinfos **map, int fd, t_list *g)
+size_t				ft_parseinfos(t_list **list, t_mapinfos **map,
+					int fd, t_list *g)
 {
 	t_list			*lst_tmp;
 	t_mapinfos		*map_tmp;
@@ -144,7 +145,5 @@ size_t				ft_parseinfos(t_list **list, t_mapinfos **map, int fd, t_list *g)
 		return (-3);
 	if (!(ft_get_start_position(map_tmp, map_tmp->map_tab)))
 		return (-7);
-	map_tmp->win_h = map_tmp->res->y;
-	map_tmp->win_w = map_tmp->res->x;
 	return (1);
 }

@@ -6,21 +6,11 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 16:50:53 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/09 17:38:11 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/12 16:30:19 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
-
-int				ft_free(t_mapinfos *map)
-{
-	//manque free(sprites)
-	free(map->mlx);
-	free(map->p);
-	free(map->res);
-	free(map->map);
-	exit(EXIT_SUCCESS);
-}
 
 void			ft_free_split(char **tab)
 {
@@ -57,16 +47,19 @@ void			*ft_garbage_collector(t_list **garbage, unsigned int size)
 
 static void		ft_clear(void *content)
 {
-	// printf("clear\n");
+	printf("clear\n");
 	if (content)
 		free(content);
 }
 
 int			ft_error(t_list **garbage, int indice)
 {
-	void (*clear)(void*);
+	int		list_size;
+	void	(*clear)(void*);
 
 	clear = &ft_clear;
+	list_size = ft_lstsize(*garbage);
+	printf("LIST SIZE = %d\n", list_size);
 	if (indice == -1)
 		printf("Error\nMap file open failed\n");
 	else if (indice == -2)
@@ -81,10 +74,11 @@ int			ft_error(t_list **garbage, int indice)
 		printf("Error\nBad RGB\n");
 	else if (indice == -7)
 		printf("Error\nNo/multiple player\n");
-	while ((*garbage)->next)
-		free((*garbage)->content);
-	if (*garbage)
-		free(*garbage);
-	system("leaks Cub3D");
+	// while ((*garbage)->next)
+	// 	if ((*garbage)->content)
+	// 		free((*garbage)->content);
+	// if (*garbage)
+	// 	free(*garbage);
+	// system("leaks Cub3D");
 	exit(EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 18:42:32 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/09 17:38:05 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/12 18:07:14 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static int			ft_game_loop(t_mapinfos *map)
 **************************************
 **			  	MAIN              	**
 ** 		-g3 -fsanitize=address      **
+**		--track-origins=yes			**
 **		system("leaks Cub3D");      **
 **		refaire ft_free			    **
 ** 		l.60->l.65 a factoriser		**

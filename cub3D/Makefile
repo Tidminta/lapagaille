@@ -6,7 +6,7 @@
 #    By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/04 18:20:36 by tidminta          #+#    #+#              #
-#    Updated: 2020/10/09 19:08:58 by tidminta         ###   ########.fr        #
+#    Updated: 2020/10/12 17:59:53 by tidminta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ INCLUDE_PATH = ./includes/
 
 OBJ_PATH = ./objs/
 
-ASAN = -g3 -fsanitize=address
+ASAN = -fsanitize=address -O3
 
 SRC_NAME =		main.c\
 				init.c\
