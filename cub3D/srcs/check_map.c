@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 13:38:44 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/12 16:38:34 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/12 20:10:41 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,35 @@
 int				ft_get_start_position(t_mapinfos *map, char **tab)
 {
 	int		cpt;
+	int		ret;
 	size_t	i;
 	size_t	j;
 
 	i = -1;
 	cpt = 0;
-	printf("win w = %zu\n", map->line_max);
-	while (tab[++i] && (i < map->line_max - 1))
+	ret = 0;
+	while ((tab[++i] && (i < map->line_max - 1)))
 	{
 		j = -1;
+		if (!(ret = ft_is_map_line(tab[i])))
+		{
+			printf("is not a map line\n");
+			return (0);
+		}
 		while (tab[i][++j])
 		{
-			// printf("pendant while i : %zu j : %zu\n", i, j);
 			if (tab[i][j] == 'N' || tab[i][j] == 'S' || tab[i][j] == 'E'
 				|| tab[i][j] == 'W')
 			{
 				map->start_x = j;
 				map->start_y = i;
 				map->dir = tab[i][j];
-				cpt++;
+				if (++cpt > 1)
+					return (0);
 			}
 		}
 	}
-	if (cpt == 1)
-		return (1);
-	printf("apres while\n");
-	return (0);
+	return (1);
 }
 
 static void		ft_get_dir2(t_player *p, char c)

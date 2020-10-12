@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 17:58:41 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/12 16:33:25 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/12 19:05:16 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ typedef struct		s_player
 	int		m_down;
 	int		m_right;
 	int		m_left;
+	int		m_left_key;
+	int		m_right_key;
 	int		texx;
 	int		texy;
 }					t_player;
@@ -217,6 +219,8 @@ int					ft_setmove(t_mapinfos *map_tmp);
 void				ft_drawtext(t_mapinfos *map_tmp, t_mlx *mlx);
 
 int					ft_get_index(t_player *p);
+
+void				ft_lateral_move(t_mapinfos *map, int indice);
 
 /*
 *************************************

@@ -11,9 +11,10 @@
 -4 bad resolution
 -5 bad path
 -6 bad rgb
--7 no/multiple player on the map
+-7 bad character or no/multiple player on the map
 	*	*	*	*	*	*	*	*	*	*	*
-in process :  - ft_parseinfos error quit done | /!\ pas a la norme /!\
+in process :  - no segfault no more
+			  - ft_get_start position fix (ftismapline bad return)
 			  - ft_error garbage collector free a fix
 			  - error "pointer being freed was not allocated" depuis garbage collector
 			  - ft_error msg d'erreur plutot que chiffres
@@ -36,12 +37,7 @@ in process :  - ft_parseinfos error quit done | /!\ pas a la norme /!\
 *********************************************
 - init elements sprite a 0 ?
 - est et ouest inverse
-- deplacements lateraux
-- /!\ easy malloc /!\
-- ft_parseopen() -> creer ft_free qui free les elements previous en cas de malloc foireux
-- ft_get_start_position a revoir | cas d'erreur non pris en compte
 - penser a free les sprites
-- check leaks
 - ft_get_rgb 26 lignes
 - croix rouge quit
 - gestion resolution max

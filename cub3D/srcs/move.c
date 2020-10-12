@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 16:56:23 by tidminta          #+#    #+#             */
-/*   Updated: 2020/08/07 15:54:42 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/12 19:08:11 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,14 @@ static int				ft_setmove2(t_mapinfos *map)
 	t_player	*p;
 
 	p = map->p;
-	if (p->m_left)
+	if (p->m_left_key)
 		ft_rot(map, 1);
-	else if (p->m_right)
+	else if (p->m_right_key)
 		ft_rot(map, -1);
+	else if (p->m_right)
+		ft_lateral_move(map, 0);
+	else if (p->m_left)
+		ft_lateral_move(map, 1);
 	return (0);
 }
 
@@ -81,10 +85,6 @@ int						ft_setmove(t_mapinfos *map)
 		ft_up(map);
 	else if (p->m_down)
 		ft_down(map);
-	else if (p->m_left)
-		ft_rot(map, 1);
-	else if (p->m_right)
-		ft_rot(map, -1);
 	ft_setmove2(map);
 	return (0);
 }

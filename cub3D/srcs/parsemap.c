@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 13:00:34 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/08 18:30:52 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/12 20:12:04 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,21 @@ size_t				ft_is_map_line(char *s)
 {
 	size_t	i;
 	size_t	len;
+	int		ret;
 
 	i = 0;
 	len = ft_strlen(s);
-	while (ft_is_map_char(s[i]))
+	ret = 0;
+	while (s[i])
+	{
+		if (!(ft_is_map_char(s[i])))
+		{
+			printf("[%c] \n", s[i]);
+			return (0);
+		}
 		i++;
-	if (i == len)
-		return (1);
-	return (0);
+	}
+	return (1);
 }
 
 char				**ft_lst_to_tab(t_list *lst, t_mapinfos *map)

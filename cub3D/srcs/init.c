@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 16:25:51 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/12 16:36:25 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/12 19:09:37 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ t_player			*ft_playerinit(t_mapinfos *map)
 	player->zbuff = (double*)malloc(sizeof(double) * map->res->x);
 	// ft_bzero(player->zbuff, sizeof(double*) * nb);
 	player->movespeed = 0.2;
-	player->rot_s = 0.01;
+	player->rot_s = 0.1;
 	map->p = player;
 	ft_get_dir(map);
 	return (player);

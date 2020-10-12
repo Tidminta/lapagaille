@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 16:50:53 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/12 16:30:19 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/12 18:36:38 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int			ft_error(t_list **garbage, int indice)
 
 	clear = &ft_clear;
 	list_size = ft_lstsize(*garbage);
-	printf("LIST SIZE = %d\n", list_size);
 	if (indice == -1)
 		printf("Error\nMap file open failed\n");
 	else if (indice == -2)
