@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 13:00:34 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/12 16:36:22 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/13 17:22:23 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int					ft_get_res_x(t_list *infos, t_res *res)
 			while ((tmp[i + (++j)] >= '0' && tmp[i + j] <= '9'))
 				res->x = (res->x * 10) + (tmp[i + j] - 48);
 			res->x = (res->x <= 0) ? -1 : res->x;
+			res->x = (res->x > RESO_X_MAX) ? RESO_X_MAX : res->x;
 			return (i + j);
 		}
 		infos = infos->next;
@@ -49,7 +50,7 @@ int					ft_get_res_y(t_list *infos, t_res *res, int index)
 	{
 		i = -1;
 		tmp = infos->content;
-		while (tmp[++i] != 'R')
+		while (tmp[++i] && tmp[i] != 'R')
 			;
 		if (tmp[i] == 'R')
 		{
@@ -59,11 +60,12 @@ int					ft_get_res_y(t_list *infos, t_res *res, int index)
 					return (-1);
 			while (tmp[i] && (tmp[i] >= '0' && tmp[i] <= '9'))
 				res->y = (res->y * 10) + (tmp[i++] - 48);
+			res->y = (res->y > RESO_Y_MAX) ? RESO_Y_MAX : res->y;
 			return (res->y);
 		}
 		infos = infos->next;
 	}
-	return (0);
+	return (-1);
 }
 
 t_list				*ft_infos_gnl(int fd, t_list **mapinfos)
@@ -72,15 +74,20 @@ t_list				*ft_infos_gnl(int fd, t_list **mapinfos)
 	t_list		*infos;
 	t_list		*map;
 	char		*line;
+	int			cpt;
 
 	map = *mapinfos;
 	infos = NULL;
+	cpt = 0;
 	while ((ret = get_next_line(fd, &line)) == 1)
 	{
 		if (line[0])
 		{
-			if (!ft_is_map_line(line))
+			if (!ft_is_map_line(line) && cpt < 8)
+			{
+				cpt++;
 				ft_lstadd_back(&infos, ft_lstnew(ft_strtrim(line, " \t")));
+			}
 			else
 				ft_lstadd_back(&map, ft_lstnew(ft_strdup(line)));
 		}
@@ -125,6 +132,7 @@ size_t				ft_parseinfos(t_list **list, t_mapinfos **map,
 	t_list			*lst_tmp;
 	t_mapinfos		*map_tmp;
 	int				ret;
+	// char			*str;
 
 	if (!(*map = ft_init_mapinfos(-1, g)))
 		return (-3);

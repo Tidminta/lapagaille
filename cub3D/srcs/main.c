@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 18:42:32 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/12 18:07:14 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/13 16:51:09 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int					main(int ac, char **av)
 		list = NULL;
 		mlx = NULL;
 		if (!(garbage = ft_lstnew("")))
-			return (ft_error(&garbage, -8));
+			return (ft_error(&garbage, -3));
 		if ((fd = ft_parse_open(av, &map, &list, &garbage)) < 0)
 			return (ft_error(&garbage, fd));
 		mlx_hook(map->mlx->win, KEYPRESS, 1L << 0, ft_keypress, &map);

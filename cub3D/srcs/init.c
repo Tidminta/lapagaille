@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 16:25:51 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/12 19:09:37 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/13 16:58:58 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int					ft_parse_open(char **av, t_mapinfos **map, t_list **list,
 	int			fd;
 
 	fd = 0;
+	if (ft_strncmp(".cub", ft_strchr(av[1], '.'), 4))
+		return (-8);
 	if ((fd = open(av[1], O_RDONLY)) < 0)
 		return (-1);
 	if ((fd = ft_parseinfos(list, map, fd, *garb)) <= 0)
@@ -55,6 +57,7 @@ t_mapinfos			*ft_init_mapinfos(int i, t_list *garbage)
 	if (!(map->map = ft_lstnew("")))
 		return (NULL);
 	map->map_tab = NULL;
+	map->av = NULL;
 	map->nbsp = 0;
 	map->res->x = 0;
 	map->res->y = 0;

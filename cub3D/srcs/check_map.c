@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 13:38:44 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/12 20:10:41 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/13 13:51:37 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int				ft_get_start_position(t_mapinfos *map, char **tab)
 		j = -1;
 		if (!(ret = ft_is_map_line(tab[i])))
 		{
-			printf("is not a map line\n");
 			return (0);
 		}
 		while (tab[i][++j])

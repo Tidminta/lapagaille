@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 17:58:41 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/12 19:05:16 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/13 17:21:09 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # define TEXWIDTH 64
 # define TEXHEIGHT 64
 # define SPRITE 64
+# define RESO_X_MAX 2560
+# define RESO_Y_MAX 1440
 
 /*
 *************************************
@@ -153,6 +155,7 @@ typedef struct		s_infosprt
 
 typedef struct		s_mapinfos
 {
+	char		**av;
 	char		**map_tab;
 	t_list		*garbage;
 	t_text		**text;

@@ -12,13 +12,15 @@
 -5 bad path
 -6 bad rgb
 -7 bad character or no/multiple player on the map
+-8 bad extention
 	*	*	*	*	*	*	*	*	*	*	*
-in process :  - no segfault no more
-			  - ft_get_start position fix (ftismapline bad return)
+in process :  - no segfault no more !
+			  - garbage collector a fix (pas de content pour l'instant)
 			  - ft_error garbage collector free a fix
 			  - error "pointer being freed was not allocated" depuis garbage collector
 			  - ft_error msg d'erreur plutot que chiffres
-			  - chercer d'autres cas ou utiliser ft_error
+			  - chercher d'autres cas ou utiliser ft_error
+			  - utiliser fonction minilib pour resolution max
 *********************************************
 				SCREENSHOT
 *********************************************
@@ -26,12 +28,7 @@ in process :  - no segfault no more
 *********************************************
 			MAP ERROR DETECCTION
 *********************************************
-- good extension
-- si caracteres present dans la map != (NSEW 012)
 - si map fermee
-- bad path
-- bad resolution
-- bad rgb
 ********************************************
 				FOIRE
 *********************************************
@@ -42,3 +39,4 @@ in process :  - no segfault no more
 - croix rouge quit
 - gestion resolution max
 - close fd -> mettre fd dans mapinfos
+- check segfault dans ft_drawall

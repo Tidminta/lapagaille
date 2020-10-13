@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 13:00:34 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/12 20:12:04 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/13 13:51:44 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,11 @@ size_t				ft_is_map_line(char *s)
 	i = 0;
 	len = ft_strlen(s);
 	ret = 0;
+	// printf("[%s]\n", s);
 	while (s[i])
 	{
 		if (!(ft_is_map_char(s[i])))
-		{
-			printf("[%c] \n", s[i]);
 			return (0);
-		}
 		i++;
 	}
 	return (1);
@@ -98,7 +96,8 @@ char				**ft_lst_to_tab(t_list *lst, t_mapinfos *map)
 	size_t	len;
 
 	i = 0;
-	len = ft_lstsize(lst);
+	if (!(len = ft_lstsize(lst)) || !lst || !map)
+		return (NULL);
 	map->line_max = len;
 	if (!(tab = (char**)malloc(sizeof(char*) * (len + 1))))
 		return (NULL);
