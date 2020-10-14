@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 16:37:01 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/12 17:57:44 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/14 18:34:58 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ int				ft_sprites_init(t_mapinfos *map)
 	while (++i < map->nbsp)
 		if (!(map->spinfos->sp[i] = (t_sprite*)malloc(sizeof(t_sprite))))
 			return (-1);
-	// i = -1;
-	// while (++i < nb)
-	// 	ft_bzero(map->spinfos->sp[i], (size_t)map->nbsp);
+	i = -1;
+	while (++i < nb)
+		ft_bzero(map->spinfos->sp[i], (size_t)map->nbsp);
 	return (1);
 }
 

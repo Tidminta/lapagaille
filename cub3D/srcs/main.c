@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 18:42:32 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/13 16:51:09 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/14 16:31:57 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ int					main(int ac, char **av)
 		mlx_hook(map->mlx->win, KEYRELEASE, 1L << 1, ft_keyrelease, &map);
 		mlx_loop_hook(map->mlx->mlx_p, &ft_game_loop, map);
 		mlx_loop(map->mlx->mlx_p);
-		close(fd);//a deplacer dans ft_free
 		return (0);
 	}
 	printf("Error\nInvalide number of arguments!\n");

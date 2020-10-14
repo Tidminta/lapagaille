@@ -18,13 +18,7 @@ in process :  - no segfault no more !
 			  - garbage collector a fix (pas de content pour l'instant)
 			  - ft_error garbage collector free a fix
 			  - error "pointer being freed was not allocated" depuis garbage collector
-			  - ft_error msg d'erreur plutot que chiffres
-			  - chercher d'autres cas ou utiliser ft_error
-			  - utiliser fonction minilib pour resolution max
-*********************************************
-				SCREENSHOT
-*********************************************
--
+			  - utiliser fonction minilib pour resolution max linux
 *********************************************
 			MAP ERROR DETECCTION
 *********************************************
@@ -32,11 +26,11 @@ in process :  - no segfault no more !
 ********************************************
 				FOIRE
 *********************************************
-- init elements sprite a 0 ?
+- free mlx || free sprites
+- init elements sprite a 0 ? ft_bzero a revifier (caster/afficher en le bail en (char*))
 - est et ouest inverse
-- penser a free les sprites
-- ft_get_rgb 26 lignes
 - croix rouge quit
-- gestion resolution max
-- close fd -> mettre fd dans mapinfos
-- check segfault dans ft_drawall
+- check segfault dans ft_drawall || ft_dda
+- SCREENSHOT
+- remove printf | find why rien ne s'affiche plus
+- dont forget to free zbuff

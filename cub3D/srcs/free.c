@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 16:50:53 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/13 17:15:04 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/14 18:37:03 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void			*ft_garbage_collector(t_list **garbage, unsigned int size)
 
 static void		ft_clear(void *content)
 {
-	printf("clear\n");
 	if (content)
 		free(content);
 }

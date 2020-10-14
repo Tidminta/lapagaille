@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 13:00:34 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/13 13:51:44 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/14 18:33:36 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,9 @@ int					ft_get_rgb(char *to_find, t_list *lst, int *rgb)
 				return (1);
 			}
 		}
-		if (lst->next)
-			lst = lst->next;
-		else
+		if (!lst->next)
 			return (-1);
+		lst = lst->next;
 	}
 	return (-1);
 }
@@ -78,7 +77,6 @@ size_t				ft_is_map_line(char *s)
 	i = 0;
 	len = ft_strlen(s);
 	ret = 0;
-	// printf("[%s]\n", s);
 	while (s[i])
 	{
 		if (!(ft_is_map_char(s[i])))
@@ -88,14 +86,12 @@ size_t				ft_is_map_line(char *s)
 	return (1);
 }
 
-char				**ft_lst_to_tab(t_list *lst, t_mapinfos *map)
+char				**ft_lst_to_tab(t_list *lst, t_mapinfos *map, size_t i)
 {
 	char	**tab;
 	char	*tmp;
-	size_t	i;
 	size_t	len;
 
-	i = 0;
 	if (!(len = ft_lstsize(lst)) || !lst || !map)
 		return (NULL);
 	map->line_max = len;

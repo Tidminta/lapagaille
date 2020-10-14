@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 13:00:34 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/13 17:22:23 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/14 17:28:14 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ size_t				ft_parseinfos(t_list **list, t_mapinfos **map,
 	ret = ft_get_rgb("F ", lst_tmp, &map_tmp->floor_rgb);
 	if (ret < 0 || ft_get_rgb("C ", lst_tmp, &map_tmp->ceil_rgb) < 0)
 		return (-6);
-	if (!(map_tmp->map_tab = ft_lst_to_tab(map_tmp->map, map_tmp)))
+	if (!(map_tmp->map_tab = ft_lst_to_tab(map_tmp->map, map_tmp, 0)))
 		return (-3);
 	if (!(ft_get_start_position(map_tmp, map_tmp->map_tab)))
 		return (-7);

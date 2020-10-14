@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 19:10:15 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/07 18:47:39 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/14 17:20:10 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void		ft_dda(t_player *p, char **map2d)
 			p->mapy += p->stepy;
 			p->side = 1;
 		}
-		if (map2d[p->mapy][p->mapx] == '1')
+		if ( map2d[p->mapy][p->mapx] && map2d[p->mapy][p->mapx] == '1')
 			p->hit = 1;
 	}
 	if (p->side == 0)
@@ -89,10 +89,12 @@ static void		ft_drawall(t_mapinfos *map, t_player *p, t_mlx *mlx)
 	if (p->drawend >= (int)map->res->y)
 		p->drawend = map->res->y - 1;
 	y = 0;
-	while (y++ <= p->drawstart)
+	while ((y++ <= p->drawstart)
+		&& ((y * map->res->x + p->x) < (map->res->x * map->res->y)))
 		mlx->img->data[(int)(y * map->res->x + p->x)] = map->ceil_rgb;
 	y = p->drawend;
-	while (y++ < (int)map->res->y - 1)
+	while ((y++ < (int)map->res->y - 1)
+		&& ((y * map->res->x + p->x) < (map->res->x * map->res->y)))
 		mlx->img->data[(int)(y * map->res->x + p->x)] = map->floor_rgb;
 }
 
