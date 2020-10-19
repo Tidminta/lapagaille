@@ -14,7 +14,7 @@
 -7 bad character or no/multiple player on the map
 -8 bad extention
 *********************************************
-in process :  - HERE WE FREE a fix
+in process :  - HERE WE FREE fixing : semble fonctionner sauf pour le dernier mailon, je pense que le content du dernier maillon n'es pas malloc'd. chercher pourquoi meme sans free aucun leaks n'est touve
 			  - error "pointer being freed was not allocated" depuis garbage collector
 			  - utiliser fonction minilib pour resolution max linux
 *********************************************
