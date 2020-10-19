@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 16:50:53 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/14 18:37:03 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/19 17:57:24 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,54 +32,63 @@ void			ft_free_split(char **tab)
 **************************************
 */
 
-void			*ft_garbage_collector(t_list **garbage, unsigned int size)
+void			*ft_garbage_collector(t_list **garbage, unsigned int size, int fd)
 {
 	t_list	*new;
 	void	*tmp;
 
 	if (!(tmp = (void*)malloc(size)))
-		ft_error(garbage, -3);
+		ft_error(garbage, "Error\nIt's may be a malloc error.\n", 0, fd);
 	if (!(new = ft_lstnew(tmp)))
-		ft_error(garbage, -3);
-	ft_lstadd_back(garbage, new);
+		ft_error(garbage, "Error\nIt's may be a malloc error.\n", 0, fd);
+	ft_lstadd_front(garbage, new);
 	return (tmp);
 }
 
 static void		ft_clear(void *content)
 {
 	if (content)
+	{
+		// printf("OK [%s]!\n", (char*)content);
 		free(content);
+	}
 }
 
-int			ft_error(t_list **garbage, int indice)
+void		ft_freelst(t_list *l)
+{
+	t_list	*tmp;
+	int		lst_size;
+	void	(*clear)(void*);
+	
+	clear = &ft_clear;
+	lst_size = ft_lstsize(l);
+	printf("[avant]liste size = %d\n", lst_size);
+	while (l)
+	{
+		tmp = l->next;
+		ft_lstdelone(l, clear);
+		l = tmp;
+	}
+	lst_size = 0;
+	lst_size = ft_lstsize(l);
+	printf("[apres] liste size = %d\n", lst_size);
+}
+
+int			ft_error(t_list **garbage, char *s, int indice, int fd)
 {
 	int		list_size;
 	void	(*clear)(void*);
 
 	clear = &ft_clear;
 	list_size = ft_lstsize(*garbage);
-	if (indice == -1)
-		printf("Error\nMap file open failed\n");
-	else if (indice == -2)
-		printf("Error\nMap parsing failed\n");
-	else if (indice == -3)
-		printf("Error\nIt's may be a malloc error\n");
-	else if (indice == -4)
-		printf("Error\nbad resolution\n");
-	else if (indice == -5)
-		printf("Error\nBad path for textures or sprite\n");
-	else if (indice == -6)
-		printf("Error\nBad RGB\n");
-	else if (indice == -7)
-		printf("Error\nBad character(s) or No/multiple player\n");
-	else if (indice == -8)
-		printf("Error\nBad extention, please fix it\n");
-	// ft_lstclear(garbage, clear);
-	// while ((*garbage)->next)
-	// 	if ((*garbage)->content)
-	// 		free((*garbage)->content);
-	// if (*garbage)
-	// 	free(*garbage);
-	// system("leaks Cub3D");
+	if (indice == 0)
+	{
+		ft_freelst(*garbage);
+		system("leaks Cub3D");
+	}
+	if (s)
+		ft_putstr_fd(s, 1);
+	if (fd)
+		close (fd);
 	exit(EXIT_SUCCESS);
 }

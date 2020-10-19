@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 15:59:58 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/14 18:41:05 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/19 17:53:43 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ int				ft_keypress(int key, t_mapinfos **map_tmp)
 	{
 		printf("ECHAP\n");
 		mlx_destroy_window(map->mlx->mlx_p, map->mlx->win);
-		return (ft_error(&map->garbage, 0));
+		// ft_freelst(map->map);
+		ft_error(&map->garbage, NULL, 0, map->fd);
 	}
 	return (0);
 }

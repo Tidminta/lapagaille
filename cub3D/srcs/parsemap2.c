@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 13:00:34 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/14 17:28:14 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/19 17:53:25 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,26 +132,26 @@ size_t				ft_parseinfos(t_list **list, t_mapinfos **map,
 	t_list			*lst_tmp;
 	t_mapinfos		*map_tmp;
 	int				ret;
-	// char			*str;
 
 	if (!(*map = ft_init_mapinfos(-1, g)))
-		return (-3);
+		ft_error(&(*map)->garbage, "Error\nIt's may be a malloc error.\n", 0 , fd);
 	map_tmp = *map;
 	if (!(*list = ft_infos_gnl(fd, &map_tmp->map)))
-		return (-3);
+		ft_error(&(*map)->garbage, "Error\nIt's may be a malloc error.\n", 0, fd);
 	lst_tmp = *list;
 	if ((ret = ft_get_res_x(lst_tmp, map_tmp->res)) <= 0)
-		return (-4);
+		ft_error(&(*map)->garbage, "Error\nbad resolution.\n", 0, fd);
 	if ((ret = ft_get_res_y(lst_tmp, map_tmp->res, ret)) <= 0)
-		return (-4);
+		ft_error(&(*map)->garbage, "Error\nbad resolution.\n", 0, fd);
 	if (!(ft_check_path(lst_tmp, map_tmp->text)))
-		return (-5);
+		ft_error(&(*map)->garbage, "Error\nBad path for textures or sprite.\n", 0, fd);
 	ret = ft_get_rgb("F ", lst_tmp, &map_tmp->floor_rgb);
 	if (ret < 0 || ft_get_rgb("C ", lst_tmp, &map_tmp->ceil_rgb) < 0)
-		return (-6);
+		ft_error(&(*map)->garbage, "Error\nBad path for textures or sprite.\n", 0, fd);
 	if (!(map_tmp->map_tab = ft_lst_to_tab(map_tmp->map, map_tmp, 0)))
-		return (-3);
+		ft_error(&(*map)->garbage, "Error\nIt's may be a malloc error.\n", 0, fd);
 	if (!(ft_get_start_position(map_tmp, map_tmp->map_tab)))
-		return (-7);
+		ft_error(&(*map)->garbage, "Error\nBad character(s) or No/multiple player.\n", 0, fd);
+	// ft_freelst(*list);
 	return (1);
 }

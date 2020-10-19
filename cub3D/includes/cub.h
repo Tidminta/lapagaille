@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 17:58:41 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/14 16:27:02 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/19 17:50:45 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,17 +157,18 @@ typedef struct		s_mapinfos
 {
 	char		**av;
 	char		**map_tab;
-	t_list		*garbage;
-	t_text		**text;
-	t_mlx		*mlx;
-	t_player	*p;
-	t_res		*res;
-	t_list		*map;
 	t_infosprt	*spinfos;
+	t_list		*garbage;
+	t_list		*map;
+	t_text		**text;
+	t_player	*p;
+	t_mlx		*mlx;
+	t_res		*res;
 	int			*zbuff;
 	int			floor_rgb;
 	int			ceil_rgb;
 	int			nbsp;
+	int			fd;
 	char		dir;
 	size_t		line_max;
 	size_t		col_max;
@@ -199,7 +200,7 @@ void				ft_get_dir(t_mapinfos *map);
 
 void				ft_free_text(t_mapinfos *map);
 
-void				*ft_garbage_collector(t_list **garbage, unsigned int size);
+void				*ft_garbage_collector(t_list **garbage, unsigned int size, int fd);
 
 
 /*
@@ -266,12 +267,13 @@ int					ft_map_is_closed(char **map);
 
 void				ft_free_split(char **tab);
 
-int					ft_error(t_list **garbage, int indice);
+int					ft_error(t_list **garbage, char *s, int indice, int fd);
 
 t_list				*ft_infos_gnl(int fd, t_list **mapinfos);
 
 int					ft_check_path(t_list *lst, t_text **tex);
 
+void				ft_freelst(t_list *l);
 /*
 **************************************
 **			SPRITE					**

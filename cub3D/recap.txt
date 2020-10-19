@@ -13,10 +13,8 @@
 -6 bad rgb
 -7 bad character or no/multiple player on the map
 -8 bad extention
-	*	*	*	*	*	*	*	*	*	*	*
-in process :  - no segfault no more !
-			  - garbage collector a fix (pas de content pour l'instant)
-			  - ft_error garbage collector free a fix
+*********************************************
+in process :  - HERE WE FREE a fix
 			  - error "pointer being freed was not allocated" depuis garbage collector
 			  - utiliser fonction minilib pour resolution max linux
 *********************************************
@@ -32,5 +30,4 @@ in process :  - no segfault no more !
 - croix rouge quit
 - check segfault dans ft_drawall || ft_dda
 - SCREENSHOT
-- remove printf | find why rien ne s'affiche plus
 - dont forget to free zbuff
