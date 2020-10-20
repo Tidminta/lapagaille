@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 13:00:34 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/20 17:58:13 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/20 19:05:25 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,9 @@ t_list				*ft_infos_gnl(int fd, t_list **mapinfos)
 {
 	int			ret;
 	t_list		*infos;
-	t_list		*map;
 	char		*line;
 	int			cpt;
 
-	map = *mapinfos;
 	infos = NULL;
 	cpt = -1;
 	while ((ret = get_next_line(fd, &line)) == 1)
@@ -86,7 +84,7 @@ t_list				*ft_infos_gnl(int fd, t_list **mapinfos)
 			if (!ft_is_map_line(line) && ++cpt < 8)
 				ft_lstadd_back(&infos, ft_lstnew(ft_strtrim(line, " \t")));
 			else
-				ft_lstadd_back(&map, ft_lstnew(ft_strdup(line)));
+				ft_lstadd_back(mapinfos, ft_lstnew(ft_strdup(line)));
 		}
 		free(line);
 	}
@@ -144,10 +142,17 @@ size_t				ft_parseinfos(t_list **list, t_mapinfos **map,
 	if (ret < 0 || ft_get_rgb("C ", *list, &map_tmp->ceil_rgb) < 0)
 		ft_error(&(*map)->garbage, "Error\nBad textures or sprite.\n", 0, fd);
 	if (!(map_tmp->map_tab = ft_lst_to_tab(map_tmp->map, map_tmp, 0)))
+	{
+		printf("FAIL\n");
 		ft_error(&(*map)->garbage, "Error\nMalloc error.\n", 0, fd);
+	}
+	ft_print_tab(map_tmp->map_tab);
 	if (!(ft_get_start_position(map_tmp, map_tmp->map_tab)))
+	{
+		printf("GET START POSITION\n");
 		ft_error(&(*map)->garbage,
 		"Error\nBad character(s) or No/multiple player.\n", 0, fd);
+	}
 	ft_freelst(*list);
 	return (1);
 }

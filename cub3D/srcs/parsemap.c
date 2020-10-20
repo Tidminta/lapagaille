@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 13:00:34 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/14 18:33:36 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/20 19:04:15 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,14 +98,15 @@ char				**ft_lst_to_tab(t_list *lst, t_mapinfos *map, size_t i)
 	if (!(tab = (char**)malloc(sizeof(char*) * (len + 1))))
 		return (NULL);
 	tab[len] = 0;
-	while (lst->next)
+	i = len;
+	while (lst->next && --i >= 0)
 	{
 		tmp = lst->content;
 		if (tmp[0])
 		{
 			if ((len = ft_strlen(tmp)) > map->col_max)
 				map->col_max = len;
-			tab[i++] = tmp;
+			tab[i] = tmp;
 		}
 		lst = lst->next;
 	}
