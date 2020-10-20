@@ -3,31 +3,15 @@
 		DONT FORGET : NORM THE PROJECT
 					  LINUX IMPLEMENTATION
 *********************************************
-				ERROR QUIT
--1 map open failed
--2 map parsing failed
--3 error occur during builting, its may be a malloc error !
--3 mapinfos init failled
--4 bad resolution
--5 bad path
--6 bad rgb
--7 bad character or no/multiple player on the map
--8 bad extention
+in process :  - utiliser fonction minilib pour resolution max linux | linux implementation
+			  - est et ouest inverse
+			  - croix rouge quit
+			  - SCREENSHOT
 *********************************************
-in process :  - HERE WE FREE fixing : semble fonctionner sauf pour le dernier mailon, je pense que le content du dernier maillon n'es pas malloc'd. chercher pourquoi meme sans free aucun leaks n'est touve
-			  - error "pointer being freed was not allocated" depuis garbage collector
-			  - utiliser fonction minilib pour resolution max linux
-*********************************************
-			MAP ERROR DETECCTION
-*********************************************
+			MAP ERROR DETECTION
+********************************************
 - si map fermee
 ********************************************
 				FOIRE
-*********************************************
-- free mlx || free sprites
-- init elements sprite a 0 ? ft_bzero a revifier (caster/afficher en le bail en (char*))
-- est et ouest inverse
-- croix rouge quit
-- check segfault dans ft_drawall || ft_dda
-- SCREENSHOT
-- dont forget to free zbuff
+********************************************
+- free mlx ??

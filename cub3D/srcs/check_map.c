@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 13:38:44 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/13 13:51:37 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/20 15:29:23 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,18 +103,14 @@ int				ft_check_path(t_list *lst_tmp, t_text **text)
 	return (1);
 }
 
-int						ft_get_index(t_player *p)
+int				ft_get_index(t_player *p)
 {
-	/** NO **/
 	if ((p->side == 1) && (p->raydy < 0))
 		return (0);
-	/** EA **/
 	else if ((p->side == 0) && (p->raydx < 0))
 		return (3);
-	/** WE **/
 	else if ((p->side == 0) && (p->raydx > 0))
 		return (2);
-	/** SO **/
 	else
 		return (1);
 }

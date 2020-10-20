@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 17:58:41 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/19 17:50:45 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/20 17:15:26 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,7 +239,8 @@ t_list				*ft_map_gnl(int fd);
 
 int					ft_get_res_x(t_list *infos, t_res *res);
 
-size_t				ft_parseinfos(t_list **list, t_mapinfos **map, int fd, t_list *g);
+size_t				ft_parseinfos(t_list **list, t_mapinfos **map,
+					int fd, t_list *g);
 
 t_mapinfos			*ft_init_mapinfos(int i, t_list *garbage);
 
@@ -274,6 +275,9 @@ t_list				*ft_infos_gnl(int fd, t_list **mapinfos);
 int					ft_check_path(t_list *lst, t_text **tex);
 
 void				ft_freelst(t_list *l);
+
+void				ft_clear_map(t_mapinfos *map);
+
 /*
 **************************************
 **			SPRITE					**

@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 16:50:53 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/19 17:57:24 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/20 16:54:54 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void			ft_free_split(char **tab)
 **************************************
 */
 
-void			*ft_garbage_collector(t_list **garbage, unsigned int size, int fd)
+void			*ft_garbage_collector(t_list **garbage,
+				unsigned int size, int fd)
 {
 	t_list	*new;
 	void	*tmp;
@@ -48,33 +49,32 @@ void			*ft_garbage_collector(t_list **garbage, unsigned int size, int fd)
 static void		ft_clear(void *content)
 {
 	if (content)
-	{
-		// printf("OK [%s]!\n", (char*)content);
 		free(content);
-	}
 }
 
-void		ft_freelst(t_list *l)
+void			ft_freelst(t_list *l)
 {
 	t_list	*tmp;
 	int		lst_size;
 	void	(*clear)(void*);
-	
+	int		i;
+
 	clear = &ft_clear;
+	i = 0;
 	lst_size = ft_lstsize(l);
-	printf("[avant]liste size = %d\n", lst_size);
-	while (l)
+	while (l && i < lst_size)
 	{
 		tmp = l->next;
-		ft_lstdelone(l, clear);
-		l = tmp;
+		if (l->content)
+		{
+			ft_lstdelone(l, clear);
+			l = tmp;
+		}
+		i++;
 	}
-	lst_size = 0;
-	lst_size = ft_lstsize(l);
-	printf("[apres] liste size = %d\n", lst_size);
 }
 
-int			ft_error(t_list **garbage, char *s, int indice, int fd)
+int				ft_error(t_list **garbage, char *s, int indice, int fd)
 {
 	int		list_size;
 	void	(*clear)(void*);
@@ -82,13 +82,11 @@ int			ft_error(t_list **garbage, char *s, int indice, int fd)
 	clear = &ft_clear;
 	list_size = ft_lstsize(*garbage);
 	if (indice == 0)
-	{
 		ft_freelst(*garbage);
-		system("leaks Cub3D");
-	}
 	if (s)
 		ft_putstr_fd(s, 1);
 	if (fd)
-		close (fd);
+		close(fd);
+	system("leaks Cub3D");
 	exit(EXIT_SUCCESS);
 }

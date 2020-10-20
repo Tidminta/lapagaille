@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 18:42:32 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/19 13:38:31 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/20 17:50:19 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,19 @@ static int			ft_game_loop(t_mapinfos *map)
 	t_mlx		*mlx;
 
 	mlx = map->mlx;
-	if (!(mlx->img->img_p = mlx_new_image(map->mlx->mlx_p, map->res->x, map->res->y)))
-		ft_error(&map->garbage, "Error\nIt's may be a malloc error\n", 0, map->fd);
-	if (!(mlx->img->data = (int *)mlx_get_data_addr(mlx->img->img_p, &mlx->img->bpp, &mlx->img->size_l, &mlx->img->endian)))
-			ft_error(&map->garbage, "Error\nIt's may be a malloc error\n", 0, map->fd);
+	if (!(mlx->img->img_p = mlx_new_image(map->mlx->mlx_p,
+		map->res->x, map->res->y)))
+		ft_error(&map->garbage,
+			"Error\nIt's may be a malloc error\n", 0, map->fd);
+	if (!(mlx->img->data = (int *)mlx_get_data_addr(mlx->img->img_p,
+		&mlx->img->bpp, &mlx->img->size_l, &mlx->img->endian)))
+	{
+		ft_error(&map->garbage,
+		"Error\nIt's may be a malloc error\n", 0, map->fd);
+	}
 	if ((ret = ft_init_text(map)) < 0)
-		ft_error(&map->garbage, "Error\nTextures loading failled.\n", 0, map->fd);
+		ft_error(&map->garbage,
+		"Error\nTextures loading failled.\n", 0, map->fd);
 	ft_setmove(map);
 	ft_raycast(map, mlx, map->p);
 	ft_spritecast(map);
@@ -62,8 +69,8 @@ int					main(int ac, char **av)
 	{
 		list = NULL;
 		mlx = NULL;
-		if (!(garbage = ft_lstnew("")))
-			return (ft_error(&garbage, "Error\nIt's may be a malloc error.\n", 1, 0));
+		if (!(garbage = ft_lstnew(ft_strdup("0"))))
+			ft_error(&garbage, "Error\nIt's may be a malloc error.\n", 1, 0);
 		ft_parse_open(av, &map, &list, &garbage);
 		mlx_hook(map->mlx->win, KEYPRESS, 1L << 0, ft_keypress, &map);
 		mlx_hook(map->mlx->win, KEYRELEASE, 1L << 1, ft_keyrelease, &map);

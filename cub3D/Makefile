@@ -6,7 +6,7 @@
 #    By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/04 18:20:36 by tidminta          #+#    #+#              #
-#    Updated: 2020/10/19 16:59:10 by tidminta         ###   ########.fr        #
+#    Updated: 2020/10/20 15:52:39 by tidminta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRC_NAME =		main.c\
 				textures.c\
 				sprite.c\
 				sprite2.c\
+				tools.c\
 				free.c
 
 SRC_GNL_NAME = 	get_next_line.c\

@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 13:00:34 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/19 17:53:25 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/20 17:48:47 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,6 @@ size_t				ft_parseinfos(t_list **list, t_mapinfos **map,
 		ft_error(&(*map)->garbage, "Error\nIt's may be a malloc error.\n", 0, fd);
 	if (!(ft_get_start_position(map_tmp, map_tmp->map_tab)))
 		ft_error(&(*map)->garbage, "Error\nBad character(s) or No/multiple player.\n", 0, fd);
-	// ft_freelst(*list);
+	ft_freelst(*list);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 15:59:58 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/19 17:53:43 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/20 17:08:20 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ int				ft_keypress(int key, t_mapinfos **map_tmp)
 	else if (key == 53)
 	{
 		printf("ECHAP\n");
-		mlx_destroy_window(map->mlx->mlx_p, map->mlx->win);
-		// ft_freelst(map->map);
+		ft_clear_map(map);
 		ft_error(&map->garbage, NULL, 0, map->fd);
 	}
 	return (0);
