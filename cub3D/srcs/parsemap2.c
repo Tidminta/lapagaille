@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 13:00:34 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/20 17:56:49 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/20 17:58:13 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,16 +78,13 @@ t_list				*ft_infos_gnl(int fd, t_list **mapinfos)
 
 	map = *mapinfos;
 	infos = NULL;
-	cpt = 0;
+	cpt = -1;
 	while ((ret = get_next_line(fd, &line)) == 1)
 	{
 		if (line[0])
 		{
-			if (!ft_is_map_line(line) && cpt < 8)
-			{
-				cpt++;
+			if (!ft_is_map_line(line) && ++cpt < 8)
 				ft_lstadd_back(&infos, ft_lstnew(ft_strtrim(line, " \t")));
-			}
 			else
 				ft_lstadd_back(&map, ft_lstnew(ft_strdup(line)));
 		}
