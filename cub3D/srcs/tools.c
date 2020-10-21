@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 16:57:50 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/21 19:07:28 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/21 19:12:58 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,13 @@ int			ft_quit(int button, t_mapinfos **map)
 
 // 	if (!res || res < 0)
 // 		return (0);
-// 	while ()
+// 	i = -1;
+// 	while (tab[++i])
+// 	{
+// 		if (ft_strlen(tab[i]) < (size_t)res)
+// 		{
+			
+// 		}
+// 	}
 // }
 
