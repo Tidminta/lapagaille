@@ -6,29 +6,24 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 13:38:44 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/21 12:34:08 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/21 18:58:41 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
 
-int				ft_get_start_position(t_mapinfos *map, char **tab)
+int				ft_get_start_position(t_mapinfos *map, char **tab, int i)
 {
 	int		cpt;
 	int		ret;
-	size_t	i;
 	size_t	j;
 
-	i = -1;
 	cpt = 0;
-	ret = 0;
-	while ((tab[++i] && (i < map->line_max - 1)))
+	while ((tab[++i] && (i < (int)map->line_max - 1)))
 	{
 		j = -1;
 		if (!(ret = ft_is_map_line(tab[i])))
-		{
 			return (0);
-		}
 		while (tab[i][++j])
 		{
 			if (tab[i][j] == 'N' || tab[i][j] == 'S' || tab[i][j] == 'E'

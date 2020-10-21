@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 17:58:41 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/21 12:00:59 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/21 19:06:05 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 # define KEYPRESS 2
 # define KEYRELEASE 3
+# define DESTROY 17
 # define WIN_WIDTH 800
 # define WIN_HEIGHT 800
 # define TEXWIDTH 64
@@ -176,7 +177,7 @@ typedef struct		s_mapinfos
 	size_t		win_h;
 	size_t		start_x;
 	size_t		start_y;
-	
+
 }					t_mapinfos;
 
 /*
@@ -200,8 +201,8 @@ void				ft_get_dir(t_mapinfos *map);
 
 void				ft_free_text(t_mapinfos *map);
 
-void				*ft_garbage_collector(t_list **garbage, unsigned int size, int fd);
-
+void				*ft_garbage_collector(t_list **garbage, t_mapinfos *map,
+					unsigned int size, int fd);
 
 /*
 *************************************
@@ -214,7 +215,7 @@ int					ft_raycast(t_mapinfos *map_tmp,
 
 int					ft_create_trgb(int t, int r, int g, int b);
 
-int					ft_keypress(int key, t_mapinfos **map_tmp);
+int					ft_keypress(int key, t_mapinfos **map);
 
 int					ft_keyrelease(int key, t_mapinfos **map_tmp);
 
@@ -262,13 +263,14 @@ void				ft_print_tab(char **tab);
 
 size_t				ft_check_rfc(t_mapinfos *map);
 
-int					ft_get_start_position(t_mapinfos *map, char **tab);
+int					ft_get_start_position(t_mapinfos *map, char **tab, int i);
 
-int					ft_map_is_closed(char **map);
+int					ft_map_is_closed(t_mapinfos *map, char **tab, int res);
 
 void				ft_free_split(char **tab);
 
-int					ft_error(t_list **garbage, char *s, int indice, int fd);
+int					ft_error(t_list **garbage, char *s, int indice,
+					t_mapinfos *map);
 
 t_list				*ft_infos_gnl(int fd, t_list **mapinfos);
 
@@ -278,7 +280,7 @@ void				ft_freelst(t_list *l);
 
 void				ft_clear_map(t_mapinfos *map);
 
-void				ft_reverse_tab(char **tab);
+int					ft_quit(int button, t_mapinfos **map);
 
 /*
 **************************************

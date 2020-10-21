@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 13:00:34 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/21 12:34:52 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/21 19:07:23 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,28 +124,29 @@ int					ft_get_path(char *to_find, t_list *lst, char **s)
 size_t				ft_parseinfos(t_list **list, t_mapinfos **map,
 					int fd, t_list *g)
 {
-	t_mapinfos		*map_tmp;
 	int				ret;
 
 	if (!(*map = ft_init_mapinfos(-1, g)))
-		ft_error(&(*map)->garbage, "Error\nMalloc error.\n", 0, fd);
-	map_tmp = *map;
-	if (!(*list = ft_infos_gnl(fd, &map_tmp->map)))
-		ft_error(&(*map)->garbage, "Error\nMalloc error.\n", 0, fd);
-	if ((ret = ft_get_res_x(*list, map_tmp->res)) <= 0)
-		ft_error(&(*map)->garbage, "Error\nbad resolution.\n", 0, fd);
-	if ((ret = ft_get_res_y(*list, map_tmp->res, ret)) <= 0)
-		ft_error(&(*map)->garbage, "Error\nbad resolution.\n", 0, fd);
-	if (!(ft_check_path(*list, map_tmp->text)))
-		ft_error(&(*map)->garbage, "Error\nBad textures or sprite.\n", 0, fd);
-	ret = ft_get_rgb("F ", *list, &map_tmp->floor_rgb);
-	if (ret < 0 || ft_get_rgb("C ", *list, &map_tmp->ceil_rgb) < 0)
-		ft_error(&(*map)->garbage, "Error\nBad textures or sprite.\n", 0, fd);
-	if (!(map_tmp->map_tab = ft_lst_to_tab(map_tmp->map, map_tmp, 0)))
-		ft_error(&(*map)->garbage, "Error\nMalloc error.\n", 0, fd);
-	if (!(ft_get_start_position(map_tmp, map_tmp->map_tab)))
+		return (-1);
+	(*map)->fd = fd;
+	if (!(*list = ft_infos_gnl(fd, &(*map)->map)))
+		ft_error(&(*map)->garbage, "Error\nMalloc error.\n", 0, (*map));
+	if ((ret = ft_get_res_x(*list, (*map)->res)) <= 0)
+		(*map)->res->x = 0;
+	if ((ret = ft_get_res_y(*list, (*map)->res, ret)) <= 0)
+		(*map)->res->y = 0;
+	if (!(ft_check_path(*list, (*map)->text)))
 		ft_error(&(*map)->garbage,
-		"Error\nBad character(s) or No/multiple player.\n", 0, fd);
+			"Error\nBad path for texture(s)!\n", 0, (*map));
+	ret = ft_get_rgb("F ", *list, &(*map)->floor_rgb);
+	if (ret < 0 || ft_get_rgb("C ", *list, &(*map)->ceil_rgb) < 0)
+		ft_error(&(*map)->garbage, "Error\nBad RGB.\n", 0, (*map));
+	if (!((*map)->map_tab = ft_lst_to_tab((*map)->map, (*map), 0)))
+		ft_error(&(*map)->garbage, "Error\nMalloc error.\n", 0, (*map));
+	if (!(ft_get_start_position((*map), (*map)->map_tab, -1)))
+		ft_error(&(*map)->garbage,
+		"Error\nBad character(s) or No/multiple player.\n", 0, (*map));
 	ft_freelst(*list);
+	// ft_map_is_closed((*map), (*map)->map_tab, (*map)->res->x);
 	return (1);
 }

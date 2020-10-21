@@ -3,14 +3,11 @@
 		DONT FORGET : NORM THE PROJECT
 					  LINUX IMPLEMENTATION
 *********************************************
-in process :  - utiliser fonction minilib pour resolution max linux | linux implementation
-			  - leaks quand error (de malloc par exemple)
-			  - croix rouge quit
-			  - SCREENSHOT
-*********************************************
-			MAP ERROR DETECTION
-********************************************
-- si map fermee
+in process :	- si map fermee
+
+				- utiliser fonction minilib pour resolution max linux | linux implementation
+				- croix rouge quit segfault
+				- SCREENSHOT
 ********************************************
 				FOIRE
 ********************************************

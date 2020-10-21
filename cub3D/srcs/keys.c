@@ -6,21 +6,19 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 15:59:58 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/20 19:01:09 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/21 18:13:12 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
 
-int				ft_keypress(int key, t_mapinfos **map_tmp)
+int				ft_keypress(int key, t_mapinfos **map)
 {
-	t_mapinfos	*map;
 	t_player	*p;
 	t_mlx		*mlx2;
 
-	map = *map_tmp;
-	p = map->p;
-	mlx2 = map->mlx;
+	p = (*map)->p;
+	mlx2 = (*map)->mlx;
 	if (key == 13 || key == 126)
 		p->m_up = 1;
 	else if (key == 1 || key == 125)
@@ -36,8 +34,7 @@ int				ft_keypress(int key, t_mapinfos **map_tmp)
 	else if (key == 53)
 	{
 		printf("ECHAP\n");
-		ft_clear_map(map);
-		ft_error(&map->garbage, NULL, 0, map->fd);
+		ft_error(&(*map)->garbage, NULL, 0, *map);
 	}
 	return (0);
 }

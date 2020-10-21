@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 16:50:53 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/20 19:01:03 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/21 18:07:58 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,17 @@ void			ft_free_split(char **tab)
 **************************************
 */
 
-void			*ft_garbage_collector(t_list **garbage,
+void			*ft_garbage_collector(t_list **garbage, t_mapinfos *map,
 				unsigned int size, int fd)
 {
 	t_list	*new;
 	void	*tmp;
 
+	(void)fd;
 	if (!(tmp = (void*)malloc(size)))
-		ft_error(garbage, "Error\nIt's may be a malloc error.\n", 0, fd);
+		ft_error(garbage, "Error\nIt's may be a malloc error.\n", 0, map);
 	if (!(new = ft_lstnew(tmp)))
-		ft_error(garbage, "Error\nIt's may be a malloc error.\n", 0, fd);
+		ft_error(garbage, "Error\nIt's may be a malloc error.\n", 0, map);
 	ft_lstadd_front(garbage, new);
 	return (tmp);
 }
@@ -74,19 +75,23 @@ void			ft_freelst(t_list *l)
 	}
 }
 
-int				ft_error(t_list **garbage, char *s, int indice, int fd)
+int				ft_error(t_list **garbage, char *s, int indice, t_mapinfos *map)
 {
 	int		list_size;
 	void	(*clear)(void*);
 
 	clear = &ft_clear;
 	list_size = ft_lstsize(*garbage);
+	if (map)
+		ft_clear_map(map);
 	if (indice == 0)
+	{
 		ft_freelst(*garbage);
+	}
 	if (s)
 		ft_putstr_fd(s, 1);
-	if (fd)
-		close(fd);
+	if (map->fd)
+		close(map->fd);
 	system("leaks Cub3D");
 	exit(EXIT_SUCCESS);
 }
