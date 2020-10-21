@@ -3,14 +3,10 @@
 		DONT FORGET : NORM THE PROJECT
 					  LINUX IMPLEMENTATION
 *********************************************
-in process :  - ft_lsttotab refact (est west fix)
-
-			  - utiliser fonction minilib pour resolution max linux | linux implementation
+in process :  - utiliser fonction minilib pour resolution max linux | linux implementation
 			  - leaks quand error (de malloc par exemple)
-			  - est et ouest inverse
 			  - croix rouge quit
 			  - SCREENSHOT
-last move : ft_lst to tab rempli de bas en haut (ft_parseinfos l144-149)(ft_lsttotab l102)(essaye de reverse chaque ligne pour voir)
 *********************************************
 			MAP ERROR DETECTION
 ********************************************

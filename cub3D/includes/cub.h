@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 17:58:41 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/20 19:04:28 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/21 12:00:59 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -277,6 +277,8 @@ int					ft_check_path(t_list *lst, t_text **tex);
 void				ft_freelst(t_list *l);
 
 void				ft_clear_map(t_mapinfos *map);
+
+void				ft_reverse_tab(char **tab);
 
 /*
 **************************************

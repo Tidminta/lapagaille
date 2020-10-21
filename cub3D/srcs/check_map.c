@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 13:38:44 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/20 15:29:23 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/21 12:34:08 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int				ft_get_start_position(t_mapinfos *map, char **tab)
 
 static void		ft_get_dir2(t_player *p, char c)
 {
-	if (c == 'S')
+	if (c == 'N')
 	{
 		p->dirx = 0;
 		p->diry = 1;
@@ -70,14 +70,14 @@ void			ft_get_dir(t_mapinfos *map)
 
 	c = map->dir;
 	p = map->p;
-	if (c == 'N')
+	if (c == 'S')
 	{
 		p->dirx = 0;
 		p->diry = -1;
 		p->planx = -0.66;
 		p->plany = 0;
 	}
-	else if (c == 'E')
+	else if (c == 'W')
 	{
 		p->dirx = -1;
 		p->diry = 0;
