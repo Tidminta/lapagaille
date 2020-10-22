@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 13:00:34 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/21 19:13:00 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/22 13:55:41 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,6 @@ size_t				ft_parseinfos(t_list **list, t_mapinfos **map,
 		ft_error(&(*map)->garbage,
 		"Error\nBad character(s) or No/multiple player.\n", 0, (*map));
 	ft_freelst(*list);
-	// ft_map_is_closed((*map), (*map)->map_tab, (*map)->res->x);
+	ft_map_is_closed((*map), (*map)->map_tab, (*map)->res->x);
 	return (1);
 }

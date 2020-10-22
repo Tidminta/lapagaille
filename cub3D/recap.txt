@@ -6,7 +6,6 @@
 in process :	- si map fermee
 
 				- utiliser fonction minilib pour resolution max linux | linux implementation
-				- croix rouge quit segfault
 				- SCREENSHOT
 ********************************************
 				FOIRE

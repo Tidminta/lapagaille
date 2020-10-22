@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 18:42:32 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/21 18:23:05 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/22 13:52:44 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,12 @@ static int			ft_game_loop(t_mapinfos *map)
 **************************************
 */
 
+
+static int					ft_cross(void)
+{
+	exit (0);
+}
+
 int					main(int ac, char **av)
 {
 	t_list		*list;
@@ -74,7 +80,7 @@ int					main(int ac, char **av)
 		if (!(garbage = ft_lstnew(ft_strdup("0"))))
 			ft_error(&garbage, "Error\nIt's may be a malloc error.\n", 1, NULL);
 		ft_parse_open(av, &map, &list, &garbage);
-		mlx_hook(map->mlx->win, DESTROY, 1L << 9, ft_quit, &map);
+		mlx_hook(map->mlx->win, DESTROY, 1L << 17, ft_cross, &map);
 		mlx_hook(map->mlx->win, KEYPRESS, 1L << 0, ft_keypress, &map);
 		mlx_hook(map->mlx->win, KEYRELEASE, 1L << 1, ft_keyrelease, &map);
 		mlx_loop_hook(map->mlx->mlx_p, &ft_game_loop, map);
