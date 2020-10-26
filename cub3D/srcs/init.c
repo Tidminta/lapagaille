@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 16:25:51 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/26 18:32:38 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/26 18:53:49 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,10 @@ t_mlx				*ft_start_mlx(t_mapinfos *map)
 	mlx->win = mlx_new_window(mlx->mlx_p, map->res->x, map->res->y, "Cub3D");
 	if (!mlx->win)
 		return (NULL);
-	if (!map->res->x || !map->res->y)
-		ft_error(&map->garbage, "Error\nbad resolution.\n", 0, map);
+	// if (map->res->x > ? || map->res->y > ?)
+	// 	utiliser fonction mlx get screen size
+	// if (!map->res->x || !map->res->y)
+	// 	ft_error(&map->garbage, "Error\nbad resolution.\n", 0, map);
 	return (mlx);
 }
 
