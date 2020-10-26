@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 17:58:41 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/21 19:06:05 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/26 18:45:00 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,7 +265,7 @@ size_t				ft_check_rfc(t_mapinfos *map);
 
 int					ft_get_start_position(t_mapinfos *map, char **tab, int i);
 
-int					ft_map_is_closed(t_mapinfos *map, char **tab, int res);
+int					ft_map_is_closed(t_mapinfos *map, char **tab);
 
 void				ft_free_split(char **tab);
 
@@ -274,13 +274,16 @@ int					ft_error(t_list **garbage, char *s, int indice,
 
 t_list				*ft_infos_gnl(int fd, t_list **mapinfos);
 
-int					ft_check_path(t_list *lst, t_text **tex);
+int					ft_check_path(t_mapinfos *m, t_list *lst, t_text **tex);
 
 void				ft_freelst(t_list *l);
 
 void				ft_clear_map(t_mapinfos *map);
 
 int					ft_quit(int button, t_mapinfos **map);
+
+void				ft_fill_tab(t_mapinfos *map, size_t i,
+					char **tab, char **tmp);
 
 /*
 **************************************

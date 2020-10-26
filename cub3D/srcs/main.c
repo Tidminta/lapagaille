@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 18:42:32 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/22 13:52:44 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/26 18:38:42 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,11 @@ static int			ft_game_loop(t_mapinfos *map)
 			"Error\nIt's may be a malloc error\n", 0, map);
 	if (!(mlx->img->data = (int *)mlx_get_data_addr(mlx->img->img_p,
 		&mlx->img->bpp, &mlx->img->size_l, &mlx->img->endian)))
-	{
 		ft_error(&map->garbage,
 		"Error\nIt's may be a malloc error\n", 0, map);
-	}
 	if ((ret = ft_init_text(map)) < 0)
-	{
 		ft_error(&map->garbage,
 		"Error\nBad path for texture(s)!\n", 0, map);
-	}
 	ft_setmove(map);
 	ft_raycast(map, mlx, map->p);
 	ft_spritecast(map);
@@ -54,16 +50,12 @@ static int			ft_game_loop(t_mapinfos *map)
 ** 		-g3 -fsanitize=address      **
 **		--track-origins=yes			**
 **		system("leaks Cub3D");      **
-**		refaire ft_free			    **
-** 		l.60->l.65 a factoriser		**
-** 		write au lieu de printf		**
 **************************************
 */
 
-
-static int					ft_cross(void)
+static int			ft_cross(void)
 {
-	exit (0);
+	exit(0);
 }
 
 int					main(int ac, char **av)
@@ -87,6 +79,6 @@ int					main(int ac, char **av)
 		mlx_loop(map->mlx->mlx_p);
 		return (0);
 	}
-	printf("Error\nInvalide number of arguments!\n");
+	ft_putstr_fd("Error\nInvalide number of arguments!\n", 1);
 	return (0);
 }

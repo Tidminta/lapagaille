@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 13:00:34 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/22 13:55:41 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/26 17:00:39 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,11 +131,10 @@ size_t				ft_parseinfos(t_list **list, t_mapinfos **map,
 	(*map)->fd = fd;
 	if (!(*list = ft_infos_gnl(fd, &(*map)->map)))
 		ft_error(&(*map)->garbage, "Error\nMalloc error.\n", 0, (*map));
-	if ((ret = ft_get_res_x(*list, (*map)->res)) <= 0)
+	if ((ret = ft_get_res_x(*list, (*map)->res)) <= 0 ||
+		ft_get_res_y(*list, (*map)->res, ret) <= 0)
 		(*map)->res->x = 0;
-	if ((ret = ft_get_res_y(*list, (*map)->res, ret)) <= 0)
-		(*map)->res->y = 0;
-	if (!(ft_check_path(*list, (*map)->text)))
+	if (!(ft_check_path((*map), *list, (*map)->text)))
 		ft_error(&(*map)->garbage,
 			"Error\nBad path for texture(s)!\n", 0, (*map));
 	ret = ft_get_rgb("F ", *list, &(*map)->floor_rgb);
@@ -146,7 +145,8 @@ size_t				ft_parseinfos(t_list **list, t_mapinfos **map,
 	if (!(ft_get_start_position((*map), (*map)->map_tab, -1)))
 		ft_error(&(*map)->garbage,
 		"Error\nBad character(s) or No/multiple player.\n", 0, (*map));
+	if (!(ft_map_is_closed((*map), (*map)->map_tab)))
+		ft_error(&(*map)->garbage, "Error\nMap not closed.\n", 0, (*map));
 	ft_freelst(*list);
-	ft_map_is_closed((*map), (*map)->map_tab, (*map)->res->x);
 	return (1);
 }

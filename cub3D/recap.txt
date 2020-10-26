@@ -3,11 +3,8 @@
 		DONT FORGET : NORM THE PROJECT
 					  LINUX IMPLEMENTATION
 *********************************************
-in process :	- si map fermee
-
-				- utiliser fonction minilib pour resolution max linux | linux implementation
+in process :	- utiliser fonction minilib pour resolution max linux | linux implementation
 				- SCREENSHOT
 ********************************************
 				FOIRE
 ********************************************
-- free mlx ??

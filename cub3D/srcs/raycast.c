@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 19:10:15 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/14 17:20:10 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/26 18:33:40 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void		ft_dda(t_player *p, char **map2d)
 			p->mapy += p->stepy;
 			p->side = 1;
 		}
-		if ( map2d[p->mapy][p->mapx] && map2d[p->mapy][p->mapx] == '1')
+		if (map2d[p->mapy][p->mapx] && map2d[p->mapy][p->mapx] == '1')
 			p->hit = 1;
 	}
 	if (p->side == 0)

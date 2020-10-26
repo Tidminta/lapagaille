@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 13:38:44 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/21 18:58:41 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/26 16:55:57 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int				ft_get_start_position(t_mapinfos *map, char **tab, int i)
 				map->start_x = j;
 				map->start_y = i;
 				map->dir = tab[i][j];
+				tab[i][j] = '0';
 				if (++cpt > 1)
 					return (0);
 			}
@@ -83,8 +84,13 @@ void			ft_get_dir(t_mapinfos *map)
 		ft_get_dir2(p, c);
 }
 
-int				ft_check_path(t_list *lst_tmp, t_text **text)
+int				ft_check_path(t_mapinfos *m, t_list *lst_tmp, t_text **text)
 {
+	if ((!m->res->x || m->res->x <= 0) ||
+		(!m->res->y || m->res->y <= 0))
+	{
+		ft_error(&(m)->garbage, "Error\nBad resolution.\n", -1, NULL);
+	}
 	if (ft_get_path("NO", lst_tmp, &text[0]->path) < 0)
 		return (-1);
 	if (ft_get_path("SO", lst_tmp, &text[1]->path) < 0)

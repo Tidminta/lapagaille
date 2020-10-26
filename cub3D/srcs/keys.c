@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 15:59:58 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/21 18:13:12 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/26 18:36:43 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,7 @@ int				ft_keypress(int key, t_mapinfos **map)
 	else if (key == 124)
 		p->m_right_key = 1;
 	else if (key == 53)
-	{
-		printf("ECHAP\n");
 		ft_error(&(*map)->garbage, NULL, 0, *map);
-	}
 	return (0);
 }
 

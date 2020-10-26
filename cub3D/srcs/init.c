@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 16:25:51 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/21 17:59:34 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/26 18:32:38 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ t_mapinfos			*ft_init_mapinfos(int i, t_list *garbage)
 	if (!(map->map = ft_lstnew(ft_strdup("\0"))))
 		return (NULL);
 	map->map_tab = NULL;
-	map->av = NULL;
 	map->nbsp = 0;
 	map->res->x = 0;
 	map->res->y = 0;

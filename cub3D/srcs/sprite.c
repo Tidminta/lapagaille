@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 16:37:01 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/21 16:56:43 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/26 18:35:42 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 ******************************************
 */
 
-int				ft_sprites_init(t_mapinfos *map)
+int						ft_sprites_init(t_mapinfos *map)
 {
 	int		i;
 	int		nb;
@@ -29,8 +29,8 @@ int				ft_sprites_init(t_mapinfos *map)
 	map->spinfos->sp = (t_sprite**)ft_garbage_collector(&map->garbage, map,
 		sizeof(t_sprite) * (nb), map->fd);
 	while (++i < map->nbsp)
-		map->spinfos->sp[i] = (t_sprite*)ft_garbage_collector(&map->garbage, map,
-			sizeof(t_sprite), map->fd);
+		map->spinfos->sp[i] = (t_sprite*)
+			ft_garbage_collector(&map->garbage, map, sizeof(t_sprite), map->fd);
 	i = -1;
 	while (++i < nb)
 		ft_bzero(map->spinfos->sp[i], sizeof(t_sprite));
