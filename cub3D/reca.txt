@@ -1,0 +1,1 @@
+ft_get start pos seg quand aucun player dans la map, 26 a NORMER (26L)

@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 16:25:51 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/26 18:53:49 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/27 18:33:08 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int					ft_parse_open(char **av, t_mapinfos **map, t_list **list,
 
 	fd = 0;
 	if (ft_strncmp(".cub", ft_strchr(av[1], '.'), 4))
-		ft_error(&(*map)->garbage, "Error\nBad extention!\n", 0, NULL);
+		ft_error(&(*map)->garbage, "Error\nBad file extention!\n", 0, NULL);
 	if ((fd = open(av[1], O_RDONLY)) < 0)
 		ft_error(&(*map)->garbage, "Error\nMap opening failled\n", 0, NULL);
 	if (ft_parseinfos(list, map, fd, *garb) < 0)
@@ -65,7 +65,7 @@ t_mapinfos			*ft_init_mapinfos(int i, t_list *garbage)
 	map->start_x = 0;
 	map->start_y = 0;
 	map->garbage = garbage;
-	map->fd = 0;
+	map->screenshoot = 0;
 	return (map);
 }
 
@@ -87,10 +87,6 @@ t_mlx				*ft_start_mlx(t_mapinfos *map)
 	mlx->win = mlx_new_window(mlx->mlx_p, map->res->x, map->res->y, "Cub3D");
 	if (!mlx->win)
 		return (NULL);
-	// if (map->res->x > ? || map->res->y > ?)
-	// 	utiliser fonction mlx get screen size
-	// if (!map->res->x || !map->res->y)
-	// 	ft_error(&map->garbage, "Error\nbad resolution.\n", 0, map);
 	return (mlx);
 }
 

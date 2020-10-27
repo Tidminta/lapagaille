@@ -6,7 +6,7 @@
 #    By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/04 18:20:36 by tidminta          #+#    #+#              #
-#    Updated: 2020/10/26 18:41:15 by tidminta         ###   ########.fr        #
+#    Updated: 2020/10/27 18:17:21 by tidminta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRC_NAME =		main.c\
 				sprite2.c\
 				tools.c\
 				tools2.c\
+				save.c\
 				free.c
 
 SRC_GNL_NAME = 	get_next_line.c\
@@ -68,7 +69,7 @@ INCLUDE = -I$(INCLUDE_PATH)
 FLAGS = -Wall -Werror -Wextra
 
 all: $(NAME)
-	@$(MAKE) -C libft
+	@$ $(MAKE) -C libft
 	@gcc -g3 $(FLAGS) $(MLX) $(NAME) ./libft/libft.a -o Cub3D 
 
 $(NAME): $(OBJ)

@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 13:00:34 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/26 17:00:39 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/27 19:54:44 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ size_t				ft_parseinfos(t_list **list, t_mapinfos **map,
 		ft_error(&(*map)->garbage, "Error\nBad RGB.\n", 0, (*map));
 	if (!((*map)->map_tab = ft_lst_to_tab((*map)->map, (*map), 0)))
 		ft_error(&(*map)->garbage, "Error\nMalloc error.\n", 0, (*map));
-	if (!(ft_get_start_position((*map), (*map)->map_tab, -1)))
+	if (!(ft_get_start_position((*map), (*map)->map_tab, -1, -1)))
 		ft_error(&(*map)->garbage,
 		"Error\nBad character(s) or No/multiple player.\n", 0, (*map));
 	if (!(ft_map_is_closed((*map), (*map)->map_tab)))

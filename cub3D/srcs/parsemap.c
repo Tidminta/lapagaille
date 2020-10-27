@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 13:00:34 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/21 11:50:23 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/27 19:44:35 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,17 @@ int					ft_get_rgb(char *to_find, t_list *lst, int *rgb)
 		{
 			while (ft_isalpha(*str) || *str == ' ')
 				str++;
-			if (ft_isdigit(*str))
+			if ((!(tab = ft_split(str, ','))) || (!(ft_check_rgb(tab))))
 			{
-				if ((!(tab = ft_split(str, ','))) || (!(ft_check_rgb(tab))))
-					return (-1);
-				*rgb = ft_create_trgb(0, ft_atoi(tab[0]),
-					ft_atoi(tab[1]), ft_atoi(tab[2]));
 				ft_free_split(tab);
-				return (1);
+				return (-1);
 			}
+			*rgb = ft_create_trgb(0, ft_atoi(tab[0]),
+				ft_atoi(tab[1]), ft_atoi(tab[2]));
+			ft_free_split(tab);
 		}
 		if (!lst->next)
-			return (-1);
+			return (1);
 		lst = lst->next;
 	}
 	return (-1);
