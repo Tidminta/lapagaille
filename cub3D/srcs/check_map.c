@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 13:38:44 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/27 19:55:42 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/28 15:06:55 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,13 @@ int				ft_get_start_position(t_mapinfos *map, char **tab, int i, int j)
 				map->start_y = i;
 				map->dir = tab[i][j];
 				tab[i][j] = '0';
-				if (++cpt > 1)
-					return (0);
+				cpt++;
 			}
 		}
 	}
-	if (ret == 1)
+	if (cpt == 1)
 		return (1);
-	return (0);
+	return (-1);
 }
 
 static void		ft_get_dir2(t_player *p, char c)
@@ -87,11 +86,13 @@ void			ft_get_dir(t_mapinfos *map)
 
 int				ft_check_path(t_mapinfos *m, t_list *lst_tmp, t_text **text)
 {
+	int		i;
+	int		ret;
+
+	i = 0;
 	if ((!m->res->x || m->res->x <= 0) ||
 		(!m->res->y || m->res->y <= 0))
-	{
 		ft_error(&(m)->garbage, "Error\nBad resolution.\n", -1, NULL);
-	}
 	if (ft_get_path("NO", lst_tmp, &text[0]->path) < 0)
 		return (0);
 	if (ft_get_path("SO", lst_tmp, &text[1]->path) < 0)
@@ -102,6 +103,13 @@ int				ft_check_path(t_mapinfos *m, t_list *lst_tmp, t_text **text)
 		return (0);
 	if (ft_get_path("S ", lst_tmp, &text[4]->path) < 0)
 		return (0);
+	while (i < 5)
+	{
+		if ((ret = open(text[i]->path, O_RDONLY)) < 0)
+			return (0);
+		close(ret);
+		i++;
+	}
 	return (1);
 }
 

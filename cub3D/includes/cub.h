@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 17:58:41 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/27 19:54:58 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/28 14:22:50 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -291,6 +291,8 @@ int					ft_check_save(t_mapinfos *m, int ac, char **av);
 int					ft_create_bmp(t_mapinfos *map);
 
 void				ft_screen_shoot(t_mapinfos *map);
+
+int					ft_double_path(t_mapinfos *map);
 
 // int					ft_check_rgb(char **tab);
 

@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 16:25:51 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/27 18:33:08 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/28 15:07:53 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,17 @@ int					ft_parse_open(char **av, t_mapinfos **map, t_list **list,
 	int			fd;
 
 	fd = 0;
+	if ((fd = open(av[1], O_RDONLY)) < 0)
+		ft_error(NULL, "Error\nMap opening failled\n", -1, NULL);
 	if (ft_strncmp(".cub", ft_strchr(av[1], '.'), 4))
 		ft_error(&(*map)->garbage, "Error\nBad file extention!\n", 0, NULL);
-	if ((fd = open(av[1], O_RDONLY)) < 0)
-		ft_error(&(*map)->garbage, "Error\nMap opening failled\n", 0, NULL);
 	if (ft_parseinfos(list, map, fd, *garb) < 0)
 	{
 		close(fd);
 		ft_error(&(*map)->garbage, "Error\nMapinfos init failed\n", 0, NULL);
 	}
+	if (!(ft_double_path(*map)))
+		ft_error(&(*map)->garbage, "Error\nBad or Same Path 2 time\n", 0, *map);
 	if (!((*(map))->p = ft_playerinit(*map)))
 		ft_error(&(*map)->garbage, "Error\nPlayer init failled\n", 0, (*map));
 	if (!((*(map))->mlx = ft_start_mlx(*map)))

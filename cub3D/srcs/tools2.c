@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 18:40:33 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/27 19:37:21 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/28 15:09:39 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,20 @@ void		ft_screen_shoot(t_mapinfos *map)
 		ft_error(&map->garbage, "Error\nScreenshot failled 1!", 0, map);
 	close(fd);
 	ft_create_bmp(map);
+}
+
+int			ft_double_path(t_mapinfos *map)
+{
+	size_t	len;
+	size_t	i;
+
+	i = 0;
+	while (i <= 4 && map->text[i + 1])
+	{
+		len = ft_strlen(map->text[i]->path);
+		if (!ft_strncmp(map->text[i]->path, map->text[i + 1]->path, len))
+			return (0);
+		i++;
+	}
+	return (1);
 }

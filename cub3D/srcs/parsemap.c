@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/05 13:00:34 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/27 19:44:35 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/28 14:10:45 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,15 @@ static int			ft_check_rgb(char **tab)
 {
 	int i;
 
-	i = -1;
-	while (++i < 3)
-		if (ft_atoi(tab[i]) < 0 || ft_atoi(tab[i]) > 255)
+	i = 0;
+	while (i < 3 && tab[i])
+	{
+		if ((ft_atoi(tab[i]) <= 0 || ft_atoi(tab[i]) > 255))
 			return (0);
+		i++;
+	}
+	if (i != 3)
+		return (0);
 	return (1);
 }
 

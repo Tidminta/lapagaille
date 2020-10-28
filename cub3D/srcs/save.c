@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 19:06:08 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/27 19:00:09 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/28 15:09:30 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,5 @@ int						ft_create_bmp(t_mapinfos *map)
 	(void)file_header;
 	(void)bmp_header;
 	ft_clear_map(map);
-	system("leaks Cub3D");
 	exit(0);
 }

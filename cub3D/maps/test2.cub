@@ -1,6 +1,6 @@
 R  900 900                   
 NO ./textures/eagle.xpm
-SO ./textures/eagle.xpm
+SO ./textures/xpm_greystone.xpm
 WE ./textures/redbrick.xpm
 EA ./textures/bluestone.xpm
 S  ./textures/barrel.xpm                            

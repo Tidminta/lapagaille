@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 16:50:53 by tidminta          #+#    #+#             */
-/*   Updated: 2020/10/27 18:32:22 by tidminta         ###   ########.fr       */
+/*   Updated: 2020/10/28 15:08:57 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ int				ft_error(t_list **garbage, char *s, int indice, t_mapinfos *map)
 	void	(*clear)(void*);
 
 	clear = &ft_clear;
-	list_size = ft_lstsize(*garbage);
+	if (garbage)
+		list_size = ft_lstsize(*garbage);
 	if (map)
 		ft_clear_map(map);
 	if (indice == 0)
@@ -85,6 +86,5 @@ int				ft_error(t_list **garbage, char *s, int indice, t_mapinfos *map)
 		ft_putstr_fd(s, 1);
 	if (map && map->fd)
 		close(map->fd);
-	system("leaks Cub3D");
 	exit(EXIT_SUCCESS);
 }

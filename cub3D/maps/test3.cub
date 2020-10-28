@@ -1,9 +1,9 @@
 R 800 800                   
-NO ./textures/xpm_greystone.xpm
-SO ../textures/colorstone.png
-WE ../textures/greenlight.png
-EA ../textures/greystone.png
-S  ../textures/redbrick.png                               
+NO ./textures/eagle.xpm
+SO ./textures/xpm_greystone.xpm
+WE ./textures/redbrick.xpm
+EA ./textures/bluestone.xpm
+S  ./textures/barrel.xpm                              
 
 F 185,122,87
 C 153,217,234   
