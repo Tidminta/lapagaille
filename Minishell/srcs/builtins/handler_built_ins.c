@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 20:59:38 by tidminta          #+#    #+#             */
-/*   Updated: 2021/02/02 18:25:42 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/02/12 00:15:31 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static int				ft_exec_built_in(t_msh *msh, t_list *element, char **env)
 	content = element->content;
 	len = ft_strlen(content);
 	i = -1;
-	/*  E X I T  */
+	/*  E X I T && L I S T */
 	if (ft_strncmp(content, "exit", len) == 0)
 		exit (0);
 	else if (ft_strncmp(content, "list", len) == 0)
@@ -94,6 +94,7 @@ static int				ft_exec_built_in(t_msh *msh, t_list *element, char **env)
 		if ((ft_my_export(msh, element->next) == ERROR))
 			return (ERROR);
 	}
+	/* U N S E T */
 	else if (ft_strncmp(content, "unset", len) == 0)
 	{
 		if (ft_my_unset(msh, element->next) == ERROR)
@@ -112,7 +113,7 @@ int				ft_handler_built_in(t_msh *msh, t_list *element, char **env)
 	content = element->content;
 	if (ft_built_in_check(content) != SUCCESS)
 		return (ERROR);
-	//builtin executiuon by ptr_func_tab
+	//builtin executiuon -> ptr_func_tab ou liste chainnée avec pointeur sur fct??
 	ft_exec_built_in(msh, element, env);
 	return (SUCCESS);
 }

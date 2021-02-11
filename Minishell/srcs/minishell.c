@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/11 19:54:29 by loamar            #+#    #+#             */
-/*   Updated: 2021/02/02 18:15:18 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/02/12 00:16:46 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ static int     	shell_prompt(t_msh *msh, char **env)
 	// signal(SIGINT, signal_handler);
     while (loop)
     {
-		printf("\033[0;32m");
-		printf(">	MINISHELL : ");
-		printf("\033[0m");
+		// printf("\033[0;32m");
+		// printf("MINISHELL : ");
+		// printf("\033[0m");
 		write(1, "minishell$ ", 11);
 		ret = get_next_line(0, &buf);
 		if (ret == -1)
@@ -75,8 +75,6 @@ static int     	shell_prompt(t_msh *msh, char **env)
     }
 	return (SUCCESS);
 }
-
-// env1=test env2=test env3=test env4=test env5=test
 
 int     main(int argc, char **argv, char **env)
 {
@@ -89,7 +87,6 @@ int     main(int argc, char **argv, char **env)
 	msh = NULL;
 	msh = init_shell(msh);
 	handler_env(msh, env); // cas d'erreur a gerer;
-	// exit (0);
     end = shell_prompt(msh, env);
 	if (end == SUCCESS)
 		exit(EXIT_SUCCESS);
