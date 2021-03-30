@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 16:48:48 by tidminta          #+#    #+#             */
-/*   Updated: 2021/02/02 16:10:14 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/02/16 16:33:02 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,45 +105,41 @@ static char			**ft_fill_exp_tab(t_list *element, int size_tab)
 	return (tab);
 }
 
-static t_env_lair 		*pop_back_env_(t_env_lair *env_lair)
+static int	ft_fill_env(char **exp_tab, t_msh *msh)
 {
-	t_env_list 		*temp;
+	t_env_lair	*lst;
+	t_env_list	*to_pop;
+	size_t		len;
+	size_t		j;
+	int			i;
 
-	if (!env_lair || env_lair == NULL)
-		return (NULL);
-	if (env_lair->start == env_lair->end)
-	{
-		free (env_lair);
-		env_lair = NULL;
-		return (NULL);
-	}
-	temp = env_lair->end;
-	env_lair->end->next = NULL;
-	temp->next = NULL;
-	temp->previous = NULL;
-	free(temp);
-	temp = NULL;
-	env_lair->size--;
-	return (env_lair);
-}
-
-static int	ft_fill_env(char **export_tab, t_msh *msh)
-{
-	t_env_lair *lst;
-	// t_env_list *start_tmp;
-	int i;
-
-	// start_tmp = lst->start;
-	i = -1;
+	to_pop = msh->env_lair->start;
 	lst = msh->env_lair;
-	// while(start_tmp->content)
-	// {
-	// 	printf("[tmp pointe sur][%s]\n", start_tmp->content);
-	// 	start_tmp = start_tmp->next;
-	// }
-	// printf("[l100][tmp pointe sur][%s]\n", start_tmp->content);
-	while (export_tab[++i] != NULL)
-		ft_fill_end_env(lst, export_tab[i]);
+	while (to_pop != NULL)
+	{
+		i = -1;
+		while (exp_tab[++i] != NULL)
+		{
+			j = 0;
+			while (exp_tab[i][j] && exp_tab[i][j] != '=')
+				j++;
+			if (to_pop->content != NULL && ft_strncmp(to_pop->content, exp_tab[i], j) == 0)
+			{
+				free(to_pop->content);
+				to_pop->content = ft_strdup(exp_tab[i]);
+				free(exp_tab[i]);
+				exp_tab[i] = ft_strdup(" ");
+			}
+		}
+		to_pop = to_pop->next;
+	}
+	i = -1;
+	while (exp_tab[++i] != NULL)
+	{
+		len = ft_strlen(exp_tab[i]);
+		if (ft_strncmp(exp_tab[i], " ", len) != 0)
+			ft_fill_end_env(lst, exp_tab[i]);
+	}
 	return (SUCCESS);
 }
 
@@ -156,13 +152,11 @@ int			ft_my_export(t_msh *msh, t_list *element)
 	if (!msh || !element)
 		return (ERROR);
 	lst = msh->env_lair;
-	// ft_doublon_check here
 	if ((size_tab = ft_check_args(lst, element)) == ERROR)
 		return (ERROR);
 	if (!(export_tab = ft_fill_exp_tab(element, size_tab)))
 		return (ERROR);
 	ft_fill_env(export_tab, msh);
 	free(export_tab);
-	// print_list(lst);
 	return (SUCCESS);
 }

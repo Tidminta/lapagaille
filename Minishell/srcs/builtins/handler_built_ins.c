@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 20:59:38 by tidminta          #+#    #+#             */
-/*   Updated: 2021/02/12 00:15:31 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/02/23 14:14:00 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void 	print_list(t_env_lair *env_lair)
 {
 	int 	test; // pour le printf
 
-	test = 1; // pour le printf
+	test = 1; // pour le printfdss
 	t_env_list *current;
 
 	current = env_lair->start;
@@ -51,6 +51,7 @@ static int		ft_built_in_check(char *s)
 	|| (ft_strncmp(s, "export", len) == 0)
 	|| (ft_strncmp(s, "unset", len) == 0)
 	|| (ft_strncmp(s, "env", len) == 0)
+	|| (ft_strncmp(s, "cd", len) == 0)
 	|| (ft_strncmp(s, "list", len) == 0)
 	|| (ft_strncmp(s, "exit", len) == 0))
 		return (SUCCESS);
@@ -98,6 +99,18 @@ static int				ft_exec_built_in(t_msh *msh, t_list *element, char **env)
 	else if (ft_strncmp(content, "unset", len) == 0)
 	{
 		if (ft_my_unset(msh, element->next) == ERROR)
+			return (ERROR);
+	}
+	/* C D */
+	else if (ft_strncmp(content, "cd", len) == 0)
+	{
+		if (ft_my_cd(msh, element->next) == ERROR)
+			return (ERROR);
+	}
+	/* E C H O */
+	else if (ft_strncmp(content, "echo", len) == 0)
+	{
+		if (ft_my_echo(msh, element->next) == ERROR)
 			return (ERROR);
 	}
 	return (SUCCESS);

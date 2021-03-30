@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handler_error.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loamar <loamar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/11 03:33:33 by loamar            #+#    #+#             */
-/*   Updated: 2020/12/11 15:29:16 by loamar           ###   ########.fr       */
+/*   Updated: 2021/02/23 16:30:25 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,6 @@ void 	free_error(t_msh *msh)
 int 	handler_error(t_msh *msh)
 {
 	msg_error(msh);
-	free_error(msh);
+	// free_error(msh);
 	return (-1);
 }

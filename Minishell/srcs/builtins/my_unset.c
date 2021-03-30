@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 16:14:39 by tidminta          #+#    #+#             */
-/*   Updated: 2021/02/12 00:13:07 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/02/16 16:36:52 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static int	ft_fill_tab(t_list *lst, char ***unset_tab)
 	return (SUCCESS);	
 }
 
-static int			ft_pop_node(t_env_lair *env_lair, char **unset_tab)
+int			ft_pop_node(t_env_lair *env_lair, char **unset_tab)
 {
 	int			i;
 	t_env_list	*to_pop;
@@ -87,35 +87,28 @@ static int			ft_pop_node(t_env_lair *env_lair, char **unset_tab)
 				to_pop = elem;
 				if (elem == env_lair->start)//premier elem
 				{
-					printf("FIRST ELEMENT !\n");
 					to_pop->next->previous = NULL;
 					env_lair->start = to_pop->next;
 					to_pop->next = NULL;
 					to_pop->previous = NULL;
 					to_pop->content = NULL;
 					to_pop = NULL;
-					// free(to_pop->content);
-					// free(to_pop);
 					env_lair->size -= 1;
 				}
 				else if (elem == env_lair->end)//dernier elem
 				{
-					printf("LAST ELEMENT !\n");
 					to_pop->previous->next = NULL;
 					env_lair->end = to_pop->previous;
 					to_pop->next = NULL;
 					to_pop->previous = NULL;
 					to_pop = NULL;
-					// free(to_pop);
 					env_lair->size -= 1;
 				}
 				else
 				{
-					printf("RANDOM ELEMENT !\n");
 					to_pop->previous->next = to_pop->next;
 					to_pop->next->previous = to_pop->previous;
 					env_lair->size -= 1;
-					
 				}
 			}
 			elem = elem->next;

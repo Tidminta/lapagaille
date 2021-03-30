@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 13:35:59 by loamar            #+#    #+#             */
-/*   Updated: 2021/01/12 15:48:59 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/02/22 16:07:23 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ int 			fill_separator_tab(t_msh *msh);
 t_lair_list		*clear_list(t_lair_list *lair_list);
 t_lair_list 	*pop_back_list(t_lair_list *lair_list);
 void			set_token_list(t_msh *msh);
-
-
 
 int 			handler_env(t_msh *msh, char **env);
 int 			ft_fill_empty_env(t_env_lair *env_lair, char *content);
