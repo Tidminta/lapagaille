@@ -6,22 +6,22 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 17:42:49 by loamar            #+#    #+#             */
-/*   Updated: 2021/01/21 14:36:05 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/03/30 16:46:13 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-typedef struct 		s_msh
+typedef struct			s_msh
 {
-	struct s_utils 		*utils;
-	struct s_data 		*data;
-	struct s_list 		*list;
-	struct s_lair_list 	*lair_list;
-	struct s_env_list 	*env_list;
-	struct s_env_lair 	*env_lair;
-}					t_msh;
+	struct s_utils		*utils;
+	struct s_data		*data;
+	struct s_list		*list;
+	struct s_lair_list	*lair_list;
+	struct s_env_list	*env_list;
+	struct s_env_lair	*env_lair;
+}						t_msh;
 
 typedef struct		s_utils
 {
