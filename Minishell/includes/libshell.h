@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 13:35:59 by loamar            #+#    #+#             */
-/*   Updated: 2021/02/22 16:07:23 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/04/08 14:31:59 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@
 # include "./includes/data.h"
 # include "./includes/cmd.h"
 # include "./includes/built.h"
-
 
 t_msh 			*init_shell(t_msh *msh);
 int 			data_check(t_msh *msh);
