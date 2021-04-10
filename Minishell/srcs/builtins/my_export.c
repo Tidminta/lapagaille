@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 16:48:48 by tidminta          #+#    #+#             */
-/*   Updated: 2021/04/08 12:32:49 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/04/10 18:23:01 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,6 @@ static int	ft_fill_env(char **exp_tab, t_msh *msh)
 				j++;
 			if (to_pop->content != NULL && ft_strncmp(to_pop->content, exp_tab[i], j) == 0)
 			{
-				// free(to_pop->content);
 				to_pop->content = ft_strdup(exp_tab[i]);
 				free(exp_tab[i]);
 				exp_tab[i] = ft_strdup(" ");

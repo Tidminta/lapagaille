@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/12 06:06:53 by loamar            #+#    #+#             */
-/*   Updated: 2021/04/08 18:06:57 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/04/10 18:24:04 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,28 +42,30 @@ static int		check_if_exist(t_msh *msh, char *str, int indice)
 	}
 	if (s)
 		free(s);
-	// printf("NO MATCH FOUND !\n");
 	return (ERROR);
 }
 
-static int	ft_handle_elem(t_msh *msh, char *str)
+static int	ft_handle_elem(t_msh *msh, char *str, int quote)
 {
-	int	i;
-	int	indic;
+	int		i;
+	int		indic;
+	size_t	len;
 
 	if (!msh || !str)
 		return (ERROR);
-	i = -1;
+	i = (!quote) ? -1 : 0;
 	indic = 0;
+	len = ft_strlen(str);
+	if (i >= 0 && str[i] == SQUOTE)
+	{
+		while (str[++i + 1])
+			ft_putchar_fd(str[i], 1);
+		return (SUCCESS);
+	}
 	while (str[++i])
 	{
 		if (str[i] && (str[i] == 36 && (check_if_exist(msh, str, i) >= 0)))
-		{
-			// while (str[i] && (str[i] != 32 || str[i] != 34
-			// || str[i] != 36 || str[i] != 39))
-			// 	i++;
 			indic = 1;
-		}
 		else if (indic != 1)
 			ft_putchar_fd(str[i], 1);
 	}
@@ -73,28 +75,22 @@ static int	ft_handle_elem(t_msh *msh, char *str)
 int			ft_my_echo(t_msh *msh, t_list *lst)
 {
 	int		option;
-	int		ret;
-	int		cpt;
-	char	**tab;
+	int		quote;
 	t_list	*element;
 
 	if (!msh || !lst)
 		return (ERROR);
 	option = (lst->token == OPTION) ? 1 : 0;
+	quote = 0;
 	element = lst;
-	ret = 0;
-	cpt = 0;
 	while (element && element->token == ARGS)
 	{
-		// ret = ft_count_word(msh, element->content);
-		// cpt += ret;
-		ft_handle_elem(msh, element->content);
+		quote = (element->token == ARGS
+		&& (element->content[0] == 34 || element->content[0] == 39)) ? 1 : 0;
+		ft_handle_elem(msh, element->content, quote);
 		ft_putchar_fd(32, 1);
 		element = element->next;
 	}
 	ft_putchar_fd(10, 1);
-	// tab = ft_fill_tab(msh);
-	//affichage tab**
-	// printf("[CPT FINAL][%d]\n", cpt);
 	return (SUCCESS);
 }

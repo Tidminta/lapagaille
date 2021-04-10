@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 17:42:49 by loamar            #+#    #+#             */
-/*   Updated: 2021/03/30 16:46:13 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/04/10 18:16:57 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,65 +23,64 @@ typedef struct			s_msh
 	struct s_env_lair	*env_lair;
 }						t_msh;
 
-typedef struct		s_utils
+typedef struct			s_utils
 {
-	pid_t 	pid;
-	pid_t 	wpid;
-	int 	size_opt_arg;
-	int 	status;
-	int 	check_opt;
-	int 	check_arg;
-	int 	error_multi_line;
-	char 	**path;
-	char	**sep_tab;
-	char 	**tab_args;
-}					t_utils;
+	pid_t				pid;
+	pid_t				wpid;
+	int					size_opt_arg;
+	int					status;
+	int					check_opt;
+	int					check_arg;
+	int					error_multi_line;
+	char				**path;
+	char				**sep_tab;
+	char				**tab_args;
+}						t_utils;
 
-typedef struct		s_split_data
+typedef struct			s_split_data
 {
-	int 	nb;
-	int 	index;
-	int 	pos;
-	int 	check;
-	int 	word;
+	int					nb;
+	int					index;
+	int					pos;
+	int					check;
+	int					word;
 
-}					t_split_data;
+}						t_split_data;
 
-typedef struct		s_data
+typedef struct			s_data
 {
-	char	**prompt_data;
-	// char 	lair_tab;
-	int 	size_data;
-	int 	check;
-}					t_data;
+	char				**prompt_data;
+	int					size_data;
+	int					check;
+}						t_data;
 
-typedef struct		s_list
+typedef struct			s_list
 {
-	char			*content;
-	int 			token;
-	struct s_list	*next;
-	struct s_list	*previous;
-}					t_list;
+	char				*content;
+	int					token;
+	struct s_list		*next;
+	struct s_list		*previous;
+}						t_list;
 
-typedef struct 		s_lair_list
+typedef struct			s_lair_list
 {
-	t_list	*start;
-	t_list	*end;
-  	int size;
-}					t_lair_list;
+	int					size;
+	t_list				*start;
+	t_list				*end;
+}						t_lair_list;
 
-typedef struct		s_env_list
+typedef struct			s_env_list
 {
 	char				*content;
 	struct s_env_list	*next;
 	struct s_env_list	*previous;
-}					t_env_list;
+}						t_env_list;
 
-typedef struct 		s_env_lair
+typedef struct		s_env_lair
 {
-	t_env_list	*start;
-	t_env_list	*end;
-  	int size;
+	t_env_list			*start;
+	t_env_list			*end;
+	int					size;
 }					t_env_lair;
 
-# endif
+#endif
