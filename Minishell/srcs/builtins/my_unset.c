@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 16:14:39 by tidminta          #+#    #+#             */
-/*   Updated: 2021/02/16 16:36:52 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/04/13 18:19:05 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static char	**ft_check_tab(t_list *lst)
 	int		i;
 
 	i = 0;
-	while (lst != NULL && (lst->token == ARGS || lst->token == OPTION))
+	while (lst != NULL && (lst->token == ARGS || lst->token == OPT))
 	{
 		i++;
 		lst = lst->next;
@@ -60,12 +60,12 @@ static int	ft_fill_tab(t_list *lst, char ***unset_tab)
 	tab_tmp = *unset_tab;
 	i = -1;
 	while (tab_tmp[++i] != NULL
-	&& (lst != NULL && (lst->token == ARGS || lst->token == OPTION)))
+	&& (lst != NULL && (lst->token == ARGS || lst->token == OPT)))
 	{
 		tab_tmp[i] = lst->content;
 		lst = lst->next;
 	}
-	return (SUCCESS);	
+	return (SUCCESS);
 }
 
 int			ft_pop_node(t_env_lair *env_lair, char **unset_tab)
@@ -121,7 +121,7 @@ int			ft_pop_node(t_env_lair *env_lair, char **unset_tab)
 int			ft_my_unset(t_msh *msh, t_list *lst)
 {
 	char		**unset_tab;
-	t_env_list *env;
+	t_env_list	*env;
 
 	if (!msh || !lst)
 		return (ERROR);

@@ -6,18 +6,17 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 20:59:38 by tidminta          #+#    #+#             */
-/*   Updated: 2021/02/23 14:14:00 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/04/13 17:39:51 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/libshell.h"
 
-
 static void 	print_list(t_env_lair *env_lair)
 {
-	int 	test; // pour le printf
+	int 	test;
 
-	test = 1; // pour le printfdss
+	test = 1;
 	t_env_list *current;
 
 	current = env_lair->start;
@@ -26,10 +25,8 @@ static void 	print_list(t_env_lair *env_lair)
 	{
 		printf("%d-> %s\n", test, current->content);
 		current = current->next;
-		test++; // pour le printf
+		test++;
 	}
-	// if (current == NULL)
-	// 	printf("[CURRENT == NULL]\n");
 	printf("\n***\nsize env_lair -> %d\n", env_lair->size);
 	printf("first env_lair -> %s\n", env_lair->start->content);
 	printf("end  env_lair -> %s\n", env_lair->end->content);

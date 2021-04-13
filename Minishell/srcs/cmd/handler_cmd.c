@@ -6,16 +6,16 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 22:57:33 by loamar            #+#    #+#             */
-/*   Updated: 2021/02/12 00:15:35 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/04/13 18:21:48 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/libshell.h"
 
-int 	handler_cmd(t_msh *msh, char **env)
+int			handler_cmd(t_msh *msh, char **env)
 {
-	int ret;
-	t_list 	*element;
+	int		ret;
+	t_list	*element;
 
 	element = msh->lair_list->start;
 	while (element->next != NULL)
@@ -25,7 +25,7 @@ int 	handler_cmd(t_msh *msh, char **env)
 			if (ft_handler_built_in(msh, element, env) != SUCCESS)
 				exec_cmd(msh, element, env);
 			element = element->next;
-			while (element->token == OPTION || element->token == ARGS)
+			while (element->token == OPT || element->token == ARGS)
 				element = element->next;
 		}
 		else

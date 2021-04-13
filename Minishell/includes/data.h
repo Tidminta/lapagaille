@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 19:16:18 by loamar            #+#    #+#             */
-/*   Updated: 2021/04/10 16:24:50 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/04/13 17:50:23 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,12 @@
 # define OR 7
 # define VARIABLE 8
 # define CMD 9
-# define OPTION 10
+# define OPT 10
 # define ARG 11
 # define SQUOTE 39
 # define DQUOTE 34
 # define SEPARATOR 35
+# define SEP 35
 # define ARGS 36
 
 int				handler_data(t_msh *msh, char *buf);

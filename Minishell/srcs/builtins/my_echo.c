@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/12 06:06:53 by loamar            #+#    #+#             */
-/*   Updated: 2021/04/12 18:21:56 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/04/13 18:19:32 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,7 @@ static t_ret		*ft_check(t_msh *msh, t_env_list *lst, char *str, int infos)
 	return (NULL);
 }
 
-// dont forget  int redirection in handle processsing
-//if (redirection) stocker dans char* sinn putchar_fd
-// recap l79 && modifier ft_check
+
 static int	ft_handle(t_msh *msh, char *str, size_t size, int quote)
 {
 	int			i;
@@ -60,7 +58,6 @@ static int	ft_handle(t_msh *msh, char *str, size_t size, int quote)
 	t_ret		*ret;
 	t_env_list	*lst;
 
-	// printf("[DEBUT HANDLE][STR = %s][len = %zu]\n", str, ft_strlen(str));
 	if (!msh || !str)
 		return (ERROR);
 	i = (!quote) ? -1 : 0;
@@ -76,20 +73,22 @@ static int	ft_handle(t_msh *msh, char *str, size_t size, int quote)
 	{
 		if ((str[i] == 36) && (ret = ft_check(msh, lst, str, i)))
 		{
-			i += ret->i - 1;
+			i += ret->i;
 			ft_putstr_fd(ret->s, 1);
-			// free_ret(ret->s);
-			// ret->i = NULL;
+			ret->i = 0;
 			free(ret);
 			indic = 1;
 		}
-		else if (indic != 1 && (i != (ft_strlen(str) - 1) && str[i] != 34))
-			ft_putchar_fd(str[i], 1);
-		else if ((size_t)i < ft_strlen(str) && (i != (ft_strlen(str) - 1) && str[i] != 34))
+		else if (indic == 1 && (size_t)i < size)
 		{
-			// indic = 0;
-			// printf("[str[%i]][%c]\n", i, str[i]);
-			ft_putchar_fd(str[i], 1);
+			indic = 0;
+			if (!(str[i] == 34 && i == size - 1))
+				ft_putchar_fd(str[i], 1);
+		}
+		else
+		{
+			if (!(str[i] == 34 && i == size - 1))
+				ft_putchar_fd(str[i], 1);
 		}
 	}
 	return (SUCCESS);
@@ -97,13 +96,13 @@ static int	ft_handle(t_msh *msh, char *str, size_t size, int quote)
 
 int			ft_my_echo(t_msh *msh, t_list *lst)
 {
-	int		option;
+	int		opt;
 	int		quote;
 	t_list	*element;
 
 	if (!msh || !lst)
 		return (ERROR);
-	option = (lst->token == OPTION) ? 1 : 0;
+	opt = (lst->token == OPT && ft_strncmp(lst->content, "-n", 2) == 0) ? 1 : 0;
 	quote = 0;
 	element = lst;
 	while (element && element->token == ARGS)
@@ -111,7 +110,8 @@ int			ft_my_echo(t_msh *msh, t_list *lst)
 		quote = (element->token == ARGS
 		&& (element->content[0] == 34 || element->content[0] == 39)) ? 1 : 0;
 		ft_handle(msh, element->content, ft_strlen(element->content), quote);
-		ft_putchar_fd(32, 1);
+		if (!opt)
+			ft_putchar_fd(32, 1);
 		element = element->next;
 	}
 	ft_putchar_fd(10, 1);
