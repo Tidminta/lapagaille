@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 18:06:28 by tidminta          #+#    #+#             */
-/*   Updated: 2021/01/18 12:27:26 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/04/14 15:32:47 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ static int				option_check(t_msh *msh, char *s)
 	if (!s[0])
 		return (0);
 	if (s[0] == 45)
-		return (OPTION);
+		return (OPT);
 	else if (s[1] && (s[0] == DQUOTE && s[1] == 45))
-		return (OPTION);
+		return (OPT);
 	else if (s[1] && (s[0] == SQUOTE && s[1] == 45))
-		return (OPTION);
+		return (OPT);
 	else return (0);
 }
 
@@ -56,7 +56,7 @@ static int		token_recognition(t_msh *msh, char *s, int indice)
 		return (CMD);
 	else if (((indice == 1 && option_check(msh, s)) || (indice > 1 && option_check(msh, s)))
 			&& (msh->utils->check_arg == 0))
-		return (OPTION);
+		return (OPT);
 	else if (indice != 0 && separator_check(msh, s))
 		return (SEPARATOR);
 	else
@@ -82,7 +82,7 @@ void		set_token_list(t_msh *msh)
 		// printf("token[%s] = %i\n", lst->content, lst->token);
 		i++;
 		i = (lst->token == SEPARATOR) ? 0 : i;
-		msh->utils->size_opt_arg = (lst->token == ARGS || lst->token == OPTION) ?
+		msh->utils->size_opt_arg = (lst->token == ARGS || lst->token == OPT) ?
 			msh->utils->size_opt_arg + 1 : msh->utils->size_opt_arg;
 		lst = lst->next;
 	}

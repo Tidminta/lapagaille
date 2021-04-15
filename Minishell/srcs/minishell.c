@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/11 19:54:29 by loamar            #+#    #+#             */
-/*   Updated: 2021/04/13 17:36:11 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/04/14 17:12:12 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 
 #include "../includes/libshell.h"
 
-static int     	shell_prompt(t_msh *msh, char **env)
+static int     	shell_prompt(t_msh *msh, char **env, char *test)
 {
 	int		loop;
 	int		ret;
@@ -61,7 +61,7 @@ static int     	shell_prompt(t_msh *msh, char **env)
 		ret = get_next_line(0, &buf);
 		if (ret == -1)
 			return (ERROR);
-		if ((handler_data(msh, buf) == -1) || (handler_list(msh) == -1))
+		if ((handler_data(msh, /*buf*/test) == -1) || (handler_list(msh) == -1))
 			return (handler_error(msh));
 		handler_cmd(msh, env);
 	}
@@ -79,7 +79,7 @@ int				main(int argc, char **argv, char **env)
 	msh = NULL;
 	msh = init_shell(msh);
 	handler_env(msh, env);
-	end = shell_prompt(msh, env);
+	end = shell_prompt(msh, env, argv[2]);
 	if (end == SUCCESS)
 		exit(EXIT_SUCCESS);
 	if (end == ERROR)
