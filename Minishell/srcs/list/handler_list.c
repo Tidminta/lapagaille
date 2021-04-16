@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handler_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loamar <loamar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/11 04:42:10 by loamar            #+#    #+#             */
-/*   Updated: 2021/01/11 14:46:01 by loamar           ###   ########.fr       */
+/*   Updated: 2021/04/16 17:47:42 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int 	linked_list_data(t_msh *msh)
 {
-	int 	count;
+	int		count;
 
 	count = 0;
 	msh->list = NULL;
@@ -31,9 +31,9 @@ static int 	linked_list_data(t_msh *msh)
 	return (SUCCESS);
 }
 
-int 	handler_list(t_msh *msh)
+int			handler_list(t_msh *msh)
 {
-	int 	ret;
+	int			ret;
 
 	ret = 0;
 	ret = linked_list_data(msh);

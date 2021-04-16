@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/12 06:06:53 by loamar            #+#    #+#             */
-/*   Updated: 2021/04/13 18:19:32 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/04/16 17:56:55 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static t_ret		*ft_check(t_msh *msh, t_env_list *lst, char *str, int infos)
 	while (infos-- >= 0)
 		str++;
 	while ((str[i]) && (str[i] != 32 && str[i] != 34
-		&& str[i] != 36 && str[i] != 39))
+		&& str[i] != 36 && str[i] != 39 && str[i] != '\\'))
 		i++;
 	if (i && (!(s = ft_substr(str, 0, (size_t)i))))
 		return (NULL);
@@ -49,7 +49,6 @@ static t_ret		*ft_check(t_msh *msh, t_env_list *lst, char *str, int infos)
 		free(s);
 	return (NULL);
 }
-
 
 static int	ft_handle(t_msh *msh, char *str, size_t size, int quote)
 {
@@ -79,7 +78,7 @@ static int	ft_handle(t_msh *msh, char *str, size_t size, int quote)
 			free(ret);
 			indic = 1;
 		}
-		else if (indic == 1 && (size_t)i < size)
+		else if ((str[i] != 92) && indic == 1 && (size_t)i < size)
 		{
 			indic = 0;
 			if (!(str[i] == 34 && i == size - 1))
@@ -87,7 +86,7 @@ static int	ft_handle(t_msh *msh, char *str, size_t size, int quote)
 		}
 		else
 		{
-			if (!(str[i] == 34 && i == size - 1))
+			if (!((str[i] == 34 && str[i] == 92) && i == size - 1))
 				ft_putchar_fd(str[i], 1);
 		}
 	}
@@ -96,21 +95,22 @@ static int	ft_handle(t_msh *msh, char *str, size_t size, int quote)
 
 int			ft_my_echo(t_msh *msh, t_list *lst)
 {
-	int		opt;
-	int		quote;
+	int		op;
+	int		quot;
 	t_list	*element;
 
 	if (!msh || !lst)
 		return (ERROR);
-	opt = (lst->token == OPT && ft_strncmp(lst->content, "-n", 2) == 0) ? 1 : 0;
-	quote = 0;
+	op = (lst->token == OPT && ft_strncmp(lst->content, "-n", 2) == 0) ? 1 : 0;
+	printf("[cont = %s][token = %d][op=%d]\n", lst->content, lst->token, op);
+	quot = 0;
 	element = lst;
 	while (element && element->token == ARGS)
 	{
-		quote = (element->token == ARGS
+		quot = (element->token == ARGS
 		&& (element->content[0] == 34 || element->content[0] == 39)) ? 1 : 0;
-		ft_handle(msh, element->content, ft_strlen(element->content), quote);
-		if (!opt)
+		ft_handle(msh, element->content, ft_strlen(element->content), quot);
+		if (!op)
 			ft_putchar_fd(32, 1);
 		element = element->next;
 	}

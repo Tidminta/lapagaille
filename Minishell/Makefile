@@ -40,15 +40,18 @@ OBJS	=	$(SRCS:.c=.o)
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
-			make -C lib/libft
-			${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBFT}
+			@echo [COMPILING LIBFT ...]
+			@make -C lib/libft
+			@${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBFT}
+			@echo [COMPILING DONE !]
 
 clean:
-			$(RM) $(OBJS)
-			make clean -C lib/libft
+			@$(RM) $(OBJS)
+			@make clean -C lib/libft
+			@echo [CLEANING DONE !]
 
 fclean:		clean
-			$(RM) $(NAME) $(LIBFT)
+			@$(RM) $(NAME) $(LIBFT)
 
 re:			fclean $(NAME)
 

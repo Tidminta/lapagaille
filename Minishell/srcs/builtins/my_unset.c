@@ -6,33 +6,11 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 16:14:39 by tidminta          #+#    #+#             */
-/*   Updated: 2021/04/14 16:48:06 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/04/16 15:08:12 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/libshell.h"
-
-// static void 	print_list(t_env_lair *env_lair)
-// {
-// 	int 	test; // pour le printf
-
-// 	test = 1; // pour le printf
-// 	t_env_list *current;
-
-// 	current = env_lair->start;
-// 	printf("| DEBUT | \n");
-// 	while (current->next != NULL)
-// 	{
-// 		printf("[%d][%s]\n", test, current->content);
-// 		current = current->next;
-// 		test++; // pour le printf
-// 	}
-// 	printf("[hors boucle][%d][%s]\n", test, current->content);
-// 	printf("| FIN |\n");
-// 	printf("[size env_lair][%d]\n", env_lair->size);
-// 	printf("[first env_lair][%s]\n", env_lair->start->content);
-// 	printf("[end  env_lair][%s]\n", env_lair->end->content);
-// }
 
 static char	**ft_check_tab(t_list *lst)
 {
@@ -60,8 +38,7 @@ static int	ft_fill_tab(t_list *lst, char ***unset_tab)
 
 	tab_tmp = *unset_tab;
 	i = -1;
-	while (/*tab_tmp[++i] != NULL
-	&& */(lst != NULL && (lst->token == ARGS || lst->token == OPT)))
+	while (lst != NULL && (lst->token == ARGS || lst->token == OPT))
 	{
 		tab_tmp[++i] = lst->content;
 		lst = lst->next;
@@ -86,7 +63,7 @@ int			ft_pop_node(t_env_lair *env_lair, char **unset_tab)
 			if (elem->content && ft_strncmp(unset_tab[i], elem->content, len) == 0)
 			{
 				to_pop = elem;
-				if (elem == env_lair->start)//premier elem
+				if (elem == env_lair->start)
 				{
 					to_pop->next->previous = NULL;
 					env_lair->start = to_pop->next;
@@ -96,7 +73,7 @@ int			ft_pop_node(t_env_lair *env_lair, char **unset_tab)
 					to_pop = NULL;
 					env_lair->size -= 1;
 				}
-				else if (elem == env_lair->end)//dernier elem
+				else if (elem == env_lair->end)
 				{
 					to_pop->previous->next = NULL;
 					env_lair->end = to_pop->previous;
