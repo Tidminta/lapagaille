@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/12 06:06:53 by loamar            #+#    #+#             */
-/*   Updated: 2021/04/16 17:56:55 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/04/22 16:34:38 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static t_ret		*ft_check(t_msh *msh, t_env_list *lst, char *str, int infos)
 		{
 			free(s);
 			ret->i = i;
-			// ret->s = ft_strdup(ft_strchr(lst->content, 61) + 1);
 			ret->s = ft_strchr(lst->content, 61) + 1;
 			return (ret);
 		}
@@ -54,28 +53,19 @@ static int	ft_handle(t_msh *msh, char *str, size_t size, int quote)
 {
 	int			i;
 	int			indic;
-	t_ret		*ret;
-	t_env_list	*lst;
+	t_ret		*r;
 
 	if (!msh || !str)
 		return (ERROR);
-	i = (!quote) ? -1 : 0;
+	i = quote;
 	indic = 0;
-	lst = msh->env_lair->start;
-	if (i == 0 && str[i] == SQUOTE)
-	{
-		while (str[++i + 1])
-			ft_putchar_fd(str[i], 1);
-		return (SUCCESS);
-	}
 	while (str[++i])
 	{
-		if ((str[i] == 36) && (ret = ft_check(msh, lst, str, i)))
+		if ((str[i] == 36) && (r = ft_check(msh, msh->env_lair->start, str, i)))
 		{
-			i += ret->i;
-			ft_putstr_fd(ret->s, 1);
-			ret->i = 0;
-			free(ret);
+			i += r->i;
+			ft_putstr_fd(r->s, 1);
+			free(r);
 			indic = 1;
 		}
 		else if ((str[i] != 92) && indic == 1 && (size_t)i < size)
@@ -86,34 +76,38 @@ static int	ft_handle(t_msh *msh, char *str, size_t size, int quote)
 		}
 		else
 		{
-			if (!((str[i] == 34 && str[i] == 92) && i == size - 1))
+			if ((str[i] != 34 && str[i] != 92) && i <= size - 1)
 				ft_putchar_fd(str[i], 1);
 		}
 	}
 	return (SUCCESS);
 }
 
-int			ft_my_echo(t_msh *msh, t_list *lst)
+int			ft_my_echo(t_msh *msh, t_list *lst, int quot)
 {
+	int		i;
 	int		op;
-	int		quot;
 	t_list	*element;
 
 	if (!msh || !lst)
 		return (ERROR);
+	i = -1;
 	op = (lst->token == OPT && ft_strncmp(lst->content, "-n", 2) == 0) ? 1 : 0;
-	printf("[cont = %s][token = %d][op=%d]\n", lst->content, lst->token, op);
-	quot = 0;
-	element = lst;
+	element = (lst->token != ARGS) ? lst->next : lst;
 	while (element && element->token == ARGS)
 	{
 		quot = (element->token == ARGS
-		&& (element->content[0] == 34 || element->content[0] == 39)) ? 1 : 0;
-		ft_handle(msh, element->content, ft_strlen(element->content), quot);
+		&& (element->content[0] == 34 || element->content[0] == 39)) ? 0 : -1;
+		if (element->content[0] == SQUOTE)
+			ft_putstr_fd(element->content, 1);
+		else
+			ft_handle(msh, element->content, ft_strlen(element->content), quot);
 		if (!op)
+		{
 			ft_putchar_fd(32, 1);
+			ft_putchar_fd(10, 1);
+		}
 		element = element->next;
 	}
-	ft_putchar_fd(10, 1);
 	return (SUCCESS);
 }

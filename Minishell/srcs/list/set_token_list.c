@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 18:06:28 by tidminta          #+#    #+#             */
-/*   Updated: 2021/04/16 18:15:50 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/04/22 15:27:54 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static int				option_check(t_msh *msh, char *s)
 {
 	size_t	len;
 
-	printf("[OPTION CHECK][%s]\n", s);
 	if (!msh || !s || !s[0])
 		return (0);
 	len = ft_strlen(s);
@@ -54,13 +53,13 @@ static int				option_check(t_msh *msh, char *s)
 		return (0);
 }
 
+/*&& (msh->utils->check_arg == 0) a placer en condi du premier else if*/
 static int		token_recognition(t_msh *msh, char *s, int indice)
 {
 	if (indice == 0)
 		return (CMD);
 	else if (((indice == 1 && option_check(msh, s))
-		|| (indice > 1 && option_check(msh, s)))
-			/*&& (msh->utils->check_arg == 0)*/)
+		|| (indice > 1 && option_check(msh, s))))
 		return (OPT);
 	else if (indice != 0 && separator_check(msh, s))
 		return (SEPARATOR);
@@ -84,7 +83,6 @@ void		set_token_list(t_msh *msh)
 	while (lst->content != NULL)
 	{
 		lst->token = token_recognition(msh, lst->content, i);
-		printf("token[%s] = %i\n", lst->content, lst->token);
 		i++;
 		i = (lst->token == SEPARATOR) ? 0 : i;
 		msh->utils->size_opt_arg = (lst->token == ARGS || lst->token == OPT) ?
