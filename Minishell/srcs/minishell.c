@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/11 19:54:29 by loamar            #+#    #+#             */
-/*   Updated: 2021/04/16 18:20:15 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/04/22 18:03:42 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int				main(int argc, char **argv, char **env)
 	msh = NULL;
 	msh = init_shell(msh);
 	handler_env(msh, env);
+	system("leaks minishell");
 	end = shell_prompt(msh, env);
 	if (end == SUCCESS)
 		exit(EXIT_SUCCESS);

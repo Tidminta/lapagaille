@@ -6,13 +6,13 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 18:06:28 by tidminta          #+#    #+#             */
-/*   Updated: 2021/04/22 15:27:54 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/04/22 16:36:54 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/libshell.h"
 
-static int				separator_check(t_msh *msh, char *s)
+static int			separator_check(t_msh *msh, char *s)
 {
 	int		i;
 	char	**tmp;
@@ -29,14 +29,7 @@ static int				separator_check(t_msh *msh, char *s)
 	return (0);
 }
 
-/*
-** token recognition a finir, bon pour cmd separator et args
-** d'autres tests sont a prevoirs, relancer l'op qd on est sur un sep
-** implementer/finir option_check(s);
-** lors des test
-*/
-
-static int				option_check(t_msh *msh, char *s)
+static int			option_check(t_msh *msh, char *s)
 {
 	size_t	len;
 
@@ -53,8 +46,7 @@ static int				option_check(t_msh *msh, char *s)
 		return (0);
 }
 
-/*&& (msh->utils->check_arg == 0) a placer en condi du premier else if*/
-static int		token_recognition(t_msh *msh, char *s, int indice)
+static int			token_recognition(t_msh *msh, char *s, int indice)
 {
 	if (indice == 0)
 		return (CMD);
@@ -71,7 +63,7 @@ static int		token_recognition(t_msh *msh, char *s, int indice)
 	return (0);
 }
 
-void		set_token_list(t_msh *msh)
+void				set_token_list(t_msh *msh)
 {
 	t_list	*lst;
 	int		i;

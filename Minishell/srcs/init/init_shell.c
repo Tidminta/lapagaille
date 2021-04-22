@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loamar <loamar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 18:42:01 by loamar            #+#    #+#             */
-/*   Updated: 2020/12/12 06:03:25 by loamar           ###   ########.fr       */
+/*   Updated: 2021/04/22 17:57:03 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/libshell.h"
 
-int 	fill_separator_tab(t_msh *msh)
+int					fill_separator_tab(t_msh *msh)
 {
-	int 	pos;
+	int		pos;
 
 	pos = 0;
 	if (!(msh->utils->sep_tab = (char**)malloc(sizeof(char*) * 8)))
@@ -36,31 +36,27 @@ int 	fill_separator_tab(t_msh *msh)
 	return (SUCCESS);
 }
 
-static void 	aff_welcome(void)
+static void			aff_welcome(void)
 {
 	ft_putstr("\n");
 	ft_putstr("   +--------------+\n");
-   	ft_putstr("   |.------------.|\n");
-   	ft_putstr("   ||            ||\n");
+	ft_putstr("   |.------------.|\n");
+	ft_putstr("   ||            ||\n");
 	ft_putstr("   || WELCOME TO ||\n");
 	ft_putstr("   ||  MINISHELL ||\n");
-   	ft_putstr("   ||            ||\n");
-   	ft_putstr("   |+------------+|\n");
-   	ft_putstr("   +-..--------..-+\n");
-   	ft_putstr("   .--------------.\n");
-  	ft_putstr("  | .============. | \n");
+	ft_putstr("   ||            ||\n");
+	ft_putstr("   |+------------+|\n");
+	ft_putstr("   +-..--------..-+\n");
+	ft_putstr("   .--------------.\n");
+	ft_putstr("  | .============. | \n");
 	ft_putstr(" | .==============. | \n");
 	ft_putstr("| ___________________| \n");
 	ft_putstr("|____________________| \n");
 	ft_putstr("*+*                *+* \n\n");
 }
 
-t_msh 	*init_shell(t_msh *msh)
+t_msh				*init_shell(t_msh *msh)
 {
 	aff_welcome();
 	return (init_msh(msh));
 }
-// t_data		*init_data_struct(t_data *data)
-// {
-// 	data->count_data = 0;
-// }

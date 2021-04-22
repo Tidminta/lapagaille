@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 20:59:38 by tidminta          #+#    #+#             */
-/*   Updated: 2021/04/22 16:05:35 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/04/22 17:30:13 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int				ft_exec_built_in(t_msh *msh, t_list *element, char **env)
 	len = ft_strlen(content);
 	i = -1;
 	if (ft_strncmp(content, "exit", len) == 0)
-		exit(0);
+		ft_exit();
 	else if ((ft_strncmp(content, "pwd", len) == 0))
 	{
 		if (ft_my_pwd() == ERROR)

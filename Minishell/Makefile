@@ -16,6 +16,7 @@ SRCS	=	./srcs/minishell.c \
 			./srcs/builtins/my_unset.c \
 			./srcs/builtins/my_cd.c \
 			./srcs/builtins/my_echo.c \
+			./srcs/builtins/my_exit.c \
 			./srcs/check/data_check.c \
 			./srcs/cmd/exec_cmd.c \
 			./srcs/cmd/handler_cmd.c \
