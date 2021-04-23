@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 17:42:49 by loamar            #+#    #+#             */
-/*   Updated: 2021/04/10 18:16:57 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/04/23 16:38:34 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ typedef struct			s_split_data
 	int					pos;
 	int					check;
 	int					word;
-
 }						t_split_data;
 
 typedef struct			s_data

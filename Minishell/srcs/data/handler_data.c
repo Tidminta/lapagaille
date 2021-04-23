@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   handler_data.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loamar <loamar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 20:48:58 by loamar            #+#    #+#             */
-/*   Updated: 2020/12/11 15:16:25 by loamar           ###   ########.fr       */
+/*   Updated: 2021/04/23 16:32:43 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/libshell.h"
 
-static int 	ft_size_data(t_msh *msh, char *buf)
+static int	ft_size_data(t_msh *msh, char *buf)
 {
 	msh->data->size_data = 0;
 	ft_memset(buf, 0, ft_strlen(buf));
@@ -22,7 +22,7 @@ static int 	ft_size_data(t_msh *msh, char *buf)
 	return (1);
 }
 
-int 	handler_data(t_msh *msh, char *buf)
+int			handler_data(t_msh *msh, char *buf)
 {
 	if (!(msh->data = (t_data *)malloc(sizeof(t_data))))
 		return (handler_error(msh));

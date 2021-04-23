@@ -6,13 +6,13 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/11 04:42:10 by loamar            #+#    #+#             */
-/*   Updated: 2021/04/16 17:47:42 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/04/23 17:45:48 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/libshell.h"
 
-static int 	linked_list_data(t_msh *msh)
+static int			linked_list_data(t_msh *msh)
 {
 	int		count;
 
@@ -27,7 +27,6 @@ static int 	linked_list_data(t_msh *msh)
 		count++;
 		ft_fill_end_list(msh->lair_list, msh->data->prompt_data[count]);
 	}
-	// print_list(msh->lair_list);
 	return (SUCCESS);
 }
 
@@ -40,6 +39,6 @@ int			handler_list(t_msh *msh)
 	if (ret == ERROR)
 		return (ERROR);
 	set_token_list(msh);
-	// free_data(msh);
+	free_data(msh);
 	return (SUCCESS);
 }

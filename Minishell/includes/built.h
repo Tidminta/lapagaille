@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 15:47:40 by tidminta          #+#    #+#             */
-/*   Updated: 2021/04/22 17:21:02 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/04/23 16:33:30 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ int				ft_my_cd(t_msh *msh, t_list *lst);
 
 int				ft_my_echo(t_msh *msh, t_list *lst, int quot);
 
-void			ft_exit(void);
+void			ft_exit(t_msh *msh);
 #endif

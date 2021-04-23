@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/11 19:54:29 by loamar            #+#    #+#             */
-/*   Updated: 2021/04/22 18:03:42 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/04/23 18:01:57 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,11 @@ static int				shell_prompt(t_msh *msh, char **env)
 		if ((handler_data(msh, buf) == -1) || (handler_list(msh) == -1))
 			return (handler_error(msh));
 		handler_cmd(msh, env);
+		//history_list(msh, buff); 
+		free(buf);
 	}
+	if (buf)
+		free(buf);
 	return (SUCCESS);
 }
 
@@ -79,7 +83,7 @@ int				main(int argc, char **argv, char **env)
 	msh = NULL;
 	msh = init_shell(msh);
 	handler_env(msh, env);
-	system("leaks minishell");
+	// system("leaks minishell");
 	end = shell_prompt(msh, env);
 	if (end == SUCCESS)
 		exit(EXIT_SUCCESS);

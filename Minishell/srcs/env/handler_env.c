@@ -6,39 +6,15 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 17:30:11 by loamar            #+#    #+#             */
-/*   Updated: 2021/02/02 16:08:13 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/04/23 17:04:34 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/libshell.h"
 
-////////////////////////////////////////////////////////////////
-// FONCTIONS POUR CHECK CE QU IL Y A DANS LA LISTE CHAINEE
-static void 	print_list(t_env_lair *env_lair)
+static int		linked_list_env(t_msh *msh, char **env)
 {
-	int 	test; // pour le printf
-
-	test = 1; // pour le printf
-	t_env_list *current;
-
-	current = env_lair->start;
-	printf("| DEBUT | \n");
-	while (current != NULL)
-	{
-		printf("%d-> %s\n", test, current->content);
-		current = current->next;
-		test++; // pour le printf
-	}
-	printf("| FIN |\n");
-	printf("size env_lair -> %d\n", env_lair->size);
-	printf("first env_lair -> %s\n", env_lair->start->content);
-	printf("end  env_lair -> %s\n", env_lair->end->content);
-}
-////////////////////////////////////////////////////////////////
-
-static int 	linked_list_env(t_msh *msh, char **env)
-{
-	int 	count;
+	int		count;
 
 	count = 0;
 	msh->env_list = NULL;
@@ -48,20 +24,16 @@ static int 	linked_list_env(t_msh *msh, char **env)
 	ft_fill_empty_env(msh->env_lair, env[count]);
 	while (env[count] != NULL)
 	{
-	// while (env[count] && ft_strncmp(env[count], "(null)", 6) != 0)
-	// {
-		// printf("[linked list env][%s]\n", env[count]);
 		count++;
 		ft_fill_end_env(msh->env_lair, env[count]);
 	}
-	// print_list(msh->env_lair);
 	return (SUCCESS);
 }
 
 static int		get_path(t_msh *msh)
 {
-	t_env_list 	*element;
-	char 		*tmp;
+	t_env_list	*element;
+	char		*tmp;
 
 	tmp = NULL;
 	element = msh->env_lair->start;
@@ -85,9 +57,9 @@ static int		get_path(t_msh *msh)
 	return (ERROR);
 }
 
-int 	handler_env(t_msh *msh, char **env)
+int			handler_env(t_msh *msh, char **env)
 {
-	int 	ret;
+	int		ret;
 
 	ret = 0;
 	ret = linked_list_env(msh, env);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_error.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loamar <loamar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 11:56:22 by loamar            #+#    #+#             */
-/*   Updated: 2021/01/06 23:39:38 by loamar           ###   ########.fr       */
+/*   Updated: 2021/04/23 17:46:38 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void		free_split(char **str)
 	free(str);
 }
 
-void 	free_data(t_msh *msh)
+void			free_data(t_msh *msh)
 {
 	if (msh->data)
 	{
@@ -36,7 +36,7 @@ void 	free_data(t_msh *msh)
 	}
 }
 
-void 	free_lair_list(t_msh *msh)
+void			free_lair_list(t_msh *msh)
 {
 	if (msh->lair_list)
 	{
@@ -45,7 +45,7 @@ void 	free_lair_list(t_msh *msh)
 	}
 }
 
-void 	free_env_lair(t_msh *msh)
+void			free_env_lair(t_msh *msh)
 {
 	if (msh->env_lair)
 	{
