@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 13:35:59 by loamar            #+#    #+#             */
-/*   Updated: 2021/04/10 18:11:28 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/04/24 17:34:20 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,14 @@
 
 t_msh			*init_shell(t_msh *msh);
 int				data_check(t_msh *msh);
-void			free_error(t_msh *msh);
 int				handler_error(t_msh *msh);
 t_msh			*init_msh(t_msh *msh);
 t_env_lair		*init_env_lair(t_env_lair *env_lair);
-void			free_data(t_msh *msh);
-void			free_lair_list(t_msh *msh);
+void			free_error(t_msh *msh);
+int				free_lair_list(t_msh *msh);
+int				free_env_lair(t_msh *msh);
+void			ft_free_separator_tab(t_msh *msh);
+int				free_data(t_msh *msh);
 t_lair_list		*init_lair_list(t_lair_list *lair_list);
 int				fill_separator_tab(t_msh *msh);
 t_lair_list		*clear_list(t_lair_list *lair_list);

@@ -6,13 +6,13 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 18:42:01 by loamar            #+#    #+#             */
-/*   Updated: 2021/04/23 18:10:45 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/04/24 16:18:06 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/libshell.h"
 
-static void			ft_free_separator_tab(t_msh *msh)
+void			ft_free_separator_tab(t_msh *msh)
 {
 	int		i;
 	char	**tab;
@@ -21,7 +21,7 @@ static void			ft_free_separator_tab(t_msh *msh)
 	tab = msh->utils->sep_tab;
 	while (msh->utils->sep_tab[++i])
 		free(msh->utils->sep_tab[i]);
-	free(msh->utils->sep_tab);
+	// free(msh->utils->sep_tab);
 }
 
 int					fill_separator_tab(t_msh *msh)

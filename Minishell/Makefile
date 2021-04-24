@@ -43,7 +43,7 @@ all:		$(NAME)
 $(NAME):	$(OBJS)
 			@echo [COMPILING LIBFT ...]
 			@make -C lib/libft
-			@${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBFT}
+			@${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBFT} -g
 			@echo [COMPILING DONE !]
 
 clean:

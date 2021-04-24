@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/11 19:54:29 by loamar            #+#    #+#             */
-/*   Updated: 2021/04/23 18:01:57 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/04/24 17:56:27 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 	**** dont forget  int redirection in ft_handle
 	**** if (redirection) stocker dans char* sinn putchar_fd
 		// signal(SIGINT, signal_handler);
-		// system("leaks minishell");
+		// system("leaks minishell")
 
    */
 
@@ -65,7 +65,7 @@ static int				shell_prompt(t_msh *msh, char **env)
 			return (handler_error(msh));
 		handler_cmd(msh, env);
 		//history_list(msh, buff); 
-		free(buf);
+		// free(buf);
 	}
 	if (buf)
 		free(buf);
@@ -83,7 +83,6 @@ int				main(int argc, char **argv, char **env)
 	msh = NULL;
 	msh = init_shell(msh);
 	handler_env(msh, env);
-	// system("leaks minishell");
 	end = shell_prompt(msh, env);
 	if (end == SUCCESS)
 		exit(EXIT_SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/11 04:42:10 by loamar            #+#    #+#             */
-/*   Updated: 2021/04/23 17:45:48 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/04/24 16:12:19 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,6 @@ int			handler_list(t_msh *msh)
 	if (ret == ERROR)
 		return (ERROR);
 	set_token_list(msh);
-	free_data(msh);
+	// free_data(msh);
 	return (SUCCESS);
 }

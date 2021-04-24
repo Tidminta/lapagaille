@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 17:19:34 by tidminta          #+#    #+#             */
-/*   Updated: 2021/04/23 18:01:52 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/04/24 17:56:15 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,20 @@ static void			ft_free_env_lair(t_env_lair *to_free)
 
 void				ft_exit(t_msh *msh)
 {
+	int		ret;
 	void	*lst;
 	size_t	cpt;
 
 	cpt = 0;
 	lst = msh->env_lair->start;
 	ft_putstr_fd("exit!\n", 1);
-	free_data(msh);
-	free_lair_list(msh);
-	free_env_lair(msh);
-	ft_free_separator_tab(msh);
+	// ft_free_separator_tab(msh);
+	if ((ret = free_data(msh)) == 0)
+		printf("free data done !\n");
+	if ((ret = free_lair_list(msh)) == 0)
+		printf("free lair list done !\n");
+	if ((ret = free_env_lair(msh)) == 0)
+		printf("free env lair done !\n");
+	// system("leaks minishell");
 	exit(0);
 }

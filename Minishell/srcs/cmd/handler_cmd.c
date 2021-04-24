@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 22:57:33 by loamar            #+#    #+#             */
-/*   Updated: 2021/04/13 18:21:48 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/04/24 16:20:51 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int			handler_cmd(t_msh *msh, char **env)
 {
 	int		ret;
 	t_list	*element;
-
+	// if (!msh || !msh->env_list || !env)
+	// 	return (ERROR);
 	element = msh->lair_list->start;
 	while (element->next != NULL)
 	{
