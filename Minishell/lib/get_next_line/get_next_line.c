@@ -23,6 +23,8 @@ char		*ft_line(char *line, char **hold)
 		ft_strlen_gnl(tmp))))
 			return (NULL);
 		free(tmp);
+		free(*hold);
+		*hold = NULL;
 	}
 	else
 	{
@@ -55,6 +57,10 @@ int			get_next_line(int fd, char **line)
 	if ((ret == -1) || (!(*line = ft_line(*line, &hold))))
 		return (-1);
 	if (!(hold))
+	{
 		return (0);
+	}
+	if (ret == 0)
+		free(hold);
 	return (1);
 }

@@ -1,6 +1,6 @@
 NAME	=	minishell
 
-CC		=	gcc
+CC		=	gcc -g3
 
 RM		=	rm -f
 
@@ -43,7 +43,7 @@ all:		$(NAME)
 $(NAME):	$(OBJS)
 			@echo [COMPILING LIBFT ...]
 			@make -C lib/libft
-			@${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBFT} -g
+			@${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBFT}
 			@echo [COMPILING DONE !]
 
 clean:
