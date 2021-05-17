@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 20:48:58 by loamar            #+#    #+#             */
-/*   Updated: 2021/04/23 16:32:43 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/05/17 17:45:23 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@ static int	ft_size_data(t_msh *msh, char *buf)
 	return (1);
 }
 
-int			handler_data(t_msh *msh, char *buf)
+int			handler_data(t_msh **msh, char *buf)
 {
-	if (!(msh->data = (t_data *)malloc(sizeof(t_data))))
-		return (handler_error(msh));
-	msh->data->prompt_data = ft_split_data(buf, ' ');
-	ft_size_data(msh, buf);
-	if (data_check(msh) == -1)
+	if (!((*(msh))->data = (t_data *)malloc(sizeof(t_data))))
+		return (handler_error(*msh));
+	(*(msh))->data->prompt_data = ft_split_data(buf, ' ');
+	ft_size_data(*msh, buf);
+	if (data_check(*msh) == -1)
 	{
-		msh->utils->error_multi_line = 1;
-		return (handler_error(msh));
+		(*(msh))->utils->error_multi_line = 1;
+		return (handler_error(*msh));
 	}
 	return (1);
 }

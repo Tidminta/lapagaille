@@ -6,13 +6,14 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 14:43:48 by loamar            #+#    #+#             */
-/*   Updated: 2021/04/23 16:37:50 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/05/17 17:28:40 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/libshell.h"
 
-static void					ft_count_word(char *s, char c, t_split_data *split_data)
+static void					ft_count_word(char *s, char c,
+t_split_data *split_data)
 {
 	split_data->pos = 0;
 	split_data->nb = 0;
@@ -30,7 +31,8 @@ static void					ft_count_word(char *s, char c, t_split_data *split_data)
 	}
 }
 
-static size_t				ft_get_len_word(char *s, char c, t_split_data *split_data)
+static size_t				ft_get_len_word(char *s, char c,
+t_split_data *split_data)
 {
 	size_t	len_word;
 	int		index;

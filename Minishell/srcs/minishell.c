@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/11 19:54:29 by loamar            #+#    #+#             */
-/*   Updated: 2021/04/26 12:55:37 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/05/17 17:32:38 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int				shell_prompt(t_msh *msh, char **env)
 		ret = get_next_line(0, &buf);
 		if (ret == -1)
 			return (ERROR);
-		if ((handler_data(msh, buf) == -1) || (handler_list(msh) == -1))
+		if ((handler_data(&msh, buf) == -1) || (handler_list(msh) == -1))
 			return (handler_error(msh));
 		handler_cmd(msh, env);
 		//history_list(msh, buff); 

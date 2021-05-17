@@ -3,14 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   create_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loamar <loamar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 04:25:27 by loamar            #+#    #+#             */
-/*   Updated: 2021/01/06 22:26:36 by loamar           ###   ########.fr       */
+/*   Updated: 2021/05/17 16:58:25 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/libshell.h"
+
+static void			print_list(t_lair_list *lair_list)
+{
+	int		test;
+
+	test = 1;
+	t_list *current;
+
+	current = lair_list->start;
+	if (!lair_list || lair_list == NULL)
+		printf("EMPTY LIST !... \n");
+	printf("\n| PRINT LIST | \n");
+	while (current->next)
+	{
+		printf("%d-> %s\n", test, current->content);
+		current = current->next;
+		test++;
+	}
+	printf("| FIN |\n");
+	printf("size env_lair -> %d\n", lair_list->size);
+	printf("first env_lair -> %s\n", lair_list->start->content);
+	printf("end  env_lair -> %s\n", lair_list->end->content);
+}
 
 int 	ft_fill_empty_list(t_lair_list *lair_list, char *content)
 {
@@ -53,14 +76,21 @@ static	int 	is_empty_list(t_lair_list *lair_list)
 
 t_lair_list		*clear_list(t_lair_list *lair_list)
 {
+	// print_list(lair_list);
 	while (!is_empty_list(lair_list))
+	{
 		lair_list = pop_back_list(lair_list);
+		// print_list(lair_list);
+	}
+	// printf("[AFTER CLEAR LIST]\n");
+	// print_list(lair_list);
 	return (NULL);
 }
 
 t_lair_list 		*pop_back_list(t_lair_list *lair_list)
 {
 	t_list 		*temp;
+	t_list 		*tmp2;
 
 	if (is_empty_list(lair_list))
 		return (NULL);
@@ -70,13 +100,16 @@ t_lair_list 		*pop_back_list(t_lair_list *lair_list)
 		lair_list = NULL;
 		return (NULL);
 	}
+	tmp2 = lair_list->end->previous;
 	temp = lair_list->end;
-	lair_list->end->next = NULL;
+	// lair_list->end->next = NULL;
 	temp->next = NULL;
 	temp->previous = NULL;
+	free(temp->content);
 	free(temp);
 	temp = NULL;
 	lair_list->size--;
+	lair_list->end = tmp2;
 	return (lair_list);
 }
 

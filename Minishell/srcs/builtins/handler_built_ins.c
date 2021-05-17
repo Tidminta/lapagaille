@@ -6,11 +6,34 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 20:59:38 by tidminta          #+#    #+#             */
-/*   Updated: 2021/04/24 16:19:05 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/05/17 16:48:21 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/libshell.h"
+
+static void			print_list(t_lair_list *lair_list)
+{
+	int		test;
+
+	test = 1;
+	t_list *current;
+
+	current = lair_list->start;
+	if (!lair_list || lair_list == NULL)
+		printf("EMPTY LIST !... \n");
+	printf("\n| PRINT LIST | \n");
+	while (current != NULL)
+	{
+		printf("[%d][%s][%d]\n", test, current->content, current->token);
+		current = current->next;
+		test++;
+	}
+	printf("| FIN |\n");
+	printf("size env_lair -> %d\n", lair_list->size);
+	printf("first env_lair -> %s\n", lair_list->start->content);
+	printf("end  env_lair -> %s\n", lair_list->end->content);
+}
 
 static int		ft_built_in_check(char *s)
 {
@@ -44,6 +67,8 @@ static int				ft_exec_built_in(t_msh *msh, t_list *element, char **env)
 	content = element->content;
 	len = ft_strlen(content);
 	i = -1;
+	if (ft_strncmp(content, "list", len) == 0)
+		print_list(msh->lair_list);
 	if (ft_strncmp(content, "exit", len) == 0)
 		ft_exit(msh);
 	else if ((ft_strncmp(content, "pwd", len) == 0))

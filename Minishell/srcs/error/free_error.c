@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 11:56:22 by loamar            #+#    #+#             */
-/*   Updated: 2021/04/26 14:54:21 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/05/17 17:16:35 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,12 @@ static void		free_split(char **str)
 	while (str[index])
 	{
 		free(str[index]);
+		str[index] = NULL;
 		index++;
 	}
 	free(str[index]);
 	free(str);
+	str = NULL;
 }
 
 int			free_data(t_msh *msh)
@@ -79,7 +81,7 @@ int			free_env_lair(t_msh *msh)
 		msh->env_lair = clear_env(msh->env_lair);
 		free(msh->env_lair);
 		printf("AFTER ENV CLEANING\n");
-		print_list(msh->env_lair);
+		// print_list(msh->env_lair);
 		return (1);
 	}
 	return (0);
