@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 17:19:34 by tidminta          #+#    #+#             */
-/*   Updated: 2021/05/17 17:27:40 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/05/24 16:55:44 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ void				ft_exit(t_msh *msh)
 	while (msh->utils->path[++cpt])
 		free(msh->utils->path[cpt]);
 	free(msh);
-	system("leaks minishell");
+	// system("leaks minishell");
 	exit(0);
 }

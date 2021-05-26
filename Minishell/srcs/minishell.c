@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/11 19:54:29 by loamar            #+#    #+#             */
-/*   Updated: 2021/05/17 17:32:38 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/05/24 17:56:03 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,6 @@ static int				shell_prompt(t_msh *msh, char **env)
 		//history_list(msh, buff); 
 		// free(buf);
 	}
-	// if (buf)
-	// {
-	// 	free(buf);
-	// 	printf("shell promt after free buff");
-	// }
 	return (SUCCESS);
 }
 
