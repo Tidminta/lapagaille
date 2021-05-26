@@ -80,7 +80,7 @@ int			free_env_lair(t_msh *msh)
 	{
 		msh->env_lair = clear_env(msh->env_lair);
 		free(msh->env_lair);
-		printf("AFTER ENV CLEANING\n");
+		// printf("AFTER ENV CLEANING\n");
 		// print_list(msh->env_lair);
 		return (1);
 	}

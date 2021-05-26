@@ -1,6 +1,6 @@
 NAME	=	minishell
 
-CC		=	gcc -g3
+CC		=	gcc -g3 -fsanitize=address
 
 RM		=	rm -f
 
@@ -8,7 +8,8 @@ CFLAGS	=	-I.
 
 LIBFT	=	./lib/libft/libft.a
 
-SRCS	=	./srcs/minishell.c \
+SRCS	=	./srcs/main/minishell.c \
+			./srcs/global/global.c \
 			./srcs/builtins/handler_built_ins.c \
 			./srcs/builtins/my_env.c \
 			./srcs/builtins/my_pwd.c \

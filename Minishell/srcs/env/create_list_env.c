@@ -82,7 +82,7 @@ t_env_lair		*clear_env(t_env_lair *env_lair)
 		// printf("[clear env 82][envlair end content = %s\n]", env_lair->end->content);
 		if (!ft_strncmp(env_lair->end->content, "(null)", 6) && env_lair->end->previous != NULL)
 		{
-			printf("content = NULL\n");
+			// printf("content = NULL\n");
 			tmp = env_lair->end->previous;
 			env_lair->end = tmp;
 		}
@@ -111,7 +111,7 @@ t_env_lair		*pop_back_env(t_env_lair *env_lair)
 		// printf("[109][env lair start = end]\n");
 		free(env_lair);
 		// env_lair = NULL;
-		printf("[114][env lair NULL]\n");
+		// printf("[114][env lair NULL]\n");
 		return (NULL);
 	}
 	// printf("[111 pop back env lair][%s]\n", env_lair->end->content);

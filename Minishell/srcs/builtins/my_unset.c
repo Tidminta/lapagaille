@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 16:14:39 by tidminta          #+#    #+#             */
-/*   Updated: 2021/04/16 15:08:12 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/05/26 19:31:24 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,12 @@ static char	**ft_check_tab(t_list *lst)
 		i++;
 		lst = lst->next;
 	}
-	if (!(tab = (char **)malloc(sizeof(char *) * (i + 1))))
+	tab = (char **)malloc(sizeof(char *) * (i + 1));
+	if (!tab)
 		return (NULL);
 	tab[i] = NULL;
-	while (lst != NULL && (lst->previous->token != CMD))
-		lst = lst->previous;
+	// while (lst != NULL && (lst->previous->token != CMD))
+	// 	lst = lst->previous;
 	return (tab);
 }
 
@@ -62,6 +63,7 @@ int			ft_pop_node(t_env_lair *env_lair, char **unset_tab)
 		{
 			if (elem->content && ft_strncmp(unset_tab[i], elem->content, len) == 0)
 			{
+				printf("unset tab[%i] : %s | content : %s\n", i, unset_tab[i], elem->content);
 				to_pop = elem;
 				if (elem == env_lair->start)
 				{
@@ -104,7 +106,8 @@ int			ft_my_unset(t_msh *msh, t_list *lst)
 	if (!msh || !lst)
 		return (ERROR);
 	env = msh->env_lair->start;
-	if (!(unset_tab = ft_check_tab(lst)))
+	unset_tab = ft_check_tab(lst);
+	if (!unset_tab)
 		return (ERROR);
 	if (ft_fill_tab(lst, &unset_tab) == ERROR)
 		return (ERROR);

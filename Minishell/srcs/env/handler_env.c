@@ -15,18 +15,19 @@
 static int		linked_list_env(t_msh *msh, char **env)
 {
 	int		count;
+	int		len;
 
 	count = 0;
+	len = 0;
+	while (env[len] != NULL)
+		len++;
 	msh->env_list = NULL;
 	msh->env_lair = init_env_lair(msh->env_lair);
 	if (msh->env_lair == NULL)
 		return (ERROR);
 	ft_fill_empty_env(msh->env_lair, env[count]);
-	while (env[count] != NULL)
-	{
-		count++;
+	while (++count < len)
 		ft_fill_end_env(msh->env_lair, env[count]);
-	}
 	return (SUCCESS);
 }
 

@@ -6,33 +6,33 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 20:59:38 by tidminta          #+#    #+#             */
-/*   Updated: 2021/05/17 16:48:21 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/05/26 18:41:23 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/libshell.h"
 
-static void			print_list(t_lair_list *lair_list)
+static void			print_list(t_env_lair *env_lair)
 {
 	int		test;
 
 	test = 1;
-	t_list *current;
+	t_env_list *current;
 
-	current = lair_list->start;
-	if (!lair_list || lair_list == NULL)
+	if (!env_lair || env_lair == NULL)
 		printf("EMPTY LIST !... \n");
+	current = env_lair->start;
 	printf("\n| PRINT LIST | \n");
 	while (current != NULL)
 	{
-		printf("[%d][%s][%d]\n", test, current->content, current->token);
+		printf("[%d][%s]\n", test, current->content);
 		current = current->next;
 		test++;
 	}
 	printf("| FIN |\n");
-	printf("size env_lair -> %d\n", lair_list->size);
-	printf("first env_lair -> %s\n", lair_list->start->content);
-	printf("end  env_lair -> %s\n", lair_list->end->content);
+	printf("size env_lair -> %d\n", env_lair->size);
+	printf("first env_lair -> %s\n", env_lair->start->content);
+	printf("end  env_lair -> %s\n", env_lair->end->content);
 }
 
 static int		ft_built_in_check(char *s)
@@ -44,15 +44,15 @@ static int		ft_built_in_check(char *s)
 	len = ft_strlen(s);
 	while (++i < len)
 		s[i] = ft_tolower(s[i]);
-	if ((ft_strncmp(s, "echo", len) == 0)
-	|| (ft_strncmp(s, "cd", len) == 0)
-	|| (ft_strncmp(s, "pwd", len) == 0)
-	|| (ft_strncmp(s, "export", len) == 0)
-	|| (ft_strncmp(s, "unset", len) == 0)
-	|| (ft_strncmp(s, "env", len) == 0)
-	|| (ft_strncmp(s, "cd", len) == 0)
-	|| (ft_strncmp(s, "list", len) == 0)
-	|| (ft_strncmp(s, "exit", len) == 0))
+	if ((ft_strcmp(s, "echo") == 0)
+	|| (ft_strcmp(s, "cd") == 0)
+	|| (ft_strcmp(s, "pwd") == 0)
+	|| (ft_strcmp(s, "export") == 0)
+	|| (ft_strcmp(s, "unset") == 0)
+	|| (ft_strcmp(s, "env") == 0)
+	|| (ft_strcmp(s, "cd") == 0)
+	|| (ft_strcmp(s, "list") == 0)
+	|| (ft_strcmp(s, "exit") == 0))
 		return (SUCCESS);
 	else
 		return (ERROR);
@@ -68,7 +68,7 @@ static int				ft_exec_built_in(t_msh *msh, t_list *element, char **env)
 	len = ft_strlen(content);
 	i = -1;
 	if (ft_strncmp(content, "list", len) == 0)
-		print_list(msh->lair_list);
+		print_list(msh->env_lair);
 	if (ft_strncmp(content, "exit", len) == 0)
 		ft_exit(msh);
 	else if ((ft_strncmp(content, "pwd", len) == 0))
