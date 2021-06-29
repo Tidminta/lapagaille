@@ -88,6 +88,7 @@ int			ft_pop_node(t_env_lair *env_lair, char **unset_tab)
 				{
 					to_pop->previous->next = to_pop->next;
 					to_pop->next->previous = to_pop->previous;
+					//pas oublier de free
 					env_lair->size -= 1;
 				}
 			}
