@@ -75,8 +75,8 @@ int				main(int argc, char **argv, char **env)
 		exit(EXIT_FAILURE);
 	if (end == RELOOP)
 	{
-		// printf("[MAIN ASKING FOR A NEW PROMPT ..]\n");
-		// sleep(1);
+		printf("[MAIN ASKING FOR A NEW PROMPT ..]\n");
+		sleep(1);
 		shell_prompt(msh, env);
 	}
 	return (0);
