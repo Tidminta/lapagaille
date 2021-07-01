@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/11 19:54:29 by loamar            #+#    #+#             */
-/*   Updated: 2021/06/29 20:59:51 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/06/30 14:27:18 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int				shell_prompt(t_msh *msh, char **env)
 	ret = 0;
 
 	g_loop(SET, 0);
-	while (loop && g_loop(GET, 0) == 0)
+	while (loop && g_loop(GET,0) == LOOP)
 	{
 		write(1, "$my_minishell : ", 16);
 		ret = get_next_line(0, &buf);

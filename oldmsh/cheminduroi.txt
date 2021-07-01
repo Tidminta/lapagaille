@@ -6,7 +6,7 @@
 #    By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/29 18:18:27 by tidminta          #+#    #+#              #
-#    Updated: 2021/06/29 21:15:19 by tidminta         ###   ########.fr        #
+#    Updated: 2021/06/30 15:02:35 by tidminta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ exit bricole a mettre au propre
 voir exit(status)
 redirections & pipes
 ctrl + D = EOF (voir def) -> [termcap]
-
+exit codes
+fork a refaire
 **************************************
 			RECAPITULONS...				
 **************************************

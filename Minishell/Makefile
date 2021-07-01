@@ -1,59 +1,32 @@
 NAME	=	minishell
 
-CC		=	gcc -g3 -fsanitize=address
+CC		=	gcc
 
 RM		=	rm -f
 
-CFLAGS	=	-I. 
+CFLAGS	=	-g
+
+LFLAGS	=	-I. -lncurses
 
 LIBFT	=	./lib/libft/libft.a
 
-SRCS	=	./srcs/main/minishell.c \
-			./srcs/global/global.c \
-			./srcs/builtins/handler_built_ins.c \
-			./srcs/builtins/my_env.c \
-			./srcs/builtins/my_pwd.c \
-			./srcs/builtins/my_export.c \
-			./srcs/builtins/my_unset.c \
-			./srcs/builtins/my_cd.c \
-			./srcs/builtins/my_echo.c \
-			./srcs/builtins/my_exit.c \
-			./srcs/check/data_check.c \
-			./srcs/cmd/exec_cmd.c \
-			./srcs/cmd/handler_cmd.c \
-			./srcs/data/handler_data.c \
-			./srcs/env/create_list_env.c \
-			./srcs/env/handler_env.c \
-			./srcs/list/create_list.c \
-			./srcs/list/handler_list.c \
-			./srcs/list/set_token_list.c \
-			./srcs/init/init_struct.c \
-			./srcs/init/init_shell.c \
-			./srcs/error/free_error.c \
-			./srcs/error/handler_error.c \
-			./srcs/data/split_data/split_data.c \
-			./srcs/data/split_data/split_data_utils.c \
-			./lib/get_next_line/get_next_line.c \
-			./lib/get_next_line/get_next_line_utils.c
-
+SRCS	=	./srcs/main/main.c
+			./srcs/cmd/handle_cmd.c
 
 OBJS	=	$(SRCS:.c=.o)
 
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
-			@echo [COMPILING LIBFT ...]
-			@make -C lib/libft
-			@${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBFT}
-			@echo [COMPILING DONE !]
+			make -C lib/libft
+			${CC} ${CFLAGS} ${LFLAGS} -o ${NAME} ${OBJS} ${LIBFT}
 
 clean:
-			@$(RM) $(OBJS)
-			@make clean -C lib/libft
-			@echo [CLEANING DONE !]
+			$(RM) $(OBJS)
+			make clean -C lib/libft
 
 fclean:		clean
-			@$(RM) $(NAME) $(LIBFT)
+			$(RM) $(NAME) $(LIBFT)
 
 re:			fclean $(NAME)
 

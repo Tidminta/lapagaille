@@ -6,17 +6,23 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 22:57:42 by loamar            #+#    #+#             */
-/*   Updated: 2021/04/13 18:21:16 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/06/30 14:45:11 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/libshell.h"
+
+/*
+** remplissage de la tab d'args
+*/
 
 static char			**ft_exec_args(t_msh *msh, t_list *cmd, char *cmd_path)
 {
 	t_list	*tmp;
 	int		pos;
 
+	if (!msh || !cmd || !cmd_path)
+		return (NULL);
 	pos = 0;
 	tmp = cmd;
 	cmd = cmd->next;
@@ -29,7 +35,7 @@ static char			**ft_exec_args(t_msh *msh, t_list *cmd, char *cmd_path)
 	cmd = tmp;
 	if (!(msh->utils->tab_args = malloc(sizeof(char *)
 		* (msh->utils->size_opt_arg + 2))))
-		return (0);
+		return (NULL);
 	while (++pos <= msh->utils->size_opt_arg)
 	{
 		cmd = cmd->next;
@@ -58,7 +64,10 @@ int					exec_cmd(t_msh *msh, t_list *cmd, char **env)
 			exec_path = ft_strjoin(msh->utils->path[count], "/");
 			exec_path = ft_strjoin(exec_path, cmd->content);
 			exec_args = ft_exec_args(msh, cmd, exec_path);
+			if (!exec_path || exec_args == NULL)
+				handler_error(msh);
 			execve(exec_path, exec_args, env);
+			return (-1);
 		}
 	}
 	else

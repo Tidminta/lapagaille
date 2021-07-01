@@ -1,26 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd.h                                              :+:      :+:    :+:   */
+/*   handle_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/01 18:05:50 by tidminta          #+#    #+#             */
-/*   Updated: 2021/07/01 18:09:55 by tidminta         ###   ########.fr       */
+/*   Created: 2021/07/01 18:03:41 by tidminta          #+#    #+#             */
+/*   Updated: 2021/07/01 18:04:15 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-**
-**  ICI NOUS METTRONS LES PROTOTYPES DES FONCTION DE GESTION DE COMMANDE
-**
-*/
+#include "./../includes/libshell.h"
 
-#ifndef CMD_H
-# define CMD_H
-
-#include "./libshell.h"
-
-// int         handle_cmd();
-
-#endif

@@ -3,24 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loamar <loamar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/01 18:05:50 by tidminta          #+#    #+#             */
-/*   Updated: 2021/07/01 18:09:55 by tidminta         ###   ########.fr       */
+/*   Created: 2020/12/06 19:13:55 by loamar            #+#    #+#             */
+/*   Updated: 2021/01/11 15:22:30 by loamar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*
-**
-**  ICI NOUS METTRONS LES PROTOTYPES DES FONCTION DE GESTION DE COMMANDE
-**
-*/
 
 #ifndef CMD_H
 # define CMD_H
 
-#include "./libshell.h"
-
-// int         handle_cmd();
-
-#endif
+int 	handler_cmd(t_msh *msh, char **env);
+int 	exec_cmd(t_msh *msh, t_list *element, char **env);
+# endif
