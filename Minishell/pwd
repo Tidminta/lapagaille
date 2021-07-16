@@ -1,0 +1,9 @@
+-Wno-framework-include-private-from-public
+Makefile
+a.out
+includes
+libft
+minishell
+printf
+pwd
+srcs
