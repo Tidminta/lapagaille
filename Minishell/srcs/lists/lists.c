@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 21:50:47 by tidminta          #+#    #+#             */
-/*   Updated: 2021/07/16 18:08:42 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/07/20 23:38:08 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,28 +86,46 @@ int			init_cmd(t_msh *msh)
 	int		*option;
 	int		*arg;
 	int		*pipe;
+	int		*redir;
+	int		*lredir;
 
 	cmd = (int *)malloc(sizeof(int) * HEADER_SIZE);
 	option = (int *)malloc(sizeof(int) * HEADER_SIZE);
 	arg = (int *)malloc(sizeof(int) * HEADER_SIZE);
 	pipe = (int *)malloc(sizeof(int) * HEADER_SIZE);
+	redir = (int*)malloc(sizeof(int) * HEADER_SIZE);
+	lredir = (int*)malloc(sizeof(int) * HEADER_SIZE);
 	ft_memset(cmd, 48, (size_t)HEADER_SIZE);
 	ft_memset(option, 48, (size_t)HEADER_SIZE);
 	ft_memset(arg, 48, (size_t)HEADER_SIZE);
 	ft_memset(pipe, 48, (size_t)HEADER_SIZE);
-	cmd[0] = EXEC;
-	cmd[1] = 0;
-	option[0] = OPTION;
-	option[1] = 0;
-	arg[0] = ARG;
-	arg[1] = 0;
-	pipe[0] = 0;
-	pipe[1] = PIPE;
-	add(msh, "cat", cmd);
+	ft_memset(redir, 48, (size_t)HEADER_SIZE);
+	ft_memset(lredir, 48, (size_t)HEADER_SIZE);
+	cmd[H_CMDTYPE] = EXEC;
+	cmd[H_SYMBOL] = 0;
+	option[H_CMDTYPE] = OPTION;
+	option[H_SYMBOL] = 0;
+	arg[H_CMDTYPE] = ARG;
+	arg[H_SYMBOL] = 0;
+	pipe[H_CMDTYPE] = 0;
+	pipe[H_SYMBOL] = PIPE;
+	redir[H_CMDTYPE] = 0;
+	redir[H_SYMBOL] = R_SIMPLE;
+	lredir[H_CMDTYPE] = 0;
+	lredir[H_SYMBOL] = L_SIMPLE; 
+ 	add(msh, "cat", cmd);
 	add(msh, "-e", option);
 	add(msh, "Makefile", arg);
 	add(msh, "|", pipe);
 	add(msh, "grep", cmd);
 	add(msh, "srcs", arg);
+	//add(msh, ">", redir);
+	//add(msh, "test", arg);
+	// add(msh, "<", lredir);
+	// add(msh, "test", arg);
+	// add(msh, "est", arg);
+	// add(msh, ">", redir);
+	// add(msh, "magique", arg);
+	// add(msh, "paris est magique", arg);
 	return (SUCCESS);
 }

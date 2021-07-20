@@ -14,6 +14,7 @@ SRCS	=	./srcs/main/main.c \
 			./srcs/gc/garbage_co.c \
 			./srcs/cmd/handle_cmd.c \
 			./srcs/cmd/cmd_tools.c \
+			./srcs/cmd/handle_redirections.c \
 			./srcs/lists/lists.c \
 			./srcs/error/error.c\
 			./srcs/env/env.c

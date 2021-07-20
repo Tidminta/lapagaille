@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 17:33:58 by tidminta          #+#    #+#             */
-/*   Updated: 2021/07/09 23:27:44 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/07/20 23:13:35 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct		s_tools
 	t_cut_cmd	*tail;
 	int			pipe[2];
 	int			nbpipe;
-	int			nbredir;
+	int			fdredir;
 	int			loop;
 	int			fdin;
 	int			fdout;

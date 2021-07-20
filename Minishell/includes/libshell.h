@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 17:52:06 by tidminta          #+#    #+#             */
-/*   Updated: 2021/07/17 00:04:47 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/07/20 23:19:45 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 **
 ** HEADER_SIZE:
 ** 0 = Builtin (1) | Cmd(2) | opt(3) | arg(4)
-** 1 = symbol -> simple(1) | double (2) | pipe (3)
+** 1 = rsimple(1) | lsimple(2) |double(3) | pipe (4)
 ** 2 = quote (1) single (2) double
 ** 3 = div (voir ci dessous)
 ** 4 = firstcmd (1) | middle cmd (2) | lastcmd (3)

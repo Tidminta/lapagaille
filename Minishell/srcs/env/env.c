@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 22:06:55 by tidminta          #+#    #+#             */
-/*   Updated: 2021/07/07 15:02:52 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/07/20 23:17:31 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void				print(t_msh *msh)
 	if (!env)
 	{
 		printf("ENV = NULL!\n");
-		sleep(5);
+		// sleep(5);
 		exit(0);
 	}
 	printf("\n[**	PRINT LIST	**]\n");
@@ -33,7 +33,7 @@ void				print(t_msh *msh)
 		i++;
 	}
 	printf("\n[**	PRINT LIST	**]\n");
-	sleep(5);
+	// sleep(5);
 }
 
 int				find_path(t_msh *msh)

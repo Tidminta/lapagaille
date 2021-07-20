@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:09:35 by tidminta          #+#    #+#             */
-/*   Updated: 2021/07/17 00:14:52 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/07/20 23:16:29 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,48 @@
 // 	return (ERROR);
 // }
 
+// int				handle_exec(t_msh *msh)
+// {//CHOIX D'EXECUTION : CMD AVEC/SANS PIPE
+// 	t_cut_cmd *cmd;
+
+// 	cmd = msh->tools->tail;
+// 	if (msh->tools->nbpipe)
+// 		cmd_pipe(msh, cmd);
+// 	else
+// 		cmd_nopipe(msh, cmd);
+// 	return (SUCCESS);
+// }
+
+void			printheader(t_msh *msh)
+{//A JETTER
+	t_cut_cmd *cmd;
+
+	cmd = msh->tools->tail;
+
+	while (cmd)
+	{
+		printf("[%s]", cmd->elem);
+		if (cmd->header[4] == FIRST_CMD)
+			printf("[FIRT CMD]\n");
+		else if (cmd->header[4] == MIDDLE_CMD)
+			printf("[MIDDLE CMD]\n");
+		else if (cmd->header[4] == LAST_CMD)
+			printf("[LAST CMD]\n");
+		else
+			printf("[NOT CMD]\n");
+		cmd = cmd->p;
+	}
+}
+
+void			my_putstr(char *str1, char *str2)
+{//A JETTER
+	ft_putstr_fd(str1, 2);
+	ft_putstr_fd("\n[", 2);
+	ft_putstr_fd(str2, 2);
+	ft_putstr_fd("]\n", 2);
+	ft_putstr_fd("\n", 2);
+}
+
 int			ispipe(t_msh *msh)
 {//RENVOI LE NOMBRE DE PIPE
 	t_cut_cmd	*cmd;
@@ -39,7 +81,6 @@ int			ispipe(t_msh *msh)
 	while (cmd != NULL)
 	{
 		elem = cmd->elem;
-		sleep(1);
 		while (elem[++i])
 		{
 			if (elem[i] == '|')
@@ -47,24 +88,6 @@ int			ispipe(t_msh *msh)
 		}
 		cmd = cmd->p;
 		i = 0;
-	}
-	return (cpt);
-}
-
-int			isredir(t_msh	*msh)
-{//RENVOI LE NOMBRE DE REDIRECTION
-	t_cut_cmd	*cmd;
-	int			i;
-	int			cpt;
-
-	i = 0;
-	cpt = 0;
-	cmd = msh->tools->tail;
-	while (cmd != NULL)
-	{
-		if (cmd->header[H_SYMBOL] == 1 || cmd->header[H_SYMBOL] == 2)
-			cpt++;
-		cmd = cmd->p;
 	}
 	return (cpt);
 }
@@ -82,31 +105,42 @@ int			choose_exec(t_cut_cmd *cmd)
 		return (ERROR);
 }
 
-int			whatpostions(t_msh *msh)
-{//DEFINIE LES POSITIONS DE CHAQUE CMD
-	t_cut_cmd *cmd;
-
-	cmd = msh->tools->tail;
-	if ((cmd->n == NULL && cmd->p == NULL) && (cmd->header[0] == 1 || cmd->header[0] == 2))
-	{
-		// CAS OU UNE SEULE COMMANDE (return handle error)
-		cmd->header[4] = LAST_CMD;
+int			getnext_pipe(t_cut_cmd **cmd)
+{//PERMET DE GET LA CMD APRES LE PROCHAIN PIPE
+	while((*(cmd)) != NULL && (*(cmd))->header[H_SYMBOL] != PIPE)
+		(*(cmd)) = (*(cmd))->p;
+	if ((*(cmd)) != NULL && (((*(cmd))->p->header[H_CMDTYPE] == EXEC
+		|| (*(cmd))->p->header[H_CMDTYPE] == BUILTIN)))//SOUS ENTEND QUE NOUS SOMME SUR UN PIPE
+		(*(cmd)) = (*(cmd))->p;
+	//ICI SOIT NOUS SOMMES SUR UNE CMD SOIT SUR NUL |
+	if ((*(cmd)))
 		return (SUCCESS);
-	}
-	else if ((cmd->n == NULL && cmd->p) && (cmd->header[0] == 1 || cmd->header[0] == 2))
+	else 
+		return (ERROR);
+}
+
+void		whatpostions(t_msh *msh)
+{
+	t_cut_cmd	*cmd;
+	t_cut_cmd	*tmp;
+	
+	cmd = msh->tools->tail;
+	if ((cmd->n == NULL && cmd->p == NULL) && (cmd->header[0] == EXEC || cmd->header[0] == BUILTIN))
+		cmd->header[4] = UNIQUE_CMD;
+	else
 	{
-		cmd->header[4] = FIRST_CMD;
-		cmd = cmd->p;
+		if (cmd->p && (cmd->header[0] == BUILTIN || cmd->header[0] == EXEC))
+			cmd->header[4] = FIRST_CMD;
+		getnext_pipe(&cmd);
+		while (cmd != NULL)
+		{
+			tmp = cmd;
+			if ((cmd->n->header[H_SYMBOL] == PIPE) && (cmd->header[H_CMDTYPE] == EXEC || cmd->header[H_CMDTYPE] == BUILTIN))
+				cmd->header[4] = MIDDLE_CMD;
+			if (getnext_pipe(&cmd) == ERROR)
+				tmp->header[4] = LAST_CMD;
+		}
 	}
-	while (cmd != NULL)
-	{
-		if (cmd->p != NULL)
-			cmd->header[4] = MIDDLE_CMD;
-		else
-				cmd->header[4] = LAST_CMD;
-		cmd = cmd->p;
-	}
-	return (SUCCESS);
 }
 
 char			*get_path(t_cut_cmd *cmd, char **paths)
@@ -153,23 +187,18 @@ char			**handle_args(t_msh *msh, t_cut_cmd *cmd)
 
 	ret = 0;
 	i = -1;
+	tail = cmd;
 	if (!msh || !cmd)
 		return (NULL);
-	while (cmd != NULL)
+	while (cmd != NULL && (cmd->header[H_SYMBOL] != PIPE && cmd->header[H_SYMBOL] != R_SIMPLE))
 	{
-		if ((cmd->header[0] == 0 || cmd->header[1] == 3))
-		{
-			cmd = NULL;
-			break ;
-		}
 		ret++;
 		cmd = cmd->p;
 	}
 	args = (char**)malloc(sizeof(char*) * (ret + 1));
 	if (!args || args == NULL)
 		return (NULL);
-	tail = msh->tools->tail;
-	while (tail != NULL && tail->header[0] > 0)
+	while (tail != NULL && (tail->header[H_SYMBOL] != PIPE && tail->header[H_SYMBOL] != R_SIMPLE))
 	{
 		args[++i] = strdup(tail->elem);
 		if (args[i] == NULL)
@@ -182,73 +211,4 @@ char			**handle_args(t_msh *msh, t_cut_cmd *cmd)
 	}
 	args[++i] = NULL;
 	return (args);
-}
-
-void			simple_exec(t_msh *msh, t_cut_cmd *cmd)
-{
-	int		pid;
-	char	*exec_path;
-	char	**args;
-
-	pid = fork();
-	if (pid == 0)
-	{
-		exec_path = get_path(cmd, msh->path);
-		if (!exec_path || exec_path == NULL)
-			ft_error(cmd, "PATH ERROR\n", 0);
-		args = handle_args(msh, cmd);
-		if (!args || args == NULL)
-			ft_error(cmd, "BAD ARGS/OPTION\n", 0);
-		execve(exec_path, args, msh->envp);
-		ft_error(cmd, "Execution failed.\n", errno);
-	}
-	else
-		waitpid(pid, &msh->tools->status, 0);
-}
-
-void				cmd_nopipe(t_msh *msh, t_cut_cmd *cmd)
-{
-	int	ret;
-
-	ret = choose_exec(cmd);
-	if (ret == BUILTIN)
-	{
-		printf("[TEST][IS BUILTIN]\n");
-		// handle_builtins(msh, cmd);
-	}
-	else if (ret == EXEC)
-		simple_exec(msh, cmd);
-	else
-		ft_error(cmd, "Bad commande", 0);
-}
-
-void			printheader(t_msh *msh)
-{//A JETTER
-	t_cut_cmd *cmd;
-
-	cmd = msh->tools->tail;
-
-	while (cmd)
-	{
-		printf("[%s]", cmd->elem);
-		if (cmd->header[4] == FIRST_CMD)
-			printf("[FIRT CMD]\n");
-		else if (cmd->header[4] == MIDDLE_CMD)
-			printf("[MIDDLE CMD]\n");
-		else if (cmd->header[4] == LAST_CMD)
-			printf("[LAST CMD]\n");
-		else
-		printf("[ERROR]\n");
-		sleep(1);
-		cmd = cmd->p;
-	}
-}
-
-void			my_putstr(char *str1, char *str2)
-{//A JETTER
-	ft_putstr_fd(str1, 2);
-	ft_putstr_fd("\n[", 2);
-	ft_putstr_fd(str2, 2);
-	ft_putstr_fd("]\n", 2);
-	ft_putstr_fd("\n", 2);
 }

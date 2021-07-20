@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 17:46:33 by tidminta          #+#    #+#             */
-/*   Updated: 2021/07/13 17:09:38 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/07/20 23:18:33 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	init_msh(t_msh *msh)
 	msh->tools->fdout = dup(1);
 	msh->tools->last_fd = 0;
 	msh->tools->nbpipe = 2;
-	msh->tools->nbredir = 0;
+	msh->tools->fdredir = 0;
 	msh->tools->last_op = 0;
 	msh->tools->status = 0;
 	msh->tools->error_msg = NULL;
