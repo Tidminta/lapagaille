@@ -1,11 +1,5 @@
-#ifndef DATA_H
-# define DATA_H
-
-#include "./libshell.h"
-
 void fill_header(int src[4], int *dst[4]);
 t_cut_cmd *fill(char *elem, int header[4]);
-void	gc_init();
 int add(t_msh *msh, char *elem, int header[4]);
 void init_jobs(t_job *jobs);
 void init_msh(t_msh *msh);
@@ -20,5 +14,4 @@ char *p_near(char *str);
 int add_symbol(t_msh *msh, char *ret, int i);
 int process_line(t_msh *msh);
 void write_error(t_msh *msh);
-
-#endif
+int main(int argc, char **argv, char **envp);

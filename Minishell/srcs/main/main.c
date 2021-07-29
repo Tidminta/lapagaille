@@ -6,297 +6,137 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 17:46:33 by tidminta          #+#    #+#             */
-/*   Updated: 2021/07/20 23:18:33 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/07/29 23:21:20 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/libshell.h"
 
-char	get_next_char(char *str, int i, char *regex)
-{
-	int y;
+/*
+**	
+**		ENV TESTINGS
+**
+*/
 
-	if (!str[i])
-		return (0);
-	while (str[i])
-	{
-		y = -1;
-		while (regex[++y])
-		{
-			if (regex[0] == str[i])
-				continue ;
-			else
-				return (str[i]);
-		}
-		i++;
-	}
-	return (0);
-}
-
-void	p_putchar_str(char **str, char c)
-{
-	char *ptr;
-	char *tmp;
-
-	ptr = *str;
-	tmp = NULL;
-	if (!ptr)
-	{
-		ptr = ft_strdup("c");
-		if (!ptr)
-			return ;
-		ptr[0] = c;
-		*str = ptr;
-		return ;
-	}
-	tmp = ft_strjoin(*str, "c");
-	tmp[ft_strlen(tmp) - 1] = c;
-	*str = tmp;
-}
-
-// t_cut_cmd		*fill(char *elem, int header[HEADER_SIZE])
+// void	print_env(t_cut_cmd *target)
 // {
-// 	t_cut_cmd *ret;
-// 	int i;
-
-// 	i = -1;
-// 	if (!(ret = malloc(sizeof(t_cut_cmd))))
-// 		return (0);
-// 	ret->elem = to_gc(&ret->elem, ft_strdup(elem));
-// 	while (++i < HEADER_SIZE)
-// 		ret->header[i] = header[i];
-// 	ret->n = NULL;
-// 	ret->p = NULL;
-// 	return (ret);
-// }
-
-// int			add(t_msh *msh, char *elem, int header[HEADER_SIZE])
-// {
-// 	t_cut_cmd *ret;
-
-// 	ret = fill(elem, header);
-// 	if (!msh->tools->head)
+// 	while (target)
 // 	{
-// 		msh->tools->head = ret;
-// 		msh->tools->tail = msh->tools->head;
-// 		return (1);
+// 		printf("%s\n", target->elem);
+// 		target = target->n;
 // 	}
-// 	ret->n = msh->tools->head;
-// 	msh->tools->head->p = ret;
-// 	msh->tools->head = ret;
-// 	return (1);
 // }
 
-void	init_jobs(t_job *jobs)
+
+// static void			print_env(t_msh *msh)
+// {
+// 	int		test;
+
+// 	test = 1;
+// 	t_cut_cmd *env;
+
+// 	env = msh->env->head;
+// 	if (!env || env == NULL)
+// 		printf("EMPTY LIST !... \n");
+// 	printf("\n| PRINT LIST | \n");
+// 	while (env)
+// 	{
+// 		printf("[%s]\n", env->elem);
+// 		env = env->n;
+// 	}
+// 	printf("\n[head = %s]\n[tail = %s]\n", msh->env->head->elem, msh->env->tail->elem);
+// 	sleep(2);
+// 	printf("| FIN [size = %d]|\n", msh->env->size);
+// }
+
+static int		is_empty_env(t_cut_cmd *env)
 {
-	jobs->prompt_status = 0;
-	jobs->reading_line = NULL;
-	jobs->have_been_read = NULL;
+	if (!env || env == NULL)
+		return (SUCCESS);
+	return (ERROR);
 }
 
-void	init_msh(t_msh *msh)
+void					init_env(t_msh *msh)
 {
-	msh->jobs = (t_job*)malloc(sizeof(t_job));
-	msh->line = NULL;
-	msh->quotes = NULL;
-	msh->tools = (t_tools*)malloc(sizeof(t_tools));
-	msh->tools->head = NULL;
-	msh->tools->tail = NULL;
-	ft_memset(msh->tools->pipe, 0, 2);
-	msh->tools->loop = 0;
-	msh->tools->fdin = dup(0);
-	msh->tools->fdout = dup(1);
-	msh->tools->last_fd = 0;
-	msh->tools->nbpipe = 2;
-	msh->tools->fdredir = 0;
-	msh->tools->last_op = 0;
-	msh->tools->status = 0;
-	msh->tools->error_msg = NULL;
-	msh->e_head = NULL;
-	msh->e_tail = NULL;
-	msh->run_status = 1;
-	msh->path = NULL;
-	msh->envp = NULL;
+	msh->env = (t_env_list*)malloc(sizeof(t_env_list));
+	msh->env->head = NULL;
+	msh->env->tail = NULL;
 }
 
-void	ready_for_input(t_msh *msh)
+static int				create_env_list(t_msh *msh, char *content)
 {
-	msh->tools->head = NULL;
-	msh->tools->tail = NULL;
-	msh->line = NULL;
-	msh->quotes = NULL;
-}
+	t_cut_cmd	*new_block;
 
-void	initializer(t_msh **mssh,char **envp)
-{
-	t_msh *msh;
-
-	msh = *mssh;
-	init_msh(msh);
-	init_jobs(msh->jobs);
-	ready_for_input(msh);
-	handle_env(msh, envp);
-	init_cmd(msh);
-	printf("INIT MSH OK ...\n");
-}
-
-char	*debug_get_line_name(t_cut_cmd *to_print)
-{
-	char *ret;
-
-	ret = NULL;
-	t_cut_cmd *ptr;
-
-	ptr = to_print;
-	while (!(!ptr->p))
-		ptr = ptr->p;
-	while (ptr)
+	if (is_empty_env(msh->env->head))
 	{
-		if (!ret)
-			ret = to_gc(&ret, ft_strdup(ptr->elem));
-		else
-			ret = to_gc(&ret, ft_strjoin(ft_strjoin(ret, " "), ptr->elem));
-		ptr = ptr->n;
+		if (!(new_block = (t_cut_cmd *)malloc(sizeof(t_cut_cmd))))
+			return (-1);
+		new_block->elem = content;
+		new_block->TOKEN = _UNASSIGNED;
+		new_block->p = NULL;
+		new_block->n = NULL;
+		msh->env->head = new_block;
+		msh->env->tail = new_block;
+		msh->env->size = 1;
+		return (SUCCESS);
 	}
-	return (ret);
+	return (ERROR);
 }
 
-void	get_line_info(t_cut_cmd *to_debug)
+static int				add_env(t_msh *msh, char *content)
 {
-	int i;
-	char *str;
-	t_cut_cmd *ptr;
+	t_cut_cmd	*new_block;
 
-	i = -1;
-	ptr = to_debug;
-	printf("Line:%s\n\telem: %s\n\theader[C S Q]: ", debug_get_line_name(ptr), ptr->elem);
-	while (++i < HEADER_SIZE)
-		printf("%d ", ptr->header[i]);
-	printf("\n");
-	while ((str = to_gc(&str, readline("next / prev > "))))
-	{
-		if ((!ft_strncmp("prev", str, 4) || !ft_strncmp("p", str, 1)) && ptr->n)
-			ptr = ptr->n;
-		if ((!ft_strncmp("next", str, 4) || !ft_strncmp("n", str, 1)) && ptr->p)
-			ptr = ptr->p;
-		i = -1;
-		if (ptr)
-		{
-			printf("Line:\n\telem: %s\nheader[C S Q]: ", ptr->elem);
-			while (++i < HEADER_SIZE)
-				printf("%d ", ptr->header[i]);
-			printf("\n");
-		}
-	}
-
+	if (!(new_block = (t_cut_cmd *)malloc(sizeof(t_cut_cmd))))
+		return (-1);
+	new_block->elem = ft_strdup(content);
+	new_block->n = NULL;
+	new_block->p = msh->env->tail;
+	msh->env->tail->n = new_block;
+	msh->env->tail = new_block;
+	msh->env->size++;
+	return (SUCCESS);
 }
 
-void	msh_debug(t_msh *msh, char *elem)
+void	init_env_placeholder(t_msh *msh, char **envp)
 {
-	if (!ft_strncmp(ft_strtrim(elem, " "), "line", 4))
-		get_line_info(msh->tools->tail);
-
-}
-
-int	is_symbol(char c)
-{
-	char **symbols;
-	int i;
+	int		i;
 
 	i = 0;
-	symbols = ft_split(SYMBOL_LIST, ' ');
-	while (symbols[i])
-	{
-		if (symbols[i][0] == c)
-			return (1);
-		i++;
-	}
-	return (0);
+	init_env(msh);
+	create_env_list(msh,envp[i]);
+	while (envp[++i])
+		add_env(msh, envp[i]);
 }
 
-int	is_quote(char c, char type)
-{
-	if (c == type)
-		return (1);
-	return (0);
-}
+/*
+**
+**			ENV TESTINGS
+**
+*/
 
-char	*p_near(char *str)
+void			ft_error(t_cut_cmd *cmd, char *str, int errornum)
 {
-	char *ret;
-	char *ret2;
-
-	if (!ft_strncmp(str, "endl", ft_strlen(str)))
-		ret2 = ft_strdup("\\n");
+	if (str)
+		ft_putstr_fd(cmd->elem, 1);
 	else
-		ret2 = ft_strndup(str, 1);
-	ret = ft_strjoin("parse error near '", ret2);
-	ret = to_gc(&ret, ft_strjoin(ret, "'"));
-	return (ret);
+		strerror(errornum);
+	exit (errornum);
 }
 
-int	add_symbol(t_msh *msh, char *ret, int i)
+int			add_to_env(t_cut_cmd **target, char *elem, t_TOKEN TOKEN)
 {
-	char **split;
-	char *ptr;
-	//(void)msh;
+	t_cut_cmd *ret;
 
-	//msh->error_msg = to_gc(&msh->error_msg, p_near(ret));
-	ptr = msh->jobs->have_been_read + i + 1;
-	split = ft_split(ptr, ' ');
-	if (!split[0])
+	ret = fill(elem, TOKEN);
+	if (!*target)
 	{
-		msh->tools->error_msg = to_gc(&msh->tools->error_msg, p_near("endl"));
-		return (0);
+		*target = ret;
+		return (1);
 	}
-	if (is_symbol(split[0][0]))
-	{
-		if (((split[0][0] == '>' && msh->jobs->have_been_read[i] == '>') ||
-		(split[0][0] == '<' && msh->jobs->have_been_read[i] == '<')) && !is_symbol(split[0][1]))
-		{
-			if (!split[0][1] && !split[1])
-			{
-				msh->tools->error_msg = to_gc(&msh->tools->error_msg, p_near("endl"));
-				return (0);
-			}
-			return (1);
-		}
-		msh->tools->error_msg = to_gc(&msh->tools->error_msg, p_near(ret));
-		return (0);
-	}
+	ret->n = *target;
+	*target = ret;
 	return (1);
-}
-
-int	p_check_symbols(t_msh *msh)
-{
-	int i;
-	char *ret;
-
-	i = 0;
-	ret = NULL;
-	while (msh->jobs->have_been_read[i])
-	{
-		if (is_symbol(msh->jobs->have_been_read[i]))
-		{
-			ret = to_gc(&ret, ft_strndup(msh->jobs->have_been_read + i, 1));
-			if (!add_symbol(msh, ret, i))
-				return (0);
-		}
-		i++;
-	}
-	return (1);
-}
-
-int	escape_symbol(t_msh *msh, char **ret, int i)
-{
-	p_putchar_str(ret, ' ');
-	while (is_symbol(msh->jobs->have_been_read[i]))
-	{		
-		p_putchar_str(ret, msh->jobs->have_been_read[i]);
-		i++;
-	}
-	p_putchar_str(ret, ' ');
-	return (i);
 }
 
 int	is_builtin(char *str)
@@ -315,182 +155,18 @@ int	is_builtin(char *str)
 	return (0);
 }
 
-int	p_str_to_struct(t_msh *msh, char *str)
+int	split_len(char **split)
 {
 	int i;
-	int y;
-	int header[HEADER_SIZE];
-	char **split;
 
-	i = 1;
-	y = -1;
-	if (!str)
-		split = ft_split(msh->jobs->have_been_read, ' ');
-	else
-		split = ft_split(str, ' ');
-	while (++y < HEADER_SIZE)
-		header[y] = 0;
-	if (!is_builtin(split[0]))
-		header[H_CMDTYPE] = 1;
-	else
-		header[H_CMDTYPE] = 0;
-	add(msh, split[0], header);
+	i = 0;
+	if (!split)
+		return (0);
 	while (split[i])
-	{
-		y = -1;
-		while (++y < HEADER_SIZE)
-			header[y] = 0;
-		if (is_symbol(split[i][0]))
-			header[H_SYMBOL] = 1;
-		else if (split[i][0] == '-')
-			header[H_CMDTYPE] = 2;
-		else
-			header[H_CMDTYPE] = 3;
-		add(msh, split[i], header);
 		i++;
-	}
-	return (1);
-}
-
-void	print_list(t_msh *msh)
-{
-	t_cut_cmd *ptr;
-
-	ptr = msh->tools->head;
-	while (ptr)
-	{
-		printf("%s\n", ptr->elem);
-		ptr = ptr->n;
-	}
-}
-
-int	get_next_quote(char *str, int i)
-{
-	if (!str)
-		return (-1);
-	while (str[i] && str[i] != '\"' && str[i] != '\'')
-		i++;
-	if (!i)
-		i = -1;
 	return (i);
 }
 
-char	*n_dup(char *str, int start, int end)
-{
-	char *ret;
-
-	ret = NULL;
-	if (!start || !end || end - start > ft_strlen(str))
-		return (ret);
-	while (start < end)
-	{
-		p_putchar_str(&ret, str[start]);
-		start++;
-	}
-	return (ret);
-}
-
-int	split_quotes(t_msh *msh, char *ptr)
-{
-	(void)msh;
-	int start_end[2];
-	int i;
-	char *str;
-
-	str = NULL;
-	i = 0;
-	start_end[0] = 0;
-	start_end[1] = 0;
-	if (!ptr)
-	{
-		ptr = msh->jobs->have_been_read;
-		p_str_to_struct(msh, ft_strndup(ft_strtrim(ptr, " "), get_next_quote(ptr, 0)));
-		ptr += get_next_quote(ptr, get_next_quote(ptr, 0)) - 1;
-		return (split_quotes(msh, ptr));
-	}
-	start_end[0] = get_next_quote(ptr, start_end[0]);
-	start_end[1] = get_next_quote(ptr, start_end[0] + 1);
-	str = n_dup(ptr, 0, start_end[0]);
-	while (ptr[start_end[1]] != ptr[start_end[0]])
-		start_end[1] = get_next_quote(ptr, start_end[1] + 1);
-	while (ptr[start_end[1] + 1] == ptr[start_end[1]])
-	{
-		start_end[1] += 2;
-		while (ptr[start_end[1]] != ptr[start_end[0]])
-			start_end[1] = get_next_quote(ptr, start_end[1] + 1);
-	}
-	p_str_to_struct(msh, n_dup(ptr, start_end[0], start_end[1] + 1));
-	printf("%s\n", n_dup(ptr, start_end[0], start_end[1] + 1));
-	if (str)
-		str = ft_strtrim(str, " ");
-	if (str && ft_strncmp(str, "", 1))
-		p_str_to_struct(msh, str);
-	ptr += start_end[1] + 1;
-	if (!ft_strncmp(ptr, "", 1) || !ptr)
-		return (1);
-	return (split_quotes(msh, ptr));
-}
-
-int	p_check_quotes(t_msh *msh)
-{
-	int i;
-	int mark_double;
-	int	mark_single;
-
-	i = 0;
-	mark_double = 0;
-	mark_single = 0;
-	while (msh->jobs->have_been_read[i])
-	{
-		if (msh->jobs->have_been_read[i] == '\"')
-			mark_double++;
-		else if (msh->jobs->have_been_read[i] == '\'')
-			mark_single++;
-		i++;
-	}
-	if (mark_double % 2 != 0 || mark_single % 2 != 0)
-	{
-		msh->tools->error_msg = to_gc(&msh->tools->error_msg, ft_strdup("dquote not supported"));
-		return (0);
-	}
-	if (mark_double || mark_single)
-		return (split_quotes(msh, NULL));
-	return (1);
-}
-
-void	p_escape_line(t_msh *msh)
-{
-	int i;
-	char *ret;
-
-	i = 0;
-	ret = NULL;
-	while (msh->jobs->have_been_read[i])
-	{
-		if (is_symbol(msh->jobs->have_been_read[i]))
-			i = escape_symbol(msh, &ret, i);
-		p_putchar_str(&ret, msh->jobs->have_been_read[i]);
-		i++;
-	}
-	msh->jobs->have_been_read = to_gc(&msh->jobs->have_been_read, ft_strdup(ret));
-}
-
-int	process_line(t_msh *msh)
-{
-	//copie la ligne lue dans la variabe msh.have_been_read qui va etre utilisee pour le parsing
-	msh->jobs->have_been_read = to_gc(&msh->jobs->have_been_read, ft_strdup(msh->jobs->reading_line));
-	//check si il y a des erreurs de parsing au niveau des symbols uniquement
-	if (!p_check_symbols(msh) || !p_check_quotes(msh))
-		return (0);
-	//escape les symbols sur msg.have_been_read pour pouvoir split les espaces ultierieurement
-	p_escape_line(msh);
-	//decoupe la chaine et la stock dans la struct s_cut_cmd *line et remplis les headers  !SI [msh->head] EST VIDE (p_check_quotes rempli la struct si des quotes sont presentes)
-	if (!msh->tools->head)
-		p_str_to_struct(msh, NULL);
-	return (1);
-}
-
-//Ecris l'erreur stock dans msh.error_msg
 void	write_error(t_msh *msh)
 {
 	if (msh->tools->error_msg)
@@ -501,31 +177,771 @@ void	write_error(t_msh *msh)
 	msh->tools->error_msg = NULL;
 }
 
-int	main(int argc, char **argv, char **envp)
+void	handler(int n)
 {
-	t_msh *msh;
-	(void)argc;
-	(void)argv;
+	(void)n;
+	gc("collect -all");
+	exit (0);
+}
+//ignore up
+
+/**
+ * builtins
+ *
+**/
+
+int	builtin_echo(t_msh *msh, t_cut_cmd *cmd)
+{
+	(void)msh;
+	(void)cmd;
+	////$MARK("echo");
+	return (1);
+}
+
+int	builtin_cd(t_msh *msh, t_cut_cmd *cmd)
+{
+	(void)msh;
+	(void)cmd;
+	////$MARK("cd");
+	return (2);
+}
+
+int	builtin_pwd(t_msh *msh, t_cut_cmd *cmd)
+{
+	(void)msh;
+	(void)cmd;
+	//$MARK("pwd");
+	return (1);
+}
+
+int	builtin_env(t_msh *msh, t_cut_cmd *cmd)
+{
+	(void)msh;
+	(void)cmd;
+	//$MARK("env");
+	return (2);
+}
+
+int		swap_env(t_msh *msh, char *new)
+{
+	t_cut_cmd 	*env;
+	size_t		len;
+	int			match;
+
+	len = 0;
+	match = 0;
+	env = msh->env->head;
+	while (new[len] != '\0' && !match)
+	{
+		if (new[len] == '=')
+			match = 1;
+		len++;
+	}
+	if (new[len])
+	{
+		while (env)
+		{
+			if (!ft_strncmp(new, env->elem, len))
+			{
+				printf("[SWAPING]\n");
+				free(env->elem);
+				gc("pause");
+				env->elem = ft_strdup(new);
+				gc("resume");
+				return (SUCCESS);
+			}
+			env = env->n;
+		}
+		// gc("pause");
+		add_env(msh, new);
+		// gc("resume");
+		return (SUCCESS);
+	}
+	return (ERROR);
+}
+
+int		builtin_export(t_msh *msh, t_cut_cmd *cmd)
+{
+	int			ret;
+	t_cut_cmd	*env;
+
+	env = msh->env->head;
+	if (!cmd->p)
+	{
+		while(env)
+		{
+			ft_putstr_fd("declare -x ", 1);
+			if (env->elem)
+				ft_putendl_fd(env->elem, 1);
+			else
+				ft_putendl_fd("ELEM DOESNT EXIST\n", 1);
+			env = env->n;
+		}
+		return (SUCCESS);
+	}
+	cmd = cmd->p;
+	while (cmd && cmd->TOKEN != PIPE)
+	{
+		if (cmd->TOKEN == ARG)
+		{
+			ret = swap_env(msh, cmd->elem);
+			if (ret == ERROR)
+				ft_error(cmd, "Somethings bas happend\n", 0);
+		}
+		cmd = cmd->p;
+	}
+	// print_env(msh);
+	return (SUCCESS);
+}
+
+int	builtin_unset(t_msh *msh, t_cut_cmd *cmd)
+{
+	(void)msh;
+	(void)cmd;
+	//$MARK("unset");
+	return (2);
+}
+
+int	builtin_exit(t_msh *msh, t_cut_cmd *cmd)
+{
+	(void)msh;
+	(void)cmd;
+	//$MARK("exit");
+	return (2);
+}
+
+void	add_builtin(int (***f_p_builtin)(t_msh *msh, t_cut_cmd *cmd), void *addr, int size)
+{
+	static	int pos;
+	char *add_fail;
+
+	add_fail = ft_strdup("BUILTIN_ARRAY_OVERFLOW, exiting now\n");
+	(void)f_p_builtin;
+	if (pos == size)
+	{
+		write(2, add_fail, ft_strlen(add_fail));
+		gc("collect -all");
+		exit (0);
+	}
+	(*f_p_builtin)[pos] = addr;
+	pos++;
+}
+
+void	roll_builtin(t_msh *msh, t_cut_cmd *cmd, int	(**f_p_builtin)(t_msh *msh, t_cut_cmd *cmd))
+{
+	int i;
+
+	i = -1;
+	while (f_p_builtin[++i])
+		f_p_builtin[i](msh, cmd);
+}
+
+
+void	handle_builtins(t_msh *msh, t_cut_cmd *cmd)
+{
+	static int			(**f_p_builtin)(t_msh *msh, t_cut_cmd *cmd);
+	int					(*malloc_size)(t_msh *msh, t_cut_cmd *cmd);
+	int					size;
+	int					index_of_cmd;
+//	int					index_of_cmd;
+
+	(void)cmd;
+	(void)msh;
+	size = split_len(ft_split(BUILTIN_LIST, ' '));
+	if (!f_p_builtin)
+	{
+		//f_p_builtin = malloc_builtin_array(size);
+		gc("pause");
+		f_p_builtin = ft_calloc(size, sizeof(malloc_size) * size);
+		gc("resume");
+		add_builtin(&f_p_builtin, builtin_echo, size);
+		add_builtin(&f_p_builtin, builtin_cd, size);
+		add_builtin(&f_p_builtin, builtin_pwd, size);
+		add_builtin(&f_p_builtin, builtin_env, size);
+		add_builtin(&f_p_builtin, builtin_export, size);
+		add_builtin(&f_p_builtin, builtin_unset, size);
+		add_builtin(&f_p_builtin, builtin_exit, size);
+		//$MARK("INIT")
+	}
+	index_of_cmd = is_match2(BUILTIN_LIST, ' ', cmd->elem);
+	f_p_builtin[index_of_cmd](msh, cmd);
+}
+
+void	builtins_placeholder(t_msh *msh, t_cut_cmd *cmd, int mode)
+{
+	if (mode)
+		handle_builtins(msh, cmd);
+	else
+	{
+		builtin_export(msh, cmd);
+	}
+}
+/**
+ * builtins
+ *
+**/
+
+/**
+ * env
+ *
+**/
+
+// void	init_envp(t_msh *msh, char **envp)
+// {
+// 	int i;
+// 	t_cut_cmd *ptr;
+
+// 	i = 0;
+// 	if (!envp)
+// 		return ;
+// 	while (envp[i])
+// 	{
+// 		add_to_env(&msh->envp, envp[i], _UNASSIGNED);
+// 		i++;
+// 	}
+// 	ptr = get_env_of(msh->envp, "PATH");
+// 	msh->path = ft_split(ft_split(ptr->elem, '=')[1], ':');
+// 	// (void)msh;
+// }
+
+t_cut_cmd	*get_env_of(t_cut_cmd *target, char *to_find)
+{
+	t_cut_cmd	*ptr;
+	char		*current_var;
+
+	ptr = target;
+	current_var = NULL;
+	if (!ptr)
+		return (NULL);
+	while (ptr)
+	{
+		current_var = ft_split(ptr->elem, '=')[0];
+		if (!ft_strncmp(current_var, to_find, ft_strlen(to_find)))
+			return (ptr);
+		ptr = ptr->n;
+	}
+	return (NULL);
+}
+
+/**
+ * env
+ *
+**/
+
+/**
+ * cmd_tools
+ *
+**/
+
+void		ispipe(t_msh *msh)
+{
+	t_cut_cmd	*cmd;
+	int			cpt;
+
+	cmd = msh->tools->tail;
+	cpt = 0;
+	while (cmd != NULL)
+	{
+		if (cmd->TOKEN == PIPE)
+			cpt++;
+		cmd = cmd->p;
+	}
+	msh->tools->nbpipe = cpt;
+}
+
+int			getnext_pipe(t_cut_cmd **cmd)
+{
+	while((*cmd) && (*cmd)->TOKEN != PIPE)
+	{
+		(*cmd) = (*cmd)->p;
+	}
+	printf("[GNP][AFTER LOOP1][%s][CMD->P = %d]\n", (*cmd)->elem, (*cmd)->p->TOKEN);
+	if ((*cmd)->p && ((*cmd)->p->TOKEN == C_ENV || (*cmd)->p->TOKEN == C_BUILTIN))
+	{
+		*cmd = (*cmd)->p;
+		printf("[GNP][NODE AFTER NEXT PIPE][%s]\n", (*cmd)->elem);
+	}
+	if (*cmd)
+	{
+		printf("[GNP][SUCCESS]\n");
+		return (SUCCESS);
+	}
+	else
+	{
+		printf("[GNP][ERROR]\n");
+		return (-1);
+	}
+}
+
+void		whatpostions(t_msh *msh)
+{
+	t_cut_cmd	*cmd;
+	t_cut_cmd	*tmp;
 	
-	msh = (t_msh*)malloc(sizeof(t_msh));
-	initializer(&msh, envp);
-	while (msh->run_status)
-		handle_cmd(msh);
+	cmd = msh->tools->tail;
+	while (cmd != NULL)
+	{
+		tmp = cmd;
+		// printf("[TMP][%s]\n", tmp->elem);
+		if (getnext_pipe(&cmd) == -1)
+			tmp->TOKEN = LAST_CMD;
+	}
+	printf("[WHAT POSITION FIN]\n");
+	$BR
+}
+
+char			*get_path(t_cut_cmd *cmd, char **paths)
+{//RENVOI LE BON PATH D'UN EXECUTABLE
+	int				i;
+	char			*str;
+	char			*tmp;
+	DIR				*o_dir;
+	struct dirent	*r_dir;
+
+	i = -1;
+	if (!cmd || !paths)
+	{
+		printf("GET PATH !CMD\n");
+		return (NULL);
+	}
+	while (paths[++i])
+	{
+		o_dir = opendir(paths[i]);
+		if (o_dir != NULL)
+		{
+			while ((r_dir = readdir(o_dir)) != NULL)
+			{
+				if (r_dir && (!ft_strncmp(cmd->elem, r_dir->d_name, (size_t)ft_strlen(r_dir->d_name))))
+				{
+					tmp = ft_strjoin(paths[i], "/");
+					str = ft_strjoin(tmp, cmd->elem);
+					if (!str)
+						return (NULL);
+					return (str);
+				}
+			}
+			if (o_dir)
+				closedir(o_dir);
+		}
+	}
+	return (NULL);
+}
+
+int				choose_args(t_msh *msh)
+{
+	t_cut_cmd	*cmd;
+
+	cmd = msh->tools->tmp_node;
+	if (!msh->tools->istmp)
+		return (NO_ARGS);
+	else if (cmd->p && cmd->p->TOKEN == ARG)
+		return (ARGS_BUT);
+	else
+		return (ARGS);
+}
+
+char			**handle_heredoc(t_msh *msh, t_cut_cmd *cmd, int mode)
+{
+	char		**args;
+	t_cut_cmd	*tmp;
+	int			i;
+
+	i = 0;
+	tmp = cmd;
+	if (mode == ARGS)
+	{	
+		args = (char **)malloc(sizeof(char*) * 3);
+		args[0] = ft_strdup(cmd->elem);
+		args[1] = ft_strdup("./msh_heredoc.msh");
+		args[2] = NULL;
+		msh->tools->istmp = 0;
+	}
+	else
+	{
+		while(tmp != NULL)
+		{
+			if (tmp != msh->tools->tmp_node && tmp->TOKEN != D_L_REDIR)
+				i++;
+			tmp = tmp->p;
+		}
+		args = (char**)malloc(sizeof(char*) * i + 1);
+		i = -1;
+		while (cmd != NULL)
+		{
+			if (cmd != msh->tools->tmp_node && cmd->TOKEN != D_L_REDIR)
+				args[++i] = cmd->elem;
+			cmd = cmd->p;
+		}
+		args[++i] = NULL;
+	}
+	return (args);
+}
+
+char			**handle_args(t_msh *msh, t_cut_cmd *cmd)
+{
+	int			ret;
+	int			tmp_check;
+	int			i;
+	t_cut_cmd	*tail;
+	char 		**args;
+
+	ret = 0;
+	i = -1;
+	tail = cmd;
+	if (!msh || !cmd)
+		return (NULL);
+	tmp_check = choose_args(msh);
+	if (msh->tools->istmp && (tmp_check == ARGS || tmp_check == ARGS_BUT))
+		args = handle_heredoc(msh, cmd, tmp_check);
+	else
+	{
+		while (cmd && (cmd->TOKEN == C_ENV || cmd->TOKEN == C_BUILTIN || cmd->TOKEN == ARG || cmd->TOKEN == OPTION))
+		{
+			ret++;
+			cmd = cmd->p;
+		}
+		args = (char**)gc_malloc(sizeof(char*) * (ret + 1));
+		while (tail && (tail->TOKEN == C_ENV || tail->TOKEN == C_BUILTIN || tail->TOKEN == ARG || tail->TOKEN == OPTION))
+		{
+			args[++i] = ft_strdup(tail->elem);
+			tail = tail->p;
+		}
+		args[++i] = NULL;
+	}
+	return (args);
+}
+
+/**
+ * cmd_tools
+ *
+**/
+
+char		**list_to_split(t_cut_cmd *target)
+{
+	char	**ret;
+	int		i;
+	t_cut_cmd	*count;
+
+	i = 0;
+	count = target;
+	while (count)
+	{
+		count = count->n;
+		i++;
+	}
+	ret = gc_malloc(sizeof(char*) * i + 1);
+	if (!ret)
+		return (NULL);
+	i = 0;
+	while (target)
+	{
+		ret[i] = ft_strdup(target->elem);
+		target = target->n;
+		i++;
+	}
+	ret[i] = NULL;
+	return (ret);
+}
+
+int				is_input(t_cut_cmd **cmd)
+{
+	while ((*(cmd)) && (*(cmd))->TOKEN != PIPE)
+	{
+		if ((*cmd)->TOKEN == L_REDIR || (*cmd)->TOKEN == D_L_REDIR)
+			return (SUCCESS);
+		(*(cmd)) = (*(cmd))->p;
+	}
+	return (ERROR);
+}
+
+int			is_output(t_cut_cmd **cmd)
+{
+
+	while ((*(cmd)) && (*(cmd))->TOKEN != PIPE)
+	{
+		if ((*(cmd))->TOKEN == R_REDIR || (*(cmd))->TOKEN == D_R_REDIR)
+			return (SUCCESS);
+		(*(cmd)) = (*(cmd))->p;
+	}
+	return (ERROR);
+}
+
+int			isredir(t_cut_cmd *cmd)
+{
+	while (cmd != NULL && cmd->TOKEN != PIPE)
+	{
+		if (cmd->TOKEN == R_REDIR || cmd->TOKEN == L_REDIR || cmd->TOKEN == D_R_REDIR || cmd->TOKEN == D_L_REDIR)
+			return (SUCCESS);
+		cmd = cmd->p;
+	}
+	return (ERROR);
+}
+
+int			output_redirection(t_msh *msh, t_cut_cmd *cmd)
+{
+	if (is_output(&cmd) == SUCCESS)
+	{
+		while ((cmd != NULL && cmd->TOKEN != PIPE)
+			&& (cmd->TOKEN == ARG || cmd->TOKEN == R_REDIR || cmd->TOKEN == D_R_REDIR))
+		{
+			if (cmd->TOKEN == ARG && cmd->n->TOKEN == R_REDIR)
+			{
+				msh->tools->fdout = open(cmd->elem, O_RDWR | O_CREAT, 0666);
+				if (msh->tools->fdout < 0)
+					return (ERROR);//exit (127 | errno)
+			}
+			else if (cmd->TOKEN == ARG && cmd->n->TOKEN == D_R_REDIR)
+			{
+				msh->tools->fdout = open(cmd->elem, O_RDWR | O_CREAT | O_APPEND, 0666);
+				if (msh->tools->fdout < 0)
+					return (ERROR);//exit (127 | errno)
+				
+			}
+			cmd = cmd->p;
+		}
+		dup2(msh->tools->fdout, 1);
+		return (SUCCESS);
+	}
+	return (ERROR);
+}
+
+int			input_redirection(t_msh *msh, t_cut_cmd *cmd)
+{
+	// char *line;
+
+	if (is_input(&cmd) == SUCCESS)
+	{
+		while((cmd && cmd->TOKEN != PIPE) && (cmd->TOKEN == ARG || cmd->TOKEN == L_REDIR || cmd->TOKEN == D_L_REDIR))
+		{
+			if (cmd->TOKEN == ARG && cmd->n->TOKEN == L_REDIR)
+			{
+				msh->tools->fdin = open(cmd->elem, O_RDWR, NULL);
+				if (msh->tools->fdin < 0)
+					return (ERROR);//exit(127 | errno)
+				msh->tools->istmp = 0;
+				dup2(msh->tools->fdin, 0);
+			}
+			else if (cmd->TOKEN == ARG && cmd->n->TOKEN == D_L_REDIR)
+			{
+				msh->tools->marker = cmd->elem;
+				msh->tools->tmp_node = cmd;
+				msh->tools->tmpfd = open("./msh_heredoc.msh", O_RDWR |  O_CREAT | O_TRUNC, 0666);
+				if (msh->tools->tmpfd < 0)
+					printf("OPEN FAILED\n");//ft_error();
+				while ((get_line(msh, "> ") >= 0) && (ft_strncmp(msh->tools->marker, msh->jobs->have_been_read, (size_t)ft_strlen(msh->jobs->have_been_read))))
+				{
+					// printf("[DEBUG][%s]\n", msh->jobs.have_been_read);
+					ft_putendl_fd(msh->jobs->have_been_read, msh->tools->tmpfd);
+				}
+				msh->tools->istmp = 2;
+			}
+			cmd = cmd->p;
+		}
+		return (SUCCESS);
+	}
+	return (ERROR);
+}
+
+int			handle_redirection(t_msh *msh, t_cut_cmd *cmd)
+{
+	int	ret;
+
+	ret = isredir(cmd);
+	if (ret == -1)
+	{//AUCUNE REDIRECTION | FONCTIONNEMENT REDIRECTION PIPE NORMALE
+		if (cmd->TOKEN != LAST_CMD)
+			dup2(msh->tools->pipe[1], 1);
+		return (-1);
+	}
+	else
+	{
+		msh->tools->fdin = 0;
+		msh->tools->fdout = 0;
+		input_redirection(msh, cmd);
+		output_redirection(msh, cmd);
+		// dup2(msh->tools->fdout, 1);
+	}
+	return (SUCCESS);
+}
+
+void			delete_heredoc(t_msh *msh)
+{
+	t_cut_cmd	*to_delete;
+	char		**delete_args;
+	char		*to_delete_path;
+	int			pid2;
+
+	pid2 = fork();
+	if (pid2 == 0)
+	{
+		to_delete = (t_cut_cmd*)malloc(sizeof(t_cut_cmd));
+		to_delete->elem = ft_strdup("/bin/rm");
+		to_delete_path = get_path(to_delete, list_to_split(msh->envp));
+		delete_args = ft_split("rm -rf ./msh_heredoc.msh", ' ');
+		msh->tools->marker = NULL;//AKA COLLECT
+		execve(to_delete->elem, delete_args, list_to_split(msh->envp));
+		printf("[FORK FORK FAILED]\n");
+	}
+	else
+		waitpid(pid2, &msh->tools->status, 0);
+}
+
+void			simple_exec(t_msh *msh, t_cut_cmd *cmd)
+{
+	int		pid;
+	char	*exec_path;
+	char	**args;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		handle_redirection(msh, cmd);
+		exec_path = get_path(cmd, msh->path);
+		if (!exec_path || exec_path == NULL)
+			ft_error(cmd, "PATH -1\n", 0);
+		args = handle_args(msh, cmd);
+		if (!args || args == NULL)
+			ft_error(cmd, "BAD ARGS/OPTION\n", 0);
+		execve(exec_path, args, list_to_split(msh->envp));
+		ft_error(cmd, "Execution failed.\n", errno);
+	}
+	else
+	{
+		waitpid(pid, &msh->tools->status, 0);
+		if (msh->tools->status)
+			printf("[FATHER FORK][STATUS = %d]\n", msh->tools->status);
+		if ((open("./msh_heredoc.msh", O_RDONLY, 0666) ) != -1)
+			delete_heredoc(msh);
+	}
+}
+
+void				cmd_nopipe(t_msh *msh, t_cut_cmd *cmd)
+{
+	(void)cmd;
+	(void)msh;
+	if (cmd && cmd->TOKEN == C_BUILTIN)
+		builtins_placeholder(msh, cmd, 0);
+	else if (cmd && cmd->TOKEN == C_ENV)
+		simple_exec(msh, cmd);
+}
+
+void			cmd_pipe(t_msh *msh, t_cut_cmd *cmd)
+{//EXECUTION DES COMMANDE PIPÉS
+	int		pid;
+	int		bfd;
+	char	*exec_path;
+	char	**args;
+
+	bfd = 0;
+	while (cmd != NULL)
+	{
+		pipe(msh->tools->pipe);
+		pid = fork();
+		if ( pid == 0)
+		{
+			ft_putstr_fd("[CMC PIPE][662]\n",2);
+			dup2(bfd, 0);
+			handle_redirection(msh, cmd);
+			ft_putstr_fd("[CMC PIPE][665]\n", 2);
+			exec_path = get_path(cmd, msh->path);
+			ft_putstr_fd("[CMC PIPE][667]\n", 2);
+			args = handle_args(msh, cmd);
+			ft_putstr_fd("[CMC PIPE][669]\n", 2);
+			execve(exec_path, args, list_to_split(msh->envp));
+			printf("[EXEC -1][%s]\n", cmd->elem);
+		}
+		else if (pid > 0)
+		{
+			wait(NULL);
+			close(msh->tools->pipe[1]);
+			bfd = msh->tools->pipe[0];
+		}
+		else
+		{
+			printf("-1 PID\n");
+			exit (0);
+		}
+		getnext_pipe(&cmd);
+	}
+}
+
+int         handle_cmd(t_msh *msh, t_cut_cmd *pos)
+{
+	if (!msh || msh == NULL)
+		return (-1);
+	ispipe(msh);
+	// whatpostions(msh);
+	if (msh->tools->nbpipe > 0)
+	{
+		ft_putstr_fd("[HANDLE CMD][PIPE !]\n", 2);
+		cmd_pipe(msh, pos);
+	}
+	else
+	{
+		ft_putstr_fd("[HANDLE CMD][NO PIPE]\n", 2);
+		cmd_nopipe(msh, pos);
+	}
 	return (0);
 }
-	// while ((msh->run_status))
-	// {
-	// 	if (!msh->jobs->prompt_status)
-	// 		msh->jobs->reading_line = to_gc(&msh->jobs, readline(PROMPT_NAME));
-	// 	if (!ft_strncmp(msh->jobs->reading_line, "msh_debug", 9) && msh->tools->head)
-	// 		msh_debug(msh, msh->jobs->reading_line + 9);
-	// 	if (msh->jobs->have_been_read)
-	// 	{
-	// 		process_line(msh);
-	// 		handle_cmd(msh);
-	// 	}
-	// 	msh->jobs->prompt_status = 0;
-	// 	write_error(msh);
-	// }
-	// collect();
-// }
+
+int	handle_and(t_msh *msh, t_cut_cmd **new_pos)
+{
+	(void)msh;
+	t_cut_cmd *new_new_pos;
+
+	new_new_pos = (*new_pos)->n;
+	*new_pos = new_new_pos;
+	return (1);
+}
+
+int		_placeholder_handle_cmd(t_msh *msh)
+{
+	(void)msh;
+	if (msh->tools->error_msg)
+		return (0);
+	t_cut_cmd	*ptr;
+	t_cut_cmd	*pos;
+	
+	ptr = get_env_of(msh->envp, "PATH");
+	pos = msh->tools->tail;
+	////$MARK("place_holder")
+	return (handle_cmd(msh, pos));
+	return (1);
+}
+
+int	main(int argc, char **argv, char **envp)
+{
+	int		i;
+	t_msh	*msh;
+
+	i = -1;
+	while (envp[++i])
+		printf("[%s]\n", envp[i]);
+	$BR
+	gc_init();
+	(void)argc;
+	(void)argv;
+	// (void)envp;
+	gc("pause");
+	init_msh(&msh, envp);
+	gc("resume");
+	signal(SIGINT, handler);
+	while (msh->tools->run_status)
+	{
+		get_line(msh, NULL);
+		p_process_line(msh);
+		//print_list(&msh);
+		_placeholder_handle_cmd(msh);
+		write_error(msh);
+		//if (msh.tools->head)
+		//	msh_debug(&msh, "line");
+		msh->jobs->have_been_read = NULL;
+		msh->jobs->reading_line = NULL;
+		msh->tools->head = NULL;
+		msh->tools->tail = NULL;
+		gc("collect");
+		// init_msh(&msh, envp);
+	}
+	gc("collect -all");
+	return (0);
+}

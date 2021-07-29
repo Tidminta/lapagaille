@@ -1,16 +1,25 @@
 #include "../../includes/libshell.h"
-int	main(void)
-{
-	int i;
-	char *str;
-	char *ptr;
-	void *g;
+extern t_gc *g_gc;
 
-	i = -1;
-	while (++i < 10)
-	str = ft_strdup("test");
-	//str = to_gc(str, ft_strdup("test2"));
-	//collect();
-	return (0);
+int	get_line(void)
+{
+	char *str;
+	char *str2;
+
+	str = readline("test_> ");
+	str2 = ft_strdup(str);
+	return (1);
 }
 
+int	main(void)
+{
+	gc_init();
+	char *str;
+
+	while (1)
+	{
+		get_line();
+		gc("collect");
+	}
+	return (0);
+}

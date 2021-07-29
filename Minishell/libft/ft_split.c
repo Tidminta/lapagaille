@@ -6,7 +6,7 @@
 /*   By: motoure <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 13:11:46 by motoure           #+#    #+#             */
-/*   Updated: 2020/01/07 22:26:22 by motoure          ###   ########.fr       */
+/*   Updated: 2021/07/28 22:20:02 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ char		**ft_split(char const *s, char c)
 		return (0);
 	i = 0;
 	y = 0;
-	if ((!(tab = gc_malloc(sizeof(char *) * words_count(s, c) + 1))))
+	if ((!(tab = ft_calloc(words_count(s,c) + 1, sizeof(char *) * words_count(s, c) + 1))))
 		return (0);
 	while (i < words_count(s, c))
 	{
@@ -113,6 +113,5 @@ char		**ft_split(char const *s, char c)
 			y++;
 		i++;
 	}
-	tab[i] = NULL;
 	return (tab);
 }
