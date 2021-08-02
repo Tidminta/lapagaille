@@ -1,0 +1,4 @@
+for elem in *.mem
+	do
+	rm $elem
+	done

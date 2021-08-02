@@ -1,0 +1,59 @@
+lsso-framework-include-private-from-public
+Makefile
+_IO
+_builtins
+_cmd_exec
+_env
+a
+a.out
+cprotoerr
+error
+file
+includes
+init
+jobs.have_been_read
+libft
+minishell
+norme
+p
+parsing
+pwd
+res
+roll
+roll.sh
+sh
+srcs
+tail
+test
+tmp
+tools-
+-rw-r--r--    1 motoure  2019_paris  12288 Jul 30 20:14 .Makefile.swp
+drwxr-xr-x   13 motoure  2019_paris    442 Jul 29 23:29 .git
+-rw-r--r--    1 motoure  2019_paris   1346 Jul 30 20:14 Makefile
+drwxr-xr-x   10 motoure  2019_paris    340 Jul 30 20:12 _IO
+drwxr-xr-x    9 motoure  2019_paris    306 Jul 30 20:12 _builtins
+drwxr-xr-x   12 motoure  2019_paris    408 Jul 30 20:12 _cmd_exec
+drwxr-xr-x    5 motoure  2019_paris    170 Jul 30 20:12 _env
+-rw-r--r--    1 motoure  2019_paris     15 Jul 28 22:32 a
+-rwxr-xr-x    1 motoure  2019_paris   8432 Jul 28 22:32 a.out
+-rw-r--r--    1 motoure  2019_paris  12764 Jul 28 22:32 cprotoerr
+drwxr-xr-x    5 motoure  2019_paris    170 Jul 30 20:12 error
+-rw-r--r--    1 motoure  2019_paris   1706 Jul 30 20:14 file
+drwxr-xr-x    8 motoure  2019_paris    272 Jul 30 20:12 includes
+drwxr-xr-x    5 motoure  2019_paris    170 Jul 30 20:12 init
+-rw-r--r--    1 motoure  2019_paris      0 Jul 25 18:35 jobs.have_been_read
+drwxr-xr-x   84 motoure  2019_paris   2856 Jul 30 20:12 libft
+-rwxr-xr-x    1 motoure  2019_paris  50692 Jul 30 20:14 minishell
+-rw-r--r--    1 motoure  2019_paris  13878 Jul 26 19:19 norme
+-rw-r--r--    1 motoure  2019_paris      0 Jul 25 18:35 p
+drwxr-xr-x   13 motoure  2019_paris    442 Jul 30 20:14 parsing
+-rw-r--r--    1 motoure  2019_paris     99 Jul 25 18:35 pwd
+-rw-r--r--    1 motoure  2019_paris     71 Jul 30 19:44 res
+-rwxr-xr-x    1 motoure  2019_paris      0 Jul 29 00:31 roll
+-rw-r--r--    1 motoure  2019_paris      0 Jul 26 01:12 roll.sh
+-rw-r--r--    1 motoure  2019_paris     38 Jul 25 18:35 sh
+drwxr-xr-x    5 motoure  2019_paris    170 Jul 28 22:46 srcs
+-rw-r--r--    1 motoure  2019_paris      0 Jul 25 18:35 tail
+-rw-r--r--    1 motoure  2019_paris      4 Jul 25 18:35 test
+-rw-r--r--    1 motoure  2019_paris    536 Jul 25 18:35 tmp
+-rw-r--r--    1 motoure  2019_paris      0 Jul 25 18:35 tools-
