@@ -9,7 +9,6 @@
 	"S_QUOTE",
 	"D_QUOTE",
 	"WILD_CARD",
-	"ENV_SOLO",
 	"PIPE",
 	"R_REDIR",
 	"D_R_REDIR",
@@ -63,7 +62,7 @@ void	print_list2(t_cut_cmd *ptr)
 	while (ptr)
 	{
 		printf("%s ->n", ptr->elem);
-		ptr = ptr->p;
+		ptr = ptr->n;
 	}
 	printf("\n");
 }
@@ -102,7 +101,7 @@ char	*debug_get_line_name(t_cut_cmd *to_print)
 	return (ret);
 }
 
-char	*get_cwd()
+char	*get_pwd()
 {
 	char	cwd[PATH_MAX];
 
@@ -148,11 +147,13 @@ int	get_line(t_msh *msh, char *str)
 	if (str)
 		curr_path = str;
 	else
-		curr_path = get_prompt_of(msh, get_cwd());
+		curr_path = get_prompt_of(msh, get_pwd());
 	msh->jobs->reading_line = readline(curr_path);
 	if (!ft_strncmp(ft_strtrim(msh->jobs->reading_line, "\n"), "", 1))
 	{
 		msh->jobs->reading_line = NULL;
+		if (msh->tools->tmpfd)
+			msh->jobs->have_been_read = ft_strdup("\n");
 		return (0);
 	}
 	else

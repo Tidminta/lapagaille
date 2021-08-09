@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 17:46:33 by tidminta          #+#    #+#             */
-/*   Updated: 2021/08/02 18:02:06 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/08/09 13:20:14 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,10 @@ static int				add_env(t_msh **msh, char *content, int mode)
 
 	if (!(new_block = (t_cut_cmd *)malloc(sizeof(t_cut_cmd))))
 		return (-1);
-	new_block->elem = ft_strdup(content);
+	if (!ft_strchr(content, '='))
+		new_block->elem = ft_strjoin(content, "=\"\"");
+	else
+		new_block->elem = ft_strdup(content);
 	new_block->n = NULL;
 	new_block->p = (*msh)->env->tail;
 	if (mode)
@@ -92,6 +95,7 @@ void	init_env(t_msh *msh, char **envp)
 	msh->env = (t_env_list*)malloc(sizeof(t_env_list));
 	msh->env->head = NULL;
 	msh->env->tail = NULL;
+	msh->env->sub = NULL;
 	create_env_list(&msh,envp[i]);
 	while (envp[++i])
 		add_env(&msh, envp[i], 0);
@@ -213,6 +217,7 @@ int	builtin_env(t_msh *msh, t_cut_cmd *cmd)
 	{
 		if (env->TOKEN == _UNASSIGNED)
 			ft_putendl_fd(env->elem, 1);
+		
 		env = env->n;
 	}
 	return (2);
@@ -242,6 +247,7 @@ int		swap_env(t_msh **msh, char *new)
 				gc("pause");
 				(env)->elem = ft_strdup(new);
 				gc("resume");
+				env->TOKEN = _UNASSIGNED;
 				return (SUCCESS);
 			}
 			(env) = (env)->n;
@@ -253,9 +259,19 @@ int		swap_env(t_msh **msh, char *new)
 	}
 	else
 	{
-		gc("pause");
-		add_env(msh, new, ENV_SOLO);
-		gc("resume");
+		len = ft_strlen(new);
+		while (env && !match)
+		{
+			if (!ft_strncmp(env->elem, new, len))
+				match = 1;
+			env = env->n;
+		}
+		if (!match)
+		{
+			gc("pause");
+			add_env(msh, new, ENV_SOLO);
+			gc("resume");
+		}
 		return (SUCCESS);
 	}
 	return (ERROR);
@@ -267,7 +283,7 @@ int		builtin_export(t_msh *msh, t_cut_cmd *cmd)
 	t_cut_cmd	*env;
 
 	env = msh->env->head;
-	if ((!cmd->p) ||((cmd->p) && (cmd->p->TOKEN >= PIPE && cmd->p->TOKEN <= D_L_REDIR)))
+	if ((!cmd->p) || ((cmd->p) && (cmd->p->TOKEN >= PIPE && cmd->p->TOKEN <= D_L_REDIR)))
 	{
 		if (!msh->tools->fdout)
 			msh->tools->fdout = 1;
@@ -590,13 +606,43 @@ char			**handle_args(t_msh *msh, t_cut_cmd *cmd)
  *
  **/
 
-char		**list_to_split(t_cut_cmd *target)
+// int			is_env(t_msh *msh, char *to_find)
+// {
+	
+// }
+
+// char		*is_substitution(t_msh *msh, char *content)
+// {
+// 	size_t	len;
+// 	char	*sub;
+// 	int		i;
+// 	int		j;
+
+// 	i = 0;
+// 	j = 0;
+// 	len = 0;
+// 	while (content[i])
+// 	{
+// 		len = ft_strlen(content);
+// 		if (content[i] == '$')
+// 		{
+// 			j = i;
+// 			while(content[++j] && content[j] != ' ')
+// 				j++;
+// 			sub = ft_substr(content, ((unsigned int)i + 1), (size_t)j);
+// 			if (is_env(msh, sub))
+// 		}
+// 	}
+// }
+
+char		**list_to_split(t_msh *msh, t_cut_cmd *target)
 {
 	char	**ret;
 	int		i;
 	t_cut_cmd	*count;
 
 	i = 0;
+	(void)msh;
 	count = target;
 	while (count)
 	{
@@ -713,7 +759,6 @@ int			input_redirection(t_msh *msh, t_cut_cmd *cmd)
 		}
 		return (SUCCESS);
 	}
-	ft_putendl_fd("[NO INPUT REDIRECTION]\n", 2);
 	return (ERROR);
 }
 
@@ -750,10 +795,10 @@ void			delete_heredoc(t_msh *msh)
 	{
 		to_delete = (t_cut_cmd*)malloc(sizeof(t_cut_cmd));
 		to_delete->elem = ft_strdup("/bin/rm");
-		to_delete_path = get_path(to_delete, list_to_split(msh->envp));
+		to_delete_path = get_path(to_delete, list_to_split(msh, msh->envp));
 		delete_args = ft_split("rm -rf ./msh_heredoc.msh", ' ');
 		msh->tools->marker = NULL;//AKA COLLECT
-		execve(to_delete->elem, delete_args, list_to_split(msh->envp));
+		execve(to_delete->elem, delete_args, list_to_split(msh, msh->envp));
 		printf("[FORK FORK FAILED]\n");
 	}
 	else
@@ -781,7 +826,7 @@ void			simple_exec(t_msh *msh, t_cut_cmd *cmd)
 			args = handle_args(msh, cmd);
 			if (!args || args == NULL)
 				ft_error(cmd, "BAD ARGS/OPTION\n", 0);
-			execve(exec_path, args, list_to_split(msh->envp));
+			execve(exec_path, args, list_to_split(msh, msh->envp));
 			ft_error(cmd, "Execution failed.\n", errno);
 		}
 	}
@@ -821,7 +866,7 @@ void			cmd_pipe(t_msh *msh, t_cut_cmd *cmd)
 					{
 						exec_path = get_path(cmd, msh->path);
 						args = handle_args(msh, cmd);
-						execve(exec_path, args, list_to_split(msh->envp));
+						execve(exec_path, args, list_to_split(msh, msh->envp));
 						printf("[EXEC -1][%s]\n", cmd->elem);
 					}
 				}
@@ -845,6 +890,8 @@ void			cmd_pipe(t_msh *msh, t_cut_cmd *cmd)
 
 int         handle_cmd(t_msh *msh, t_cut_cmd *pos)
 {
+	// t_cut_cmd	*sub;
+
 	if (!msh || msh == NULL)
 		return (-1);
 	ispipe(msh);
@@ -883,7 +930,6 @@ int		_placeholder_handle_cmd(t_msh *msh)
 	pos = msh->tools->tail;
 	////$MARK("place_holder")
 	return (handle_cmd(msh, pos));
-	return (1);
 }
 
 int	main(int argc, char **argv, char **envp)

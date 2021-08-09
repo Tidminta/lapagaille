@@ -1,21 +1,5 @@
 #include "../../includes/libshell.h"
 
-int	is_builtin(char *str)
-{
-	char **list;
-	int i;
-
-	i = 0;
-	list = ft_split(BUILTIN_LIST, ' ');
-	while (list[i])
-	{
-		if (!ft_strncmp(str, list[i], ft_strlen(str)))
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
 int	add_symbol(t_msh *msh, char *str, char *ret, int i)
 {
 	char **split;

@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 17:33:58 by tidminta          #+#    #+#             */
-/*   Updated: 2021/08/02 17:57:22 by tidminta         ###   ########.fr       */
+/*   Updated: 2021/08/02 22:27:01 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct	s_env_list
 {
 	struct s_cut_cmd	*tail;
 	struct s_cut_cmd	*head;
+	struct s_cut_cmd	*sub;
 	int					size;
 }				t_env_list;
 

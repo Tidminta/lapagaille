@@ -1,7 +1,7 @@
 #include "../includes/libshell.h"
 
 void	init_jobs(t_msh **msh)
-{//BECAREFULL TO CHANGE THE MALLOC TO GC OR CALLOC !
+{
 	(*msh)->jobs = (t_job*)malloc(sizeof(t_job));
 	(*msh)->jobs->reading_line = NULL;
 	(*msh)->jobs->have_been_read = NULL;
@@ -32,28 +32,13 @@ void	init_tools(t_msh *msh)
 	msh->tools->last_op = 0;
 }
 
-void	init_env(t_msh *msh, char **envp)
-{
-	int		i;
-
-	i = 0;
-	msh->env = (t_env_list*)malloc(sizeof(t_env_list));
-	msh->env->head = NULL;
-	msh->env->tail = NULL;
-	msh->env->sub = NULL;
-	create_env_list(&msh,envp[i]);
-	while (envp[++i])
-		add_env(&msh, envp[i], 0);
-}
-
 void	init_msh(t_msh **msh, char **envp)
 {
 	t_cut_cmd *ptr;
-
 	*msh = (t_msh*)malloc(sizeof(t_msh));
 	init_jobs(msh);
 	init_tools(*msh);
-	init_env(*msh, envp);
+	init_env_placeholder(*msh, envp);
 	ptr = get_env_of((*msh)->env->head, "PATH");
 	(*msh)->path = ft_split(ft_split(ptr->elem, '=')[1], ':');
 	(*msh)->envp = (*msh)->env->head;
