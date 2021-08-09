@@ -1,0 +1,171 @@
+Error: SPACE_REPLACE_TAB    (line:  18, col:   9):      Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  19, col:   8):      Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  19, col:   9):      Misaligned variable declaration
+Error: SPACE_REPLACE_TAB    (line:  34, col:   8):      Found space when expecting tab
+Error: TOO_MANY_FUNCS       (line:  67, col:   1):      Too many functions in file
+Error: TOO_MANY_FUNCS       (line:  73, col:   1):      Too many functions in file
+Error: VAR_DECL_START_FUNC  (line:  78, col:   1):      Variable declaration not at start of function
+Error: SPACE_REPLACE_TAB    (line:  78, col:  14):      Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  79, col:  17):      Misaligned variable declaration
+Error: LINE_TOO_LONG        (line:  85, col:  83):      line too long
+Error: TOO_MANY_FUNCS       (line:  97, col:   1):      Too many functions in file
+Error: EOL_OPERATOR         (line: 101, col:  37):      Logic operator at the end of line
+Error: TOO_FEW_TAB          (line: 102, col:   9):      Missing tabs for indent level
+Error: EOL_OPERATOR         (line: 102, col:  37):      Logic operator at the end of line
+Error: TOO_FEW_TAB          (line: 103, col:   9):      Missing tabs for indent level
+Error: EOL_OPERATOR         (line: 103, col:  20):      Logic operator at the end of line
+Error: TOO_FEW_TAB          (line: 104, col:   9):      Missing tabs for indent level
+Error: EOL_OPERATOR         (line: 104, col:  38):      Logic operator at the end of line
+Error: TOO_FEW_TAB          (line: 105, col:   5):      Missing tabs for indent level
+Error: EOL_OPERATOR         (line: 105, col:  37):      Logic operator at the end of line
+Error: TOO_FEW_TAB          (line: 106, col:   5):      Missing tabs for indent level
+Error: EOL_OPERATOR         (line: 106, col:  33):      Logic operator at the end of line
+Error: TOO_FEW_TAB          (line: 107, col:   9):      Missing tabs for indent level
+Error: EOL_OPERATOR         (line: 109, col:  26):      Logic operator at the end of line
+Error: TOO_FEW_TAB          (line: 110, col:   9):      Missing tabs for indent level
+Error: EOL_OPERATOR         (line: 110, col:  35):      Logic operator at the end of line
+Error: TOO_FEW_TAB          (line: 111, col:   5):      Missing tabs for indent level
+Error: EOL_OPERATOR         (line: 111, col:  34):      Logic operator at the end of line
+Error: TOO_FEW_TAB          (line: 112, col:   5):      Missing tabs for indent level
+Error: EOL_OPERATOR         (line: 112, col:  30):      Logic operator at the end of line
+Error: TOO_FEW_TAB          (line: 113, col:   9):      Missing tabs for indent level
+Error: TOO_MANY_FUNCS       (line: 121, col:   1):      Too many functions in file
+Error: EOL_OPERATOR         (line: 125, col:  19):      Logic operator at the end of line
+Error: TOO_FEW_TAB          (line: 126, col:   5):      Missing tabs for indent level
+Error: EOL_OPERATOR         (line: 126, col:  28):      Logic operator at the end of line
+Error: TOO_FEW_TAB          (line: 127, col:   5):      Missing tabs for indent level
+Error: EOL_OPERATOR         (line: 127, col:  30):      Logic operator at the end of line
+Error: TOO_FEW_TAB          (line: 128, col:   5):      Missing tabs for indent level
+Error: EOL_OPERATOR         (line: 128, col:  30):      Logic operator at the end of line
+Error: TOO_FEW_TAB          (line: 129, col:   5):      Missing tabs for indent level
+Error: TOO_MANY_FUNCS       (line: 137, col:   1):      Too many functions in file
+Error: VAR_DECL_START_FUNC  (line: 141, col:   1):      Variable declaration not at start of function
+Error: SPACE_REPLACE_TAB    (line: 141, col:   9):      Found space when expecting tab
+Error: TOO_MANY_FUNCS       (line: 151, col:   1):      Too many functions in file
+Error: TOO_MANY_FUNCS       (line: 159, col:   1):      Too many functions in file
+Error: WRONG_SCOPE_COMMENT  (line: 163, col:   5):      Comment is invalid in this scope
+Error: TOO_MANY_FUNCS       (line: 167, col:   1):      Too many functions in file
+Error: WRONG_SCOPE_COMMENT  (line: 171, col:   5):      Comment is invalid in this scope
+Error: TOO_MANY_FUNCS       (line: 175, col:   1):      Too many functions in file
+Error: TOO_MANY_FUNCS       (line: 182, col:   1):      Too many functions in file
+Error: LINE_TOO_LONG        (line: 182, col:  82):      line too long
+Error: TAB_REPLACE_SPACE    (line: 184, col:  11):      Found tab when expecting space
+Error: SPACE_REPLACE_TAB    (line: 184, col:  16):      Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line: 185, col:   9):      Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line: 185, col:  10):      Misaligned variable declaration
+Error: TOO_MANY_FUNCS       (line: 199, col:   1):      Too many functions in file
+Error: LINE_TOO_LONG        (line: 199, col:  83):      line too long
+Error: SPACE_REPLACE_TAB    (line: 201, col:   8):      Found space when expecting tab
+Error: TOO_MANY_FUNCS       (line: 208, col:   1):      Too many functions in file
+Error: SPACE_REPLACE_TAB    (line: 210, col:  11):      Found space when expecting tab
+Error: WRONG_SCOPE_COMMENT  (line: 230, col:   9):      Comment is invalid in this scope
+Error: TOO_MANY_FUNCS       (line: 245, col:   1):      Too many functions in file
+Error: TOO_MANY_TABS_FUNC   (line: 245, col:   9):      extra tabs before function name
+Error: SPACE_REPLACE_TAB    (line: 247, col:  14):      Found space when expecting tab
+Error: TOO_MANY_FUNCS       (line: 260, col:   1):      Too many functions in file
+Error: SPACE_REPLACE_TAB    (line: 262, col:   8):      Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line: 263, col:  14):      Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line: 263, col:  15):      Misaligned variable declaration
+Error: TOO_MANY_FUNCS       (line: 278, col:   1):      Too many functions in file
+Error: TOO_MANY_FUNCS       (line: 307, col:   1):      Too many functions in file
+Error: TOO_MANY_TABS_FUNC   (line: 307, col:   9):      extra tabs before function name
+Error: BRACE_SHOULD_EOL     (line: 308, col:   1):      Expected newline after brace
+Error: WRONG_SCOPE_COMMENT  (line: 308, col:   2):      Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 308, col:   2):      Comment is invalid in this scope
+Error: VAR_DECL_START_FUNC  (line: 309, col:   1):      Variable declaration not at start of function
+Error: TOO_MANY_FUNCS       (line: 323, col:   1):      Too many functions in file
+Error: TOO_MANY_TABS_FUNC   (line: 323, col:   9):      extra tabs before function name
+Error: BRACE_SHOULD_EOL     (line: 324, col:   1):      Expected newline after brace
+Error: WRONG_SCOPE_COMMENT  (line: 324, col:   2):      Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 324, col:   2):      Comment is invalid in this scope
+Error: SPACE_AFTER_KW       (line: 325, col:   5):      Missing space after keyword
+Error: SPC_BFR_PAR          (line: 325, col:  10):      Missing space before parenthesis (brace/bracket)
+Error: TOO_FEW_TAB          (line: 328, col:   9):      Missing tabs for indent level
+Error: SPC_AFTER_PAR        (line: 328, col:  45):      Missing space after parenthesis (brace/bracket)
+Error: LINE_TOO_LONG        (line: 328, col:  46):      line too long
+Error: WRONG_SCOPE_COMMENT  (line: 328, col:  46):      Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line: 328, col:  86):      line too long
+Error: WRONG_SCOPE_COMMENT  (line: 330, col:   5):      Comment is invalid in this scope
+Error: SPC_BEFORE_NL        (line: 333, col:   9):      Space before newline
+Error: TOO_MANY_FUNCS       (line: 337, col:   1):      Too many functions in file
+Error: TOO_MANY_TABS_FUNC   (line: 337, col:   9):      extra tabs before function name
+Error: SPACE_EMPTY_LINE     (line: 341, col:   1):      Space on empty line
+Error: TOO_MANY_FUNCS       (line: 352, col:   1):      Too many functions in file
+Error: TOO_MANY_TABS_FUNC   (line: 352, col:  13):      extra tabs before function name
+Error: BRACE_SHOULD_EOL     (line: 353, col:   1):      Expected newline after brace
+Error: WRONG_SCOPE_COMMENT  (line: 353, col:   2):      Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 353, col:   2):      Comment is invalid in this scope
+Error: VAR_DECL_START_FUNC  (line: 354, col:   1):      Variable declaration not at start of function
+Error: ASSIGN_IN_CONTROL    (line: 368, col:  27):      Assignment in control structure
+Error: LINE_TOO_LONG        (line: 370, col:  86):      line too long
+Error: TOO_MANY_LINES       (line: 384, col:   1):      Function has more than 25 lines
+Error: TOO_MANY_FUNCS       (line: 386, col:   1):      Too many functions in file
+Error: TOO_MANY_TABS_FUNC   (line: 386, col:  13):      extra tabs before function name
+Error: MIXED_SPACE_TAB      (line: 391, col:   9):      Mixed spaces and tabs
+Error: SPACE_REPLACE_TAB    (line: 391, col:   9):      Found space when expecting tab
+Error: LINE_TOO_LONG        (line: 398, col:  83):      line too long
+Error: SPACE_AFTER_KW       (line: 403, col:  13):      Missing space after keyword
+Error: SPACE_AFTER_KW       (line: 403, col:  37):      Missing space after keyword
+Error: LINE_TOO_LONG        (line: 404, col:  84):      line too long
+Error: TOO_MANY_FUNCS       (line: 419, col:   1):      Too many functions in file
+Error: TOO_MANY_TABS_FUNC   (line: 419, col:   9):      extra tabs before function name
+Error: MISALIGNED_VAR_DECL  (line: 423, col:  17):      Misaligned variable declaration
+Error: TOO_MANY_FUNCS       (line: 446, col:   1):      Too many functions in file
+Error: TOO_MANY_TABS_FUNC   (line: 446, col:  13):      extra tabs before function name
+Error: TOO_MANY_FUNCS       (line: 457, col:   1):      Too many functions in file
+Error: TOO_MANY_TABS_FUNC   (line: 457, col:   9):      extra tabs before function name
+Error: EMPTY_LINE_FUNCTION  (line: 459, col:   1):      Empty line in function
+Error: TOO_MANY_FUNCS       (line: 469, col:   1):      Too many functions in file
+Error: TOO_MANY_TABS_FUNC   (line: 469, col:   9):      extra tabs before function name
+Error: LINE_TOO_LONG        (line: 473, col:  86):      line too long
+Error: TOO_MANY_FUNCS       (line: 480, col:   1):      Too many functions in file
+Error: TOO_MANY_TABS_FUNC   (line: 480, col:   9):      extra tabs before function name
+Error: LINE_TOO_LONG        (line: 485, col:  86):      line too long
+Error: WRONG_SCOPE_COMMENT  (line: 491, col:  36):      Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 491, col:  36):      Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line: 495, col:  82):      line too long
+Error: WRONG_SCOPE_COMMENT  (line: 497, col:  36):      Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 497, col:  36):      Comment is invalid in this scope
+Error: EMPTY_LINE_FUNCTION  (line: 498, col:   1):      Empty line in function
+Error: SPACE_EMPTY_LINE     (line: 498, col:   1):      Space on empty line
+Error: TOO_MANY_FUNCS       (line: 508, col:   1):      Too many functions in file
+Error: TOO_MANY_TABS_FUNC   (line: 508, col:  13):      extra tabs before function name
+Error: TOO_MANY_FUNCS       (line: 517, col:   1):      Too many functions in file
+Error: TOO_MANY_TABS_FUNC   (line: 517, col:   9):      extra tabs before function name
+Error: SPACE_AFTER_KW       (line: 521, col:   9):      Missing space after keyword
+Error: SPC_BFR_PAR          (line: 521, col:  14):      Missing space before parenthesis (brace/bracket)
+Error: LINE_TOO_LONG        (line: 521, col:  82):      line too long
+Error: WRONG_SCOPE_COMMENT  (line: 527, col:  36):      Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 527, col:  36):      Comment is invalid in this scope
+Error: TOO_MANY_FUNCS       (line: 537, col:   1):      Too many functions in file
+Error: TOO_MANY_TABS_FUNC   (line: 537, col:   9):      extra tabs before function name
+Error: BRACE_SHOULD_EOL     (line: 543, col:   5):      Expected newline after brace
+Error: WRONG_SCOPE_COMMENT  (line: 543, col:   6):      Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 543, col:   6):      Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 554, col:   9):      Comment is invalid in this scope
+Error: TOO_MANY_FUNCS       (line: 559, col:   1):      Too many functions in file
+Error: TOO_MANY_TABS_FUNC   (line: 559, col:  13):      extra tabs before function name
+Error: TOO_MANY_FUNCS       (line: 582, col:   1):      Too many functions in file
+Error: TOO_MANY_TABS_FUNC   (line: 582, col:  17):      extra tabs before function name
+Error: TOO_MANY_FUNCS       (line: 592, col:   1):      Too many functions in file
+Error: TOO_MANY_TABS_FUNC   (line: 592, col:  13):      extra tabs before function name
+Error: BRACE_SHOULD_EOL     (line: 593, col:   1):      Expected newline after brace
+Error: WRONG_SCOPE_COMMENT  (line: 593, col:   2):      Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 593, col:   2):      Comment is invalid in this scope
+Error: VAR_DECL_START_FUNC  (line: 594, col:   1):      Variable declaration not at start of function
+Error: NO_SPC_AFR_PAR       (line: 604, col:  12):      Extra space after parenthesis (brace/bracket)
+Error: TOO_MANY_LINES       (line: 626, col:   1):      Function has more than 25 lines
+Error: TOO_MANY_FUNCS       (line: 628, col:   1):      Too many functions in file
+Error: CONSECUTIVE_SPC      (line: 628, col:   4):      Two or more consecutives spaces
+Error: SPACE_BEFORE_FUNC    (line: 628, col:  12):      space before function name
+Error: TOO_FEW_TAB          (line: 640, col:   1):      Missing tabs for indent level
+Error: TOO_FEW_TAB          (line: 641, col:   1):      Missing tabs for indent level
+Error: TOO_MANY_FUNCS       (line: 646, col:   1):      Too many functions in file
+Error: VAR_DECL_START_FUNC  (line: 649, col:   1):      Variable declaration not at start of function
+Error: SPACE_REPLACE_TAB    (line: 649, col:  14):      Found space when expecting tab
+Error: TOO_MANY_FUNCS       (line: 656, col:   1):      Too many functions in file
+Error: TOO_MANY_TABS_FUNC   (line: 656, col:   5):      extra tabs before function name
+Error: VAR_DECL_START_FUNC  (line: 661, col:   1):      Variable declaration not at start of function
+Error: SPACE_EMPTY_LINE     (line: 663, col:   1):      Space on empty line
+Error: TOO_MANY_FUNCS       (line: 670, col:   1):      Too many functions in file
+Error: SPACE_REPLACE_TAB    (line: 672, col:  10):      Found space when expecting tab
