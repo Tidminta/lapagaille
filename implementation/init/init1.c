@@ -63,9 +63,17 @@ void	init_msh(t_msh **msh, char **envp)
 	init_jobs(msh);
 	init_tools(*msh);
 	init_env(*msh, envp);
-	print_env(*msh, (*msh)->env->head);
-	$BR
 	ptr = get_env_of((*msh)->env->head, "PATH");
 	(*msh)->path = ft_split(ft_split(ptr->elem, '=')[1], ':');
+	if (!(*msh)->path)
+	{
+		printf("PATH INIT FAILED\n");
+		$BR
+	}
 	(*msh)->envp = (*msh)->env->head;
+	if (!(*msh)->envp)
+	{
+		printf("ENVP INIT FAILED\n");
+		$BR
+	}
 }

@@ -17,8 +17,8 @@ void	son_fork(t_msh *msh, t_cut_cmd *cmd, int bfd)
 	char	*exec_path;
 	char	**args;
 
-	if (bfd > 0)
-		dup2(bfd, 0);
+	// if (bfd > 0)
+	dup2(bfd, 0);
 	handle_redirection(msh, cmd, bfd);
 	if (cmd && cmd->TOKEN == C_BUILTIN)
 		handle_builtins(msh, cmd);
@@ -28,6 +28,7 @@ void	son_fork(t_msh *msh, t_cut_cmd *cmd, int bfd)
 		args = handle_args(msh, cmd);
 		execve(exec_path, args, list_to_split(msh->env->head));
 		printf("[EXEC -1][%s]\n", cmd->elem);
+		exit (1);
 	}
 }
 

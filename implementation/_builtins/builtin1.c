@@ -4,6 +4,8 @@ int	builtin_export(t_msh *msh, t_cut_cmd *cmd)
 {
 	int			ret;
 	t_cut_cmd	*env;
+	char		**env_split;
+	char		*to_print;
 
 	env = msh->env->head;
 	if (cmd->p)
@@ -16,8 +18,21 @@ int	builtin_export(t_msh *msh, t_cut_cmd *cmd)
 			msh->tools->fdout = 1;
 		while (env)
 		{
-			ft_putstr_fd("declare -x ", msh->tools->fdout);
-			ft_putendl_fd(env->elem, msh->tools->fdout);
+			if (ft_strchr(env->elem, '='))
+			{
+				env_split = ft_split(env->elem, '=');
+				to_print = ft_strjoin("declare -x ", env_split[0]);
+				to_print = ft_strjoin(to_print, "=\"");
+				to_print = ft_strjoin(to_print, env_split[1]);
+				to_print = ft_strjoin(to_print, "\"");
+				// ft_putstr_fd("declare -x", msh->tools->fdout);
+				ft_putendl_fd(to_print, msh->tools->fdout);
+			}
+			else
+			{
+				ft_putstr_fd("declare -x ", 2);
+				ft_putendl_fd(env->elem, 2);
+			}
 			env = env->n;
 		}
 		return (SUCCESS);
@@ -91,4 +106,5 @@ void	handle_builtins(t_msh *msh, t_cut_cmd *cmd)
 	}
 	index_of_cmd = is_match2(BUILTIN_LIST, ' ', cmd->elem);
 	f_p_builtin[index_of_cmd](msh, cmd);
+	exit (0);
 }

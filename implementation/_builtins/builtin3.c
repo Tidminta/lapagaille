@@ -50,7 +50,7 @@ int	swap_env(t_msh **msh, char *new)
 	len = 0;
 	match = 0;
 	env = (*msh)->env->head;
-	while (new[len] != '\0' && !match)
+	while (new[len] && !match)
 	{
 		if (new[len] == '=')
 			match = 1;

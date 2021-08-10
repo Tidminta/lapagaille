@@ -11,7 +11,8 @@ int	print_env(t_msh *msh, t_cut_cmd *target)
 	printf("/n**	PRINT LIST	**\n");
 	while (target)
 	{
-		printf("[%s]\n", target->elem);
+		if (target->TOKEN != ENV_SOLO)
+			printf("[%s]\n", target->elem);
 		target = target->n;
 	}
 	return (1);
