@@ -1,1 +1,0 @@
-gcc -Wall -Wextra -Werror -g   -c -o srcs/main/main.o srcs/main/main.c

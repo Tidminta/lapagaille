@@ -1,0 +1,17 @@
+Makefile
+_IO
+_builtins
+_cmd_exec
+_env
+cat
+error
+file
+file2
+file3
+file4
+includes
+init
+libft
+minishell
+parsing
+srcs
