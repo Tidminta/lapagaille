@@ -1,33 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/02 20:14:24 by tidminta          #+#    #+#             */
-/*   Updated: 2020/01/17 18:59:03 by tidminta         ###   ########.fr       */
+/*   Created: 2021/09/13 18:02:21 by tidminta          #+#    #+#             */
+/*   Updated: 2021/09/15 02:12:28 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/philo.h"
 
-int		ft_memcmp(const void *s1, const void *s2, size_t n)
+// int	free_philo(t_ctrl *ctrl, int i);
+
+int	start_philo(t_ctrl *ctrl)
 {
-	size_t			i;
-	unsigned char	*new_s1;
-	unsigned char	*new_s2;
+	
+}
 
-	i = 0;
-	new_s1 = (unsigned char *)s1;
-	new_s2 = (unsigned char *)s2;
-	if (n == 0 || s1 == s2 || (s1 == NULL && s2 == NULL))
-		return (0);
-	while (i < n)
+int	main(int ac, char **av)
+{
+	t_ctrl	*ctrl;
+
+	ctrl = NULL;
+	if (ac == 5 || ac == 6)
 	{
-		if (new_s1[i] != new_s2[i])
-			return (new_s1[i] - new_s2[i]);
-		i++;
+		if (init_jobs(ctrl, av) == ERROR)
+		{
+			printf("MEMORY ERROR.\nexit.\n");
+			exit (0);
+		}
+		// start_philo(ctrl);
+		printf("start philo\n");
 	}
+	else
+		printf("WRONG NUMBER OF ARGS[%d]\n", ac);
 	return (0);
 }

@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motoure <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/09 12:44:51 by motoure           #+#    #+#             */
-/*   Updated: 2019/11/09 12:47:11 by motoure          ###   ########.fr       */
+/*   Created: 2019/11/13 22:41:28 by tidminta          #+#    #+#             */
+/*   Updated: 2020/01/16 21:28:20 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-int	ft_isascii(int c)
+int		ft_isascii(int c)
 {
-	if (c >= 0 && c <= 127)
-		return (1);
-	return (0);
+	return (c >= 0 && c <= 127);
 }

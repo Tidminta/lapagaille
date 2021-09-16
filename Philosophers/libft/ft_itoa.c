@@ -3,53 +3,63 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motoure <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/07 01:16:16 by motoure           #+#    #+#             */
-/*   Updated: 2021/08/27 06:38:38 by motoure          ###   ########.fr       */
+/*   Created: 2020/01/11 18:56:26 by tidminta          #+#    #+#             */
+/*   Updated: 2020/01/17 18:48:24 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
-int		count(int n)
+static char		*fill(char *str, int n, int i)
 {
-	int count;
-
-	count = 0;
-	while (n)
+	while (n > 0)
 	{
-		n /= 10;
-		count++;
+		str[i] = '0' + (n % 10);
+		n = n / 10;
+		i--;
 	}
-	return (count);
+	return (str);
 }
 
-char	*ft_itoa(int n)
+static int		len(long nb, int i)
+{
+	if (nb < 0)
+	{
+		i = 1;
+		nb = nb * -1;
+	}
+	while (nb > 0)
+	{
+		nb = nb / 10;
+		i++;
+	}
+	return (i);
+}
+
+char			*ft_itoa(int n)
 {
 	int		i;
-	char	*ret;
-	int		negative;
+	char	*alloc;
 
-	if (n == -2147483648 || n == 0)
-		return (ft_strdup(n == 0 ? "0" : "-2147483648"));
-	negative = n > 0 ? 0 : 1;
-	(negative) ? (n = n * -1) : 0;
-	i = 0;
-	if (!(ret = gc_malloc(sizeof(char) * count(n) + ((negative) ? 2 : 1))))
-		return (0);
-	while (n)
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	if (n != 0)
 	{
-		ret[i] = n % 10 + 48;
-		n /= 10;
-		i++;
+		i = len((long)n, 0);
+		if (!(alloc = (char *)malloc(sizeof(char) * (i + 1))))
+			return (NULL);
+		alloc[i] = '\0';
+		i--;
 	}
-	if ((negative))
+	else
+		return (ft_strdup("0"));
+	if (n < 0)
 	{
-		ret[i] = '-';
-		i++;
+		alloc[0] = '-';
+		n = n * -1;
 	}
-	ret[i] = '\0';
-	return (ft_strrev(ret));
+	alloc = fill(alloc, n, i);
+	return (alloc);
 }

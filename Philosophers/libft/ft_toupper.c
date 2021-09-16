@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motoure <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/09 18:42:54 by motoure           #+#    #+#             */
-/*   Updated: 2021/07/01 17:30:16 by motoure          ###   ########.fr       */
+/*   Created: 2019/11/14 13:19:49 by tidminta          #+#    #+#             */
+/*   Updated: 2020/01/17 19:48:40 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-int	ft_toupper(int c)
+int		ft_toupper(int c)
 {
-	if (c >= 'a' && c <= 'z')
-		return (c - 32);
+	if ((c >= 'a' && c <= 'z'))
+	{
+		c = c - 32;
+		return (c);
+	}
 	return (c);
 }

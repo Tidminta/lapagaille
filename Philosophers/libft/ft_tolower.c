@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motoure <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/09 18:48:10 by motoure           #+#    #+#             */
-/*   Updated: 2020/01/07 18:14:27 by motoure          ###   ########.fr       */
+/*   Created: 2019/11/14 15:55:17 by tidminta          #+#    #+#             */
+/*   Updated: 2020/01/17 19:48:45 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-int	ft_tolower(int c)
+int		ft_tolower(int c)
 {
-	if (c >= 'A' && c <= 'Z')
-		return (c + 32);
+	if ((c >= 'A' && c <= 'Z'))
+	{
+		c = c + 32;
+		return (c);
+	}
 	return (c);
 }

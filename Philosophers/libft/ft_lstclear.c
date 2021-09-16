@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrev.c                                        :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motoure <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/07 17:18:24 by motoure           #+#    #+#             */
-/*   Updated: 2020/01/07 17:19:32 by motoure          ###   ########.fr       */
+/*   Created: 2020/06/02 17:49:35 by tidminta          #+#    #+#             */
+/*   Updated: 2020/06/05 12:09:01 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "libft.h"
 
-char	*ft_strrev(char *str)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	int		i;
-	int		y;
-	char	swap;
+	t_list	*cur;
+	t_list	*prev;
 
-	swap = '0';
-	i = 0;
-	y = ft_strlen(str) - 1;
-	while (i < y)
+	if (!lst)
+		return ;
+	while (*lst)
 	{
-		swap = str[i];
-		str[i] = str[y];
-		str[y] = swap;
-		i++;
-		y--;
+		prev = *lst;
+		cur = *lst;
+		cur = prev->next;
+		(del)(prev->content);
+		free(prev);
+		*lst = cur;
 	}
-	return (str);
 }

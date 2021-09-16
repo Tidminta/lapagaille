@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   proto.h                                            :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/14 16:47:07 by tidminta          #+#    #+#             */
-/*   Updated: 2021/09/14 17:51:15 by tidminta         ###   ########.fr       */
+/*   Created: 2020/06/03 13:27:21 by tidminta          #+#    #+#             */
+/*   Updated: 2020/06/05 12:12:09 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PROTO_H
-# define PROTO_H
+#include "libft.h"
 
-# include "./philo.h"
-
-int	add_philo(t_ctrl *ctrl);
-
-int	free_philo(t_ctrl *ctrl, int i);
-
-#endif
+void	ft_lstiter(t_list *lst, void (*f)(void *))
+{
+	if (!lst)
+		return ;
+	while (lst->next)
+	{
+		(*f)(lst->content);
+		lst = lst->next;
+	}
+	if (lst->content)
+		(*f)(lst->content);
+}

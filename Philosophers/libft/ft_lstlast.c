@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_str.c                                   :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motoure <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/23 09:06:00 by motoure           #+#    #+#             */
-/*   Updated: 2021/07/02 02:23:50 by motoure          ###   ########.fr       */
+/*   Created: 2020/06/02 17:20:36 by tidminta          #+#    #+#             */
+/*   Updated: 2020/06/05 12:09:28 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putchar_str(char **str, char c)
+t_list		*ft_lstlast(t_list *lst)
 {
-	int		c_index;
-	char	*ptr;
-
-	c_index = ft_strlen(*str);
-	*str = ft_realloc(*str, ft_strlen(*str) + 2);
-	ptr = *str;
-	ptr[c_index] = c;
-	ptr[c_index + 1] = '\0';
+	if (!lst)
+		return (NULL);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
 }

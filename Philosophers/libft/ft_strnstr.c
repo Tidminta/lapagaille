@@ -3,60 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motoure <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/08 19:04:30 by motoure           #+#    #+#             */
-/*   Updated: 2020/01/08 16:17:43 by motoure          ###   ########.fr       */
+/*   Created: 2019/12/14 21:55:49 by tidminta          #+#    #+#             */
+/*   Updated: 2020/01/17 19:37:37 by tidminta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#define S size_t
+#include "libft.h"
 
-static unsigned int		ft_strlen(char *str)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	unsigned int i;
+	size_t	i;
+	int		j;
+	char	*src;
+	char	*to_find;
 
 	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-char					*ft_strstr(char *str, char *to_find, size_t len)
-{
-	unsigned long		i;
-	unsigned int		y;
-
-	i = 0;
-	y = 0;
-	if (to_find[y] == '\0')
-		return (str);
-	while (str[i] && i < len)
+	src = (char *)haystack;
+	if (!needle[0])
+		return (src);
+	to_find = (char *)needle;
+	while (src[i] != '\0' && i < len)
 	{
-		if (str[i] == to_find[y])
+		j = 0;
+		while (to_find[j] == src[i + j] && (i + j) < len)
 		{
-			while (str[i] == to_find[y] && to_find[y] && i < len)
+			if (to_find[j + 1] == '\0')
 			{
-				i++;
-				y++;
+				return (src + i);
 			}
-			if (y == (ft_strlen(to_find)))
-				return (str + (i - y));
-			else
-				i--;
+			j++;
 		}
-		y = 0;
 		i++;
 	}
 	return (NULL);
-}
-
-char					*ft_strnstr(const char *haystack,
-		const char *needle, S len)
-{
-	char *return_value;
-
-	return_value = ft_strstr((char *)haystack, (char *)needle, len);
-	return (return_value);
 }
