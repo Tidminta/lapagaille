@@ -6,7 +6,7 @@
 /*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 22:30:24 by tidminta          #+#    #+#             */
-/*   Updated: 2020/01/17 19:12:35 by tidminta         ###   ########.fr       */
+/*   Updated: 2023/02/09 11:00:24 by tminta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char		**ft_free(char **tab, int len)
 {
-	if (tab != '\0')
+	if (tab[0][0] != '\0')
 	{
 		while (len >= 0)
 		{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   includes.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tidiane <tidiane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tminta <tminta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 19:19:27 by tminta            #+#    #+#             */
-/*   Updated: 2023/05/10 01:05:37 by tidiane          ###   ########.fr       */
+/*   Updated: 2023/05/11 19:30:33 by tminta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,36 @@
 # include <unistd.h>
 # include <sys/wait.h>
 
-// typedef	struct	s_path
-// {
-// 	char	*content;
-// 	t_path	*n;
-// }				t_path;
+# define	SUCCESS 1
+# define	ERROR -1
+# define	CMD 1
+# define	FILE 2
 
-
+typedef struct s_cmd
+{
+	char			*cmd_n;
+	char			*cmd_p;
+	char			**args;
+	int				pos;
+	struct s_cmd	*n;
+	struct s_cmd	*p;
+}				t_cmd;
 // TOKEN : 1 = cmd | 2 = args
+
+typedef	struct s_box
+{
+	struct s_cmd	*head;
+	struct s_cmd	*tail;
+	int				size;
+}				t_box;
+
+// typedef	struct s_files
+// {
+// 	char			*name;
+// 	int				pos;
+// 	struct s_files	*n;
+// 	struct s_files	*p;
+// }				t_files;
 
 typedef struct s_pipe
 {
@@ -39,6 +61,8 @@ typedef struct s_pipe
 	char			*file2;
 	char			*cmd2;
 	char			*o_cmd2;
+	t_box			*cmd_box;
+	// t_files			*files;
 	char			**path;
 	char			**paths;
 	char 			**args1;
@@ -49,7 +73,13 @@ typedef struct s_pipe
 	int				fd1;
 	int				fd2;
 	int				pipe[2];
+	int				position;
 }				t_pipe;
+
+/* ******************************************** */
+// INIT
+
+int		ft_create_lstc(t_pipe **box);
 
 
 /* ******************************************** */
@@ -57,13 +87,11 @@ typedef struct s_pipe
 
 int		processing(t_pipe *box);
 
-t_pipe	*ft_init(char **argv, char **envp);
+void	ft_init(t_pipe **box, char **argv, char **envp);
 
 void	ft_parsing_step(t_pipe **box, char **argv, char **envp);
 
 char	*ft_only_cmd(t_pipe *box, int indic);
-
-t_pipe	*ft_init(char **argv, char **envp);
 
 void	ft_free_split2(t_pipe *box);
 

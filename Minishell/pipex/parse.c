@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tidiane <tidiane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tminta <tminta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 14:26:30 by tidiane           #+#    #+#             */
-/*   Updated: 2023/05/10 01:09:54 by tidiane          ###   ########.fr       */
+/*   Updated: 2023/05/11 19:28:11 by tminta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_parsing_step(t_pipe **box, char **argv, char **envp)
     int indic;
 
     indic = -1;
-	*box = ft_init(argv, envp);
+	ft_init(box, argv, envp);
     if (!(*box))
         return ;
 	ft_get_cmd(box);
@@ -53,14 +53,14 @@ char	*ft_only_cmd(t_pipe *box, int indic)
 	return (str);
 }
 
-t_pipe	*ft_init(char **argv, char **envp)
+t_pipe	*ft_box_fill(char **argv, char **envp)
 {
 	t_pipe	*tools;
-
 
 	tools = (t_pipe *)malloc(sizeof(t_pipe));
 	if (!tools)
 		return (NULL);
+	ft_create_lstc(&tools);
 	tools->envp = envp;
 	tools->file1 = ft_strdup(argv[1]);
 	tools->cmd1 = ft_strdup(argv[2]);
@@ -82,8 +82,14 @@ t_pipe	*ft_init(char **argv, char **envp)
     tools->f_args[2] = NULL;
 	tools->f_args[0] = ft_split(argv[2], ' ');
 	tools->f_args[1] = ft_split(argv[3], ' ');
-
+	printf("[test][%s]\n", tools->cmd_box->head->cmd_n);
+	exit (0);
 	return (tools);
+}
+
+void	ft_init(t_pipe **box, char **argv, char **envp)
+{
+	(*box) = ft_box_fill(argv, envp);
 }
 
 void	ft_free_split2(t_pipe *box)
