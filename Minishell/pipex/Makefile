@@ -11,6 +11,10 @@ LFLAGS	=	-I. -lncurses -lreadline #-fsanitize=address
 LIBFT	=	./libft/libft.a
 
 SRCS	=	./main.c \
+			./exec.c \
+			./init.c \
+			./parse.c \
+			./utils.c 
 
 OBJS	=	$(SRCS:.c=.o)
 
