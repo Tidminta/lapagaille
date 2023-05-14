@@ -3,33 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motoure <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: tminta <marvin@42quebec.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/07 20:26:37 by motoure           #+#    #+#             */
-/*   Updated: 2020/01/08 16:13:30 by motoure          ###   ########.fr       */
+/*   Created: 2022/07/07 15:48:46 by tminta            #+#    #+#             */
+/*   Updated: 2022/07/07 15:48:52 by tminta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "libft.h"
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
 	size_t			i;
-	unsigned char	*cast_dst;
-	unsigned char	*cast_src;
+	unsigned char	*src_tmp;
+	unsigned char	*dst_tmp;
 
+	src_tmp = (unsigned char *)src;
+	dst_tmp = (unsigned char *)dst;
 	i = 0;
-	cast_src = (unsigned char *)src;
-	cast_dst = (unsigned char *)dst;
 	if (src == dst)
 		return (dst);
-	if (cast_dst > cast_src)
+	if (dst_tmp > src_tmp)
 	{
 		while (++i <= len)
-			cast_dst[len - i] = cast_src[len - i];
+			dst_tmp[len - i] = src_tmp[len - i];
 	}
 	else
-		ft_memcpy(dst, src, len);
+	{
+		i = 0;
+		while (i < len)
+		{
+			dst_tmp[i] = src_tmp[i];
+			i++;
+		}
+	}
 	return (dst);
 }

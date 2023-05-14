@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motoure <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: tminta <marvin@42quebec.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/08 14:41:23 by motoure           #+#    #+#             */
-/*   Updated: 2019/11/08 14:49:12 by motoure          ###   ########.fr       */
+/*   Created: 2022/07/07 15:53:55 by tminta            #+#    #+#             */
+/*   Updated: 2022/07/07 15:54:02 by tminta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "libft.h"
 
-unsigned int	ft_strlcat(char *dst, char *src, size_t dstsize)
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	unsigned int i;
-	unsigned int y;
-	unsigned int len;
-	unsigned int tlen;
+	unsigned int	i;
+	unsigned int	y;
+	unsigned int	len;
+	unsigned int	tlen;
 
 	i = 0;
 	y = 0;

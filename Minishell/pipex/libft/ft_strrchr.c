@@ -3,21 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motoure <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: tminta <marvin@42quebec.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/07 18:34:41 by motoure           #+#    #+#             */
-/*   Updated: 2020/01/07 18:34:49 by motoure          ###   ########.fr       */
+/*   Created: 2022/07/07 15:55:35 by tminta            #+#    #+#             */
+/*   Updated: 2022/07/07 15:55:40 by tminta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "libft.h"
 
 char	*ft_strrchr(const char *s, int c)
 {
-	char *tmp;
+	char	*tmp;
 
 	tmp = 0;
+	c = (char)c;
+	if ((c > 126 || c < 0) && s[0])
+		return ((char *)s);
 	while (*s)
 	{
 		if (*s == c)

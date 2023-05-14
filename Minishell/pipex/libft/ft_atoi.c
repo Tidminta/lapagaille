@@ -3,36 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motoure <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: tminta <marvin@42quebec.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/08 22:48:46 by motoure           #+#    #+#             */
-/*   Updated: 2020/01/08 16:05:44 by motoure          ###   ########.fr       */
+/*   Created: 2022/07/07 15:41:47 by tminta            #+#    #+#             */
+/*   Updated: 2022/07/07 15:42:02 by tminta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
 int	ft_atoi(const char *str)
 {
-	int return_value;
-	int i;
-	int sign;
+	int					signe;
+	unsigned long		nb;
 
-	sign = 1;
-	return_value = 0;
-	i = 0;
-	while ((str[i] == ' ') || (str[i] >= 9 && str[i] <= 13))
-		i++;
-	if (str[i] == '+' || str[i] == '-')
+	signe = 1;
+	nb = 0;
+	while ((*str >= 9 && *str <= 13) || *str == 32)
+		str++;
+	if (*str == '-')
+		signe = -1;
+	if (*str == '+' || *str == '-')
+		str++;
+	while (*str >= '0' && *str <= '9')
 	{
-		if (str[i] == '-')
-			sign = -sign;
-		i++;
+		if (nb >= 2147483647)
+		{
+			if (signe == -1)
+				return (0);
+			else
+				return (-1);
+		}
+		nb = nb * 10 + (*str - '0');
+		str++;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		return_value = return_value * 10 + str[i] - '0';
-		i++;
-	}
-	return (return_value * sign);
+	return ((int)nb * signe);
 }

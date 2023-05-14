@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tminta <marvin@42quebec.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/11 18:56:26 by tidminta          #+#    #+#             */
-/*   Updated: 2020/01/17 18:48:24 by tidminta         ###   ########.fr       */
+/*   Created: 2022/07/07 15:44:47 by tminta            #+#    #+#             */
+/*   Updated: 2022/07/07 15:44:55 by tminta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char		*fill(char *str, int n, int i)
+static char	*fill(char *str, int n, int i)
 {
 	while (n > 0)
 	{
@@ -23,7 +23,7 @@ static char		*fill(char *str, int n, int i)
 	return (str);
 }
 
-static int		len(long nb, int i)
+static int	len(long nb, int i)
 {
 	if (nb < 0)
 	{
@@ -38,7 +38,7 @@ static int		len(long nb, int i)
 	return (i);
 }
 
-char			*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	int		i;
 	char	*alloc;
@@ -48,7 +48,8 @@ char			*ft_itoa(int n)
 	if (n != 0)
 	{
 		i = len((long)n, 0);
-		if (!(alloc = (char *)malloc(sizeof(char) * (i + 1))))
+		alloc = (char *)malloc(sizeof(char) * (i + 1));
+		if (!alloc)
 			return (NULL);
 		alloc[i] = '\0';
 		i--;

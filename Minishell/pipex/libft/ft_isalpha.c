@@ -3,20 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motoure <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: tidminta <tidminta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/08 13:55:56 by motoure           #+#    #+#             */
-/*   Updated: 2020/01/07 18:11:18 by motoure          ###   ########.fr       */
+/*   Created: 2019/11/13 21:46:56 by tidminta          #+#    #+#             */
+/*   Updated: 2022/07/07 15:43:40 by tminta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
 int	ft_isalpha(int c)
 {
-	if (c >= 91 && c <= 96)
-		return (0);
-	if (c >= 65 && c <= 122)
-		return (1);
-	return (0);
+	return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
 }

@@ -1,40 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tminta <marvin@42quebec.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/07 15:53:38 by tminta            #+#    #+#             */
-/*   Updated: 2022/07/07 15:53:46 by tminta           ###   ########.fr       */
+/*   Created: 2022/07/07 15:47:04 by tminta            #+#    #+#             */
+/*   Updated: 2022/07/07 15:47:15 by tminta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+int	ft_lstsize(t_list *lst)
 {
-	char	*tab;
-	int		i;
-	int		lenght;
+	int	i;
 
-	if (!s1 || !s2)
-		return (NULL);
-	lenght = ft_strlen(s1) + ft_strlen(s2);
-	tab = (char *)malloc(sizeof(char) * (lenght + 1));
-	if (!tab)
-		return (NULL);
-	i = -1;
-	while (s1[++i] != '\0')
-		tab[i] = s1[i];
-	i = 0;
-	lenght = lenght - ft_strlen(s2);
-	while (s2[i] != '\0')
+	i = 1;
+	if (!lst)
+		return (0);
+	while (lst->next)
 	{
-		tab[lenght] = s2[i];
 		i++;
-		lenght++;
+		lst = lst->next;
 	}
-	tab[lenght] = '\0';
-	return (tab);
+	return (i);
 }

@@ -3,35 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tminta <tminta@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tminta <marvin@42quebec.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/09 19:41:32 by motoure           #+#    #+#             */
-/*   Updated: 2023/03/16 19:00:40 by tminta           ###   ########.fr       */
+/*   Created: 2022/07/07 15:56:08 by tminta            #+#    #+#             */
+/*   Updated: 2022/07/07 15:56:13 by tminta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char			*return_value;
+	char			*tab;
+	unsigned int	i;
 
 	if (!s)
 		return (NULL);
-	if (start > (unsigned int)ft_strlen(s))
+	if (start > ft_strlen(s))
+		return (ft_strdup(""));
+	if (len > ft_strlen(s))
+		len = ft_strlen(s);
+	tab = (char *)malloc(sizeof(char) * len + 1);
+	if (!tab)
+		return (NULL);
+	i = 0;
+	while (s[start] != '\0' && i < len)
 	{
-		if (!(return_value = malloc(sizeof(char) * 1)))
-			return (0);
-		if (!(return_value[0] == '\0'))
-			return_value[0] = '\0';
-		return (return_value);
+		tab[i] = s[start + i];
+		i++;
 	}
-	if (!(return_value = malloc(sizeof(char) * len + 1)))
-		return (0);
-	ft_memcpy(return_value, s + start, len);
-	return_value[len] = '\0';
-	return (return_value);
+	tab[i] = '\0';
+	return (tab);
 }

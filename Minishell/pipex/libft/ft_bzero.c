@@ -3,32 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motoure <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: tminta <marvin@42quebec.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/07 13:46:47 by motoure           #+#    #+#             */
-/*   Updated: 2020/01/08 16:07:09 by motoure          ###   ########.fr       */
+/*   Created: 2022/07/07 15:42:15 by tminta            #+#    #+#             */
+/*   Updated: 2022/07/07 15:42:35 by tminta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "libft.h"
 
-static void		*ft_memset(void *b, int c, size_t len)
+void	ft_bzero(void *s, size_t n)
 {
-	unsigned long	i_array_b;
-	unsigned char	*a;
+	char	*dst;
 
-	i_array_b = 0;
-	a = (unsigned char *)b;
-	while (i_array_b < len)
+	dst = s;
+	while (n-- > 0)
 	{
-		a[i_array_b] = (unsigned char)c;
-		i_array_b++;
+			*dst = '\0';
+			dst++;
 	}
-	b = a;
-	return (b);
-}
-
-void			ft_bzero(void *s, size_t n)
-{
-	ft_memset(s, 0, n);
+	return ;
 }
