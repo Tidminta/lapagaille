@@ -6,7 +6,7 @@
 /*   By: tminta <tminta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 12:40:08 by tminta            #+#    #+#             */
-/*   Updated: 2023/05/13 20:21:02 by tminta           ###   ########.fr       */
+/*   Updated: 2023/05/13 20:33:38 by tminta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static void	ft_exec(t_pipe	*box, int indic, int *fdout)
 	{
 		res = execve(cmd->cmd_p, cmd->args, box->envp);
 		exit(1);
-		// perror("PIPEX");
 	}
 	else
 	{
@@ -48,20 +47,18 @@ static void	ft_redir(t_pipe *box, int indic)
 	}
 	else if (indic == 2)
 	{
-		box->fd2 = open(box->file2, O_RDWR | O_CREAT | O_TRUNC , 0666);
+		box->fd2 = open(box->file2, O_RDWR | O_CREAT | O_TRUNC, 0666);
 		dup2(box->pipe[0], 0);
 		dup2(box->fd2, 1);
 	}
 }
 
-//if (!get_path) -> handle_error(errno);
 int	processing(t_pipe *box)
 {	
-	int indic;
+	int	indic;
 	int	fdout;
 
 	indic = 1;
-	// ft_open2(box);
 	pipe(box->pipe);
 	while (indic <= 2)
 	{
