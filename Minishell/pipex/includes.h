@@ -6,7 +6,7 @@
 /*   By: tminta <tminta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 19:19:27 by tminta            #+#    #+#             */
-/*   Updated: 2023/05/13 21:16:51 by tminta           ###   ########.fr       */
+/*   Updated: 2023/05/13 23:27:34 by tminta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,10 @@ typedef struct s_cmd
 	char			**args;
 	int				pos;
 	struct s_cmd	*n;
-	// struct s_cmd	*p;
 }				t_cmd;
-
-// typedef struct s_box
-// {
-// 	struct s_cmd	*head;
-// 	struct s_cmd	*tail;
-// 	int				size;
-// }				t_box;
 
 typedef struct s_pipe
 {
-	// t_box			*cmd_box;
 	t_cmd			*cmd1;
 	t_cmd			*cmd2;
 	char			**argv;
@@ -75,12 +66,18 @@ void	ft_free_split2(t_pipe *box);
 
 char	*split_path(char **envp);
 
-void	ft_get_path(t_pipe	*box, int indic);
+void	ft_get_path(t_pipe	*box, int indic, int i);
 
 void	ft_parsing_step(t_pipe **box, char **argv, char **envp);
 
 char	*first_word(char *str);
 
 int		processing(t_pipe *box);
+
+void	ft_clean(t_pipe **box);
+
+void	ft_free_tab(char **tb);
+
+char	*ft_strjoin2(char *s1, char *s2);
 
 #endif

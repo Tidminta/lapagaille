@@ -6,7 +6,7 @@
 /*   By: tminta <tminta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 14:26:30 by tidiane           #+#    #+#             */
-/*   Updated: 2023/05/13 21:04:47 by tminta           ###   ########.fr       */
+/*   Updated: 2023/05/13 23:38:44 by tminta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,16 @@ void	ft_get_cmd(t_pipe **box)
 void	ft_parsing_step(t_pipe **box, char **argv, char **envp)
 {
 	int	indic;
+	int	i;
 
 	indic = -1;
+	i = -1;
 	ft_init(box, argv, envp);
 	if (!(*box))
 		return ;
 	ft_get_cmd(box);
 	while (++indic < 2)
-		ft_get_path(*box, indic);
+		ft_get_path(*box, indic, i);
 }
 
 char	*split_path(char **envp)
@@ -47,7 +49,6 @@ char	*split_path(char **envp)
 	while (ft_strncmp("PATH", envp[i], ft_strlen("PATH")))
 		i++;
 	path = ft_substr(envp[i], 5, (size_t)ft_strlen(envp[i]));
-	ft_strtrim(path, "\n");
 	return (path);
 }
 
@@ -61,13 +62,11 @@ void	ft_verif(char *tmp, t_cmd *cmd)
 	}
 }
 
-void	ft_get_path(t_pipe	*box, int indic)
+void	ft_get_path(t_pipe	*box, int indic, int i)
 {
 	char	*tmp;
 	t_cmd	*cmd;
-	int		i;
 
-	i = -1;
 	tmp = split_path(box->envp);
 	if (tmp == NULL || !tmp)
 		;
@@ -76,15 +75,18 @@ void	ft_get_path(t_pipe	*box, int indic)
 	else
 		cmd = box->cmd2;
 	box->path = ft_split(tmp, ':');
-	if (tmp)
-		free(tmp);
+	free(tmp);
 	while (box->path[++i])
 	{
 		tmp = ft_strdup(box->path[i]);
-		tmp = ft_strjoin(tmp, "/");
-		tmp = ft_strjoin(tmp, cmd->cmd_n);
-		ft_strtrim(tmp, "\n");
-		ft_verif(tmp, cmd);
-		free(tmp);
+		tmp = ft_strjoin2(tmp, "/");
+		tmp = ft_strjoin2(tmp, cmd->cmd_n);
+		if (tmp)
+		{
+			ft_verif(tmp, cmd);
+			free(tmp);
+		}
 	}
+	ft_free_tab(box->path);
+	free(box->path);
 }

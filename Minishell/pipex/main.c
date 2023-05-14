@@ -6,7 +6,7 @@
 /*   By: tminta <tminta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 19:04:36 by tminta            #+#    #+#             */
-/*   Updated: 2023/05/13 21:02:26 by tminta           ###   ########.fr       */
+/*   Updated: 2023/05/13 22:04:20 by tminta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ int	main(int argc, char **argv, char **envp)
 	if (!box)
 		exit(0);
 	processing(box);
+	ft_clean(&box);
 	return (0);
 }
