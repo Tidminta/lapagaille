@@ -6,7 +6,7 @@
 /*   By: tminta <tminta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 19:19:27 by tminta            #+#    #+#             */
-/*   Updated: 2023/05/11 19:30:33 by tminta           ###   ########.fr       */
+/*   Updated: 2023/05/13 19:47:01 by tminta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <sys/wait.h>
+#include <stdio.h>
+# include <errno.h>
+
 
 # define	SUCCESS 1
 # define	ERROR -1
@@ -26,14 +29,13 @@
 
 typedef struct s_cmd
 {
-	char			*cmd_n;
-	char			*cmd_p;
+	char			*cmd_n;//name
+	char			*cmd_p;//path
 	char			**args;
 	int				pos;
 	struct s_cmd	*n;
 	struct s_cmd	*p;
 }				t_cmd;
-// TOKEN : 1 = cmd | 2 = args
 
 typedef	struct s_box
 {
@@ -42,38 +44,23 @@ typedef	struct s_box
 	int				size;
 }				t_box;
 
-// typedef	struct s_files
-// {
-// 	char			*name;
-// 	int				pos;
-// 	struct s_files	*n;
-// 	struct s_files	*p;
-// }				t_files;
-
 typedef struct s_pipe
 {
-	char			**envp;
-	char			*file1;
-	char			**cmd;
-	char			*cmd1;
-	char			**o_cmd1;
-	char			**only_cmd;
-	char			*file2;
-	char			*cmd2;
-	char			*o_cmd2;
 	t_box			*cmd_box;
-	// t_files			*files;
+	t_cmd			*cmd1;
+	t_cmd			*cmd2;
+	char			**argv;
+	char			**envp;
+	int				argc;
 	char			**path;
-	char			**paths;
-	char 			**args1;
-	char 			**args2;
-	char			***f_args;
 	int				pid;
 	int				err_no;
 	int				fd1;
 	int				fd2;
-	int				pipe[2];
+	int				*pipe;
 	int				position;
+	char			*file1;
+	char			*file2;
 }				t_pipe;
 
 /* ******************************************** */
@@ -81,17 +68,12 @@ typedef struct s_pipe
 
 int		ft_create_lstc(t_pipe **box);
 
+void	ft_init(t_pipe **box, char **argv, char **envp);
 
 /* ******************************************** */
 //PARSING 
 
-int		processing(t_pipe *box);
-
-void	ft_init(t_pipe **box, char **argv, char **envp);
-
 void	ft_parsing_step(t_pipe **box, char **argv, char **envp);
-
-char	*ft_only_cmd(t_pipe *box, int indic);
 
 void	ft_free_split2(t_pipe *box);
 
@@ -101,13 +83,9 @@ int		ft_get_path(t_pipe	*box, int indic);
 
 void	ft_parsing_step(t_pipe **box, char **argv, char **envp);
 
-
-/* ******************************************** */
-//EXEC
-void	ft_exec(t_pipe	*box, int indic);
+char    *first_word(char *str);
 
 int		processing(t_pipe *box);
 
-// void	ft_open(t_pipe *box);
 
 #endif

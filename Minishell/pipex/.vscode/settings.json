@@ -1,0 +1,8 @@
+{
+	"files.associations": {
+		"memory": "c",
+		"tuple": "c",
+		"type_traits": "c",
+		"unordered_map": "c"
+	}
+}
